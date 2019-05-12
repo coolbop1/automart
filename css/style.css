@@ -129,17 +129,30 @@ padding:10px;
  	background-position: center;
  
 }
+#postcontent{
+	width:calc(100% - 10px);
+	height:435px;
+	margin:20px 5px 20px 5px;
+}
 #signs{
 	height:435px;
 	width:100%;
 	background:rgba(0,0,0,0.6);
 	text-align:center;
-	padding:auto;
 	position:relative;
 	z-index:0;
 	overflow:hidden;
 	/*display:table;
 	vertical-align: middle;*/
+}
+#postinner{
+	height:435px;
+	width:100%;
+	background:rgba(2,14,114,0.6);
+	text-align:center;
+	position:relative;
+	z-index:0;
+	overflow:hidden;
 }
 .pintab{
 	position:absolute;
@@ -156,7 +169,28 @@ padding:10px;
 	min-width:100px;
 	cursor:pointer;
 }
-#accontact,#acagent{
+.pintop{
+	position:absolute;
+	font-size:20px;
+	color:#ffffff;
+	background:#d8743a;
+	padding:5px 20px 5px 20px;
+	text-transform: uppercase;
+	border-radius:0 0 25px 25px;
+	border-top:0;
+	border-left:5px solid #ffffff;
+	border-bottom:5px solid #ffffff;
+	border-right:5px solid #ffffff;
+	min-width:100px;
+	cursor:pointer;
+}
+#tpintop{
+	right:10px;
+}
+#fpintop{
+	right:180px;
+}
+#accontact,#acagent,#postcarad{
 	position:static;
 	margin:40px 0 40px 0;
 	border-radius:25px;
@@ -257,11 +291,14 @@ position:relative;
 	width:calc(100%-30px);
 	border-bottom:2px solid #bf3f3f;;
 }
+#adtitle{
+	margin-top:0;
+}
 #adstitle{
 	margin-top:0;
 	padding:10px;
 	color:#ffffff;
-	font-size:30px;
+	font-size:25px;
 	border-bottom:2px solid #ffffff;
 }
 #statcontent{
@@ -271,24 +308,26 @@ position:relative;
 	margin: 10px 0px 20px 0px;
 	background:#3c79f2;
 	padding:10px;
-	width:calc(100% - 25px);
-	border:2px solid #ffffff;
+	width:calc(100% - 21px);
+	border-top:2px solid #ffffff;
+	border-bottom:2px solid #ffffff;
 	boder-radius:5px;
 	font-size:20px;
-	color:#ffffff;
+	color:#021e72;
 }
 #indexads{
 	background:#021e72;
 	position:absolute;
 	border:2px solid #cccccc;
-	height:200px;
+	height:250px;
 	width:50%;
 	left:25%;
 }
 .sameimg{
-	width:20%;
+	width:27%;
 	border:2px solid #ffffff;
-	margin:5px;
+	margin:3px;
+	height:150px;
 }
 #agentsconer{
 	width:20%;
@@ -304,4 +343,58 @@ footer{
 	font-weight:bold;
 	text-align:center;
 	color:#ffffff;
+}
+#profiletab{
+	position:absolute;
+	width:25%;
+	height:435px;
+	left:0;
+	border-right:5px solid #ffffff;
+}
+#postform{
+	position:absolute;
+	width:calc(70% - 5px);
+	right:2.5%;
+	height:70%;
+	bottom:12%;
+	background:#f1f1f1;
+	box-shadow: 5px 10px 10px #000000;
+}
+
+#inputonly{
+	width:70%;
+	float:left;
+	margin:40px 0 40px 0;
+	height:calc(100% - 80px);
+	border-right:1px solid #cccccc;
+}
+#postimg{
+	width:20%;
+	float:left;
+	margin:40px 0 40px 0;
+}
+.grouptwo{
+	padding:3px;
+	float:none;
+	clear:both;
+	width:100%;
+}
+.groupf{
+	float:left;
+	margin:1px;
+	width:calc(50% - 5px)
+}
+.groupf input{
+	padding:10px;
+	border-style:none;
+	border:2px solid #021e72;
+	border-radius:25px;
+}
+.cpforms{
+	width:calc(100% - 46px);
+	padding:10px;
+	border-style:none;
+	border:2px solid #021e72;
+	boder-radius:5px;
+	
 }
