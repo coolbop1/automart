@@ -34,13 +34,24 @@ function closetab(){
   document.getElementById("forsearch").style.left = "27.5%"; 
 }
 function showmyads(){
-	document.getElementById("posted").style.display ="block";	document.getElementById("postform").style.display = "none";	document.getElementById("profiletab").style.display = "none";	document.getElementById("pagetit").innerHTML = "MY POST"
+	document.getElementById("posted").style.display ="block";	
+  document.getElementById("postform").style.display = "none";	
+  document.getElementById("profiletab").style.display = "none";	
+  document.getElementById("prequest").style.display = "none";  
 }
 function showpostad(){
 document.getElementById("postform").style.display = "block";
-document.getElementById("profiletab").style.display = "block";	document.getElementById("posted").style.display = "none";
-document.getElementById("pagetit").innerHTML = "PROFILE";
+document.getElementById("profiletab").style.display = "block";
+document.getElementById("posted").style.display = "none";
+document.getElementById("prequest").style.display = "none";
 	
+}
+function showorder(){
+document.getElementById("prequest").style.display = "block";
+document.getElementById("profiletab").style.display = "block";
+document.getElementById("posted").style.display = "none";
+document.getElementById("postform").style.display = "none";
+  
 }
 function pedit(clickedbox){
 	let but = clickedbox;
