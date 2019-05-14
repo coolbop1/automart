@@ -33,36 +33,3 @@ function closetab(){
   document.getElementById("fpintab").style.top = '500px'; 
   document.getElementById("forsearch").style.left = "27.5%"; 
 }
-function showmyads(){
-	document.getElementById("posted").style.display ="block";	
-  document.getElementById("postform").style.display = "none";	
-  document.getElementById("profiletab").style.display = "none";	
-  document.getElementById("prequest").style.display = "none";  
-}
-function showpostad(){
-document.getElementById("postform").style.display = "block";
-document.getElementById("profiletab").style.display = "block";
-document.getElementById("posted").style.display = "none";
-document.getElementById("prequest").style.display = "none";
-	
-}
-function showorder(){
-document.getElementById("prequest").style.display = "block";
-document.getElementById("profiletab").style.display = "block";
-document.getElementById("posted").style.display = "none";
-document.getElementById("postform").style.display = "none";
-  
-}
-function pedit(clickedbox){
-	let but = clickedbox;
-	let rep = but.replace('ep','edit');	
-	let repcl =	but.replace('ep','cl');				 document.getElementById(rep).style.display = "block";
-document.getElementById(repcl).style.display = "block";	document.getElementById(clickedbox).innerHTML = "update price"
-}
-function closedit(clsbox){
-	let but = clsbox;
-	let rep = but.replace('cl','edit');	
-	let repcl =	but.replace('cl','ep');	
-	document.getElementById(rep).style.display = "none";
-document.getElementById(clsbox).style.display = "none";	document.getElementById(repcl).innerHTML = "edit price"
-}
