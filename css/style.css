@@ -281,6 +281,11 @@ position:relative;
 	top:1px;
 	font-size: 20px; 
 }
+.closes{	
+	cursor:pointer;	
+	font-size: 20px;
+	display:none; 
+}
 #fpin{
 	top:80px;
 }
@@ -437,7 +442,9 @@ footer{
 	width:20%;
 	float:left;
 	margin:40px 0 40px 0;
+
 }
+
 .grouptwo{
 	padding:3px;
 	float:none;
@@ -462,7 +469,6 @@ footer{
 	border:2px solid #021e72;
 	boder-radius:5px;
 	
-<<<<<<< HEAD
 }
 .orderlist{
 	width:130%;
@@ -477,6 +483,4 @@ footer{
 .aref{
 	color:blue;
 	cursor:pointer
-=======
->>>>>>> 740c2d129f0d551b1202f17e566313aac8502e61
 }

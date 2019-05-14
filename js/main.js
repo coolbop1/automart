@@ -65,7 +65,6 @@ function closedit(clsbox){
 	let repcl =	but.replace('cl','ep');	
 	document.getElementById(rep).style.display = "none";
 document.getElementById(clsbox).style.display = "none";	document.getElementById(repcl).innerHTML = "edit price"
-<<<<<<< HEAD
 }
 function editop(thisid){
 let eid = thisid;
@@ -87,6 +86,4 @@ document.getElementById(meid).style.display = "none";
 document.getElementById(eid).style.display = "none";
 document.getElementById(cleid).innerHTML = "Edit Price";
 
-=======
->>>>>>> 740c2d129f0d551b1202f17e566313aac8502e61
 }
