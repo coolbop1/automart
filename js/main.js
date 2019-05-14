@@ -66,24 +66,3 @@ function closedit(clsbox){
 	document.getElementById(rep).style.display = "none";
 document.getElementById(clsbox).style.display = "none";	document.getElementById(repcl).innerHTML = "edit price"
 }
-function editop(thisid){
-let eid = thisid;
-let leid = eid.replace('epo','rey');
-let meid = eid.replace('epo','edited');
-let cleid = eid.replace('epo','clo');
-document.getElementById(leid).style.display = "none";
-document.getElementById(meid).style.display = "block";
-document.getElementById(cleid).style.display = "block";
-document.getElementById(eid).innerHTML = "Update Price"
-}
-function closepo(thisid){
-let eid = thisid;
-let leid = eid.replace('clo','rey');
-let meid = eid.replace('clo','edited');
-let cleid = eid.replace('clo','epo');
-document.getElementById(leid).style.display = "block";
-document.getElementById(meid).style.display = "none";
-document.getElementById(eid).style.display = "none";
-document.getElementById(cleid).innerHTML = "Edit Price"
-
-}
