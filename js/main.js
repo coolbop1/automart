@@ -84,6 +84,6 @@ let cleid = eid.replace('clo','epo');
 document.getElementById(leid).style.display = "block";
 document.getElementById(meid).style.display = "none";
 document.getElementById(eid).style.display = "none";
-document.getElementById(cleid).innerHTML = "Edit Price"
+document.getElementById(cleid).innerHTML = "Edit Price";
 
 }
