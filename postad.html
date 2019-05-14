@@ -34,20 +34,101 @@
 		</header>
 		<section id="postcontent">
 				<div id="postinner">
-				
-					<span tabindex="0" id="fpintop" onclick="rightSlide(this.id)" class="pintop">Post Ads</span>
+
+					<span tabindex="0" id="spintop" onclick="showorder()" class="pintop">purchase order</span>
+					<span tabindex="0" id="fpintop" onclick="showpostad()" class="pintop">create Ads</span>
 					
-					<span tabindex="0" id="tpintop" class="pintop">posted</span>
+					<span tabindex="0" id="tpintop" onclick="showmyads()" class="pintop">my ads</span>
 				<div id="profiletab">
 					
 					</div>
+					<div id="posted">
+						
+						<div class="boxline">
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car1.jpg">
+								<div class="priceedit">
+									<center><input type="nunber" value="5000" id="edit1"></center>
+									<button id="ep1" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl1"  class="close" onclick="closedit(this.id)">&#10006</span></center>
+								</div>
+							</div>
+							<table>
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+								</table>
+						</div>
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car2.jpg">
+									<div class="priceedit">
+									<center><input type="nunber" value="5000" id="edit2"></center>
+									<button id="ep2" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl2"  class="close" onclick="closedit(this.id)">&#10006</span></center>
+								</div>
+								
+								
+							</div>
+							<table>
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+								</table>
+						</div>
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car3.jpeg">
+									<div class="priceedit">
+									<center><input type="nunber" value="5000" id="edit3"></center>
+									<button id="ep3" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl3"  class="close" onclick="closedit(this.id)">&#10006</span></center>
+								</div>
+								
+								
+							</div>
+							<table>
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+								</table>
+						</div>
+						</div>
+						<br/>
+						
+						<br/>&nbsp;<br/>&nbsp;<br/>
+						
+						
+						
+					</div>
 					<!--post car ads goes here-->
 					<div id="postform">
+
 						<div id="adtitle" class="stattitle">Post a Car For Sale</div>
+						<form>
 						<div id="inputonly">
 						
 						<center>
-							<form>
+							
 							<div class="grouptwo">
 							<div class="groupf">
 								<input class="cpform" placeholder="Manufacture">
@@ -93,40 +174,215 @@
 						&nbsp;
 						<br/>
 						<center><button id="postcarad" class="pintab">Post Car</button></center>
+					</div>	
+					</form>				
+				</div>
+				
+
+
+
+
+
+
+				<div id="prequest">
+
+						<div id="adtitle" class="stattitle">Make a Purchase Order</div>
+						
+						<div id="inputonly">
+						
+						<center>
+							<form>
+							<div class="grouptwo">
+							<div class="groupf">
+								<strong>Manufacture&model</strong>
+							</div>
+							<div class="groupf">
+								<input class="cpform" placeholder="Manufacture">
+							</div>
+						</div>
+						<br/>&nbsp;</br>
+						<div class="grouptwo">
+							<div class="groupf">
+								<strong>Body Type/Color</strong>
+							</div>
+							<div class="groupf">
+								<input class="cpform" placeholder="Body type">
+							</div>
+						</div>
+						<br/>&nbsp;<br/>
+						<div class="grouptwo">
+							<div class="groupf">
+									<strong>Willing to Pay</strong>
+							</div>
+							<div class="groupf">
+								<input type="number" class="cpform" placeholder="Price $">
+							</div>
+						</div>
+						<div class="grouptwo">
+							<div class="groupf">
+								<strong>Condition</strong>
+							</div>
+							<div class="groupf">
+								New:<input type="radio" class="radioinput" value="new" name="stateocar"> &nbsp;&nbsp;
+									Old<input type="radio" class="radioinput" value="old" name="stateocar">
+							</div>
+						</div>
+						<div class="grouptwo">
+							<center><button id="postcarad" class="pintab">ORDER</button></center>
+						</div>
+						</form>
+						</center>
+						
+						
 					</div>
-					</form>
+						<div id="postimg">
+							<div id="runorder">
+							<center><strong> My Orders</strong</center>
+						<br/>
+						&nbsp;
+						<br/>
+						<div class="orderlist">
+						 Audi 2018<hr/>
+						 <span id="rey1">Price: $5000</span>
+						 <span id="clo1"  class="closes" onclick="closepo(this.id)">&#10006</span> 
+<input class="orderinp" id="edited1" type="number" value="5000" >
+<div id="epo1" class="aref" tabindex="0" onclick="editop(this.id)" >Edit price</div>
+						</div>
+						<br/>
+						<div class="orderlist">
+						 Audi 2018<hr/>
+						 <span id="rey2">Price: $5000</span> 
+						 <span id="clo2"  class="closes" onclick="closepo(this.id)">&#10006</span>
+<input class="orderinp" id="edited2" type="number" value="5000" >
+<div id="epo2" class="aref" tabindex="0" onclick="editop(this.id)" >Edit price</div>
+						</div>
+						
 					</div>
+						
+					</div>	
+									
+				</div>
 					
 					
 				</div>
+
 		</section>
 		<section id="extras">
 			<div id="firsthook" class="hook"></div>
 			<div id="secondhook" class="hook"></div>
 			<div id="thirdhook" class="hook"></div>
 			<div id="fourthhook" class="hook"></div>
-			<div id="statdiv">
-				<div class="stattitle">SITE STATS</div>
-				<div id="statcontent">
-					<div class="statclass">Cars Sold : 1,000+</div>
-					<div class="statclass">For Sale : 5,00+</div>
-				</div>
-			</div>
+			
 			<div id="indexads">
-					<div id="adstitle" class="stattitle">Featured Automobile</div>
-					 <center>
-					 	<img src="image/placeholder.png" class="sameimg">
-					 	<img src="image/placeholder.png" class="sameimg">
-					 	<img src="image/placeholder.png" class="sameimg">
+					<div class="stattitle">Featured Automobile</div>
+					 <div id="postedd">
+					 <!------begining of the ads---->
+					<div class="boxline">
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car1.jpg"></div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car2.jpg"></div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car3.jpeg"></div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+					</div>
+
+
+					<div class="boxline">
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car1.jpg"></div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car2.jpg"></div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox">
+							<div class="imgcontain"><img src="image/car3.jpeg"></div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+					</div>
 					 	
-					 </center>
+					 </div>
 				</div>
-				<div id="agentsconer">
-					<center>
-					<button id="accontact" class="pintab">contact</button>
-					<button id="acagent" class="pintab">agents</button>
-					</center>
-				</div>
+				
 		</section>
 		<footer>
 			copyright &copy; bidoritunmise@gmail.com(Andela) 2019

@@ -1,5 +1,6 @@
 body{
-	font:15px arial;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
 	padding:0px;
 	margin:0px;
 }
@@ -45,7 +46,7 @@ background:#021e72;
 header{
 	background:#021e72;
 	color:#ffffff;
-	height:80px;
+	min-height:80px;
 	margin-top:0;
 	position:relative;
 	width:100%;
@@ -76,7 +77,7 @@ header a{
 }
 #mid{
 	width: 100px;
-  height: 100px;
+  min-height: 100px;
   background:#3c79f2;
  // background:#ffffff;
 	color:#ffffff;
@@ -102,7 +103,7 @@ padding:10px;
 	background:#3c79f2;
 	position:absolute;
 	width:10px;
-	height:70px;
+	min-height:70px;
 	top:-50px;
 	z-index:10;
 }
@@ -121,7 +122,7 @@ padding:10px;
 	/*border-right:3px solid #021e72;*/
 #fcontent {
 	width:calc(100% - 10px);
-	height:435px;
+	min-height:435px;
 	margin:20px 5px 20px 5px;
 	background:url("car.jpeg");
 	background-repeat: no-repeat;
@@ -131,11 +132,11 @@ padding:10px;
 }
 #postcontent{
 	width:calc(100% - 10px);
-	height:435px;
+	min-height:435px;
 	margin:20px 5px 20px 5px;
 }
 #signs{
-	height:435px;
+	min-height:435px;
 	width:100%;
 	background:rgba(0,0,0,0.6);
 	text-align:center;
@@ -146,7 +147,7 @@ padding:10px;
 	vertical-align: middle;*/
 }
 #postinner{
-	height:435px;
+	min-height:435px;
 	width:100%;
 	background:rgba(2,14,114,0.6);
 	text-align:center;
@@ -156,7 +157,7 @@ padding:10px;
 }
 .pintab{
 	position:absolute;
-	font-size:20px;
+	font-size:15px;
 	color:#ffffff;
 	background:#d8743a;
 	left:0px;
@@ -171,18 +172,18 @@ padding:10px;
 }
 .pintop{
 	position:absolute;
-	font-size:20px;
+	font-size:15px;
 	color:#ffffff;
 	background:#d8743a;
 	padding:5px 20px 5px 20px;
 	text-transform: uppercase;
-	border-radius:0 0 25px 25px;
 	border-top:0;
 	border-left:5px solid #ffffff;
 	border-bottom:5px solid #ffffff;
 	border-right:5px solid #ffffff;
 	min-width:100px;
 	cursor:pointer;
+	z-index:10;
 }
 #tpintop{
 	right:10px;
@@ -190,17 +191,38 @@ padding:10px;
 #fpintop{
 	right:180px;
 }
-#accontact,#acagent,#postcarad{
+#spintop{
+	left:10px;
+}
+
+#accontact,#acagent,#postcarad,#acorder{
 	position:static;
 	margin:40px 0 40px 0;
 	border-radius:25px;
 	border:5px solid #ffffff;
 	min-width:150px;
 }
+#ep1,#ep2,#ep3,#ep4,#ep5,#ep6{
+	position:static;
+	margin:10px 0 10px 0;
+	border-radius:25px;
+	border:5px solid #ffffff;
+	min-width:150px;
+}
+#edit1,#edit2,#edit3,#edit4,#edit5,#edit6{
+	width:60%;
+	margin-top:5px;
+	border:2px solid #021e72;
+	border-radius:10px;
+	display:none;
+}
+#cl1,#cl2,#cl3,#cl4,#cl5,#cl6{
+	display:none;
+}
 .righttab{
 	background:#d8743a;
 	width:30%;
-	height:500px;
+	min-height:500px;
 	position:absolute;
 	right:0px;
 	margin-right: 10px;
@@ -259,6 +281,11 @@ position:relative;
 	top:1px;
 	font-size: 20px; 
 }
+.closes{	
+	cursor:pointer;	
+	font-size: 20px;
+	display:none; 
+}
 #fpin{
 	top:80px;
 }
@@ -270,18 +297,12 @@ position:relative;
 }
 
 #extras{
-	background:#bf3f3f;
+	background:#cccccc;
 	width:100%;
-	height:250px;
+	height:100%;
 	position:relative;
 }
-#statdiv{
-	background:rgba(255,255,255,0.5);
-	position:absolute;
-	height:100%;
-	width:20%;
-	left:10px;
-}
+
 .stattitle{
 	margin-top:30px;
 	text-align:center;
@@ -301,40 +322,32 @@ position:relative;
 	font-size:25px;
 	border-bottom:2px solid #ffffff;
 }
-#statcontent{
-	width:100%;
-}
-.statclass{
-	margin: 10px 0px 20px 0px;
-	background:#3c79f2;
-	padding:10px;
-	width:calc(100% - 21px);
-	border-top:2px solid #ffffff;
-	border-bottom:2px solid #ffffff;
-	boder-radius:5px;
-	font-size:20px;
-	color:#021e72;
-}
+
 #indexads{
-	background:#021e72;
-	position:absolute;
-	border:2px solid #cccccc;
-	height:250px;
-	width:50%;
-	left:25%;
+	width:95%;
+	left:2.5%;
+	//top:50px;
+	min-height:100%;
+	position:relative;
+
+	
 }
 .sameimg{
 	width:27%;
 	border:2px solid #ffffff;
 	margin:3px;
-	height:150px;
+	min-height:150px;
+}
+.boxline{
+	width:100%;
+	//min-height:500px;
 }
 #agentsconer{
 	width:20%;
 	right:0;
 	border-left:3px solid #ffffff;
-	height:100%;
-	position:absolute;
+	min-height:100%;
+	position:relative;
 }
 footer{
 	padding:20px;
@@ -347,32 +360,91 @@ footer{
 #profiletab{
 	position:absolute;
 	width:25%;
-	height:435px;
+	min-height:435px;
 	left:0;
 	border-right:5px solid #ffffff;
+	display:none;
 }
-#postform{
+#postform,#prequest{
 	position:absolute;
 	width:calc(70% - 5px);
+	top:70px;
 	right:2.5%;
-	height:70%;
+	min-height:90%;
 	bottom:12%;
 	background:#f1f1f1;
 	box-shadow: 5px 10px 10px #000000;
+	display:none;
 }
-
+.adsbox{
+	width:calc(33% - 10px);
+	float:left;
+	margin:5px;
+	min-height:300px;
+	background:#f1f1f1;
+	box-shadow: 3px 5px 5px #000000;
+	position:relative
+}
+.imgcontain{
+	width:100%;
+	height:200px;
+	overflow:hidden;
+	background:#666666;
+	position:relative;
+}
+.priceedit{
+	position:absolute;
+	width:100%;
+	background:rgba(255,255,255,0.8);
+	top:0;
+	z-index:10;
+}
+.imgcontain img{
+	width:100%;
+	height:auto;
+}
+.adsbox table{
+	position:absolute;
+	width:100%;
+	bottom:5px;
+	text-align:left;
+	background:#021e72;
+	color:#ffffff;
+}
+.adsbox .orangetable{
+	position:absolute;
+	width:100%;
+	bottom:5px;
+	text-align:left;
+	background:#d8743a;
+	color:#ffffff;
+}
+#posted{
+	
+	width:calc(100% - 10px);
+	margin:70px 5px 70px 5px;
+	/*box-shadow: 5px 10px 10px #000000;*/
+}
+#postedd{
+	
+	width:100%;
+	
+	min-height:500px;
+}
 #inputonly{
 	width:70%;
 	float:left;
 	margin:40px 0 40px 0;
-	height:calc(100% - 80px);
+	min-height:calc(100% - 80px);
 	border-right:1px solid #cccccc;
 }
 #postimg{
 	width:20%;
 	float:left;
 	margin:40px 0 40px 0;
+
 }
+
 .grouptwo{
 	padding:3px;
 	float:none;
@@ -397,4 +469,17 @@ footer{
 	border:2px solid #021e72;
 	boder-radius:5px;
 	
+}
+.orderlist{
+	width:130%;
+	background:#ffffff;
+	border:2px solid #cccccc;
+}
+.orderinp{
+	display:none;
+	width:70%;
+}
+.aref{
+	color:blue;
+	cursor:pointer
 }
