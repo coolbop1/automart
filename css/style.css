@@ -399,6 +399,37 @@ footer{
 	top:0;
 	z-index:10;
 }
+.mark{
+	position:absolute;
+	width:100%;
+	//background:rgba(255,255,255,0.8);
+	top:100px;
+	z-index:10;
+}
+.sold{
+	position:absolute;
+	width:100%;
+	min-height:300px;
+	background:rgba(255,255,255,0.8);
+	font-size:70px;
+	color:red;
+	text-align:center;
+	vertical-align:middle;
+	z-index:20;
+	display:none;
+}
+.sold span{
+	width:100%;
+	display:table-cell;
+	vertical-align:middle;
+	font-weight:bold;
+	  transform: rotate(-45deg);
+    transform-origin: right, top;
+    -ms-transform: rotate(-45deg);
+    -ms-transform-origin:right, top;
+    -webkit-transform: rotate(-45deg);
+    -webkit-transform-origin:right, top;
+}
 .imgcontain img{
 	width:100%;
 	height:auto;
