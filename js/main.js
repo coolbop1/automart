@@ -92,3 +92,13 @@ function marksold(thisid){
 	let replace1 = theid.replace('soldbut','soldmask');
 	document.getElementById(replace1).style.display = "table";
 }
+function reportad(thisid){
+	let theid = thisid;
+	let replace1 = theid.replace('reportbut','ralert');
+	document.getElementById(replace1).style.display = "block";
+document.getElementById(theid).className = "reporttabs";
+document.getElementById(theid).innerHTML = "flagged";
+	setTimeout(function(){
+document.getElementById(replace1).style.display = "none";
+	}, 3000);
+}
