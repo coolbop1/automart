@@ -170,6 +170,34 @@ padding:10px;
 	min-width:100px;
 	cursor:pointer;
 }
+.reporttab{
+	position:absolute;
+	font-size:10px;
+	color:red;
+	background:#ffffff;
+	left:0px;
+	padding:5px 5px 5px 5px;
+	text-transform: uppercase;
+	border-radius:0px 15px 15px 0;
+	border-top:2px solid #bf3f3f;
+	border-bottom:2px solid #bf3f3f;
+	border-right:2px solid #bf3f3f;
+	cursor:pointer;
+}
+.reporttabs{
+	position:absolute;
+	font-size:10px;
+	color:#ffffff;
+	background:red;
+	left:0px;
+	padding:5px 5px 5px 5px;
+	text-transform: uppercase;
+	border-radius:0px 15px 15px 0;
+	border-top:2px solid #ffffff;
+	border-bottom:2px solid #ffffff;
+	border-right:2px solid #ffffff;
+	cursor:pointer;
+}
 .pintop{
 	position:absolute;
 	font-size:15px;
@@ -398,6 +426,16 @@ footer{
 	background:rgba(255,255,255,0.8);
 	top:0;
 	z-index:10;
+}
+.ralerts{
+	position:absolute;
+	width:calc(100% - 10px);
+	background:rgba(0,255,0,0.3);
+	top:0;
+	padding:3px;
+	font-size:15px;
+	z-index:15;
+	display:none;
 }
 .mark{
 	position:absolute;
