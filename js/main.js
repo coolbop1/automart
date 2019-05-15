@@ -87,3 +87,8 @@ document.getElementById(eid).style.display = "none";
 document.getElementById(cleid).innerHTML = "Edit Price";
 
 }
+function marksold(thisid){
+	let theid = thisid;
+	let replace1 = theid.replace('soldbut','soldmask');
+	document.getElementById(replace1).style.display = "table";
+}
