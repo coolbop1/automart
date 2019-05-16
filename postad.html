@@ -7,6 +7,7 @@
 			Auto mart
 		</title>
 		<link rel="stylesheet" href="css/style.css" >
+			<link rel="stylesheet" href="css/responsive.css" >
 	</head>
 	<body>
 		<header>
@@ -16,11 +17,15 @@
 						<a href="index.html">AUT<span class="logored">O</span> MART</a>
 					</h1>
 				</div>
+				<span id="pmenu" onclick="opennav()"><img src="image/menu.png" ></span>
 				<nav id="topnav">
 					<ul>
 						<li><a href="">Home</a></li>
 						<li><a href="">About</a></li>
 						<li><a href="">Contact</a></li>
+						<li class="hideli"><a onclick="showorder()">purchase order</a></li>
+					<li class="hideli"><a onclick="showpostad()">create Ads</a></li>
+<li class="hideli"><a onclick="showmyads()">my ads</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -446,5 +451,6 @@
 			</center>
 		</div>
 		<script src="js/main.js"></script>
+		
 	</body>
 </html>

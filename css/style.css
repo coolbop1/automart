@@ -4,6 +4,9 @@ body{
 	padding:0px;
 	margin:0px;
 }
+#pmenu{
+	display:none;
+}
 .contain{
 	padding:5px 20px 5px 20px;
 }
@@ -53,6 +56,7 @@ header{
 	border-bottom:8px solid #bf3f3f;
 }
 header a{
+	
 	padding-top:0px;
 	text-transform:uppercase;
 	text-decoration:none;
@@ -559,7 +563,7 @@ footer{
 	width:100%;
 	background:rgba(0,0,0,0.8);
 	top:0;
-	z-index:15;
+	z-index:100;
 	display:none;
 }
 #inoverlay,#odetails{
@@ -572,4 +576,7 @@ footer{
 #inoverlay img{
 	width:90%;
 	margin:10px;
+}
+.hideli{
+	display:none;
 }
