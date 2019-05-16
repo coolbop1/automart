@@ -70,7 +70,7 @@
 					</div>
 				</div>
 		</section>
-		<section id="extras">
+			<section id="extras">
 			<div id="firsthook" class="hook"></div>
 			<div id="secondhook" class="hook"></div>
 			<div id="thirdhook" class="hook"></div>
@@ -82,7 +82,12 @@
 					 <!------begining of the ads---->
 					<div class="boxline">
 						<div class="adsbox">
-							<div class="imgcontain"><img src="image/car1.jpg"></div>
+							<div class="imgcontain"><a id="single1" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
+							<div id="ralert1" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+							<div class="mark">
+									<button class="reporttab" onclick="reportad(this.id)" id="reportbut1">report</button>
+									</div>
+									
 							<table class="orangetable">
 									<th>
 										Audi 2018
@@ -98,7 +103,11 @@
 							</table>
 						</div>
 						<div class="adsbox">
-							<div class="imgcontain"><img src="image/car2.jpg"></div>
+							<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
+							<div id="ralert2" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+							<div class="mark">
+									<button class="reporttab" onclick="reportad(this.id)" id="reportbut2">report</button>
+									</div>
 							<table class="orangetable">
 									<th>
 										Audi 2018
@@ -114,7 +123,11 @@
 							</table>
 						</div>
 						<div class="adsbox">
-							<div class="imgcontain"><img src="image/car3.jpeg"></div>
+							<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
+							<div id="ralert3" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+							<div class="mark">
+									<button class="reporttab" onclick="reportad(this.id)" id="reportbut3">report</button>
+									</div>
 							<table class="orangetable">
 									<th>
 										Audi 2018
@@ -134,7 +147,11 @@
 
 					<div class="boxline">
 						<div class="adsbox">
-							<div class="imgcontain"><img src="image/car1.jpg"></div>
+							<div class="imgcontain"><a id="single4" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
+							<div id="ralert4" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+							<div class="mark">
+									<button class="reporttab" onclick="reportad(this.id)" id="reportbut4">report</button>
+									</div>
 							<table class="orangetable">
 									<th>
 										Audi 2018
@@ -150,7 +167,11 @@
 							</table>
 						</div>
 						<div class="adsbox">
-							<div class="imgcontain"><img src="image/car2.jpg"></div>
+							<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
+							<div id="ralert5" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+							<div class="mark">
+									<button class="reporttab" onclick="reportad(this.id)" id="reportbut5">report</button>
+									</div>
 							<table class="orangetable">
 									<th>
 										Audi 2018
@@ -166,7 +187,11 @@
 							</table>
 						</div>
 						<div class="adsbox">
-							<div class="imgcontain"><img src="image/car3.jpeg"></div>
+							<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
+							<div id="ralert6" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+							<div class="mark">
+									<button class="reporttab" onclick="reportad(this.id)" id="reportbut6">report</button>
+									</div>
 							<table class="orangetable">
 									<th>
 										Audi 2018
@@ -187,17 +212,26 @@
 				</div>
 				
 		</section>
-		<!--<div id="agentsconer">
-					<center>
-					<button id="accontact" class="pintab">contact</button>
-					<button id="acagent" class="pintab">agents</button>
-					<button id="acorder" class="pintab">order now</button>
-					</center>
-				</div>-->
+		
 		<footer>
 			copyright &copy; bidoritunmise@gmail.com(Andela) 2019
-		</footer>
-
+			</footer>
+<div id="overlay">
+			<center><div id="inoverlay"></div></center>
+			<center>
+				<div id="odetails">
+					<div id="fdetail">Manufacturer:<span>Audi 2018</span>
+					<hr/>
+					Condition:<span>New</span>
+					<hr/>
+					Price:<span>$5000</span>
+				</div>
+			</center>
+			<br/>
+			<center>
+			<button onclick="cls()">CLOSE</button>
+			</center>
+		</div>
 		<script src="js/main.js"></script>
 	</body>
 </html>

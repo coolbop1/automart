@@ -102,3 +102,10 @@ document.getElementById(theid).innerHTML = "flagged";
 document.getElementById(replace1).style.display = "none";
 	}, 3000);
 }
+function cls(){	document.getElementById('overlay').style.display = "none";
+}
+function opensingle(thisid){
+document.getElementById('inoverlay').innerHTML=document.getElementById(thisid).innerHTML;	
+document.getElementById('overlay').style.display = "block";
+	
+}
