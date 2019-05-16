@@ -553,3 +553,23 @@ footer{
 	color:blue;
 	cursor:pointer
 }
+#overlay{
+	position:fixed;
+	height:150%;
+	width:100%;
+	background:rgba(0,0,0,0.8);
+	top:0;
+	z-index:15;
+	display:none;
+}
+#inoverlay,#odetails{
+	background:#ffffff;
+	border-radius:5px;
+	margin-top:25px;
+	width:70%;
+	font-weight:bold;
+}
+#inoverlay img{
+	width:90%;
+	margin:10px;
+}
