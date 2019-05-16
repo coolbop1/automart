@@ -1,3 +1,16 @@
+function opennav(){
+if(document.getElementById("topnav").style.display == false || document.getElementById("topnav").style.display == "none" ){
+document.getElementById("topnav").style.display = 'block'; 
+document.getElementById("pmenu").innerHTML = "&#10006";
+}else if(document.getElementById("topnav").style.display == "block"){
+document.getElementById("topnav").style.display = 'none';
+document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
+}
+else{
+document.getElementById("topnav").style.display = 'none';
+document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
+}
+}
 function rightSlide(slideid) {
   document.getElementById("forsearch").style.left = "200px";  
   var elem = document.getElementById(slideid+"tab"); 
