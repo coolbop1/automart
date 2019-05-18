@@ -107,8 +107,17 @@ function marksold(thisid){
 }
 function reportad(thisid){
 	let theid = thisid;
-	let replace1 = theid.replace('reportbut','ralert');
-	document.getElementById(replace1).style.display = "block";
+
+	let replace2 = theid.replace('reportbut','rr');
+
+document.getElementById(replace2).style.display = "block";
+}
+function confirmre(thisid){
+	let theid = thisid.replace('confirmr','reportbut');
+	let replace1 = thisid.replace('confirmr','ralert');
+	let replace2 = thisid.replace('confirmr','rr');
+document.getElementById(replace2).style.display = "none";
+document.getElementById(replace1).style.display = "block";
 document.getElementById(theid).className = "reporttabs";
 document.getElementById(theid).innerHTML = "flagged";
 	setTimeout(function(){
