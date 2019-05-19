@@ -131,3 +131,32 @@ document.getElementById('inoverlay').innerHTML=document.getElementById(thisid).i
 document.getElementById('overlay').style.display = "block";
 	
 }
+function showsold(){
+document.getElementById('pickedtitle').innerHTML = "Sold"
+document.getElementById('soldbox').style.display = "block";
+document.getElementById('unsoldbox').style.display = "none";
+document.getElementById('reportedbox').style.display = "none";
+}
+function showunsold(){
+document.getElementById('pickedtitle').innerHTML = "Unsold"
+document.getElementById('soldbox').style.display = "none";
+document.getElementById('unsoldbox').style.display = "block";
+document.getElementById('reportedbox').style.display = "none";
+}
+function showreported(){
+	document.getElementById('pickedtitle').innerHTML = "Reported"
+document.getElementById('soldbox').style.display = "none";
+document.getElementById('unsoldbox').style.display = "none";
+document.getElementById('reportedbox').style.display = "block";
+}
+function showallpost(){
+document.getElementById('pickedtitle').innerHTML = "All"
+document.getElementById('soldbox').style.display = "block";
+document.getElementById('unsoldbox').style.display = "block";
+document.getElementById('reportedbox').style.display = "block";
+}
+function deletead(thisid){
+	let theid = thisid;
+	let replace1 = theid.replace('deletebut','ads');
+document.getElementById(replace1).style.display = "none";
+}
