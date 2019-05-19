@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Auto mart
+		</title>
+		<link rel="stylesheet" href="css/style.css" >
+			<link rel="stylesheet" href="css/responsive.css" >
+	</head>
+	<body>
+		<header>
+			<div class="contain">
+				<div id="sitename">
+					<h1>
+						<a href="index.html">AUT<span class="logored">O</span> MART</a>
+					</h1>
+				</div>
+				<span id="pmenu" onclick="opennav()"><img src="image/menu.png" ></span>
+				<nav id="topnav">
+					<ul>
+						<li><a href="">Home</a></li>
+						<li><a href="">About</a></li>
+						<li><a href="">Contact</a></li>
+						<li class="hideli"><a onclick="showorder()">purchase order</a></li>
+					<li class="hideli"><a onclick="showpostad()">create Ads</a></li>
+<li class="hideli"><a onclick="showmyads()">my ads</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div id="nofloat">
+				<div id="midlogo">
+					<center>
+						<div id="mid"><a href="index.html"><img src="image/log.png" width="100px"></a></div>
+					</center>
+				</div>
+			</div>
+		</header>
+		
+		
+			<section id="postcontent">
+				<div id="postinner">
+						<span tabindex="0" id="fpin" onclick="showsold()" class="pintab">Sold</span>
+					<span tabindex="0" id="spin" onclick="showunsold()" class="pintab">Unsold</span>
+					<span tabindex="0" id="tpin" onclick="showreported()" class="pintab">Reported</span>
+					
+					
+					
+					
+					
+					<h1 id="ppagetitile">ADMIN</h1>
+				</div>
+				</section>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<section id="extras">
+			<div id="firsthook" class="hook"></div>
+			<div id="secondhook" class="hook"></div>
+			<div id="thirdhook" class="hook"></div>
+			<div id="fourthhook" class="hook"></div>
+			
+			<div id="indexads">
+					<div class="stattitle"><span id="pickedtitle">All</span> Posts</div>
+					 <div id="postedd">
+					 	<button onclick="showallpost()">ALL POST</button>
+					 <!------begining of the ads---->
+					<div class="boxline" id="unsoldbox">
+						<div class="adsbox" id="ads1">
+							<div id="soldmask1" class="sold"><span>SOLD!</span></div>
+							<div class="imgcontain"><a id="single1" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
+								
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut1">DELETE</button>
+									</div>
+									
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox" id="ads2">
+							<div id="soldmask2" class="sold"><span>SOLD!</span></div>
+							<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut2">DELETE</button>
+									</div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox" id="ads3">
+							<div id="soldmask3" class="sold"><span>SOLD!</span></div>
+							<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
+							
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut3">DELETE</button>
+									</div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+					</div>
+
+
+					<div class="boxline" id="soldbox">
+						<div class="adsbox" id="ads4">
+							<div id="soldmask4" class="solds"><span>SOLD!</span></div>
+							<div class="imgcontain"><a id="single4" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut4">DELETE</button>
+									</div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox" id="ads5">
+							<div id="soldmask5" class="solds"><span>SOLD!</span></div>
+							<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
+					
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut5">DELETE</button>
+									</div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox" id="ads6">
+							<div id="soldmask6" class="solds"><span>SOLD!</span></div>
+							<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
+							
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut6">DELETE</button>
+									</div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+					</div>
+					 	
+					 	
+					 	
+					 	
+					 	<div class="boxline" id="reportedbox">
+						<div class="adsbox" id="ads7">
+							<div class="imgcontain"><a id="single7" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
+							
+								<div class="priceedit"><center><strong>This ad have been marked</strong></center><br/> <strong>By:</strong>boritunmise@gmail.com </br><strong>Reason:</strong>"This ads picture is popular online i suspect fraud"</div>
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut7">DELETE</button>
+									</div>
+									
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox" id="ads8">
+							<div class="imgcontain"><a id="single8" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
+								
+							<div class="priceedit"><center><strong>This ad have been marked</strong></center><br/> <strong>By:</strong>boritunmise@gmail.com </br><strong>Reason:</strong>"This ads picture is popular online i suspect fraud"</div>
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut8">DELETE</button>
+									</div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+						<div class="adsbox" id="ads9">
+							<div class="imgcontain"><a id="single9" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
+							
+						<div class="priceedit"><center><strong>This ad have been marked</strong></center><br/> <strong>By:</strong>boritunmise@gmail.com </br><strong>Reason:</strong>"This ads picture is popular online i suspect fraud"</div>
+							<div class="mark">
+									<button class="reporttabs" onclick="deletead(this.id)" id="deletebut9">DELETE</button>
+									</div>
+							<table class="orangetable">
+									<th>
+										Audi 2018
+									</th>
+									<tr>
+										<td>Condition</td>
+										<td>Used</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>$5,000</td>
+									</tr>
+							</table>
+						</div>
+					</div>
+					 	
+					 				
+					 	
+					 </div>
+				</div>
+				
+		</section>
+		
+		<footer>
+			copyright &copy; bidoritunmise@gmail.com(Andela) 2019
+			</footer>
+<div id="overlay">
+			<center><div id="inoverlay"></div></center>
+			<center>
+				<div id="odetails">
+					<div id="fdetail">Manufacturer:<span>Audi 2018</span>
+					<hr/>
+					Condition:<span>New</span>
+					<hr/>
+					Price:<span>$5000</span>
+				</div>
+			</center>
+			<br/>
+			<center>
+			<button onclick="cls()">CLOSE</button>
+			</center>
+		</div>
+		<script src="js/main.js"></script>
+		
+	</body>
+</html>
