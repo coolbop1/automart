@@ -1,5 +1,6 @@
 function opennav(){
-	if(document.getElementById("topnav").style.display == false || document.getElementById("topnav").style.display == "none" ){
+
+		if(document.getElementById("topnav").style.display == false || document.getElementById("topnav").style.display == "none" ){
 		document.getElementById("topnav").style.display = "block"; 
 		document.getElementById("pmenu").innerHTML = "&#10006";
 	}else if(document.getElementById("topnav").style.display == "block"){
@@ -9,21 +10,35 @@ function opennav(){
 	else{
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
+		
 	}
+	
+
+}
+function opennavs(){
+	if(document.getElementById("topnav").style.display == "block"){
+document.getElementById("topnav").style.display = "none";
+		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
+		}
 }
 function rightSlide(slideid) {
-	document.getElementById("forsearch").style.left = "200px";  
+	 opennavs();
 	var elem = document.getElementById(slideid+"tab"); 
+	
 	if(slideid == "fpin"){
 		let elems = document.getElementById("spintab");
 		elems.style.top = "435px";
 		document.getElementById(slideid).style.pointerEvents = "none"; 
 		document.getElementById("spin").style.pointerEvents = "none"; 
+document.getElementById("fpin").style.background ="#bf3f3f";
+document.getElementById("spin").style.background ="inherit";
 	}else if(slideid == "spin"){
 		let elems = document.getElementById("fpintab");
 		elems.style.top = "500px";
 		document.getElementById(slideid).style.pointerEvents = "none"; 
 		document.getElementById("fpin").style.pointerEvents = "none"; 
+		document.getElementById("fpin").style.background ="inherit";
+document.getElementById("spin").style.background ="#bf3f3f";
 	}
 	elem.className = "righttab";
 	var pos = 435;
@@ -40,6 +55,10 @@ function rightSlide(slideid) {
 			elem.style.top = pos + "px"; 
 		}
 	}
+	setTimeout(function(){
+		document.getElementById("signs").scrollIntoView({block:'start',behavior:'smooth'});
+	},1000);
+	
 }
 function closetab(){
 	document.getElementById("spintab").style.top = "500px"; 
@@ -47,24 +66,36 @@ function closetab(){
 	document.getElementById("forsearch").style.left = "27.5%"; 
 }
 function showmyads(){
-	document.getElementById("posted").style.display ="block";	
+opennavs();	document.getElementById("posted").style.display ="block";	
 	document.getElementById("postform").style.display = "none";	
 	document.getElementById("profiletab").style.display = "none";	
 	document.getElementById("prequest").style.display = "none";  
+	
+	
+	document.getElementById("navsord").style.background ="inherit";
+document.getElementById("navmad").style.background ="#bf3f3f";
+document.getElementById("navsad").style.background ="inherit";
 }
 function showpostad(){
-	document.getElementById("postform").style.display = "block";
+opennavs();	document.getElementById("postform").style.display = "block";
 	document.getElementById("profiletab").style.display = "block";
 	document.getElementById("posted").style.display = "none";
 	document.getElementById("prequest").style.display = "none";
 	
+	
+	document.getElementById("navsord").style.background ="inherit";
+document.getElementById("navmad").style.background ="inherit";
+document.getElementById("navsad").style.background ="#bf3f3f";
+	
 }
 function showorder(){
-	document.getElementById("prequest").style.display = "block";
+opennavs();	document.getElementById("prequest").style.display = "block";
 	document.getElementById("profiletab").style.display = "block";
 	document.getElementById("posted").style.display = "none";
 	document.getElementById("postform").style.display = "none";
-  
+  document.getElementById("navsord").style.background ="#bf3f3f";
+document.getElementById("navmad").style.background ="inherit";
+document.getElementById("navsad").style.background ="inherit";
 }
 function pedit(clickedbox){
 	let but = clickedbox;
@@ -160,3 +191,6 @@ function deletead(thisid){
 	let replace1 = theid.replace("deletebut","ads");
 	document.getElementById(replace1).style.display = "none";
 }
+/*function login(){
+document.getElementById("fpintab").style.display = "none";
+}*/

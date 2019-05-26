@@ -18,16 +18,14 @@
 					</h1>
 				</div>
 				<span id="pmenu" onclick="opennav()"><img src="image/menu.png" ></span>
-				<nav id="topnav">
-					<ul>
-						<li><a href="">Home</a></li>
-						<li><a href="">About</a></li>
-						<li><a href="">Contact</a></li>
-						<li class="hideli"><a onclick="showorder()">purchase order</a></li>
-					<li class="hideli"><a onclick="showpostad()">create Ads</a></li>
-<li class="hideli"><a onclick="showmyads()">my ads</a></li>
-					</ul>
-				</nav>
+				<div id="topnav">
+					<ul id="navul">
+						<li  id="navmad" tabindex="0" onclick="showmyads()"><a >My ads</a></li>
+						<li id="navsad" tabindex="0" onclick="showpostad()"><a >Create ad</a></li>
+						<li id="navsord" tabindex="0" onclick="showorder()"><a >Order</a></li>
+						<li tabindex="0" ><a>Logout</a></li>
+							</ul>
+				</div>
 			</div>
 			<div id="nofloat">
 				<div id="midlogo">
@@ -40,12 +38,28 @@
 		<section id="postcontent">
 				<div id="postinner">
 
-					<span tabindex="0" id="spintop" onclick="showorder()" class="pintop">purchase order</span>
-					<span tabindex="0" id="fpintop" onclick="showpostad()" class="pintop">create Ads</span>
 					
-					<span tabindex="0" id="tpintop" onclick="showmyads()" class="pintop">my ads</span>
 				<div id="profiletab">
-					
+					<div id="runorder">
+						<br/>&nbsp;<br/>
+							<center><strong id="buyreq">Buyers Requests</strong></center>
+						<br/>
+						&nbsp;
+						<br/>
+						<div class="orderlists">
+						 Audi 2018<hr/>
+						 <span id="">Price: $5000</span>
+						
+<div id="sm1" class="aref" tabindex="0" onclick="seemore(this.id)" >See more</div>
+						</div>
+						<br/>
+						<div class="orderlists">
+						 Audi 2018<hr/>
+						 <span id="">Price: $5000</span> 
+					<div id="sm2" class="aref" tabindex="0" onclick="seemore(this.id)" >See more</div>
+						</div>
+						
+					</div>
 					</div>
 					<div id="posted">
 						
@@ -62,19 +76,27 @@
 									<button id="ep1" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl1"  class="close" onclick="closedit(this.id)">&#10006</span></center>
 								</div>
 							</div>
-							<table>
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-								</table>
+							
+							<div class="orangetablev"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
+							
 						</div>
 						<div class="adsbox">
 							<div id="soldmask2" class="sold"><span>SOLD!</span></div>
@@ -92,19 +114,27 @@
 								
 								
 							</div>
-							<table>
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-								</table>
+							
+							<div class="orangetablev"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
+							
 						</div>
 						<div class="adsbox">
 									<div id="soldmask3" class="sold"><span>SOLD!</span></div>
@@ -119,19 +149,27 @@
 								
 								
 							</div>
-							<table>
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-								</table>
+							
+						<div class="orangetablev"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
+							
 						</div>
 						</div>
 						<br/>
@@ -307,19 +345,27 @@
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut1">report</button>
 									</div>
 									
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+						
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+						
+						
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
@@ -328,19 +374,26 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut2">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+						
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+						
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
@@ -349,19 +402,26 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut3">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+							
+							<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
 						</div>
 					</div>
 
@@ -374,19 +434,26 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut4">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+						
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+						
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
@@ -395,19 +462,27 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut5">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+							
+							<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
+							
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
@@ -416,19 +491,27 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut6">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+									
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
+							
 						</div>
 					</div>
 					 	

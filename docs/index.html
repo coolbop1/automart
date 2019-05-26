@@ -8,6 +8,8 @@
 		</title>
 		<link rel="stylesheet" href="css/style.css" >
 			<link rel="stylesheet" href="css/responsive.css" >
+
+			
 	</head>
 	<body>
 		<header>
@@ -18,13 +20,14 @@
 					</h1>
 				</div>
 				<span id="pmenu" onclick="opennav()"><img src="image/menu.png" ></span>
-				<nav id="topnav">
-					<ul>
-						<li><a href="">Home</a></li>
-						<li><a href="">About</a></li>
-						<li><a href="">Contact</a></li>
+				
+				<div id="topnav">
+					<ul id="navul">
+						<li id="fpin" onclick="rightSlide(this.id)" tabindex="0"><a  >Signin</a></li>
+						<li id="spin" onclick="rightSlide(this.id)" tabindex="0"><a>Signup</a></li>
+						
 					</ul>
-				</nav>
+				</div>
 			</div>
 			<div id="nofloat">
 				<div id="midlogo">
@@ -35,38 +38,47 @@
 			</div>
 		</header>
 		<section id="fcontent">
+			<div id="hhold"><div class="heading">Smart way<br/> to buy or sell<br/> auto mobile </div></div>
 				<div id="signs">
 					<div id="forsearch">
 						<form id="serchform">
 							<span id="mainsearch"><input type="text" id="searchinput" placeholder="Find Auto-mobile Of Your Choice" name="find"></span>
 							<span id="searchspan"><button class="searchbutton" type="submit"><img src="image/searchs.png" width="12px"></button></span>
 						</form>
+						
 					</div>
-					<span tabindex="0" id="fpin" onclick="rightSlide(this.id)" class="pintab">Sign in</span>
-					<span tabindex="0" id="spin" onclick="rightSlide(this.id)" class="pintab">Sign up</span>
-					<a href="postad.html"><span tabindex="0" id="tpin" class="pintab">Explore</span></a>
-				
-						<div class="hide" id="fpintab">
+					
+						<div class="righttab" id="fpintab">
 <div class="titletab">SIGN IN <span  class="close" onclick="closetab()">&#10006</span></div>
+<div class="underwarn"><div class="warning" id="logwarning"></div></div>
+
+							<div class="underwarn"><div class="success" id="logsuccess"></div></div>
 						<div class="contain">
-							<form action="postad.html">
-								<input type="text" class="myinput" id="user" placeholder="Username or Email" name="user">
+								<form method="POST" onsubmit="return  login()">
+									
+								<input type="email" class="myinput" id="user" placeholder="Email" name="user">
+							
 								<input type="password" class="myinput" placeholder="*******" id="pwd" name="pwd">
-								<button class="padbutton" type="submit">login</button>
+								<button id="logg"  class="padbutton" >login</button>
 							</form>
 						</div>
 					</div>
 					<div class="hide" id="spintab">
 						<div class="titletab">SIGN UP <span  class="close" onclick="closetab()">&#10006</span></div>
+						<div class="underwarn"><div class="warning" id="regwarning"></div></div>
+
+							<div class="underwarn"><div class="success" id="regsuccess"></div></div>
 						<div class="contain">
-							<form>
-								<input type="text" class="myinput" id="regfname" placeholder="First Name" name="regfname">
-								<input type="text" class="myinput" id="reglname" placeholder="Last Name" name="reglname">
-								<input type="email" class="myinput" id="regemail" placeholder="Email" name="regemail">
-								<input type="text" class="myinput" id="reguser" placeholder="Username or Email" name="reguser">
-								<input type="password" class="myinput" placeholder="***Password***" id="regpwd" name="regpwd">
-								<input type="password" class="myinput" placeholder="***Retype Password***" id="reegpwd" name="reegpwd">
-								<button class="padbutton" type="submit">register</button>
+							<form method="POST" onsubmit="return signup()">
+								<input type="text" class="myinput" id="regfname" placeholder="First Name" pattern="[a-zA-Z.- ]+" title="Letters only please" name="regfname" required>
+								<input type="text"q$ class="myinput" id="reglname" placeholder="Last Name" pattern="[a-zA-Z.- ]+" title="Letters only please" name="reglname" required>
+								<input type="email" class="myinput" id="regemail" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="regemail" required>
+				
+								<input type="text" class="myinput" id="regadd" placeholder="Address" pattern="[a-zA-Z0-9.-/ ]+" name="regadd" required>
+							
+								<input type="password" class="myinput" placeholder="***Password***" pattern=".{6,}" title="Six or more characters" id="regpwd" name="regpwd" required>
+								<!--<input type="password" class="myinput" placeholder="***Retype Password***" id="reegpwd" name="reegpwd">-->
+								<button class="padbutton"  >register</button>
 							</form>
 						</div>
 					</div>
@@ -91,20 +103,31 @@
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut1">report</button>
 									</div>
 									
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+									
+									
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
+							
 						</div>
+						
+						
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
 								<div class="ralerts" id="rr2"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr2" onclick="confirmre(this.id)">submit</button></div>
@@ -112,19 +135,25 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut2">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
@@ -133,19 +162,26 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut3">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+							
+							<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
 						</div>
 					</div>
 
@@ -158,19 +194,26 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut4">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+							
+							
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
@@ -179,19 +222,26 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut5">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+						
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+						
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
@@ -200,19 +250,27 @@
 							<div class="mark">
 									<button class="reporttab" onclick="reportad(this.id)" id="reportbut6">report</button>
 									</div>
-							<table class="orangetable">
-									<th>
-										Audi 2018
-									</th>
-									<tr>
-										<td>Condition</td>
-										<td>Used</td>
-									</tr>
-									<tr>
-										<td>Price</td>
-										<td>$5,000</td>
-									</tr>
-							</table>
+						
+						<div class="orangetablep"	>	
+							<div class="intp">
+								<div class="dinsyd">
+									<span class="manu">Audi 2018</span>
+									<hr/>
+									<span class="carcond">
+										Condition &nbsp;:&nbsp; Used
+										</span>
+									</div>
+									<div class="pricein">
+										PRICE
+										<br/>
+										$5,000
+										</div>
+							<div class="slant">
+								</div>
+							</div>
+							</div>
+						
+						
 						</div>
 					</div>
 					 	
@@ -241,5 +299,6 @@
 			</center>
 		</div>
 		<script src="js/main.js"></script>
+			<script src="js/client.js"></script>
 	</body>
 </html>
