@@ -8,6 +8,9 @@
 		</title>
 		<link rel="stylesheet" href="css/style.css" >
 			<link rel="stylesheet" href="css/responsive.css" >
+				
+		
+	
 	</head>
 	<body>
 		<header>
@@ -20,25 +23,25 @@
 				<span id="pmenu" onclick="opennav()"><img src="image/menu.png" ></span>
 				<div id="topnav">
 					<ul id="navul">
-						<li  id="navmad" tabindex="0" onclick="showmyads()"><a >My ads</a></li>
-						<li id="navsad" tabindex="0" onclick="showpostad()"><a >Create ad</a></li>
-						<li id="navsord" tabindex="0" onclick="showorder()"><a >Order</a></li>
-						<li tabindex="0" ><a>Logout</a></li>
+						<li  id="navmad" onclick="showmyads()"><a >My ads</a></li>
+						<li id="navsad"  onclick="showpostad()"><a >Create ad</a></li>
+						<li id="navsord"  onclick="showorder()"><a >Order</a></li>
+						<li  onclick="logout()" ><a>Logout</a></li>
 							</ul>
 				</div>
 			</div>
 			<div id="nofloat">
 				<div id="midlogo">
 					<center>
-						<div id="mid"><a href="index.html"><img src="image/log.png" width="100px"></a></div>
+						<div id="mid"><a href="index.html"><img src="image/logb.png" width="100px"></a></div>
 					</center>
 				</div>
 			</div>
 		</header>
 		<section id="postcontent">
+			
 				<div id="postinner">
-
-					
+					<div id="userspace"></div>
 				<div id="profiletab">
 					<div id="runorder">
 						<br/>&nbsp;<br/>
@@ -180,9 +183,13 @@
 						
 					</div>
 					<!--post car ads goes here-->
+					<div class="postinner">
 					<div id="postform">
 
-						<div id="adtitle" class="stattitle">Post a Car For Sale</div>
+						<div id="adtitle" class="stattitle">
+							<div class="slants"></div>
+							Create Ad.
+						<div class="slant"></div></div>
 						<form>
 						<div id="inputonly">
 						
@@ -190,29 +197,29 @@
 							
 							<div class="grouptwo">
 							<div class="groupf">
-								<input class="cpform" placeholder="Manufacture">
+								<input class="myinput" placeholder="Manufacture">
 							</div>
 							<div class="groupf">
-								<input class="cpform" placeholder="Model">
+								<input class="myinput" placeholder="Model">
 							</div>
 						</div>
-						<br/>&nbsp;</br>
+						
 						<div class="grouptwo">
 							<div class="groupf">
-								<input class="cpform" placeholder="Body type">
+								<input class="myinput" placeholder="Body type">
 							</div>
 							<div class="groupf">
-								<input class="cpform" placeholder="Engine size">
+								<input class="myinput" placeholder="Engine size">
 							</div>
 						</div>
-						<br/>&nbsp;<br/>
+						
 						<div class="grouptwo">
-								<input type="number" class="cpforms" placeholder="Price $">
+								<input type="number" id="pprice" class="myinput" placeholder="Price $">
 							</div>
 							<div class="grouptwo">
-								State<br/>
+								Condition of the car: &nbsp; &nbsp; &nbsp;
 								New:<input type="radio" class="radioinput" value="new" name="stateocar"> &nbsp;&nbsp;
-									Old<input type="radio" class="radioinput" value="old" name="stateocar">
+									used<input type="radio" class="radioinput" value="used" name="stateocar">
 							</div>
 						
 						
@@ -229,10 +236,8 @@
 							<input type="file" hidden id="chooseim" >
 						</label>
 						</center>
-						<br/>
-						&nbsp;
-						<br/>
-						<center><button id="postcarad" class="pintab">Post Car</button></center>
+						
+						<center><button id="postcarad" class="padbutton">Post Car</button></center>
 					</div>	
 					</form>				
 				</div>
@@ -321,16 +326,12 @@
 					</div>	
 									
 				</div>
-					
+					</div>
 					
 				</div>
 
 		</section>
 	<section id="extras">
-			<div id="firsthook" class="hook"></div>
-			<div id="secondhook" class="hook"></div>
-			<div id="thirdhook" class="hook"></div>
-			<div id="fourthhook" class="hook"></div>
 			
 			<div id="indexads">
 					<div class="stattitle">Featured Automobile</div>
@@ -540,6 +541,16 @@
 			</center>
 		</div>
 		<script src="js/main.js"></script>
-		
+			<script src="js/client.js"></script>
+			<script src="js/login.js"></script>
+		<script>
+	/*		if(myToken){
+//stilllog();
+document.getElementById("userspace").innerHTML = myToken;
+}else{
+	document.getElementById("userspace").innerHTML = "here";
+}*/
+			//document.getElementById("userspace").innerHTML = userIemail;
+			</script>
 	</body>
 </html>

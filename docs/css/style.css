@@ -16,11 +16,11 @@ body{
 	border-style: none;
 	width:calc(100% - 40px);
 	margin-bottom:50px;
-	border-bottom: 2px solid #ffffff;
+	border-bottom: 2px solid #021e72;
 	
 
 }
-#spintab .myinput{
+#spintab .myinput,.groupf input{
 	margin-bottom:10px;
 	padding:10px;
 	
@@ -98,11 +98,11 @@ header a{
 #mid{
 	width: 100px;
   min-height: 100px;
-  background:#3c79f2;
+  background:#d8743a;
  // background:#ffffff;
 	color:#ffffff;
 	border-radius:50%;
-	border:5px solid #ffffff;
+	border:3px solid #ffffff;
 	text-align:center;
 	text-shadow:0 0 60px #bf3f3f, 0 0 100px #021e72;
 	position:relative;
@@ -117,33 +117,12 @@ padding:10px;
 	right:35%;
 	z-index:10;
 }
-.hook{
-	border:3px solid #ffffff;
-	border-radius:15px;
-	background:#3c79f2;
-	position:absolute;
-	width:10px;
-	min-height:70px;
-	top:-50px;
-	z-index:10;
-}
-#firsthook{
-	left:40px;
-}
-#secondhook{
-	left:80px;
-}
-#thirdhook{
-	right:80px;
-}
-#fourthhook{
-	right:40px;
-}
+
 	/*border-right:3px solid #021e72;*/
 #fcontent {
 	width:calc(100% - 10px);
-	min-height:435px;
-	margin:20px 5px 20px 5px;
+	//min-height:435px;
+	margin:20px 5px 5px 5px;
 	background:url("car.jpeg");
 	background-repeat: no-repeat;
  	//background-attachment: fixed;
@@ -153,7 +132,8 @@ padding:10px;
 #postcontent{
 	width:calc(100% - 10px);
 	min-height:435px;
-	margin:20px 5px 20px 5px;
+	background:#021e72;
+	margin:20px 5px 5px 5px;
 }
 #signs{
 	min-height:435px;
@@ -169,12 +149,13 @@ padding:10px;
 #postinner{
 	min-height:435px;
 	width:100%;
-	background:rgba(2,14,114,0.6);
+	//background:rgba(0,0,0,0.6);
 	text-align:center;
 	position:relative;
 	z-index:0;
 	overflow:hidden;
-}
+
+}	
 .pintab{
 	position:absolute;
 	font-size:15px;
@@ -248,7 +229,7 @@ padding:10px;
 	left:10px;
 }
 
-#accontact,#acagent,#postcarad,#acorder{
+#accontact,#acagent,#acorder{
 	position:static;
 	margin:40px 0 40px 0;
 	border-radius:25px;
@@ -359,7 +340,7 @@ text-shadow:2px 2px 4px #000000;
 }
 
 .stattitle{
-	margin-top:30px;
+	padding:10px;
 	text-align:center;
 	color:#021e72;
 	font-weight:bold;
@@ -369,6 +350,9 @@ text-shadow:2px 2px 4px #000000;
 }
 #adtitle{
 	margin-top:0;
+	background:#021e72;
+	border-bottom:2px solid #ffffff;
+	color:#ffffff;
 }
 #adstitle{
 	margin-top:0;
@@ -427,8 +411,8 @@ footer{
 	right:2.5%;
 	min-height:90%;
 	bottom:12%;
-	background:#f1f1f1;
-	box-shadow: 5px 10px 10px #000000;
+	background:#d8743a;
+	border: 3px solid #ffffff;
 	display:none;
 }
 .adsbox{
@@ -565,12 +549,6 @@ footer{
 	margin:1px;
 	width:calc(50% - 5px)
 }
-.groupf input{
-	padding:10px;
-	border-style:none;
-	border:2px solid #021e72;
-	border-radius:25px;
-}
 .cpforms{
 	width:calc(100% - 46px);
 	padding:10px;
@@ -705,6 +683,35 @@ footer{
     -webkit-transform: rotate(30deg);
     -webkit-transform-origin:right, top;
 }
+.stattitle .slant{
+	top:-20px;
+	right:-130px;
+	background:#d8743a;
+}
+.slants{
+	height:200px;
+	background:#021e72;
+	position:absolute;
+	left:-50px;
+	top:-50px;
+	width:50%;
+	border:2px solid #ffffff;
+	transform: rotate(-30deg);
+    transform-origin: left, top;
+    -ms-transform: rotate(-30deg);
+    -ms-transform-origin:left, top;
+    -webkit-transform: rotate(-30deg);
+    -webkit-transform-origin:left, top;
+}
+.stattitle .slants{
+	top:-20px;
+	left:-130px;
+	background:#d8743a;
+}
+.stattitle{
+	position:relative;
+	overflow:hidden;
+}
 .dinsyd{
 	position:absolute;
 	width:50%;
@@ -730,6 +737,20 @@ footer{
 	font-size:15px;
 	font-weight:bold;
 	
+}
+#nowloged{
+	display:none;
+}
+#userspace{
+	position:absolute;
+	padding:10px;
+	background:white;
+	top:5px;
+	right:5px;
+	color:#bf3f3f;
+}
+#pprice{
+	width:calc(100% - 80px);
 }
 /*label{
 	float:left;
