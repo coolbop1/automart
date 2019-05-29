@@ -37,8 +37,11 @@ header{
 	z-index:50;
 }
 #fcontent,#postcontent{
+	width:100%;
 	margin-top:100px;
 	margin-bottom:0;
+	margin-right:0;
+	margin-left:0;
 }
 
 #extras{
@@ -58,9 +61,7 @@ header{
 	margin-right: 0 !important;
 	top:500px;
 }
-.hook{
-	display:none;
-}
+
 .adsbox{
 	width:calc(100% - 10px);
 	float:none;
@@ -92,8 +93,6 @@ header{
 	top:70px;
 	right:2.5%;
 	min-height:90%;
-	background:#f1f1f1;
-	box-shadow: 5px 10px 10px #000000;
 	display:none;
 }
 #inputonly{
@@ -118,7 +117,7 @@ header{
 #posted{
 	
 	width:calc(100% - 10px);
-	margin:20px 5px 30px 5px !important;
+	margin:50px 5px 30px 5px !important;
 	/*box-shadow: 5px 10px 10px #000000;*/
 }
 .hideli{
@@ -144,6 +143,9 @@ header{
 }
 #fpin{
 	background:inherit;
+}
+.postinner{
+		padding-top:50px;
 }
 
 	}

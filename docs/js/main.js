@@ -1,3 +1,5 @@
+
+
 function opennav(){
 
 		if(document.getElementById("topnav").style.display == false || document.getElementById("topnav").style.display == "none" ){
@@ -191,6 +193,7 @@ function deletead(thisid){
 	let replace1 = theid.replace("deletebut","ads");
 	document.getElementById(replace1).style.display = "none";
 }
+
 /*function login(){
 document.getElementById("fpintab").style.display = "none";
 }*/

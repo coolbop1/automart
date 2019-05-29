@@ -10,6 +10,7 @@
 			<link rel="stylesheet" href="css/responsive.css" >
 
 			
+	
 	</head>
 	<body>
 		<header>
@@ -22,17 +23,23 @@
 				<span id="pmenu" onclick="opennav()"><img src="image/menu.png" ></span>
 				
 				<div id="topnav">
+				
 					<ul id="navul">
+							<div id="notloged">
 						<li id="fpin" onclick="rightSlide(this.id)" tabindex="0"><a  >Signin</a></li>
 						<li id="spin" onclick="rightSlide(this.id)" tabindex="0"><a>Signup</a></li>
-						
+						</div>
+						<span id="nowloged">
+						<li onclick="dashboard()" tabindex="0"><a  >Dashboard</a></li>
+						<li  onclick="logout()" tabindex="0"><a>Logout</a></li>
+						</span>
 					</ul>
 				</div>
 			</div>
 			<div id="nofloat">
 				<div id="midlogo">
 					<center>
-						<div id="mid"><a href="index.html"><img src="image/log.png" width="100px"></a></div>
+						<div id="mid"><a href="index.html"><img src="image/logb.png" width="100px"></a></div>
 					</center>
 				</div>
 			</div>
@@ -85,10 +92,7 @@
 				</div>
 		</section>
 			<section id="extras">
-			<div id="firsthook" class="hook"></div>
-			<div id="secondhook" class="hook"></div>
-			<div id="thirdhook" class="hook"></div>
-			<div id="fourthhook" class="hook"></div>
+			
 			
 			<div id="indexads">
 					<div class="stattitle">Featured Automobile</div>
@@ -298,7 +302,9 @@
 			<button onclick="cls()">CLOSE</button>
 			</center>
 		</div>
+		
 		<script src="js/main.js"></script>
 			<script src="js/client.js"></script>
+			<script src="js/login.js"></script>
 	</body>
 </html>
