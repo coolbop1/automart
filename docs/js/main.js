@@ -68,7 +68,8 @@ function closetab(){
 	document.getElementById("forsearch").style.left = "27.5%"; 
 }
 function showmyads(){
-opennavs();	document.getElementById("posted").style.display ="block";	
+opennavs();
+document.getElementById("myadsti").style.display ="block";	document.getElementById("posted").style.display ="block";	
 	document.getElementById("postform").style.display = "none";	
 	document.getElementById("profiletab").style.display = "none";	
 	document.getElementById("prequest").style.display = "none";  
@@ -79,7 +80,8 @@ document.getElementById("navmad").style.background ="#bf3f3f";
 document.getElementById("navsad").style.background ="inherit";
 }
 function showpostad(){
-opennavs();	document.getElementById("postform").style.display = "block";
+opennavs();
+document.getElementById("myadsti").style.display ="none";	document.getElementById("postform").style.display = "block";
 	document.getElementById("profiletab").style.display = "block";
 	document.getElementById("posted").style.display = "none";
 	document.getElementById("prequest").style.display = "none";
@@ -91,7 +93,8 @@ document.getElementById("navsad").style.background ="#bf3f3f";
 	
 }
 function showorder(){
-opennavs();	document.getElementById("prequest").style.display = "block";
+opennavs();
+document.getElementById("myadsti").style.display ="none";	document.getElementById("prequest").style.display = "block";
 	document.getElementById("profiletab").style.display = "block";
 	document.getElementById("posted").style.display = "none";
 	document.getElementById("postform").style.display = "none";
