@@ -191,36 +191,39 @@
 							<!--<div class="slants"></div>-->
 							Create Ad.
 						<!--<div class="slant"></div>--></div>
-						<form>
+						<div class="underwarn"><div class="warning" id="regwarning"></div></div>
+
+							<div class="underwarn"><div class="success" id="regsuccess"></div></div>
+						<form method="POST" onsubmit="return postcar()">
 						<div id="inputonly">
 						
 						<center>
 							
 							<div class="grouptwo">
 							<div class="groupf">
-								<input class="myinput" placeholder="Manufacture">
+								<input id="pcman" name="pcman" class="myinput" placeholder="Manufacture" pattern="[a-zA-Z0-9.-/ ]+" required>
 							</div>
 							<div class="groupf">
-								<input class="myinput" placeholder="Model">
+								<input id="pcmodel" name="pcmodel" class="myinput" placeholder="Model" pattern="[a-zA-Z0-9.-/ ]+" required>
 							</div>
 						</div>
 						
 						<div class="grouptwo">
 							<div class="groupf">
-								<input class="myinput" placeholder="Body type">
+								<input id="pccolor" name="pccolor" class="myinput" placeholder="Body type / color" pattern="[a-zA-Z0-9.-/ ]+" required>
 							</div>
 							<div class="groupf">
-								<input class="myinput" placeholder="Engine size">
+								<input id="pces" name="pces" class="myinput" placeholder="Engine size" pattern="[a-zA-Z0-9.-/ ]+" required>
 							</div>
 						</div>
 						
 						<div class="grouptwo">
-								<input type="number" id="pprice" class="myinput" placeholder="Price $">
+								<input type="number" id="pprice" name="pprice" class="myinput" placeholder="Price $"  required>
 							</div>
-							<div class="grouptwo">
+							<div id="irline" class="grouptwo">
 								Condition of the car: &nbsp; &nbsp; &nbsp;
-								New:<input type="radio" class="radioinput" value="new" name="stateocar"> &nbsp;&nbsp;
-									used<input type="radio" class="radioinput" value="used" name="stateocar">
+								New:<input type="radio" class="radioinput" value="new"  name="stateocar"  checked> &nbsp;&nbsp;
+									Used<input type="radio" class="radioinput" value="used" name="stateocar">
 							</div>
 						
 						
@@ -230,12 +233,43 @@
 					</div>
 						<div id="postimg">
 							<center>
-						<label for="chooseim">
-							choose image<br/>
+				
+						
+						
+						
+						
+						
+					
+
+  
+    <div id="dropbox">
+    <div class="form_line">
+      <div class="form_controls">
+        <div class="upload_button_holder">
+          <input type="file" id="fileElem" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+          <a href="#" id="fileSelect">
+          	choose image<br/>
 							<img src="image/placeholder.png" width="100px">
-							
-							<input type="file" hidden id="chooseim" >
-						</label>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+  
+  <div class="progress-bar" id="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+  <div id="gallery" />
+</div>	
+						
+						
+						
+						
+						
+						
+						
+						<input type="hidden" id="pcpics" value="image/car1.jpg" name="pcpics" required>
+							<input id="carposter" type="hidden" >
 						</center>
 						
 						<center><button id="postcarad" class="padbutton">Post Car</button></center>
@@ -251,7 +285,7 @@
 
 				<div id="prequest">
 
-						<div id="adtitle" class="stattitle">Make a Purchase Order</div>
+						<div id="adtitle" class="stattitle">Purchase Order</div>
 						
 						<div id="inputonly">
 						

@@ -6,12 +6,12 @@ window.location = ""
 	
 if(myToken){
 stilllog();
-//document.getElementById('indexads').style.display = "none"
+
 }else{
 
 }
 var userSession = sessionStorage.getItem('student');
-    console.log('userSession: ', JSON.parse(userSession));
+   // console.log('userSession: ', JSON.parse(userSession));
      const userAllInfo = JSON.parse(userSession);
      if(userSession){
      	userIid = userAllInfo[0].id;
