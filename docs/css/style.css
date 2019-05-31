@@ -8,6 +8,9 @@ body{
 #pmenu{
 	display:none;
 }
+html{
+	tex-rendering :optimizeLegibility;
+}
 .contain{
 	padding:5px 20px 5px 20px;
 }
@@ -760,6 +763,26 @@ footer{
 	top:10px;
 	left:10px;
 	text-shadow:2px 2px 4px #000000;
+}
+#irline{
+	font-size:20px;
+	color:#ffffff;
+	padding:0px;
+	margin:0px;
+}
+.progress-bar{
+  width: 200px;
+  position: relative;
+  height: 8px;
+  margin-top: 4px;
+}
+.progress-bar .progress{
+  height: 8px;
+  background-color: #ff0000;
+  width: 0;
+}
+#fileSelect{
+	text-decoration:none;
 }
 /*label{
 	float:left;
