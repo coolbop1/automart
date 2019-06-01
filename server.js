@@ -22,7 +22,7 @@ extended: true }));//middleware
 app.use(bodyParser.text({ type: "application/json" }));
 const Joi = require('joi')
 
- app.use(express.static("../docs"));
+ app.use(express.static("./docs"));
  
  //app.use(morgan("dev"));
 
