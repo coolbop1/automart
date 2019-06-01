@@ -26,6 +26,7 @@
 						<li  id="navmad" onclick="showmyads()"><a >My ads</a></li>
 						<li id="navsad"  onclick="showpostad()"><a >Create ad</a></li>
 						<li id="navsord"  onclick="showorder()"><a >Order</a></li>
+						<li id="navsoff"  onclick="showoffer()"><a >Offers</a></li>
 						<li  onclick="logout()" ><a>Logout</a></li>
 							</ul>
 				</div>
@@ -42,31 +43,9 @@
 			
 				<div id="postinner">
 					<div id="userspace"></div>
-					<div id="myadsti">MY ADS</div>
-				<div id="profiletab">
-					<div id="runorder">
-						<br/>&nbsp;<br/>
-							<center><strong id="buyreq">Buyers Requests</strong></center>
-						<br/>
-						&nbsp;
-						<br/>
-						<div class="orderlists">
-						 Audi 2018<hr/>
-						 <span id="">Price: $5000</span>
-						
-<div id="sm1" class="aref" tabindex="0" onclick="seemore(this.id)" >See more</div>
-						</div>
-						<br/>
-						<div class="orderlists">
-						 Audi 2018<hr/>
-						 <span id="">Price: $5000</span> 
-					<div id="sm2" class="aref" tabindex="0" onclick="seemore(this.id)" >See more</div>
-						</div>
-						
-					</div>
-					</div>
+					<div id="myadsti">My Ads</div>
 					<div id="posted">
-						
+						<br/>&nbsp;<br/>
 						<div class="boxline">
 						<div class="adsbox">
 							<div id="soldmask1" class="sold"><span>SOLD!</span></div>
@@ -181,15 +160,16 @@
 						<br/>&nbsp;<br/>&nbsp;<br/>
 						
 						
-						
+						<div class="fn"></div>
 					</div>
 					<!--post car ads goes here-->
-					<div class="postinner">
+					
+						
 					<div id="postform">
 
-						<div id="adtitle" class="stattitle">
+						<div id="adtitle" class="stattitl">
 							<!--<div class="slants"></div>-->
-							Create Ad.
+							<span class="subtitile">INFO:Please fill the form below to creat ad</span>
 						<!--<div class="slant"></div>--></div>
 						<div class="underwarn"><div class="warning" id="regwarning"></div></div>
 
@@ -220,8 +200,8 @@
 						<div class="grouptwo">
 								<input type="number" id="pprice" name="pprice" class="myinput" placeholder="Price $"  required>
 							</div>
-							<div id="irline" class="grouptwo">
-								Condition of the car: &nbsp; &nbsp; &nbsp;
+							<div class="grouptwo irline">
+								Condition : &nbsp; &nbsp; &nbsp;
 								New:<input type="radio" class="radioinput" value="new"  name="stateocar"  checked> &nbsp;&nbsp;
 									Used<input type="radio" class="radioinput" value="used" name="stateocar">
 							</div>
@@ -260,7 +240,7 @@
     <div class="progress" id="progress"></div>
   </div>
   <div id="gallery" />
-</div>	
+	
 						
 						
 						
@@ -268,14 +248,16 @@
 						
 						
 						
-						<input type="hidden" id="pcpics" value="image/car1.jpg" name="pcpics" required>
+						<input type="hidden" id="pcpics" value="image/car1.jpg<>" name="pcpics" required>
 							<input id="carposter" type="hidden" >
 						</center>
 						
 						<center><button id="postcarad" class="padbutton">Post Car</button></center>
-					</div>	
-					</form>				
-				</div>
+					</div>
+						<div class="fn"></div>
+					</form>	
+				</div>			
+				
 				
 
 
@@ -285,49 +267,39 @@
 
 				<div id="prequest">
 
-						<div id="adtitle" class="stattitle">Purchase Order</div>
+						<div id="adtitle" class="stattitl"><span class="subtitile">INFO:Please fill the form below to place order</span></div>
 						
 						<div id="inputonly">
 						
 						<center>
-							<form>
+							<form method="POST" onsubmit="return postorder()">
 							<div class="grouptwo">
-							<div class="groupf">
-								<strong>Manufacture&model</strong>
-							</div>
-							<div class="groupf">
-								<input class="cpform" placeholder="Manufacture">
-							</div>
-						</div>
-						<br/>&nbsp;</br>
-						<div class="grouptwo">
-							<div class="groupf">
-								<strong>Body Type/Color</strong>
-							</div>
-							<div class="groupf">
-								<input class="cpform" placeholder="Body type">
-							</div>
-						</div>
-						<br/>&nbsp;<br/>
-						<div class="grouptwo">
-							<div class="groupf">
-									<strong>Willing to Pay</strong>
-							</div>
-							<div class="groupf">
-								<input type="number" class="cpform" placeholder="Price $">
+							<div class="groupff">
+								<input id="pomanu" class="myinput" placeholder="Manufacturer">
+								<label class="label-helper" for="pomanu">Manufacturer</label>
 							</div>
 						</div>
 						<div class="grouptwo">
-							<div class="groupf">
-								<strong>Condition</strong>
-							</div>
-							<div class="groupf">
-								New:<input type="radio" class="radioinput" value="new" name="stateocar"> &nbsp;&nbsp;
-									Old<input type="radio" class="radioinput" value="old" name="stateocar">
+							<div class="groupff">
+								<input id="pocolor" class="myinput" placeholder="Body type/colour">
+								<label class="label-helper" for="pocolor">Color/Body type</label>
 							</div>
 						</div>
 						<div class="grouptwo">
-							<center><button id="postcarad" class="pintab">ORDER</button></center>
+							<div class="groupff">
+								<input id="poprice" type="number" class="myinput" placeholder="Price $">
+								<label class="label-helper" for="poprice">Willing to Pay</label>
+							</div>
+						</div>
+						<div class="grouptwo">
+							<div class="grouptwo irline">
+									Condition : &nbsp; &nbsp; &nbsp;
+									New:<input type="radio" class="radioinput" value="new"  name="postateocar"  checked> &nbsp;&nbsp;
+										Used<input type="radio" class="radioinput" value="used" name="postateocar">
+								</div>
+						</div>
+						<div class="grouptwo">
+							<center><button id="postcarorder" class="padbutton">ORDER</button></center>
 						</div>
 						</form>
 						</center>
@@ -336,7 +308,7 @@
 					</div>
 						<div id="postimg">
 							<div id="runorder">
-							<center><strong> My Orders</strong></center>
+							<center><span class="subtitile"> My Orders </span></center>
 						<br/>
 						&nbsp;
 						<br/>
@@ -359,233 +331,228 @@
 					</div>
 						
 					</div>	
-									
+					<div class="fn"></div>			
 				</div>
 					</div>
 					
 				</div>
-
+				<div class="fn"></div>
 		</section>
-	<section id="extras">
+		<section id="extras">
 			
-			<div id="indexads">
-					<div class="stattitle">Featured Automobile</div>
-					 <div id="postedd">
-					 <!------begining of the ads---->
-					<div class="boxline">
-						<div class="adsbox">
-							<div class="imgcontain"><a id="single1" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
-								<div class="ralerts" id="rr1"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr1" onclick="confirmre(this.id)">submit</button></div>
-							<div id="ralert1" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
-							<div class="mark">
-									<button class="reporttab" onclick="reportad(this.id)" id="reportbut1">report</button>
-									</div>
-									
-						
-						<div class="orangetablep"	>	
-							<div class="intp">
-								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
-									<hr/>
-									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
-										</span>
-									</div>
-									<div class="pricein">
-										PRICE
-										<br/>
-										$5,000
+			
+				<div id="indexads">
+						<div class="stattitle">Featured Automobile</div>
+						 <div id="postedd">
+							 <div>
+						 <!------begining of the ads---->
+						<div class="boxline">
+							<div class="adsbox">
+								<div class="imgcontain"><a id="single1" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
+									<div class="ralerts" id="rr1"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr1" onclick="confirmre(this.id)">submit</button></div>
+								<div id="ralert1" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+								<div class="mark">
+										<button class="reporttab" onclick="reportad(this.id)" id="reportbut1">report</button>
 										</div>
-							<div class="slant">
-								</div>
-							</div>
-							</div>
-						
-						
-						</div>
-						<div class="adsbox">
-							<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
-								<div class="ralerts" id="rr2"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr2" onclick="confirmre(this.id)">submit</button></div>
-							<div id="ralert2" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
-							<div class="mark">
-									<button class="reporttab" onclick="reportad(this.id)" id="reportbut2">report</button>
-									</div>
-						
-						<div class="orangetablep"	>	
-							<div class="intp">
-								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
-									<hr/>
-									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
-										</span>
-									</div>
-									<div class="pricein">
-										PRICE
-										<br/>
-										$5,000
+										
+										
+										
+							<div class="orangetablep"	>	
+								<div class="intp">
+									<div class="dinsyd">
+										<span class="manu">Audi 2018</span>
+										<hr/>
+										<span class="carcond">
+											Condition &nbsp;:&nbsp; Used
+											</span>
 										</div>
-							<div class="slant">
-								</div>
-							</div>
-							</div>
-						
-						</div>
-						<div class="adsbox">
-							<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
-								<div class="ralerts" id="rr3"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr3" onclick="confirmre(this.id)">submit</button></div>
-							<div id="ralert3" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
-							<div class="mark">
-									<button class="reporttab" onclick="reportad(this.id)" id="reportbut3">report</button>
+										<div class="pricein">
+											PRICE
+											<br/>
+											$5,000
+											</div>
+								<div class="slant">
 									</div>
+								</div>
+								</div>
+								
+								
+							</div>
+							
+							
+							<div class="adsbox">
+								<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
+									<div class="ralerts" id="rr2"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr2" onclick="confirmre(this.id)">submit</button></div>
+								<div id="ralert2" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+								<div class="mark">
+										<button class="reporttab" onclick="reportad(this.id)" id="reportbut2">report</button>
+										</div>
+							<div class="orangetablep"	>	
+								<div class="intp">
+									<div class="dinsyd">
+										<span class="manu">Audi 2018</span>
+										<hr/>
+										<span class="carcond">
+											Condition &nbsp;:&nbsp; Used
+											</span>
+										</div>
+										<div class="pricein">
+											PRICE
+											<br/>
+											$5,000
+											</div>
+								<div class="slant">
+									</div>
+								</div>
+								</div>
+								
+							</div>
+							<div class="adsbox">
+								<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
+									<div class="ralerts" id="rr3"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr3" onclick="confirmre(this.id)">submit</button></div>
+								<div id="ralert3" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+								<div class="mark">
+										<button class="reporttab" onclick="reportad(this.id)" id="reportbut3">report</button>
+										</div>
+								
+								<div class="orangetablep"	>	
+								<div class="intp">
+									<div class="dinsyd">
+										<span class="manu">Audi 2018</span>
+										<hr/>
+										<span class="carcond">
+											Condition &nbsp;:&nbsp; Used
+											</span>
+										</div>
+										<div class="pricein">
+											PRICE
+											<br/>
+											$5,000
+											</div>
+								<div class="slant">
+									</div>
+								</div>
+								</div>
+								
+							</div>
+						</div>
+	
+	
+						<div class="boxline">
+							<div class="adsbox">
+								<div class="imgcontain"><a id="single4" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
+									<div class="ralerts" id="rr4"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr4" onclick="confirmre(this.id)">submit</button></div>
+								<div id="ralert4" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+								<div class="mark">
+										<button class="reporttab" onclick="reportad(this.id)" id="reportbut4">report</button>
+										</div>
+							<div class="orangetablep"	>	
+								<div class="intp">
+									<div class="dinsyd">
+										<span class="manu">Audi 2018</span>
+										<hr/>
+										<span class="carcond">
+											Condition &nbsp;:&nbsp; Used
+											</span>
+										</div>
+										<div class="pricein">
+											PRICE
+											<br/>
+											$5,000
+											</div>
+								<div class="slant">
+									</div>
+								</div>
+								</div>
+								
+								
+							</div>
+							<div class="adsbox">
+								<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
+									<div class="ralerts" id="rr5"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr5" onclick="confirmre(this.id)">submit</button></div>
+								<div id="ralert5" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+								<div class="mark">
+										<button class="reporttab" onclick="reportad(this.id)" id="reportbut5">report</button>
+										</div>
 							
 							<div class="orangetablep"	>	
-							<div class="intp">
-								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
-									<hr/>
-									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
-										</span>
-									</div>
-									<div class="pricein">
-										PRICE
-										<br/>
-										$5,000
+								<div class="intp">
+									<div class="dinsyd">
+										<span class="manu">Audi 2018</span>
+										<hr/>
+										<span class="carcond">
+											Condition &nbsp;:&nbsp; Used
+											</span>
 										</div>
-							<div class="slant">
+										<div class="pricein">
+											PRICE
+											<br/>
+											$5,000
+											</div>
+								<div class="slant">
+									</div>
 								</div>
-							</div>
-							</div>
+								</div>
 							
-						</div>
-					</div>
-
-
-					<div class="boxline">
-						<div class="adsbox">
-							<div class="imgcontain"><a id="single4" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
-								<div class="ralerts" id="rr4"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr4" onclick="confirmre(this.id)">submit</button></div>
-							<div id="ralert4" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
-							<div class="mark">
-									<button class="reporttab" onclick="reportad(this.id)" id="reportbut4">report</button>
-									</div>
-						
-						<div class="orangetablep"	>	
-							<div class="intp">
-								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
-									<hr/>
-									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
-										</span>
-									</div>
-									<div class="pricein">
-										PRICE
-										<br/>
-										$5,000
+							</div>
+							<div class="adsbox">
+								<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
+								<div class="ralerts" id="rr6"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr6" onclick="confirmre(this.id)">submit</button></div>
+								<div id="ralert6" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
+								<div class="mark">
+										<button class="reporttab" onclick="reportad(this.id)" id="reportbut6">report</button>
 										</div>
-							<div class="slant">
-								</div>
-							</div>
-							</div>
-						
-						</div>
-						<div class="adsbox">
-							<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
-								<div class="ralerts" id="rr5"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr5" onclick="confirmre(this.id)">submit</button></div>
-							<div id="ralert5" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
-							<div class="mark">
-									<button class="reporttab" onclick="reportad(this.id)" id="reportbut5">report</button>
-									</div>
 							
 							<div class="orangetablep"	>	
-							<div class="intp">
-								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
-									<hr/>
-									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
-										</span>
-									</div>
-									<div class="pricein">
-										PRICE
-										<br/>
-										$5,000
+								<div class="intp">
+									<div class="dinsyd">
+										<span class="manu">Audi 2018</span>
+										<hr/>
+										<span class="carcond">
+											Condition &nbsp;:&nbsp; Used
+											</span>
 										</div>
-							<div class="slant">
-								</div>
-							</div>
-							</div>
-							
-							
-						</div>
-						<div class="adsbox">
-							<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
-							<div class="ralerts" id="rr6"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr6" onclick="confirmre(this.id)">submit</button></div>
-							<div id="ralert6" class="ralerts">Thanks, your report is sent. It will be investigated and acted upon accordingly</div>
-							<div class="mark">
-									<button class="reporttab" onclick="reportad(this.id)" id="reportbut6">report</button>
+										<div class="pricein">
+											PRICE
+											<br/>
+											$5,000
+											</div>
+								<div class="slant">
 									</div>
-									
-						<div class="orangetablep"	>	
-							<div class="intp">
-								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
-									<hr/>
-									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
-										</span>
-									</div>
-									<div class="pricein">
-										PRICE
-										<br/>
-										$5,000
-										</div>
-							<div class="slant">
 								</div>
-							</div>
-							</div>
+								</div>
 							
 							
+							</div>
 						</div>
+							 </div>
+						 </div>
 					</div>
-					 	
-					 </div>
-				</div>
-				
-		</section>
-		
-		<footer>
-			copyright &copy; bidoritunmise@gmail.com(Andela) 2019
-			</footer>
-<div id="overlay">
-			<center><div id="inoverlay"></div></center>
-			<center>
-				<div id="odetails">
-					<div id="fdetail">Manufacturer:<span>Audi 2018</span>
-					<hr/>
-					Condition:<span>New</span>
-					<hr/>
-					Price:<span>$5000</span>
-				</div>
-			</center>
-			<br/>
-			<center>
-			<button onclick="cls()">CLOSE</button>
-			</center>
-		</div>
-		<script src="js/main.js"></script>
-			<script src="js/client.js"></script>
-			<script src="js/login.js"></script>
-		<script>
-	/*		if(myToken){
-//stilllog();
-document.getElementById("userspace").innerHTML = myToken;
-}else{
-	document.getElementById("userspace").innerHTML = "here";
-}*/
-			//document.getElementById("userspace").innerHTML = userIemail;
-			</script>
-	</body>
-</html>
+					<div class="fn"></div>
+			</section>
+			
+			<footer >
+				copyright &copy; bidoritunmise@gmail.com(Andela) 2019
+				</footer>
+	<div id="overlay">
+				<center><div id="inoverlay"></div></center>
+				<center>
+					<div id="odetails">
+						<div id="fdetail">Manufacturer:<span>Audi 2018</span>
+						<hr/>
+						Condition:<span>New</span>
+						<hr/>
+						Price:<span>$5000</span>
+					</div>
+				</center>
+				<br/>
+				<center>
+				<button onclick="cls()">CLOSE</button>
+				</center>
+			</div>
+			
+			<script src="js/main.js"></script>
+				<script src="js/client.js"></script>
+				<script src="js/login.js"></script>
+		</body>
+	</html>

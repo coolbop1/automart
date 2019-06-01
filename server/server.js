@@ -148,7 +148,7 @@ return;
   
   
   
-  
+  ///////////post car end point///////////////////
   app.post("/car", (req, res) => {
   	 	let postcarform = {
  		"id" : allcars.length + 1,
@@ -181,7 +181,44 @@ return;
  	"message" : "Car posted successfully"
   	});
   })
+/////////////////////////
 
+
+
+///////////purchase///////////////////
+app.post("/car", (req, res) => {
+	let postcarform = {
+  "id" : allcars.length + 1,
+  "email" : req.body.pcposter,
+  "created_on" : new Date(),
+  "manufacturer" : req.body.pcman,
+  "model" : req.body.pcmodel,
+  "price" : req.body.pprice,
+  "state" : req.body.stateocar,
+  "engine_size" : req.body.pces,
+  "color" : req.body.pccolor,
+  "pics" : req.body.pcpics
+}
+allcars.push(postcarform);
+console.log(postcarform)
+res.json({
+   "status":200,
+   "data":{
+  "id" : allcars.length + 1,
+  "email" : req.body.pcposter,
+  "created_on" : new Date(),
+  "manufacturer" : req.body.pcman,
+  "model" : req.body.pcmodel,
+  "price" : req.body.pprice,
+  "state" : req.body.stateocar,
+  "engine_size" : req.body.pces,
+  "color" : req.body.pccolor,
+  "pics" : req.body.pcpics
+},
+"message" : "Car posted successfully"
+});
+})
+/////////////////////////
  
  
  

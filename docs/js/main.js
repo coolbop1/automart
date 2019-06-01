@@ -69,9 +69,10 @@ function closetab(){
 }
 function showmyads(){
 opennavs();
-document.getElementById("myadsti").style.display ="block";	document.getElementById("posted").style.display ="block";	
+document.getElementById("myadsti").innerHTML = "My Ads";
+document.getElementById("myadsti").style.display ="block";
+	document.getElementById("posted").style.display ="block";	
 	document.getElementById("postform").style.display = "none";	
-	document.getElementById("profiletab").style.display = "none";	
 	document.getElementById("prequest").style.display = "none";  
 	
 	
@@ -81,10 +82,11 @@ document.getElementById("navsad").style.background ="inherit";
 }
 function showpostad(){
 opennavs();
-document.getElementById("myadsti").style.display ="none";	document.getElementById("postform").style.display = "block";
-	document.getElementById("profiletab").style.display = "block";
-	document.getElementById("posted").style.display = "none";
-	document.getElementById("prequest").style.display = "none";
+document.getElementById("myadsti").innerHTML = "Create Ad"
+document.getElementById("myadsti").style.display ="block";	
+document.getElementById("posted").style.display = "none";
+document.getElementById("postform").style.display = "block";
+document.getElementById("prequest").style.display = "none";
 	
 	
 	document.getElementById("navsord").style.background ="inherit";
@@ -94,8 +96,9 @@ document.getElementById("navsad").style.background ="#bf3f3f";
 }
 function showorder(){
 opennavs();
-document.getElementById("myadsti").style.display ="none";	document.getElementById("prequest").style.display = "block";
-	document.getElementById("profiletab").style.display = "block";
+document.getElementById("myadsti").innerHTML = "Create Order"
+document.getElementById("myadsti").style.display ="block";	
+document.getElementById("prequest").style.display = "block";
 	document.getElementById("posted").style.display = "none";
 	document.getElementById("postform").style.display = "none";
   document.getElementById("navsord").style.background ="#bf3f3f";

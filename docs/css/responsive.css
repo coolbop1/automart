@@ -1,3 +1,14 @@
+@media only screen and (max-width:1200px){
+	#midlogo{
+		display:none;
+	}
+	.adsbox{
+		width:calc(50% - 10px);
+	}
+	#posted{
+		padding-top:10px !important;
+	}
+}
 @media only screen and (max-width:768px){
 	#midlogo{
 		display:none;
@@ -82,24 +93,21 @@ header{
 	width:90%;
 	margin:10px;
 }
-#profiletab{
-	display:none !important;
-}
+
 #postform,#prequest{
 	float:none !important;
 	width:95% !important;
 	margin:auto !important;
 	position:static;
-	top:70px;
-	right:2.5%;
+	margin-top:50px !important;
+	
 	min-height:90%;
 	display:none;
 }
 #inputonly{
 	width:100%;
 	float:none;
-	margin:0 0 40px 0;
-	//min-height:calc(100% - 80px);
+	margin:20px 0 40px 0;
 	border-right:0 solid #cccccc;
 }
 #postimg{
@@ -117,7 +125,8 @@ header{
 #posted{
 	
 	width:calc(100% - 10px);
-	margin:50px 5px 30px 5px !important;
+	margin:0px 5px 30px 5px !important;
+	padding-top:10px !important;
 	/*box-shadow: 5px 10px 10px #000000;*/
 }
 .hideli{
