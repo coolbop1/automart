@@ -189,6 +189,20 @@ padding:10px;
 	border-right:2px solid #bf3f3f;
 	cursor:pointer;
 }
+.reporttaby{
+	position:absolute;
+	font-size:16px;
+	color:#021e72;
+	background:#ffffff;
+	left:0px;
+	padding:5px 5px 5px 5px;
+	text-transform: uppercase;
+	border-bottom:2px solid #021e72;
+	border-bottom:2px solid #021e72;
+	border-right:2px solid #021e72;
+	border-left:2px solid #021e72;
+	cursor:pointer;
+}
 .reporttabs{
 	position:absolute;
 	font-size:10px;
@@ -456,6 +470,13 @@ footer{
 	top:100px;
 	z-index:10;
 }
+.marks{
+	position:absolute;
+	top:0;
+	z-index:10;
+	right:100px;
+}
+
 .sold{
 	position:absolute;
 	width:100%;
@@ -547,6 +568,10 @@ footer{
 	float:left;
 	margin:1px;
 	width:calc(50% - 5px)
+}
+.groupff img{
+	width:100%;
+	border:2px solid white;
 }
 .groupff{
 	float:none;

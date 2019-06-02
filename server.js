@@ -1,5 +1,6 @@
 let allusers = [];
 let allcars = [];
+let allorders =[];
 console.log('starting server');
 const express = require('express');
 //const jwt = require('jwt-simple');
@@ -186,36 +187,29 @@ return;
 
 
 ///////////purchase///////////////////
-app.post("/car", (req, res) => {
-	let postcarform = {
-  "id" : allcars.length + 1,
-  "email" : req.body.pcposter,
-  "created_on" : new Date(),
-  "manufacturer" : req.body.pcman,
-  "model" : req.body.pcmodel,
-  "price" : req.body.pprice,
-  "state" : req.body.stateocar,
-  "engine_size" : req.body.pces,
-  "color" : req.body.pccolor,
-  "pics" : req.body.pcpics
-}
-allcars.push(postcarform);
-console.log(postcarform)
+app.post("/order", (req, res) => {
+	let purchaseorderform = {
+					"id" : allorders.length + 1,
+					"buyer" : req.body.popoid, 
+					"car_id" : req.body.poid,
+					"amount" : req.body.poprice, 
+					"status" : req.body.stateocarp,
+					"created_on" : new Date()
+					}
+	
+allorders.push(purchaseorderform);
+console.log(purchaseorderform)
 res.json({
-   "status":200,
-   "data":{
-  "id" : allcars.length + 1,
-  "email" : req.body.pcposter,
-  "created_on" : new Date(),
-  "manufacturer" : req.body.pcman,
-  "model" : req.body.pcmodel,
-  "price" : req.body.pprice,
-  "state" : req.body.stateocar,
-  "engine_size" : req.body.pces,
-  "color" : req.body.pccolor,
-  "pics" : req.body.pcpics
+"status" : 200,
+"data" : {
+"id" : allorders.length + 1,
+"car_id" : req.body.poid,
+"created_on" : new Date(),
+"status" : req.body.stateocarp,
+"price" : req.body.popprice,
+"price_offered" : req.body.poprice
 },
-"message" : "Car posted successfully"
+"message" : "Your offer have been sent to the seller and still pending, Please check your order dashboard to see when it is accepted"
 });
 })
 /////////////////////////

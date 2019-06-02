@@ -1,3 +1,14 @@
+const dtab = sessionStorage.getItem('pagetab');
+const dtabid =sessionStorage.getItem('chooseorder');
+if(sessionStorage.getItem('pagetab')){
+	document.getElementById("pomanid").value = dtabid;
+	showorder();
+	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
+	setTimeout(function (){
+	sessionStorage.clear('chooseorder');
+	sessionStorage.clear('pagetab');
+	},2000)
+}
 
 
 function opennav(){
@@ -96,7 +107,7 @@ document.getElementById("navsad").style.background ="#bf3f3f";
 }
 function showorder(){
 opennavs();
-document.getElementById("myadsti").innerHTML = "Create Order"
+document.getElementById("myadsti").innerHTML = "Place Order"
 document.getElementById("myadsti").style.display ="block";	
 document.getElementById("prequest").style.display = "block";
 	document.getElementById("posted").style.display = "none";
@@ -199,6 +210,31 @@ function deletead(thisid){
 	let replace1 = theid.replace("deletebut","ads");
 	document.getElementById(replace1).style.display = "none";
 }
+function order(thisid){
+	let theid = thisid;
+	let replace1 = theid.replace("orderbut","");
+	sessionStorage.setItem('chooseorder', replace1);
+	sessionStorage.setItem('pagetab', 'order');
+	if(window.location.pathname == "/postad.html"){
+		const dtab = sessionStorage.getItem('pagetab');
+const dtabid =sessionStorage.getItem('chooseorder');
+if(sessionStorage.getItem('pagetab')){
+	document.getElementById("pomanid").value = dtabid;
+	
+	showorder();
+	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
+	setTimeout(function (){
+		sessionStorage.clear('chooseorder');
+		sessionStorage.clear('pagetab');
+	
+	},2000)
+}
+		} else {
+	window.location = "postad.html";
+	}
+	
+}
+
 
 /*function login(){
 document.getElementById("fpintab").style.display = "none";
