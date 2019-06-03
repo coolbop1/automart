@@ -149,7 +149,7 @@ function closepo(thisid){
 	document.getElementById(cleid).innerHTML = "Edit Price";
 
 }
-function marksold(thisid){
+function markssold(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("soldbut","soldmask");
 	document.getElementById(replace1).style.display = "table";

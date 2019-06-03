@@ -4,10 +4,10 @@
   "description": "andela challenge",
   "main": "server.js",
   "directories": {
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "start": "node server.js",
     "build": "babel src -d lib"
   },

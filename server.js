@@ -280,7 +280,7 @@ app.patch("/car/:carid/status", (req, res) => {
 		console.log("marked");
 		console.log({
 			"id" : checkforcar.id,
-			"email" : "",
+			"email" : req.body.owneremail,
 			"created_on" :new Date(),
 			"manufacturer" : checkforcar.manufacturer,
 			"model" : checkforcar.model,
@@ -292,7 +292,7 @@ res.status(200).json({
 	"status" : 200,
 	"data" : {
 	"id" : checkforcar.id,
-	"email" : "",
+	"email" : req.body.owneremail,
 	"created_on" :new Date(),
 	"manufacturer" : checkforcar.manufacturer,
 	"model" : checkforcar.model,
@@ -300,14 +300,14 @@ res.status(200).json({
 	"state" : checkforcar.state,
 	"status" : checkforcar.status
 	},
-"message" : "SOLD"
+"message" : "The ad have been marked as sold."
 })
 	} else {
 	
 res.status(404).send({
 "status" : 404,
 "error" : "404 not found",
-"message" : "Oops cant find this order"
+"message" : "Oops cant find this ad"
 });
 }
 })
