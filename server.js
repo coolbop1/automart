@@ -45,8 +45,13 @@ app.use(function(req, res, next) {
  	res.send(tid);
  });
  
- 
- app.get("/all",(req, res) =>{
+ app.get("/allorders",(req, res) =>{
+	res.send(allorders);
+});
+ app.get("/allusers",(req, res) =>{
+	res.send(allusers);
+});
+ app.get("/allcars",(req, res) =>{
  	res.send(allcars);
  });
 //handles sign up
@@ -80,7 +85,7 @@ return;
  	}
  	allusers.push(postit);
  			let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
- 	res.json({
+ 	res.status(200).json({
  		"status" : 200,
  		"data" :{
  		"token" : token,
@@ -114,7 +119,7 @@ return;
  console.log(comfirm)
  		let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
 
- 		res.json({ 
+ 		res.status(200).json({ 
 							 	"status" : 200,
 							"data" : {
 							"token" : token,
@@ -161,11 +166,12 @@ return;
  		"state" : req.body.stateocar,
  		"engine_size" : req.body.pces,
  		"color" : req.body.pccolor,
- 		"pics" : req.body.pcpics
+		 "pics" : req.body.pcpics,
+		 "status" : "unsold"
  	}
  	allcars.push(postcarform);
  	console.log(postcarform)
-  	res.json({
+  	res.status(200).json({
   		"status":200,
   		"data":{
  		"id" : allcars.length + 1,
@@ -177,7 +183,8 @@ return;
  		"state" : req.body.stateocar,
  		"engine_size" : req.body.pces,
  		"color" : req.body.pccolor,
- 		"pics" : req.body.pcpics
+		 "pics" : req.body.pcpics,
+		 "status" : "unsold"
  	},
  	"message" : "Car posted successfully"
   	});
@@ -192,14 +199,15 @@ app.post("/order", (req, res) => {
 					"id" : allorders.length + 1,
 					"buyer" : req.body.popoid, 
 					"car_id" : req.body.poid,
-					"amount" : req.body.poprice, 
+					"amount" : req.body.popprice,
+					"price_offered" : req.body.poprice, 
 					"status" : req.body.stateocarp,
 					"created_on" : new Date()
 					}
 	
 allorders.push(purchaseorderform);
 console.log(purchaseorderform)
-res.json({
+res.status(200).json({
 "status" : 200,
 "data" : {
 "id" : allorders.length + 1,
@@ -211,6 +219,97 @@ res.json({
 },
 "message" : "Your offer have been sent to the seller and still pending, Please check your order dashboard to see when it is accepted"
 });
+})
+/////////////////////////
+
+
+
+
+
+
+
+///////////edit purchase order price///////////////////
+app.patch("/order/:orderrid/price", (req, res) => {
+	const checkfororder = allorders.find(u => u.id == req.params.orderrid && u.status == "pending");
+	if(checkfororder){
+		const old_price = checkfororder.price_offered
+		checkfororder.price_offered = req.body.newpoprice;
+		console.log(req.body.newpoprice)
+		
+		let editorderform = {
+					"id" : checkfororder.id,
+					"buyer" : checkfororder.buyer, 
+					"car_id" : checkfororder.car_id,
+					"amount" : checkfororder.amount,
+					"new_price_offered" : checkfororder.price_offered,
+					"old_price_offered" : old_price,
+					"status" : checkfororder.status
+					}
+
+console.log(editorderform);
+res.status(200).json(	{
+"status" : 200,
+"data" : {
+"id" : checkfororder.id,
+"car_id" : checkfororder.car_id,
+"status" : checkfororder.status,
+"old_price_offered" : old_price,
+"new_price_offered" : checkfororder.price_offered
+},
+"message" : "Your order price have been updated successfully"
+})
+	} else {
+	
+res.status(404).send({
+"status" : 404,
+"error" : "404 not found",
+"message" : "Oops cant find this order"
+});
+}
+})
+/////////////////////////
+
+
+
+
+///////////mark carf as sold///////////////////
+app.patch("/car/:carid/status", (req, res) => {
+	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "unsold");
+	if(checkforcar){
+		checkforcar.status = "sold";
+		console.log("marked");
+		console.log({
+			"id" : checkforcar.id,
+			"email" : req.body.owneremail,
+			"created_on" :new Date(),
+			"manufacturer" : checkforcar.manufacturer,
+			"model" : checkforcar.model,
+			"price" : checkforcar.price,
+			"state" : checkforcar.state,
+			"status" : checkforcar.status
+			})
+res.status(200).json({
+	"status" : 200,
+	"data" : {
+	"id" : checkforcar.id,
+	"email" : req.body.owneremail,
+	"created_on" :new Date(),
+	"manufacturer" : checkforcar.manufacturer,
+	"model" : checkforcar.model,
+	"price" : checkforcar.price,
+	"state" : checkforcar.state,
+	"status" : checkforcar.status
+	},
+"message" : "The ad have been marked as sold."
+})
+	} else {
+	
+res.status(404).send({
+"status" : 404,
+"error" : "404 not found",
+"message" : "Oops cant find this ad"
+});
+}
 })
 /////////////////////////
  

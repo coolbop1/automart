@@ -46,6 +46,9 @@
 					<div id="myadsti">My Ads</div>
 					<div id="posted">
 						<br/>&nbsp;<br/>
+						<div class="underwarn"><div class="warning hide" id="regwarningi"></div></div>
+
+							<div class="underwarn"><div class="success  hide" id="regsuccessi"></div></div>
 						<div class="boxline">
 						<div class="adsbox">
 							<div id="soldmask1" class="sold"><span>SOLD!</span></div>
@@ -171,9 +174,9 @@
 							<!--<div class="slants"></div>-->
 							<span class="subtitile">INFO:Please fill the form below to creat ad</span>
 						<!--<div class="slant"></div>--></div>
-						<div class="underwarn"><div class="warning" id="regwarning"></div></div>
+						<div class="underwarn"><div class="warning hide" id="regwarning"></div></div>
 
-							<div class="underwarn"><div class="success" id="regsuccess"></div></div>
+							<div class="underwarn"><div class="success  hide" id="regsuccess"></div></div>
 						<form method="POST" onsubmit="return postcar()">
 						<div id="inputonly">
 						
@@ -267,46 +270,46 @@
 
 				<div id="prequest">
 
-						<div id="adtitle" class="stattitl"><span class="subtitile">INFO:Please complete the form below to place order</span></div>
+						<div id="adtitle" class="stattitl"><span class="subtitile">INFO:Click order button of your desired car ad to enable and fill this form automatically</span></div>
 						
 						<div id="inputonly">
 						
 						<center>
-							<div class="underwarn"><div class="warning" id="regwarningy"></div></div>
+							<div class="underwarn"><div class="warning hide" id="regwarningy"></div></div>
 
-							<div class="underwarn"><div class="success" id="regsuccessy"></div></div>
+							<div class="underwarn"><div class="success  hide" id="regsuccessy"></div></div>
 							<form method="POST" onsubmit="return postorder()">
 								<div class="groupff">
-									<img src="image/car1.jpg">
+									<span class="hide" id="orderimg" ></span>
 									</div>
 							<div class="grouptwo">
 							<div class="groupff">
-									<input id="pomanid" type="hidden" vp>
-										<input id="orderposterid" type="hidden" >
+									<input id="pomanid" type="hidden" required>
+										<input id="orderposterid" type="hidden" required>
 										
-								<input id="pomanu" class="myinput" placeholder="Manufacturer" value="volvo" disabled>
+								<input id="pomanu" class="myinput" placeholder="Manufacturer" required  disabled>
 								<label class="label-helper" for="pomanu">Manufacturer</label>
 							</div>
 						</div>
 						<div class="grouptwo">
 							<div class="groupff">
-								<input id="pocolor" class="myinput" placeholder="Body type/colour" value="blue" disabled>
+								<input id="pocolor" class="myinput" placeholder="Body type/colour" disabled>
 								<label class="label-helper" for="pocolor">Color/Body type</label>
 							</div>
 						</div>
 						<div class="grouptwo">
 							<div class="groupff">
-								<input id="poprice" type="number" class="myinput" placeholder="Price $" value="5000">
+								<input id="poprice" type="number" class="myinput" placeholder="Price $" required disabled>
 								<label class="label-helper" for="poprice">Willing to Pay</label>
 							</div>
 						</div>
 						<div class="grouptwo">
 							<div class="grouptwo irline">
-									Condition : New:<input type="radio" class="radioinput" value="new"  name="postateocar"  checked>&nbsp;&nbsp;|&nbsp;&nbsp;Price : $5,000
+									Condition : <span id="ncarcond"></span>&nbsp;&nbsp;|&nbsp;&nbsp;Buyer's Price : $<span id="showpprice"></span>
 								</div>
 						</div>
 						<div class="grouptwo">
-							<center><button id="postcarorder" class="padbutton">ORDER</button></center>
+							<center><button id="postcarorder" class="padbutton" disabled>ORDER</button></center>
 						</div>
 						</form>
 						</center>
@@ -315,23 +318,39 @@
 					</div>
 						<div id="postimg">
 							<div id="runorder">
-							<center><span class="subtitile"> My Orders </span></center>
-						<br/>
-						&nbsp;
-						<br/>
-						<div class="orderlist">
-						 Audi 2018<hr/>
-						 <span id="rey1">Price: $5000</span>
-						 <span id="clo1"  class="closes" onclick="closepo(this.id)">&#10006</span> 
-<input class="orderinp" id="edited1" type="number" value="5000" >
-<div id="epo1" class="aref" tabindex="0" onclick="editop(this.id)" >Edit price</div>
+							<center><span class="subtitile"> Pending Orders </span></center>
+						<div class="underwarn"><div class="warning hide" id="regwarningu"></div></div>
+
+							<div class="underwarn"><div class="success  hide" id="regsuccessu"></div></div>
+								<div class="orderlist">
+							
+							<div class="slanted"></div>
+						 <span class="manu">Audi 2018</span><hr/>
+						 <span class="carcond" id="rey1">Price: $5000</span> 
+						 <span id="clo1"  class="closes" onclick="closepo(this.id)">&#10006</span>
+ <span class="hide" id="cloo1">
+						 <form id="editpo1" method="POST" onsubmit="return editpo(this.id)">
+<input id="edited1" class="orderinp" type="number" value="5000" >
+<button class="updatebut" type="submit" >update price</button>
+<div class="fn"></div>
+</form>
+</span>
+<div id="epo1" class="aref" tabindex="0" onclick="editop(this.id)" >Edit Price</div>
 						</div>
 						<br/>
 						<div class="orderlist">
-						 Audi 2018<hr/>
-						 <span id="rey2">Price: $5000</span> 
+							
+							<div class="slanted"></div>
+						 <span class="manu">Audi 2018</span><hr/>
+						 <span class="carcond" id="rey2">Price: $5000</span> 
 						 <span id="clo2"  class="closes" onclick="closepo(this.id)">&#10006</span>
-<input class="orderinp" id="edited2" type="number" value="5000" >
+ <span class="hide" id="cloo2">
+						 <form id="editpo2" method="POST" onsubmit="return editpo(this.id)">
+<input id="edited2" class="orderinp" type="number" value="5000" >
+<button class="updatebut" type="submit" >update price</button>
+<div class="fn"></div>
+</form>
+</span>
 <div id="epo2" class="aref" tabindex="0" onclick="editop(this.id)" >Edit Price</div>
 						</div>
 						
@@ -379,13 +398,16 @@
 									<div class="pricein">
 										PRICE
 										<br/>
-										$5,000
+										$1,000
 										</div>
 							<div class="slant">
 								</div>
 							</div>
 							</div>
-							
+							<span class="hide" id="smanu1">Audi 2018</span>
+							<span class="hide" id="scolor1">blue</span>
+								<span class="hide" id="scond1">used</span>
+							<span class="hide" id="samount1">1000</span>
 							
 						</div>
 						
@@ -404,23 +426,28 @@
 						<div class="orangetablep"	>	
 							<div class="intp">
 								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
+									<span class="manu">Benz 230</span>
 									<hr/>
 									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
+										Condition &nbsp;:&nbsp; New
 										</span>
 									</div>
 									<div class="pricein">
 										PRICE
 										<br/>
-										$5,000
+										$3,000
 										</div>
 							<div class="slant">
 								</div>
 							</div>
 							</div>
-							
+								<span class="hide" id="smanu2">Benz 230</span>
+							<span class="hide" id="scolor2">Ash</span>
+								<span class="hide" id="scond2">new</span>
+							<span class="hide" id="samount2">3000</span>
 						</div>
+						
+						
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
 								<div class="ralerts" id="rr3"><input placeholder='reason for reporting' class="ereport"><br/><button id="confirmr3" onclick="confirmre(this.id)">submit</button></div>
@@ -435,10 +462,10 @@
 							<div class="orangetablep"	>	
 							<div class="intp">
 								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
+									<span class="manu">Toyota corolla</span>
 									<hr/>
 									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
+										Condition &nbsp;:&nbsp; New
 										</span>
 									</div>
 									<div class="pricein">
@@ -450,7 +477,10 @@
 								</div>
 							</div>
 							</div>
-							
+							<span class="hide" id="smanu3">Toyota corolla</span>
+							<span class="hide" id="scolor3">White</span>
+								<span class="hide" id="scond3">new</span>
+							<span class="hide" id="samount3">5000</span>
 						</div>
 					</div>
 
@@ -469,7 +499,7 @@
 						<div class="orangetablep"	>	
 							<div class="intp">
 								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
+									<span class="manu">Golf</span>
 									<hr/>
 									<span class="carcond">
 										Condition &nbsp;:&nbsp; Used
@@ -478,13 +508,16 @@
 									<div class="pricein">
 										PRICE
 										<br/>
-										$5,000
+										$1,000
 										</div>
 							<div class="slant">
 								</div>
 							</div>
 							</div>
-							
+							<span class="hide" id="smanu4">Golf</span>
+							<span class="hide" id="scolor4">Blue</span>
+								<span class="hide" id="scond4">used</span>
+							<span class="hide" id="samount4">1000</span>
 							
 						</div>
 						<div class="adsbox">
@@ -501,22 +534,25 @@
 						<div class="orangetablep"	>	
 							<div class="intp">
 								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
+									<span class="manu">Daewoo</span>
 									<hr/>
 									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
+										Condition &nbsp;:&nbsp; New
 										</span>
 									</div>
 									<div class="pricein">
 										PRICE
 										<br/>
-										$5,000
+										$2,000
 										</div>
 							<div class="slant">
 								</div>
 							</div>
 							</div>
-						
+						<span class="hide" id="smanu5">Daewoo</span>
+							<span class="hide" id="scolor5">Ash</span>
+								<span class="hide" id="scond5">new</span>
+							<span class="hide" id="samount5">2000</span>
 						</div>
 						<div class="adsbox">
 							<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
@@ -532,22 +568,25 @@
 						<div class="orangetablep"	>	
 							<div class="intp">
 								<div class="dinsyd">
-									<span class="manu">Audi 2018</span>
+									<span class="manu">Chevrolete</span>
 									<hr/>
 									<span class="carcond">
-										Condition &nbsp;:&nbsp; Used
+										Condition &nbsp;:&nbsp; New
 										</span>
 									</div>
 									<div class="pricein">
 										PRICE
 										<br/>
-										$5,000
+										$6,000
 										</div>
 							<div class="slant">
 								</div>
 							</div>
 							</div>
-						
+						<span class="hide" id="smanu6">Chevrolete</span>
+							<span class="hide" id="scolor6">White</span>
+								<span class="hide" id="scond6">new</span>
+							<span class="hide" id="samount6">6000</span>
 						
 						</div>
 					</div>
