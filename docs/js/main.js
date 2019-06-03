@@ -1,14 +1,9 @@
-const dtab = sessionStorage.getItem('pagetab');
-const dtabid =sessionStorage.getItem('chooseorder');
-if(sessionStorage.getItem('pagetab')){
-	document.getElementById("pomanid").value = dtabid;
-	showorder();
-	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
-	setTimeout(function (){
-	sessionStorage.clear('chooseorder');
-	sessionStorage.clear('pagetab');
-	},2000)
+function editpot(thisid){
+	let theid = thisid;
+	let replace2 = theid.replace("editpo","edited");
+let fret = document.getElementById(replace2).value;	sessionStorage.setItem('peditprice',fret);
 }
+
 
 
 function opennav(){
@@ -134,9 +129,11 @@ function editop(thisid){
 	let leid = eid.replace("epo","rey");
 	let meid = eid.replace("epo","edited");
 	let cleid = eid.replace("epo","clo");
+	let dleid = eid.replace("epo","cloo");
 	document.getElementById(leid).style.display = "none";
 	document.getElementById(meid).style.display = "block";
 	document.getElementById(cleid).style.display = "block";
+	document.getElementById(dleid).style.display = "block";
 	document.getElementById(eid).innerHTML = "Update Price";
 }
 function closepo(thisid){
@@ -144,9 +141,11 @@ function closepo(thisid){
 	let leid = eid.replace("clo","rey");
 	let meid = eid.replace("clo","edited");
 	let cleid = eid.replace("clo","epo");
+		let dleid = eid.replace("clo","cloo");
 	document.getElementById(leid).style.display = "block";
 	document.getElementById(meid).style.display = "none";
 	document.getElementById(eid).style.display = "none";
+	document.getElementById(dleid).style.display = "none";
 	document.getElementById(cleid).innerHTML = "Edit Price";
 
 }
@@ -213,29 +212,60 @@ function deletead(thisid){
 function order(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("orderbut","");
+	let replace2 = theid.replace("orderbut","single");
+	let replace3 = theid.replace("orderbut","smanu");
+	let replace4 = theid.replace("orderbut","scolor");
+	let replace5 = theid.replace("orderbut","scond");
+	let replace6 = theid.replace("orderbut","samount");
 	sessionStorage.setItem('chooseorder', replace1);
+	sessionStorage.setItem('chooseordermanu', replace3);
+	sessionStorage.setItem('chooseordercolor', replace4);
+	sessionStorage.setItem('chooseordercond', replace5);
+	sessionStorage.setItem('chooseorderamount', replace6);
+	sessionStorage.setItem('chooseorderimg', replace2);
 	sessionStorage.setItem('pagetab', 'order');
 	if(window.location.pathname == "/postad.html"){
-		const dtab = sessionStorage.getItem('pagetab');
+		
+		life();
+		} else {
+	window.location = "postad.html";
+	}
+	
+}
+life();
+function life(){
+	const dtab = sessionStorage.getItem('pagetab');
+			const dtabimg = sessionStorage.getItem('chooseorderimg');
+				const dtabmanu = sessionStorage.getItem('chooseordermanu');
+				const dtabcolor = sessionStorage.getItem('chooseordercolor');
+				const dtabcond = sessionStorage.getItem('chooseordercond');
+				const dtabamount = sessionStorage.getItem('chooseorderamount');
 const dtabid =sessionStorage.getItem('chooseorder');
 if(sessionStorage.getItem('pagetab')){
-	document.getElementById("pomanid").value = dtabid;
 	
+document.getElementById("pomanid").value = dtabid;	document.getElementById("orderimg").innerHTML = document.getElementById(dtabimg).innerHTML; 
+	document.getElementById("pomanu").value = document.getElementById(dtabmanu).innerHTML;
+	document.getElementById("pocolor").value = document.getElementById(dtabcolor).innerHTML;
+document.getElementById("poprice").value = document.getElementById(dtabamount).innerHTML;
+document.getElementById("showpprice").innerHTML = document.getElementById(dtabamount).innerHTML;
+
+document.getElementById('poprice').disabled = false;
+document.getElementById('postcarorder').disabled = false;
+if(document.getElementById(dtabcond).innerHTML == "new"){
+		document.getElementById("ncarcond").innerHTML = 'New:<input type="radio" class="radioinput" value="new"  name="postateocar"  checked>';
+	} else {
+		document.getElementById("ncarcond").innerHTML = 'Used:<input type="radio" class="radioinput" value="used"  name="postateocar"  checked>';
+	}
 	showorder();
-	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
+
+document.getElementById("orderimg").style.display = "block";	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
 	setTimeout(function (){
 		sessionStorage.clear('chooseorder');
 		sessionStorage.clear('pagetab');
 	
 	},2000)
 }
-		} else {
-	window.location = "postad.html";
-	}
-	
 }
-
-
 /*function login(){
 document.getElementById("fpintab").style.display = "none";
 }*/

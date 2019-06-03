@@ -172,6 +172,18 @@ padding:10px;
 	min-width:100px;
 	cursor:pointer;
 }
+.updatebut{
+	font-size:15px;
+	color:#ffffff;
+	background:#d8743a;
+	padding:5px;
+	text-transform: uppercase;
+	border-radius:20px;
+	border:2px solid #ffffff;
+	cursor:pointer;
+	float:left;
+	margin:5px;
+}
 .pintab:focus{
 	background:#021e72;
 }
@@ -280,6 +292,9 @@ padding:10px;
 }
 .hide{
 	display:none;
+}
+.show{
+	display:block;
 }
 #forsearch{
 	position:absolute;
@@ -589,9 +604,17 @@ footer{
 }
 .orderlist{
 	width:100%;
-	background:#ffffff;
-	border:2px solid #cccccc;
+	background:#021e72;
+	border:2px solid #fff;
+	color:#fff;
+	position:relative;
+	overflow:hidden;
 	
+}
+.orderlist hr{
+	border-style : none;
+	height:2px;
+	background:#fff;
 }
 .orderinp{
 	display:none;
@@ -599,7 +622,12 @@ footer{
 }
 .aref{
 	color:blue;
-	cursor:pointer
+	position:absolute;
+	left:0px;
+	z-index:1;
+	top:16px;
+	cursor:pointer;
+	background:white
 }
 #overlay{
 	position:fixed;
@@ -641,7 +669,6 @@ footer{
 	font-size:15px;
 	text-align:center;
 	background:rgba(240, 173, 78,0.2);
-	display:none;
 }
 .success{
 	color:#5cb85c;
@@ -652,7 +679,6 @@ footer{
 	font-size:15px;
 	text-align:center;
 	background:rgba(92, 184, 92,0.2);
-	display:none;
 }
 .underwarn{
 	margin:10px;
@@ -699,7 +725,22 @@ footer{
 }
 
 .slant{
-	height:200px;
+	height:250px;
+	background:#021e72;
+	position:absolute;
+	right:-50px;
+	top:-50px;
+	width:50%;
+	border:2px solid #ffffff;
+	transform: rotate(30deg);
+    transform-origin: right, top;
+    -ms-transform: rotate(30deg);
+    -ms-transform-origin:right, top;
+    -webkit-transform: rotate(30deg);
+    -webkit-transform-origin:right, top;
+}
+.slanted{
+	height:300px;
 	background:#021e72;
 	position:absolute;
 	right:-50px;
@@ -765,7 +806,7 @@ footer{
 }
 .manu{
 	font-size:15px;
-	font-weight:bold;
+	font-weight:300;
 	
 }
 #nowloged{
@@ -806,7 +847,7 @@ footer{
 }
 .progress-bar .progress{
   height: 8px;
-  background-color: #ff0000;
+  background-color: #bf3f3f;
   width: 0;
 }
 #fileSelect{
@@ -833,9 +874,9 @@ input:focus + .label-helper, input:invalid + .label-helper {
   opacity: 1;
   padding: 4px; }
 input:invalid {
-  border-left: 5px solid #f00; }
+  border-left: 5px solid #bf3f3f; }
   input:invalid + .label-helper::after {
-    color: #f00;
+    color: #bf3f3f;
     content: "X";
     font-family: arial;
     font-size: 14px;
@@ -843,7 +884,7 @@ input:invalid {
     padding-left: 12px; }
 .subtitile{
 	color:white;
-	font-weight: 700;
+	font-weight: 300;
 	font-size:15px;
 	text-align:left;
 }
