@@ -36,6 +36,7 @@ document.getElementById("topnav").style.display = "none";
 }
 function rightSlide(slideid) {
 	 opennavs();
+	 document.getElementById("touchlist").classList.replace("show","hide");
 	var elem = document.getElementById(slideid+"tab"); 
 	
 	if(slideid == "fpin"){
