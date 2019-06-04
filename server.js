@@ -361,6 +361,41 @@ res.status(404).send({
  
  
  
+ 
+ 
+  //handles view single car
+ app.get("/car/:carid", (req, res) => {
+ 	const confirmcar = allcars.find(u => u.id == req.params.carid);
+ 	if(confirmcar){
+ 		const confirmowner = allusers.find(t => t.email == confirmcar.email)
+ 		res.status(200).json({
+ 			"status" : 200,
+ 			"data" : {
+				"id" : confirmcar.id,
+				"owner" : confirmowner.id,
+				"created_on" : confirmcar.created_on,
+				"state" : confirmcar.state,
+				"status" : confirmcar.status,
+				"price" : confirmcar.price,
+				"manufacturer" : confirmcar.manufacturer,
+				"model" : confirmcar.model,
+				"body_type" : confirmcar.color,
+				"pics" : confirmcar.pics
+				}
+ 		})
+ 			
+ 		
+ 	} else {
+ 	
+ 			res.status(404).send({
+ 				"error" : "The car was not found"
+ 			})
+ 			
+ 	}
+ })
+ 
+ 
+ 
   
   
   
