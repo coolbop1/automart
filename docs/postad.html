@@ -30,6 +30,7 @@
 						<li  onclick="logout()" ><a>Logout</a></li>
 							</ul>
 				</div>
+				<div class="fn"></div>	
 			</div>
 			<div id="nofloat">
 				<div id="midlogo">
@@ -58,8 +59,12 @@
 									</div>
 									
 								<div class="priceedit">
-									<center><input type="number" value="5000" id="edit1"></center>
-									<button id="ep1" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl1"  class="close" onclick="closedit(this.id)">&#10006</span></center>
+									<center>
+									
+					 <form id="editap1" method="POST" onsubmit="return  editadprice(this.id)">
+										<input type="number" value="5000" id="sedit1">
+			<button id="edita1" type="submit" class="pintabw hide">Update price</button></form>
+			<button id="ep1" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl1"  class="close" onclick="closedit(this.id)">&#10006</span></center>
 								</div>
 							</div>
 							
@@ -94,8 +99,12 @@
 							
 							
 									<div class="priceedit">
-									<center><input type="number" value="5000" id="edit2"></center>
-									<button id="ep2" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl2"  class="close" onclick="closedit(this.id)">&#10006</span></center>
+									<center>
+									
+					 <form id="editap2" method="POST" onsubmit="return  editadprice(this.id)">
+										<input type="number" value="5000" id="sedit2">
+			<button id="edita2" type="submit" class="pintabw hide">Update price</button></form>
+			<button id="ep2" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl2"  class="close" onclick="closedit(this.id)">&#10006</span></center>
 								</div>
 								
 								
@@ -129,8 +138,12 @@
 									<button class="pintab" onclick="marksold(this.id)" id="soldbut3">mark as sold</button>
 									</div>
 									<div class="priceedit">
-									<center><input type="number" value="5000" id="edit3"></center>
-									<button id="ep3" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl3"  class="close" onclick="closedit(this.id)">&#10006</span></center>
+										<center>
+									
+					 <form id="editap3" method="POST" onsubmit="return  editadprice(this.id)">
+										<input type="number" value="5000" id="sedit3">
+			<button id="edita3" type="submit" class="pintabw hide">Update price</button></form>
+			<button id="ep3" class="pintab" onclick="pedit(this.id)">Edit price</button><center><span id="cl3"  class="close" onclick="closedit(this.id)">&#10006</span></center>
 								</div>
 								
 								
@@ -615,7 +628,7 @@
 			<button onclick="cls()">CLOSE</button>
 			</center>
 		</div>
-		
+		<div id="touchlist" class="hide">&nbsp;</div>
 		<script src="js/main.js"></script>
 			<script src="js/client.js"></script>
 			<script src="js/login.js"></script>

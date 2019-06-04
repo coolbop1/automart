@@ -17,11 +17,17 @@
 	float:none;
 	clear:both;
 	margin-top:20px;
+	padding:0;
 	display:none;
-	width:90%;
+	width:100%;
 }
 #topnav ul{
 	width:100%;
+}
+#navul{
+	width:100%;
+	margin:0;
+	padding: 0;
 }
 #navul li{
 	text-align:center;
