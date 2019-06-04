@@ -172,6 +172,17 @@ padding:10px;
 	min-width:100px;
 	cursor:pointer;
 }
+.pintabw{
+	font-size:15px;
+	color:#ffffff;
+	background:#d8743a;
+	padding:5px 20px 5px 20px;
+	text-transform: uppercase;
+	border-radius:25px;
+	border:5px solid #ffffff;
+	min-width:100px;
+	cursor:pointer;
+}
 .updatebut{
 	font-size:15px;
 	color:#ffffff;
@@ -184,7 +195,7 @@ padding:10px;
 	float:left;
 	margin:5px;
 }
-.pintab:focus{
+.pintab:focus,.pintabw:focus{
 	background:#021e72;
 }
 .reporttab{
@@ -270,7 +281,7 @@ padding:10px;
 	border:5px solid #ffffff;
 	min-width:150px;
 }
-#edit1,#edit2,#edit3,#edit4,#edit5,#edit6{
+#edit1,#edit2,#edit3,#edit4,#edit5,#edit6,#sedit1,#sedit2,#sedit3,#sedit4,#sedit5,#sedit6{
 	width:60%;
 	margin-top:5px;
 	border:2px solid #021e72;
@@ -530,7 +541,8 @@ footer{
 }
 .imgcontain img{
 	width:100%;
-	height:auto;
+	height:100%;
+	object-fit: cover;
 }
 .adsbox table{
 	position:absolute;
@@ -636,7 +648,19 @@ footer{
 	background:rgba(0,0,0,0.8);
 	top:0;
 	z-index:100;
+	overflow:hidden;
 	display:none;
+}
+
+#touchlist{
+	position:fixed;
+	height:120%;
+	width:100%;
+	background:rgba(0,0,0,0.8);
+	top:0;
+	z-index:10;
+	overflow:hidden;
+	
 }
 #inoverlay,#odetails{
 	background:#ffffff;

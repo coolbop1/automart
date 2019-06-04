@@ -11,14 +11,19 @@ function opennav(){
 		if(document.getElementById("topnav").style.display == false || document.getElementById("topnav").style.display == "none" ){
 		document.getElementById("topnav").style.display = "block"; 
 		document.getElementById("pmenu").innerHTML = "&#10006";
+		document.getElementById("touchlist").classList.replace("hide","show");
 	}else if(document.getElementById("topnav").style.display == "block"){
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
+		document.getElementById("touchlist").classList.replace("show","hide");
+
+		
 	}
 	else{
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
-		
+		document.getElementById("touchlist").classList.replace("show","hide");
+
 	}
 	
 
@@ -75,6 +80,7 @@ function closetab(){
 }
 function showmyads(){
 opennavs();
+document.getElementById("touchlist").classList.replace("show","hide");
 document.getElementById("myadsti").innerHTML = "My Ads";
 document.getElementById("myadsti").style.display ="block";
 	document.getElementById("posted").style.display ="block";	
@@ -88,6 +94,7 @@ document.getElementById("navsad").style.background ="inherit";
 }
 function showpostad(){
 opennavs();
+document.getElementById("touchlist").classList.replace("show","hide");
 document.getElementById("myadsti").innerHTML = "Create Ad"
 document.getElementById("myadsti").style.display ="block";	
 document.getElementById("posted").style.display = "none";
@@ -102,6 +109,7 @@ document.getElementById("navsad").style.background ="#bf3f3f";
 }
 function showorder(){
 opennavs();
+document.getElementById("touchlist").classList.replace("show","hide");
 document.getElementById("myadsti").innerHTML = "Place Order"
 document.getElementById("myadsti").style.display ="block";	
 document.getElementById("prequest").style.display = "block";
@@ -113,16 +121,20 @@ document.getElementById("navsad").style.background ="inherit";
 }
 function pedit(clickedbox){
 	let but = clickedbox;
-	let rep = but.replace("ep","edit");	
-	let repcl =	but.replace("ep","cl");				 document.getElementById(rep).style.display = "block";
-	document.getElementById(repcl).style.display = "block";	document.getElementById(clickedbox).innerHTML = "update price";
+	let rep = but.replace("ep","sedit");	
+	let repcl =	but.replace("ep","cl");	
+	let repcla =	but.replace("ep","edita");	
+	document.getElementById(repcla).classList.replace("hide","show");		 document.getElementById(rep).style.display = "block";
+	document.getElementById(repcl).style.display = "block";	document.getElementById(clickedbox).style.display = "none";
+
 }
 function closedit(clsbox){
 	let but = clsbox;
-	let rep = but.replace("cl","edit");	
-	let repcl =	but.replace("cl","ep");	
-	document.getElementById(rep).style.display = "none";
-	document.getElementById(clsbox).style.display = "none";	document.getElementById(repcl).innerHTML = "edit price";
+	let rep = but.replace("cl","sedit");	
+	let repcl =	but.replace("cl","ep");
+	let repcla =	but.replace("cl","edita");	
+document.getElementById(repcla).classList.replace("show","hide");	document.getElementById(rep).style.display = "none";
+	document.getElementById(clsbox).style.display = "none";	document.getElementById(repcl).style.display= "block";
 }
 function editop(thisid){
 	let eid = thisid;

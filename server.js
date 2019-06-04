@@ -312,6 +312,51 @@ res.status(404).send({
 }
 })
 /////////////////////////
+
+
+
+
+
+///////////seller edit price///////////////////
+app.patch("/car/:carid/price", (req, res) => {
+	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "unsold");
+	if(checkforcar){
+		checkforcar.price = req.body.dnewprice;
+		console.log("marked");
+		console.log({
+			"id" : checkforcar.id,
+			"email" : req.body.owneremail,
+			"created_on" :new Date(),
+			"manufacturer" : checkforcar.manufacturer,
+			"model" : checkforcar.model,
+			"price" : checkforcar.price,
+			"state" : checkforcar.state,
+			"status" : checkforcar.status
+			})
+res.status(200).json({
+	"status" : 200,
+	"data" : {
+	"id" : checkforcar.id,
+	"email" : req.body.owneremail,
+	"created_on" :new Date(),
+	"manufacturer" : checkforcar.manufacturer,
+	"model" : checkforcar.model,
+	"price" : checkforcar.price,
+	"state" : checkforcar.state,
+	"status" : checkforcar.status
+	},
+"message" : "The price have been changed successfully."
+})
+	} else {
+	
+res.status(404).send({
+"status" : 404,
+"error" : "404 not found",
+"message" : "Oops cant find this ad or have been sold"
+});
+}
+})
+/////////////////////////
  
  
  
