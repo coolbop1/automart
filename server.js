@@ -54,6 +54,53 @@ app.use(function(req, res, next) {
  app.get("/allcars",(req, res) =>{
  	res.send(allcars);
  });
+ 
+ 
+ app.get("/car",(req, res) =>{
+ 	let allqueried=[];
+ 	if(Object.keys(req.query).length > 0){
+ 		let allquerystatus=[];
+ 		let anyotherquery=[];
+ 		if(req.query.status){
+ 	for(let i = 0; i < allcars.length; i++){
+ 		let looktru = allcars[i].status;
+ 		if(looktru == req.query.status){
+ 			let findid = allusers.find(d => d.email == allcars[i].email)
+ 				 	let qstatus = {
+ 		"id" : allcars[i].id,
+ 		"owner" : findid.id,
+ 		"created_on" : allcars[i].created_on,
+ 		"state" : allcars[i].state,
+ 		"status" : allcars[i].status,
+ 		"price" : allcars[i].price,
+ 		"manufacturer" : allcars[i].manufacturer,
+ 		"model" : allcars[i].model,
+ 		"body_type" : allcars[i].color,
+ 		"engine_size" : allcars[i].engine_size,
+ 		"pics" : allcars[i].pics
+		 
+ 	}		
+ 			allquerystatus.push(qstatus)
+ 		}
+ 	//	res.send(allquerystatus);
+ 	}
+ 	}
+ 	var intersection;
+ 	if(anyotherquery.length > 0){
+ 	 intersection = allquerystatus.filter(x => anyotherquery.includes(x));
+ 	}else{
+ 	 intersection = allquerystatus;
+ 	}
+ 	res.send(intersection);
+ 	}else{
+ 		res.send("no request");
+ 	}
+ 	
+ 	
+ });
+ 
+ 
+ 
 //handles sign up
  app.post("/auth/signup", (req, res) => { 
 
@@ -167,7 +214,7 @@ return;
  		"engine_size" : req.body.pces,
  		"color" : req.body.pccolor,
 		 "pics" : req.body.pcpics,
-		 "status" : "unsold"
+		 "status" : "available"
  	}
  	allcars.push(postcarform);
  	console.log(postcarform)
@@ -274,7 +321,7 @@ res.status(404).send({
 
 ///////////mark carf as sold///////////////////
 app.patch("/car/:carid/status", (req, res) => {
-	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "unsold");
+	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "available");
 	if(checkforcar){
 		checkforcar.status = "sold";
 		console.log("marked");
@@ -319,7 +366,7 @@ res.status(404).send({
 
 ///////////seller edit price///////////////////
 app.patch("/car/:carid/price", (req, res) => {
-	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "unsold");
+	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "available");
 	if(checkforcar){
 		checkforcar.price = req.body.dnewprice;
 		console.log("marked");
