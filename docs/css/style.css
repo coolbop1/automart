@@ -481,16 +481,7 @@ footer{
 	top:0;
 	z-index:10;
 }
-.ralerts{
-	position:absolute;
-	width:calc(100% - 10px);
-	background:rgba(0,255,0,0.3);
-	top:0;
-	padding:3px;
-	font-size:15px;
-	z-index:15;
-	display:none;
-}
+
 .mark{
 	position:absolute;
 	width:100%;
@@ -704,6 +695,17 @@ footer{
 	font-size:15px;
 	text-align:center;
 	background:rgba(92, 184, 92,0.2);
+}
+.ralerts{
+	position:absolute;
+	width:calc(100% - 40px);
+	background:rgba(92, 184, 92,0.9);
+	text-align:center;
+	top:0;
+	padding:20px;
+	font-size:15px;
+	z-index:15;
+	display:none;
 }
 .underwarn{
 	margin:10px;
