@@ -65,7 +65,23 @@ app.use(function(req, res, next) {
  
  
  
- 
+ app.delete("/car/:carid",(req, res) =>{
+	 let todelete = req.params.carid;
+	 const checktodelete = allcars.find(del => del.id == todelete)
+	 if(checktodelete){
+		var index = allcars.indexOf(checktodelete);
+		allcars.splice(index, 1);
+		res.status(200).json({
+			"status" : 200,
+			"data" : "Car Ad successfully deleted"
+			})
+	 }else{
+		res.status(404).json({
+			"status" : 400,
+			"error" : "Car Ad not found"
+			})
+	 }
+ });
  
  
  
