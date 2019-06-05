@@ -132,7 +132,7 @@ app.get("/car",(req, res) =>{
 							"price" : preresult[b].price,
 							"manufacturer" : preresult[b].manufacturer,
 							"model" : preresult[b].model,
-							"body_type" : preresult[b].color,
+							"body_type" : preresult[b].body_type,
 							"engine_size" : preresult[b].engine_size,
 							"pics" : preresult[b].pics
 						}
@@ -165,7 +165,7 @@ app.get("/car",(req, res) =>{
 							"price" : preresult[b].price,
 							"manufacturer" : preresult[b].manufacturer,
 							"model" : preresult[b].model,
-							"body_type" : preresult[b].color,
+							"body_type" : preresult[b].body_type,
 							"engine_size" : preresult[b].engine_size,
 							"pics" : preresult[b].pics
 						}
@@ -200,7 +200,7 @@ app.get("/car",(req, res) =>{
 							"price" : preresult[b].price,
 							"manufacturer" : preresult[b].manufacturer,
 							"model" : preresult[b].model,
-							"body_type" : preresult[b].color,
+							"body_type" : preresult[b].body_type,
 							"engine_size" : preresult[b].engine_size,
 							"pics" : preresult[b].pics
 						}
@@ -234,7 +234,7 @@ app.get("/car",(req, res) =>{
 							"price" : preresult[b].price,
 							"manufacturer" : preresult[b].manufacturer,
 							"model" : preresult[b].model,
-							"body_type" : preresult[b].color,
+							"body_type" : preresult[b].body_type,
 							"engine_size" : preresult[b].engine_size,
 							"pics" : preresult[b].pics
 						}
@@ -265,7 +265,7 @@ app.get("/car",(req, res) =>{
 							"price" : preresult[b].price,
 							"manufacturer" : preresult[b].manufacturer,
 							"model" : preresult[b].model,
-							"body_type" : preresult[b].color,
+							"body_type" : preresult[b].body_type,
 							"engine_size" : preresult[b].engine_size,
 							"pics" : preresult[b].pics
 						}
@@ -278,6 +278,37 @@ app.get("/car",(req, res) =>{
 						//break;	
 						}
 						var checkout	= seniorresult.find(l => l.state != req.query.state);
+						if(checkout){
+						var index = seniorresult.indexOf(checkout);
+						seniorresult.splice(index, 1);
+						}
+				}else if(alltoquery[p] == "body_type"){
+					let looktru = preresult[b].body_type;
+					if(looktru == req.query.body_type){
+						let findid = allusers.find(d => d.email == preresult[b].email);
+						let qstatus = {
+							"id" : preresult[b].id,
+							"owner" : findid.id,
+							"email" : preresult[b].email,
+							"created_on" : preresult[b].created_on,
+							"state" : preresult[b].state,
+							"status" : preresult[b].status,
+							"price" : preresult[b].price,
+							"manufacturer" : preresult[b].manufacturer,
+							"model" : preresult[b].model,
+							"body_type" : preresult[b].body_type,
+							"engine_size" : preresult[b].engine_size,
+							"pics" : preresult[b].pics
+						}
+						var checkin	= seniorresult.find(y => y.id == preresult[b].id);
+						if(!checkin)
+						seniorresult.push(qstatus);								
+					
+					}else{
+						//seniorresult = [];
+						//break;	
+						}
+						var checkout	= seniorresult.find(l => l.body_type != req.query.body_type);
 						if(checkout){
 						var index = seniorresult.indexOf(checkout);
 						seniorresult.splice(index, 1);
@@ -333,6 +364,15 @@ app.get("/car",(req, res) =>{
 					}
 				}
 			}
+			if(alltoquery[q] == "body_type"){
+				for(let w =0; w < seniorresult.length; w++){
+					var checkedout	= seniorresult.find(n => n.body_type != req.query.body_type );
+					if(checkedout){
+						var index = seniorresult.indexOf(checkedout);
+						seniorresult.splice(index, 1);
+					}
+				}
+			}
 		}	
 		if(seniorresult.length > 0){										
 			res.status(200).json({
@@ -358,7 +398,7 @@ app.get("/car",(req, res) =>{
 				"price" : allcars[v].price,
 				"manufacturer" : allcars[v].manufacturer,
 				"model" : allcars[v].model,
-				"body_type" : allcars[v].color,
+				"body_type" : allcars[v].body_type,
 				"engine_size" : allcars[v].engine_size,
 				"pics" : allcars[v].pics
 			}
@@ -506,7 +546,7 @@ return;
  		"price" : req.body.pprice,
  		"state" : req.body.stateocar,
  		"engine_size" : req.body.pces,
- 		"color" : req.body.pccolor,
+ 		"body_type" : req.body.pccolor,
 		 "pics" : req.body.pcpics,
 		 "status" : "available"
  	}
@@ -523,7 +563,7 @@ return;
  		"price" : req.body.pprice,
  		"state" : req.body.stateocar,
  		"engine_size" : req.body.pces,
- 		"color" : req.body.pccolor,
+ 		"body_type" : req.body.pccolor,
 		 "pics" : req.body.pcpics,
 		 "status" : "unsold"
  	},
@@ -720,7 +760,7 @@ res.status(404).send({
 				"price" : confirmcar.price,
 				"manufacturer" : confirmcar.manufacturer,
 				"model" : confirmcar.model,
-				"body_type" : confirmcar.color,
+				"body_type" : confirmcar.body_type,
 				"pics" : confirmcar.pics
 				}
  		})
