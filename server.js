@@ -56,48 +56,204 @@ app.use(function(req, res, next) {
  });
  
  
- app.get("/car",(req, res) =>{
- 	let allqueried=[];
- 	if(Object.keys(req.query).length > 0){
- 		let allquerystatus=[];
- 		let anyotherquery=[];
- 		if(req.query.status){
- 	for(let i = 0; i < allcars.length; i++){
- 		let looktru = allcars[i].status;
- 		if(looktru == req.query.status){
- 			let findid = allusers.find(d => d.email == allcars[i].email)
- 				 	let qstatus = {
- 		"id" : allcars[i].id,
- 		"owner" : findid.id,
- 		"created_on" : allcars[i].created_on,
- 		"state" : allcars[i].state,
- 		"status" : allcars[i].status,
- 		"price" : allcars[i].price,
- 		"manufacturer" : allcars[i].manufacturer,
- 		"model" : allcars[i].model,
- 		"body_type" : allcars[i].color,
- 		"engine_size" : allcars[i].engine_size,
- 		"pics" : allcars[i].pics
-		 
- 	}		
- 			allquerystatus.push(qstatus)
- 		}
- 	//	res.send(allquerystatus);
- 	}
- 	}
- 	var intersection;
- 	if(anyotherquery.length > 0){
- 	 intersection = allquerystatus.filter(x => anyotherquery.includes(x));
- 	}else{
- 	 intersection = allquerystatus;
- 	}
- 	res.send(intersection);
- 	}else{
- 		res.send("no request");
- 	}
- 	
- 	
- });
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+app.get("/car",(req, res) =>{
+	let alltoquery=[];
+	let seniorresult = [];
+	let nofit = [];
+			
+	if(Object.keys(req.query).length > 0){
+		let allthequeries = Object.keys(req.query).length;
+		let thequery = Object.keys(req.query);
+		for(let z=0; z < allthequeries; z++){
+			alltoquery.push(thequery[z]);
+		}
+		if(nofit.length == 0){
+			var preresult = allcars;
+		}
+		else {
+			var preresult = seniorresult;		
+		}
+		//checking each car 
+		for(let b=0; b < preresult.length; b++){
+						
+			for(let p =0; p < allthequeries; p++){
+				//status query start	
+				if(b == (preresult.length - 1))
+						nofit.push(1);					
+				if(alltoquery[p] == "status"){
+					let looktru = preresult[b].status;
+					if(looktru == req.query.status){
+						let findid = allusers.find(d => d.email == preresult[b].email);
+						let qstatus = {
+							"id" : preresult[b].id,
+							"owner" : findid.id,
+							"email" : preresult[b].email,
+							"created_on" : preresult[b].created_on,
+							"state" : preresult[b].state,
+							"status" : preresult[b].status,
+							"price" : preresult[b].price,
+							"manufacturer" : preresult[b].manufacturer,
+							"model" : preresult[b].model,
+							"body_type" : preresult[b].color,
+							"engine_size" : preresult[b].engine_size,
+							"pics" : preresult[b].pics
+						}
+						var checkin	= seniorresult.find(y => y.id == preresult[b].id);
+						if(!checkin)
+						seniorresult.push(qstatus);
+						
+														
+					}else{
+						//seniorresult = [];
+						//break;	
+						}
+
+						var checkout	= seniorresult.find(l => l.status != req.query.status);
+						if(checkout){
+						var index = seniorresult.indexOf(checkout);
+						seniorresult.splice(index, 1);
+						}																					
+					}else if(alltoquery[p] == "min_price" ){
+					let looktru = parseInt(preresult[b].price);
+					if(looktru >= parseInt(req.query.min_price) && !isNaN(req.query.min_price)){
+						let findid = allusers.find(d => d.email == preresult[b].email);
+						let qstatus = {
+							"id" : preresult[b].id,
+							"owner" : findid.id,
+							"email" : preresult[b].email,
+							"created_on" : preresult[b].created_on,
+							"state" : preresult[b].state,
+							"status" : preresult[b].status,
+							"price" : preresult[b].price,
+							"manufacturer" : preresult[b].manufacturer,
+							"model" : preresult[b].model,
+							"body_type" : preresult[b].color,
+							"engine_size" : preresult[b].engine_size,
+							"pics" : preresult[b].pics
+						}
+						var checkin	= seniorresult.find(y => y.id == preresult[b].id);
+						if(!checkin)
+						seniorresult.push(qstatus);								
+					}else if(isNaN(req.query.min_price)){
+						seniorresult = [];
+						res.status(400).send('wrong value formart for min_price');
+						
+						break
+					}else{
+						//seniorresult = [];
+						//break;	
+						}
+						var checkout	= seniorresult.find(l => parseInt(l.price) < parseInt( req.query.min_price));
+						if(checkout){
+						var index = seniorresult.indexOf(checkout);
+						seniorresult.splice(index, 1);
+						}				
+				}else if(alltoquery[p] == "max_price"){
+					let looktru = parseInt(preresult[b].price);
+					if(looktru <= parseInt(req.query.max_price) && !isNaN(req.query.max_price)){
+						let findid = allusers.find(d => d.email == preresult[b].email);
+						let qstatus = {
+							"id" : preresult[b].id,
+							"owner" : findid.id,
+							"email" : preresult[b].email,
+							"created_on" : preresult[b].created_on,
+							"state" : preresult[b].state,
+							"status" : preresult[b].status,
+							"price" : preresult[b].price,
+							"manufacturer" : preresult[b].manufacturer,
+							"model" : preresult[b].model,
+							"body_type" : preresult[b].color,
+							"engine_size" : preresult[b].engine_size,
+							"pics" : preresult[b].pics
+						}
+						var checkin	= seniorresult.find(y => y.id == preresult[b].id);
+						if(!checkin)
+						seniorresult.push(qstatus);								
+					}else if(isNaN(req.query.max_price)){
+						seniorresult = [];
+						res.status(400).send('wrong value formart for max_price');
+						break
+					}else{
+						//seniorresult = [];
+						//break;	
+						}
+						var checkout	= seniorresult.find(l => parseInt(l.price) > parseInt(req.query.max_price));
+						if(checkout){
+						var index = seniorresult.indexOf(checkout);
+						seniorresult.splice(index, 1);
+						}
+				}else{
+					res.status(400).send('bad request');
+				}
+			}
+		}
+		for(let q =0; q < allthequeries; q++){
+			if(alltoquery[q] == "status"){
+				for(let w =0; w < seniorresult.length; w++){
+				var checkedout	= seniorresult.find(n => n.status != req.query.status );
+				if(checkedout){
+					var index = seniorresult.indexOf(checkedout);
+					seniorresult.splice(index, 1);
+					}
+				}
+				}
+				if(alltoquery[q] == "min_price"){
+					for(let w =0; w < seniorresult.length; w++){
+					var checkedout	= seniorresult.find(n => parseInt(n.price) < parseInt(req.query.min_price) );
+					if(checkedout){
+						var index = seniorresult.indexOf(checkedout);
+						seniorresult.splice(index, 1);
+						}
+					}
+					}
+					if(alltoquery[q] == "max_price"){
+						for(let w =0; w < seniorresult.length; w++){
+						var checkedout	= seniorresult.find(n => parseInt(n.price) > parseInt(req.query.max_price) );
+						if(checkedout){
+							var index = seniorresult.indexOf(checkedout);
+							seniorresult.splice(index, 1);
+							}
+						}
+						}
+			
+
+		}	
+													
+		res.json(seniorresult);
+	}else{
+		res.send('no request');
+	}
+});
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
