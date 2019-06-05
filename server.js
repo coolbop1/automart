@@ -222,7 +222,7 @@ app.get("/car",(req, res) =>{
 						}
 				}else if(alltoquery[p] == "manufacturer"){
 					let looktru = preresult[b].manufacturer;
-					if(looktru <= req.query.max_price){
+					if(looktru == req.query.manufacturer){
 						let findid = allusers.find(d => d.email == preresult[b].email);
 						let qstatus = {
 							"id" : preresult[b].id,
@@ -247,6 +247,37 @@ app.get("/car",(req, res) =>{
 						//break;	
 						}
 						var checkout	= seniorresult.find(l => l.manufacturer != req.query.manufacturer);
+						if(checkout){
+						var index = seniorresult.indexOf(checkout);
+						seniorresult.splice(index, 1);
+						}
+				}else if(alltoquery[p] == "state"){
+					let looktru = preresult[b].state;
+					if(looktru == req.query.state){
+						let findid = allusers.find(d => d.email == preresult[b].email);
+						let qstatus = {
+							"id" : preresult[b].id,
+							"owner" : findid.id,
+							"email" : preresult[b].email,
+							"created_on" : preresult[b].created_on,
+							"state" : preresult[b].state,
+							"status" : preresult[b].status,
+							"price" : preresult[b].price,
+							"manufacturer" : preresult[b].manufacturer,
+							"model" : preresult[b].model,
+							"body_type" : preresult[b].color,
+							"engine_size" : preresult[b].engine_size,
+							"pics" : preresult[b].pics
+						}
+						var checkin	= seniorresult.find(y => y.id == preresult[b].id);
+						if(!checkin)
+						seniorresult.push(qstatus);								
+					
+					}else{
+						//seniorresult = [];
+						//break;	
+						}
+						var checkout	= seniorresult.find(l => l.state != req.query.state);
 						if(checkout){
 						var index = seniorresult.indexOf(checkout);
 						seniorresult.splice(index, 1);
@@ -287,6 +318,15 @@ app.get("/car",(req, res) =>{
 			if(alltoquery[q] == "manufacturer"){
 				for(let w =0; w < seniorresult.length; w++){
 					var checkedout	= seniorresult.find(n => n.manufacturer != req.query.manufacturer );
+					if(checkedout){
+						var index = seniorresult.indexOf(checkedout);
+						seniorresult.splice(index, 1);
+					}
+				}
+			}
+			if(alltoquery[q] == "state"){
+				for(let w =0; w < seniorresult.length; w++){
+					var checkedout	= seniorresult.find(n => n.state != req.query.state );
 					if(checkedout){
 						var index = seniorresult.indexOf(checkedout);
 						seniorresult.splice(index, 1);
