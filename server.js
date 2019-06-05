@@ -1,6 +1,7 @@
 let allusers = [];
 let allcars = [];
 let allorders =[];
+let allreports=[];
 console.log('starting server');
 const express = require('express');
 //const jwt = require('jwt-simple');
@@ -654,6 +655,39 @@ res.status(404).send({
  	}
  })
  
+
+
+ ///////////flag car as frad endpoint///////////////////
+ app.post("/flag", (req, res) => {
+	let reportform = {
+		"id" : allreports.length + 1,
+		"car_id" : req.body.car_id,
+		"created_on" : new Date(),
+		"reason" : req.body.rereason, 
+		"description" : req.body.redes,
+		"reporter" : req.body.repby
+}
+allreports.push(reportform);
+console.log(reportform)
+res.status(200).json({
+   "status":200,
+   "data":{
+	"id" : allreports.length + 1,
+	"car_id" : req.body.car_id,
+	"created_on" : new Date(),
+	"reason" : req.body.rereason, 
+	"description" : req.body.redes,
+	"reporter" : req.body.repby
+},
+"message" : "Thanks, your report is sent. It will be investigated and acted upon accordingly"
+});
+})
+/////////////////////////
+
+
+
+
+
  
  
   
