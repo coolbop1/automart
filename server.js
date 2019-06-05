@@ -254,10 +254,22 @@ app.get("/car",(req, res) =>{
 			
 
 		}	
-													
-		res.json(seniorresult);
+		if(seniorresult.length > 0){										
+		res.status(200).json({
+			"status":200,
+			"data":	seniorresult
+			});
+		}else{
+			res.status(404).json({
+				"status":404,
+				"msg":"no result for this request"
+			});
+		}
 	}else{
-		res.send('no request');
+		res.status(400).json({
+			"status":400,
+			"error":"no request"
+		});
 	}
 });
  
