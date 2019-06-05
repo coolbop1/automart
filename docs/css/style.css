@@ -103,14 +103,14 @@ header a{
 #mid{
 	width: 100px;
   min-height: 100px;
-  background:#d8743a;
+  background:#bf3f3f;
 	color:#ffffff;
 	border-radius:50%;
 	border:3px solid #ffffff;
 	text-align:center;
 	text-shadow:0 0 60px #bf3f3f, 0 0 100px #021e72;
 	position:relative;
-	
+	display:none;
 	
 padding:10px;
   }
@@ -120,12 +120,13 @@ padding:10px;
 	top:30px;
 	right:47.5%;
 	z-index:10;
+	display:none;
 }
 
 	/*border-right:3px solid #021e72;*/
 #fcontent {
 	width:calc(100% - 10px);
-	margin:20px 5px 5px 5px;
+	margin:10px 5px 5px 5px;
 	background:url("car.jpeg");
 	background-repeat: no-repeat;
  	background-position: center;
@@ -135,7 +136,7 @@ padding:10px;
 	width:calc(100% - 10px);
 	min-height:435px;
 	background:#021e72;
-	margin:20px 5px 5px 5px;
+	margin:10px 5px 5px 5px;
 }
 #signs{
 	min-height:435px;
@@ -161,7 +162,7 @@ padding:10px;
 	position:absolute;
 	font-size:15px;
 	color:#ffffff;
-	background:#d8743a;
+	background:#bf3f3f;
 	left:0px;
 	padding:5px 20px 5px 20px;
 	text-transform: uppercase;
@@ -175,7 +176,7 @@ padding:10px;
 .pintabw{
 	font-size:15px;
 	color:#ffffff;
-	background:#d8743a;
+	background:#bf3f3f;
 	padding:5px 20px 5px 20px;
 	text-transform: uppercase;
 	border-radius:25px;
@@ -186,7 +187,7 @@ padding:10px;
 .updatebut{
 	font-size:15px;
 	color:#ffffff;
-	background:#d8743a;
+	background:#bf3f3f;
 	padding:5px;
 	text-transform: uppercase;
 	border-radius:20px;
@@ -246,7 +247,7 @@ padding:10px;
 	position:absolute;
 	font-size:15px;
 	color:#ffffff;
-	background:#d8743a;
+	background:#bf3f3f;
 	padding:5px 20px 5px 20px;
 	text-transform: uppercase;
 	border-top:0;
@@ -292,7 +293,7 @@ padding:10px;
 	display:none;
 }
 .righttab{
-	background:#d8743a;
+	background:#bf3f3f;
 	width:30%;
 	min-height:500px;
 	position:absolute;
@@ -453,7 +454,7 @@ footer{
 	min-height:90%;
 	margin-top:70px;
 	margin-bottom:30px !important;
-	background:#d8743a;
+	background:#bf3f3f;
 	border: 3px solid #ffffff;
 	display:none;
 }
@@ -557,7 +558,7 @@ footer{
 	width:100%;
 	bottom:5px;
 	text-align:left;
-	background:#d8743a;
+	background:#bf3f3f;
 	color:#ffffff;
 }
 
@@ -730,7 +731,7 @@ footer{
 	position:absolute;
 	width:100%;
 	bottom:10px;
-	background:#d8743a;
+	background:#bf3f3f;
 	color:#ffffff;
 }
 .orangetablev{
@@ -781,7 +782,7 @@ footer{
 .stattitle .slant{
 	top:-20px;
 	right:-130px;
-	background:#d8743a;
+	background:#bf3f3f;
 }
 .slants{
 	height:200px;
@@ -801,7 +802,7 @@ footer{
 .stattitle .slants{
 	top:-20px;
 	left:-130px;
-	background:#d8743a;
+	background:#bf3f3f;
 }
 .stattitle{
 	position:relative;
