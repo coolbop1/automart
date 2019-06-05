@@ -151,7 +151,7 @@ app.get("/car",(req, res) =>{
 						var index = seniorresult.indexOf(checkout);
 						seniorresult.splice(index, 1);
 						}																					
-					}else if(alltoquery[p] == "min_price" ){
+				}else if(alltoquery[p] == "min_price" ){
 					let looktru = parseInt(preresult[b].price);
 					if(looktru >= parseInt(req.query.min_price) && !isNaN(req.query.min_price)){
 						let findid = allusers.find(d => d.email == preresult[b].email);
@@ -220,6 +220,37 @@ app.get("/car",(req, res) =>{
 						var index = seniorresult.indexOf(checkout);
 						seniorresult.splice(index, 1);
 						}
+				}else if(alltoquery[p] == "manufacturer"){
+					let looktru = preresult[b].manufacturer;
+					if(looktru <= req.query.max_price){
+						let findid = allusers.find(d => d.email == preresult[b].email);
+						let qstatus = {
+							"id" : preresult[b].id,
+							"owner" : findid.id,
+							"email" : preresult[b].email,
+							"created_on" : preresult[b].created_on,
+							"state" : preresult[b].state,
+							"status" : preresult[b].status,
+							"price" : preresult[b].price,
+							"manufacturer" : preresult[b].manufacturer,
+							"model" : preresult[b].model,
+							"body_type" : preresult[b].color,
+							"engine_size" : preresult[b].engine_size,
+							"pics" : preresult[b].pics
+						}
+						var checkin	= seniorresult.find(y => y.id == preresult[b].id);
+						if(!checkin)
+						seniorresult.push(qstatus);								
+					
+					}else{
+						//seniorresult = [];
+						//break;	
+						}
+						var checkout	= seniorresult.find(l => l.manufacturer != req.query.manufacturer);
+						if(checkout){
+						var index = seniorresult.indexOf(checkout);
+						seniorresult.splice(index, 1);
+						}
 				}else{
 					res.status(400).send('bad request');
 				}
@@ -247,6 +278,15 @@ app.get("/car",(req, res) =>{
 			if(alltoquery[q] == "max_price"){
 				for(let w =0; w < seniorresult.length; w++){
 					var checkedout	= seniorresult.find(n => parseInt(n.price) > parseInt(req.query.max_price) );
+					if(checkedout){
+						var index = seniorresult.indexOf(checkedout);
+						seniorresult.splice(index, 1);
+					}
+				}
+			}
+			if(alltoquery[q] == "manufacturer"){
+				for(let w =0; w < seniorresult.length; w++){
+					var checkedout	= seniorresult.find(n => n.manufacturer != req.query.manufacturer );
 					if(checkedout){
 						var index = seniorresult.indexOf(checkedout);
 						seniorresult.splice(index, 1);
