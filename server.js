@@ -96,6 +96,7 @@ app.get("/car",(req, res) =>{
 	let alltoquery=[];
 	let seniorresult = [];
 	let nofit = [];
+	let noquerycar =[];
 			
 	if(Object.keys(req.query).length > 0){
 		let allthequeries = Object.keys(req.query).length;
@@ -226,38 +227,36 @@ app.get("/car",(req, res) =>{
 		for(let q =0; q < allthequeries; q++){
 			if(alltoquery[q] == "status"){
 				for(let w =0; w < seniorresult.length; w++){
-				var checkedout	= seniorresult.find(n => n.status != req.query.status );
-				if(checkedout){
-					var index = seniorresult.indexOf(checkedout);
-					seniorresult.splice(index, 1);
+					var checkedout	= seniorresult.find(n => n.status != req.query.status );
+					if(checkedout){
+						var index = seniorresult.indexOf(checkedout);
+						seniorresult.splice(index, 1);
 					}
 				}
-				}
-				if(alltoquery[q] == "min_price"){
-					for(let w =0; w < seniorresult.length; w++){
+			}
+			if(alltoquery[q] == "min_price"){
+				for(let w =0; w < seniorresult.length; w++){
 					var checkedout	= seniorresult.find(n => parseInt(n.price) < parseInt(req.query.min_price) );
 					if(checkedout){
 						var index = seniorresult.indexOf(checkedout);
 						seniorresult.splice(index, 1);
-						}
 					}
+				}
+			}
+			if(alltoquery[q] == "max_price"){
+				for(let w =0; w < seniorresult.length; w++){
+					var checkedout	= seniorresult.find(n => parseInt(n.price) > parseInt(req.query.max_price) );
+					if(checkedout){
+						var index = seniorresult.indexOf(checkedout);
+						seniorresult.splice(index, 1);
 					}
-					if(alltoquery[q] == "max_price"){
-						for(let w =0; w < seniorresult.length; w++){
-						var checkedout	= seniorresult.find(n => parseInt(n.price) > parseInt(req.query.max_price) );
-						if(checkedout){
-							var index = seniorresult.indexOf(checkedout);
-							seniorresult.splice(index, 1);
-							}
-						}
-						}
-			
-
+				}
+			}
 		}	
 		if(seniorresult.length > 0){										
-		res.status(200).json({
-			"status":200,
-			"data":	seniorresult
+			res.status(200).json({
+				"status":200,
+				"data":	seniorresult
 			});
 		}else{
 			res.status(404).json({
@@ -266,10 +265,40 @@ app.get("/car",(req, res) =>{
 			});
 		}
 	}else{
-		res.status(400).json({
-			"status":400,
-			"error":"no request"
-		});
+		for(let v =0; v < allcars.length; v++){
+			let findid = allusers.find(d => d.email == allcars[v].email);
+			let allnoqcar = {
+				"id" : allcars[v].id,
+				"owner" : findid.id,
+				"email" : allcars[v].email,
+				"created_on" : allcars[v].created_on,
+				"state" : allcars[v].state,
+				"status" : allcars[v].status,
+				"price" : allcars[v].price,
+				"manufacturer" : allcars[v].manufacturer,
+				"model" : allcars[v].model,
+				"body_type" : allcars[v].color,
+				"engine_size" : allcars[v].engine_size,
+				"pics" : allcars[v].pics
+			}
+			noquerycar.push(allnoqcar);
+		}
+		if(noquerycar.length > 0){										
+			res.status(200).json({
+				"status":200,
+				"data":	noquerycar
+			});
+		}else{
+			res.status(404).json({
+				"status":404,
+				"msg":"no car ad to display"
+			});
+		}
+
+		//res.status(400).json({
+		//	"status":400,
+		//	"error":"no request"
+		//});
 	}
 });
  
