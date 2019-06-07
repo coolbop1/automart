@@ -635,13 +635,13 @@ footer{
 }
 #overlay{
 	position:fixed;
-	height:150%;
+	height:100%;
 	width:100%;
 	background:rgba(0,0,0,0.8);
 	top:0;
 	z-index:100;
-	overflow:hidden;
 	display:none;
+	overflow-y: scroll;
 }
 
 #touchlist{
@@ -914,6 +914,9 @@ input:invalid {
 	font-weight: 300;
 	font-size:15px;
 	text-align:left;
+}
+.scrollable{
+	overflow: auto;
 }
 /*label{
 	float:left;
