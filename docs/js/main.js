@@ -12,10 +12,12 @@ function opennav(){
 		document.getElementById("topnav").style.display = "block"; 
 		document.getElementById("pmenu").innerHTML = "&#10006";
 		document.getElementById("touchlist").classList.replace("hide","show");
+		document.body.style.overflow = "hidden";
 	}else if(document.getElementById("topnav").style.display == "block"){
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
 		document.getElementById("touchlist").classList.replace("show","hide");
+		document.body.style.overflow = "scroll";
 
 		
 	}
@@ -23,6 +25,7 @@ function opennav(){
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
 		document.getElementById("touchlist").classList.replace("show","hide");
+		document.body.style.overflow = "scroll";
 
 	}
 	
@@ -37,6 +40,8 @@ document.getElementById("topnav").style.display = "none";
 function rightSlide(slideid) {
 	 opennavs();
 	 document.getElementById("touchlist").classList.replace("show","hide");
+	 document.body.style.overflow = "scroll";
+
 	var elem = document.getElementById(slideid+"tab"); 
 	
 	if(slideid == "fpin"){
@@ -82,6 +87,8 @@ function closetab(){
 function showmyads(){
 opennavs();
 document.getElementById("touchlist").classList.replace("show","hide");
+document.body.style.overflow = "scroll";
+
 document.getElementById("myadsti").innerHTML = "My Ads";
 document.getElementById("myadsti").style.display ="block";
 	document.getElementById("posted").style.display ="block";	
@@ -96,6 +103,8 @@ document.getElementById("navsad").style.background ="inherit";
 function showpostad(){
 opennavs();
 document.getElementById("touchlist").classList.replace("show","hide");
+document.body.style.overflow = "scroll";
+
 document.getElementById("myadsti").innerHTML = "Create Ad"
 document.getElementById("myadsti").style.display ="block";	
 document.getElementById("posted").style.display = "none";
@@ -111,6 +120,8 @@ document.getElementById("navsad").style.background ="#bf3f3f";
 function showorder(){
 opennavs();
 document.getElementById("touchlist").classList.replace("show","hide");
+document.body.style.overflow = "scroll";
+
 document.getElementById("myadsti").innerHTML = "Place Order"
 document.getElementById("myadsti").style.display ="block";	
 document.getElementById("prequest").style.display = "block";
@@ -134,8 +145,10 @@ function closedit(clsbox){
 	let rep = but.replace("cl","sedit");	
 	let repcl =	but.replace("cl","ep");
 	let repcla =	but.replace("cl","edita");	
-document.getElementById(repcla).classList.replace("show","hide");	document.getElementById(rep).style.display = "none";
-	document.getElementById(clsbox).style.display = "none";	document.getElementById(repcl).style.display= "block";
+document.getElementById(repcla).classList.replace("show","hide");	
+document.getElementById(rep).style.display = "none";
+document.getElementById(clsbox).style.display = "none";	
+document.getElementById(repcl).style.display= "block";
 }
 function editop(thisid){
 	let eid = thisid;
@@ -187,9 +200,11 @@ function confirmre(thisid){
 	}, 3000);
 }
 function cls(){	document.getElementById("overlay").style.display = "none";
+document.body.style.overflow = "scroll";
 }
 function opensingle(thisid){
-	document.getElementById("inoverlay").innerHTML=document.getElementById(thisid).innerHTML;	
+	document.getElementById("inoverlay").innerHTML=document.getElementById(thisid).innerHTML;
+	document.body.style.overflow = "hidden";	
 	document.getElementById("overlay").style.display = "block";
 	
 }
