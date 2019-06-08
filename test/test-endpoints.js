@@ -598,6 +598,7 @@ describe('GET /allcars endpoint', function () {
                 
             });
 
-            
+            //export COVERALLS_REPO_TOKEN=uXXej4MsUdasVhX6yL01XTtWMJR82UyJo
+
     
 
