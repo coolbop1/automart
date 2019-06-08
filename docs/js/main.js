@@ -17,7 +17,7 @@ function opennav(){
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
 		document.getElementById("touchlist").classList.replace("show","hide");
-		document.body.style.overflow = "scroll";
+		document.body.style.overflow = "auto";
 
 		
 	}
@@ -25,7 +25,7 @@ function opennav(){
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("pmenu").innerHTML = "<img src='image/menu.png' >";
 		document.getElementById("touchlist").classList.replace("show","hide");
-		document.body.style.overflow = "scroll";
+		document.body.style.overflow = "auto";
 
 	}
 	
@@ -40,7 +40,7 @@ document.getElementById("topnav").style.display = "none";
 function rightSlide(slideid) {
 	 opennavs();
 	 document.getElementById("touchlist").classList.replace("show","hide");
-	 document.body.style.overflow = "scroll";
+	 document.body.style.overflow = "auto";
 
 	var elem = document.getElementById(slideid+"tab"); 
 	
@@ -87,7 +87,7 @@ function closetab(){
 function showmyads(){
 opennavs();
 document.getElementById("touchlist").classList.replace("show","hide");
-document.body.style.overflow = "scroll";
+document.body.style.overflow = "auto";
 
 document.getElementById("myadsti").innerHTML = "My Ads";
 document.getElementById("myadsti").style.display ="block";
@@ -103,7 +103,7 @@ document.getElementById("navsad").style.background ="inherit";
 function showpostad(){
 opennavs();
 document.getElementById("touchlist").classList.replace("show","hide");
-document.body.style.overflow = "scroll";
+document.body.style.overflow = "auto";
 
 document.getElementById("myadsti").innerHTML = "Create Ad"
 document.getElementById("myadsti").style.display ="block";	
@@ -120,7 +120,7 @@ document.getElementById("navsad").style.background ="#bf3f3f";
 function showorder(){
 opennavs();
 document.getElementById("touchlist").classList.replace("show","hide");
-document.body.style.overflow = "scroll";
+document.body.style.overflow = "auto";
 
 document.getElementById("myadsti").innerHTML = "Place Order"
 document.getElementById("myadsti").style.display ="block";	
@@ -200,7 +200,7 @@ function confirmre(thisid){
 	}, 3000);
 }
 function cls(){	document.getElementById("overlay").style.display = "none";
-document.body.style.overflow = "scroll";
+document.body.style.overflow = "auto";
 }
 function opensingle(thisid){
 	document.getElementById("inoverlay").innerHTML=document.getElementById(thisid).innerHTML;
