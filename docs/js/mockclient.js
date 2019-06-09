@@ -298,7 +298,7 @@ function logins(){
 
 //////////////cloudinary upload image and get the path//////////
 
-
+if(window.location.pathname == "/postad.html"){
 
 const cloudName = 'coolbop';
 const unsignedUploadPreset = 'lmxbyuah';
@@ -391,5 +391,5 @@ var handleFiles = function(files) {
 };
 
 
-
+}
 //////////////////////////////////////////////////////

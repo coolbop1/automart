@@ -8,11 +8,13 @@ var expect = require('chai').expect();
 
 describe('POST /auth/signup endpoint', function () {
     let 	comfirms = {
-        "email" : "testemail" ,
+        
          "first_name" : "test firstname",
          "last_name" : "testlast" ,
-          "password" : "thepassword",
-           "address" : "testaddress"
+         "email" : "testemail" ,
+         "address" : "testaddress",
+          "password" : "thepassword"
+           
         }
     it('respond with json containing the registered', function (done) {
         apps(app)
@@ -25,30 +27,64 @@ describe('POST /auth/signup endpoint', function () {
 });
 describe('POST /auth/signup endpoint', function () {
     let 	comfirms = {
-        "email" : "testemail" ,
+        "email" : "testemail",
          "first_name" : "test firstname",
-         "last_name" : "testlast" ,
+         "last_name" : "testlast",
           "password" : "thepassword",
            "address" : "testaddress"
         }
+        let comfirmsy = {
+            "email" : "","first_name" : "","last_name" : "","password" : "","address" : "testaddress"
+            }
     it('respond with json containing  error msg email is taken', function (done) {
         apps(app)
             .post('/auth/signup')
-            .send(comfirms)
             .set('Accept', 'application/json')
+            .send(comfirms)
+            .expect(409, done);
+    });
+    it('respond with json containing  cant be empty', function (done) {
+        apps(app)
+            .post('/auth/signup')
+            .set('Accept', 'application/json')
+            .send(comfirmsy)
             .expect(409, done);
     });
     
 });
 describe('POST /auth/signin endpoint', function () {
-    let 	comfirms = {"user" : "testemail" , "pass" : "thepassword"}
-    let 	notcomfirms = {"user" : "testemaioool" , "pass" : "thepassword"}
+    let 	comfirms = {"email" : "testemail" , "password" : "thepassword"}
+    let 	comfirmsy = {"email" : "" , "password" : ""}
+    let 	notcomfirms = {"email" : "testemaioool" , "password" : "thepassword"}
     it('respond with json details of user', function (done) {
         apps(app)
             .post('/auth/signin')
-            .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirms)
             .expect(200, done);
+    });
+    before(function(done){
+        apps(app)
+        .post('/auth/signin')
+        .send(comfirms)
+        .end(function(err, res){
+            token = res.body.data.token;
+            done();
+        })
+        
+    })
+    it('respond with authorized ', function (done) {
+        apps(app)
+            .get('/me')
+            .set("Authorization", "Bearer "+token)
+            .expect('Content-Type', /json/, done) //expecting HTTP status code
+    });
+    it('respond with not authorized ', function (done) {
+        apps(app)
+            .get('/me')
+            //.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImV4YW1wbGV1c2VyIiwiZW1haWwiOiJleGFtcGxlQGdtYWlsLmNvbSJ9LCJpYXQiOjE1NTExMTE1ODAsImV4cCI6MTU1MTExMTYxMH0.aSTVC-HcEdrH1KBNtuD_MoLZ8DWnSiM6bCqO4EgJ5zM")
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .expect(403, done);
     });
     it('respond with 404 unexistence email', function (done) {
         apps(app)
@@ -57,9 +93,16 @@ describe('POST /auth/signin endpoint', function () {
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(404, done);
     });
+    it('respond with 409 conflict', function (done) {
+        apps(app)
+            .post('/auth/signin')
+            .send(comfirmsy)
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .expect(409, done);
+    });
 });
 describe('POST /auth/signin with wrong password', function () {
-    let 	comfirms = {"user" : "testemail" , "pass" : "thepa"}
+    let 	comfirms = {"email" : "testemail" , "password" : "thepassssss"}
     it('respond with 401 unauthorised', function (done) {
         apps(app)
             .post('/auth/signin')
@@ -70,7 +113,7 @@ describe('POST /auth/signin with wrong password', function () {
     
 });
 describe('POST /auth/signin endpoint', function () {
-    let 	comfirms = {"user" : "testemail" , "pass" : "wrongpassword"}
+    let 	comfirms = {"email" : "testemail" , "password" : "wrongpassword"}
     it('unauthorize error', function (done) {
         apps(app)
             .post('/auth/signin')
@@ -106,16 +149,17 @@ describe('GET /car endpoint', function () {
 
 describe('POST /car endpoint', function () {
     let 	comfirms = {
-        "pcman" : "carmanufacturer" ,
-         "pcmodel" : "carmodel",
-         "pccolor" : "color" ,
-          "pces" : "21000",
-           "pprice" : "1000",
-           "stateocar" : "new" ,
-            "pcpics" : "fromcloud",
-            "pcposter":"emailofposter",
-            "pcowner" : 1
-        }
+        "manufacturer" : "carmanufacturer" , 
+        "model" : "carmodel",
+        "body_type" : "color" , 
+        "engine_size" : "21000", 
+        "price" : "1000",
+        "stateocar" : "new" , 
+        "pcpics" : "fromcloud",
+        "pcposter":"emailofposter",
+        "pcowner":"1"
+    }
+    
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
             .post('/car')
@@ -123,26 +167,52 @@ describe('POST /car endpoint', function () {
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(200, done);
     });
-    
+    it('respond with only 1', function (done) {
+        apps(app)
+            .get('/car')
+            .query({'status' : 'available'})
+            .expect(200, done); //expecting HTTP status code
+            
+           
+    });
 });
+
 describe('POST /car endpoint', function () {
     let 	comfirms = {
-        "pcman" : "carmanufacturers" ,
-         "pcmodel" : "carmodels",
-         "pccolor" : "colors" ,
-          "pces" : "21001",
-           "pprice" : "2000",
+        "manufacturer" : "carmanufacturers" ,
+         "model" : "carmodels",
+         "body_type" : "colors" ,
+          "engine_size" : "21001",
+           "price" : "2000",
            "stateocar" : "new" ,
             "pcpics" : "fromclouds",
             "pcposter":"emailofposter",
-            "pcowner" : 1
+            "pcowner" : "1"
         }
+        let 	comfirmsy = {
+            "manufacturer" : "" ,
+             "model" : "carmodels",
+             "body_type" : "colors" ,
+              "engine_size" : "21001",
+               "price" : "2000",
+               "stateocar" : "new" ,
+                "pcpics" : "fromclouds",
+                "pcposter":"emailofposter",
+                "pcowner" : "1"
+            }
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
             .post('/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(200, done);
+    });
+    it('respond with json conflict', function (done) {
+        apps(app)
+            .post('/car')
+            .send(comfirmsy)
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .expect(409, done);
     });
     
 });
@@ -158,7 +228,11 @@ describe('GET /car no query get all endpoint', function () {
 describe('PATCH /car/:carid/price endpoint', function () {
     let 	comfirms = {
         "owneremail" : "emailofposter",
-        "dnewprice" : "2000"
+        "price" : "2000"
+    }
+    let 	comfirmsy = {
+        "owneremail" : "emailofposter",
+        "price" : ""
     }
     it('respond with json containing The price have been changed', function (done) {
         apps(app)
@@ -166,6 +240,13 @@ describe('PATCH /car/:carid/price endpoint', function () {
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(200, done);
+    });
+    it('respond with 409 conflict', function (done) {
+        apps(app)
+            .patch('/car/1/price')
+            .send(comfirmsy)
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .expect(409, done);
     });
     
 });
@@ -228,11 +309,18 @@ describe('GET /allcars endpoint', function () {
             });
             describe('POST /order endpoint', function () {
                 let 	comfirms = {
-                    "poid" : "1" ,
-                     "popoid" : "1",
-                     "poprice" : "1000" ,
-                      "stateocarp" : "pending",
-                       "popprice" : "1000"
+                    "car_id" : "1" ,
+                     "buyer" : "1",
+                     "order_price" : "1000" ,
+                      "status" : "pending",
+                       "amount" : "1000"
+                }
+                let 	comfirmsy = {
+                    "car_id" : "" ,
+                     "buyer" : "1",
+                     "order_price" : "1000" ,
+                      "status" : "pending",
+                       "amount" : "1000"
                 }
                 it('respond with json containing order sent successfully', function (done) {
                     apps(app)
@@ -241,27 +329,24 @@ describe('GET /allcars endpoint', function () {
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(200, done);
                 });
+                it('respond with conflict', function (done) {
+                    apps(app)
+                        .post('/order')
+                        .send(comfirmsy)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .expect(409, done);
+                });
                 
             });
             describe('PATCH /order/:orderrid/price', function () {
-                let 	comfirms ={"newpoprice" : "2000"}
+                let 	comfirms ={"order_price" : "2000"}
+                let 	comfirmsy ={"order_price" : ""}
                 it('respond with json containing The order price have been changed', function (done) {
                     apps(app)
                         .patch('/order/1/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
-                        .expect(200)
-                        .expect({
-                            "status" : 200,
-                            "data" : {
-                            "id" : 1,
-                            "car_id" : "1",
-                            "status" : "pending",
-                            "old_price_offered" : "1000",
-                            "new_price_offered" : "2000"
-                            },
-                            "message" : "Your order price have been updated successfully"
-                            }, done);
+                        .expect(200, done);
                 });
                 it('respond with json containing error message', function (done) {
                     apps(app)
@@ -271,15 +356,28 @@ describe('GET /allcars endpoint', function () {
                         .expect(404, done);
                         
                 });
-                
+                it('respond with 409 conflict', function (done) {
+                    apps(app)
+                        .patch('/order/0/price')
+                        .send(comfirmsy)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .expect(409, done);
+                        
+                });
             });
             describe('POST /flag endpoint', function () {
                 let 	comfirms = {
-                    "repby" : "reporter@.com",
+                    "reporter_email" : "reporter@.com",
                 "car_id" : "1",
-                "rereason" : "fraud",
-                "redes" : "fraud"
+                "reason" : "fraud",
+                "description" : "fraud"
             }
+            let 	comfirmsy = {
+                "reporter_email" : "reporter@.com",
+            "car_id" : "1",
+            "reason" : "",
+            "description" : "fraud"
+        }
                 it('respond with json containing your report is sent successfully', function (done) {
                     apps(app)
                         .post('/flag')
@@ -288,7 +386,14 @@ describe('GET /allcars endpoint', function () {
                         .expect(200,done)
                         
                 });
-                
+                it('respond with json 409 conflict', function (done) {
+                    apps(app)
+                        .post('/flag')
+                        .send(comfirmsy)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .expect(409,done)
+                        
+                });
             });
             
            
@@ -365,14 +470,7 @@ describe('GET /allcars endpoint', function () {
                 });
             });
             describe('GET /car with correct body_type query', function () {
-                it('respond with json of the cars with body type given', function (done) {
-                    apps(app)
-                        .get('/car')
-                        .query({'body_type' : 'color'})
-                        .expect(200, done); //expecting HTTP status code
-                        
-                       
-                });
+               
                 it('respond with bad request due to typo', function (done) {
                     apps(app)
                         .get('/car')
@@ -404,6 +502,63 @@ describe('GET /allcars endpoint', function () {
                 });
 
             });
+            describe('GET /car never repeat output', function () {
+                it('respond with only 1', function (done) {
+                    apps(app)
+                        .get('/car')
+                        .query({'status' : 'available'})
+                        .query({'body_type' : 'color'})
+                        .expect(200, done); //expecting HTTP status code
+                        
+                       
+                });
+                it('respond with only 1', function (done) {
+                    apps(app)
+                        .get('/car')
+                        .query({'status' : 'available'})
+                        .query({'state' : 'new'})
+                        .expect(200, done); //expecting HTTP status code
+                        
+                       
+                });
+                it('respond with only 1', function (done) {
+                    apps(app)
+                        .get('/car')
+                        .query({'status' : 'available'})
+                        .query({'manufacturer' : 'carmanufacturer'})
+                        .expect(200, done); //expecting HTTP status code
+                        
+                       
+                });
+                it('respond with only 1', function (done) {
+                    apps(app)
+                        .get('/car')
+                        .query({'status' : 'available'})
+                        .query({'min_price' : '1'})
+                        .expect(200, done); //expecting HTTP status code
+                        
+                       
+                });
+                it('respond with only 1', function (done) {
+                    apps(app)
+                        .get('/car')
+                        .query({'status' : 'available'})
+                        .query({'max_price' : '100000000000000'})
+                        .expect(200, done); //expecting HTTP status code
+                        
+                       
+                });
+                it('respond with only 1', function (done) {
+                    apps(app)
+                        .get('/car')
+                        .query({'max_price' : '100000000000000'})
+                        .query({'status' : 'available'})
+                        .expect(200, done); //expecting HTTP status code
+                        
+                       
+                });
+            
+        });
             describe('GET /car multiple conflicting queries', function () {
                 it('respond with 404 not found state:true body_type:false', function (done) {
                     apps(app)
@@ -582,23 +737,15 @@ describe('GET /allcars endpoint', function () {
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
                     "owneremail" : "emailofposter",
-                    "dnewprice" : "2000"
+                    "price" : "2000"
                 }
                 it('respond with json 404 not found', function (done) {
                     apps(app)
                         .patch('/car/1/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
-                        .expect({
-                            "status" : 404,
-                            "error" : "404 not found",
-                            "message" : "Oops cant find this ad or have been sold"
-                            }, done);
+                        .expect(404, done);
                 });
                 
             });
-
             //export COVERALLS_REPO_TOKEN=uXXej4MsUdasVhX6yL01XTtWMJR82UyJo
-
-    
-

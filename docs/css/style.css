@@ -342,7 +342,7 @@ padding:10px;
 }
 .titletab{
 background:#021e72;
-margin: 20px 0 20px 0; 
+margin: 20px 0 10px 0; 
 padding:10px;
 text-align: center;
 text-transform: uppercase;
@@ -883,14 +883,22 @@ footer{
 }
 
 
-.label-helper {
+.label-helper, .label-helperr{
   position: absolute;
   opacity: 0;
   transition: .2s bottom, .2s opacity;
   bottom: 0;
-	left: 0;
+	left: 5px;
 	color:white;
   z-index: 1; }
+  input:focus + .label-helperr, input:invalid + .label-helperr {
+  bottom: 80%;
+  font-family: arial;
+	font-size: 17px;
+	font-weight: 300;
+  line-height: 1;
+  opacity: 1;
+  padding: 4px; }
 
 input:focus + .label-helper, input:invalid + .label-helper {
   bottom: 98%;
@@ -917,6 +925,10 @@ input:invalid {
 }
 .scrollable{
 	overflow: auto;
+}
+.relh{
+	position:relative;
+	padding-top:10px;
 }
 /*label{
 	float:left;

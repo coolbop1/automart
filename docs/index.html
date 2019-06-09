@@ -59,15 +59,20 @@
 					
 						<div class="righttab" id="fpintab">
 <div class="titletab">SIGN IN <span  class="close" onclick="closetab()">&#10006</span></div>
+<br/>
 <div class="underwarn"><div class="warning hide" id="logwarning"></div></div>
 
 							<div class="underwarn"><div class="success  hide" id="logsuccess"></div></div>
 						<div class="contain">
 								<form method="POST" onsubmit="return  login()">
-									
+									<div class="relh">
 								<input type="email" class="myinput" id="user" placeholder="Email" name="user">
-							
+									<label class="label-helper" for="user">Email</label>
+							</div>
+							<div class="relh">
 								<input type="password" class="myinput" placeholder="*******" id="pwd" name="pwd">
+									<label class="label-helper" for="pwd">Password</label>
+									</div>
 								<button id="logg"  class="padbutton" >login</button>
 							</form>
 						</div>
@@ -79,13 +84,27 @@
 							<div class="underwarn"><div class="success  hide" id="regsuccess"></div></div>
 						<div class="contain">
 							<form method="POST" onsubmit="return signup()">
-								<input type="text" class="myinput" id="regfname" placeholder="First Name" pattern="[a-zA-Z.- ]+" title="Letters only please" name="regfname" required>
-								<input type="text"q$ class="myinput" id="reglname" placeholder="Last Name" pattern="[a-zA-Z.- ]+" title="Letters only please" name="reglname" required>
-								<input type="email" class="myinput" id="regemail" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="regemail" required>
-				
-								<input type="text" class="myinput" id="regadd" placeholder="Address" pattern="[a-zA-Z0-9.-/ ]+" name="regadd" required>
-							
-								<input type="password" class="myinput" placeholder="***Password***" pattern=".{6,}" title="Six or more characters" id="regpwd" name="regpwd" required>
+								<div class="relh">
+								<input type="text" class="myinput" id="regfname" placeholder="First Name" title="Letters only please" name="regfname" >
+									<label class="label-helperr" for="regfname">First name</label>
+									</div>
+									<div class="relh">
+								<input type="text" class="myinput" id="reglname" placeholder="Last Name" title="Letters only please" name="reglname" >
+									<label class="label-helperr" for="reglname">Last name</label>
+									</div>
+									<div class="relh">
+								<input type="email" class="myinput" id="regemail" placeholder="Email"  name="regemail" >
+									<label class="label-helperr" for="regemail">Email</label>
+									</div>
+									
+					<div class="relh">
+								<input type="text" class="myinput" id="regadd" placeholder="Address"  name="regadd" >
+									<label class="label-helperr" for="regadd">Address</label>
+									</div>
+							<div class="relh">
+								<input type="password" class="myinput" placeholder="***Password***"  title="Six or more characters" id="regpwd" name="regpwd" >
+									<label class="label-helperr" for="regpwd">Password</label>
+									</div>
 								<!--<input type="password" class="myinput" placeholder="***Retype Password***" id="reegpwd" name="reegpwd">-->
 								<button class="padbutton"  >register</button>
 							</form>
@@ -106,7 +125,7 @@
 							<div class="imgcontain"><a id="single1" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
 								<div class="ralerts" id="rr1">
 									<form id="reportfor1" method="POST" onsubmit="return  confirmrep(this.id)">
-										<textarea id="reportwhy1" class="ereport" placeholder='reason for reporting' required></textarea>  
+										<textarea id="reportwhy1" class="ereport" placeholder='reason for reporting' ></textarea>  
 										<br/>
 										<button id="confirmr1" class="pintabw" type="submit">submit</button>
 									</form>
@@ -151,7 +170,7 @@
 							<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
 								<div class="ralerts" id="rr2">
 										<form id="reportfor2" method="POST" onsubmit="return  confirmrep(this.id)">
-												<textarea id="reportwhy2" class="ereport" placeholder='reason for reporting' required></textarea>  
+												<textarea id="reportwhy2" class="ereport" placeholder='reason for reporting' ></textarea>  
 												<br/>
 												<button id="confirmr2" class="pintabw" type="submit">submit</button>
 											</form>
@@ -193,7 +212,7 @@
 							<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
 								<div class="ralerts" id="rr3">
 										<form id="reportfor3" method="POST" onsubmit="return  confirmrep(this.id)">
-												<textarea id="reportwhy3" class="ereport" placeholder='reason for reporting' required></textarea>  
+												<textarea id="reportwhy3" class="ereport" placeholder='reason for reporting' ></textarea>  
 												<br/>
 												<button id="confirmr3" class="pintabw" type="submit">submit</button>
 											</form>
@@ -239,7 +258,7 @@
 							<div class="imgcontain"><a id="single4" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
 								<div class="ralerts" id="rr4">
 										<form id="reportfor4" method="POST" onsubmit="return  confirmrep(this.id)">
-												<textarea id="reportwhy4" class="ereport" placeholder='reason for reporting' required></textarea>  
+												<textarea id="reportwhy4" class="ereport" placeholder='reason for reporting' ></textarea>  
 												<br/>
 												<button id="confirmr4" class="pintabw" type="submit">submit</button>
 										</form>
@@ -279,7 +298,7 @@
 							<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
 								<div class="ralerts" id="rr5">
 										<form id="reportfor5" method="POST" onsubmit="return  confirmrep(this.id)">
-												<textarea id="reportwhy5" class="ereport" placeholder='reason for reporting' required></textarea>  
+												<textarea id="reportwhy5" class="ereport" placeholder='reason for reporting' ></textarea>  
 												<br/>
 												<button id="confirmr5" class="pintabw" type="submit">submit</button>
 											</form>
@@ -321,7 +340,7 @@
 							<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
 							<div class="ralerts" id="rr6">
 									<form id="reportfor6" method="POST" onsubmit="return  confirmrep(this.id)">
-											<textarea id="reportwhy6" class="ereport" placeholder='reason for reporting' required></textarea>  
+											<textarea id="reportwhy6" class="ereport" placeholder='reason for reporting' ></textarea>  
 											<br/>
 											<button id="confirmr6" class="pintabw" type="submit">submit</button>
 										</form>
@@ -391,7 +410,7 @@
 		<div id="touchlist" class="hide">&nbsp;</div>
 		<script src="js/main.js"></script>
 			<script src="js/mockclient.js"></script>
-			<!----<script src="js/client.js"></script>
+			<!--<script src="js/client.js"></script>
 				<script src="js/login.js"></script>-->
 	</body>
 </html>
