@@ -28,7 +28,7 @@ You should install, in like manner , any missing package causing errors.
 And soon the project is running!!
 
 ## Running the tests
-Travis is used to run test on this project
+[Travis](https://travis-ci.org/coolbop1/automart) is used to run test on this project
 
 ### Unit tests
 All endpoints responsible for core features of this project are tested 
