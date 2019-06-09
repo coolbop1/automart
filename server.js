@@ -4,6 +4,7 @@ let allorders =[];
 let allreports=[];
 //console.log('starting server');
 const express = require("express");
+const Joi = require("joi");
 //const jwt = require('jwt-simple');
 const app = express(); app.set("jwtTokenSecret", "ourlittlesecret");
 //const jwt = require('jsonwebtoken');
@@ -19,7 +20,7 @@ app.use(bodyParser.urlencoded({
 	extended: true }));//middleware
 
 app.use(bodyParser.text({ type: "application/json" }));
-const Joi = require("joi");
+
 app.use(express.static("./docs"));
 //app.use(morgan("dev"));
 
@@ -65,8 +66,9 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 		for(let z=0; z < allthequeries; z++){
 			alltoquery.push(thequery[z]);
 		}
-		if(nofit.length == 0){var preresult = allcars;	}else {var preresult = seniorresult;}
+		//if(nofit.length == 0){var preresult = allcars;	}else {var preresult = seniorresult;}
 		//checking each car 
+		var preresult = allcars;
 		for(let b=0; b < preresult.length; b++){
 
 			for(let p =0; p < allthequeries; p++){
@@ -98,7 +100,7 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 		
 					}else{
 						//seniorresult = [];
-						//break;	
+						//return;	
 					}
 
 					var checkout	= seniorresult.find(l => l.status != req.query.status);
@@ -131,10 +133,10 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 						seniorresult = [];
 						res.status(400).send("wrong value formart for min_price");
 
-						break;
+						return;
 					}else{
 						//seniorresult = [];
-						//break;	
+						//return;	
 					}
 					var checkout	= seniorresult.find(l => parseInt(l.price) < parseInt( req.query.min_price));
 					if(checkout){
@@ -165,10 +167,10 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 					}else if(isNaN(req.query.max_price)){
 						seniorresult = [];
 						res.status(400).send("wrong value formart for max_price");
-						break;
+						return;
 					}else{
 						//seniorresult = [];
-						//break;	
+						//return;	
 					}
 					var checkout	= seniorresult.find(l => parseInt(l.price) > parseInt(req.query.max_price));
 					if(checkout){
@@ -199,7 +201,7 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 		
 					}else{
 						//seniorresult = [];
-						//break;	
+						//return;	
 					}
 					var checkout	= seniorresult.find(l => l.manufacturer != req.query.manufacturer);
 					if(checkout){
@@ -230,7 +232,7 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 		
 					}else{
 						//seniorresult = [];
-						//break;	
+						//return;	
 					}
 					var checkout	= seniorresult.find(l => l.state != req.query.state);
 					if(checkout){
@@ -256,12 +258,13 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 							"pics" : preresult[b].pics
 						};
 						var checkin	= seniorresult.find(y => y.id == preresult[b].id);
-						if(!checkin)
-							seniorresult.push(qstatus);		
+						if(!checkin){
+							seniorresult.push(qstatus);
+						}	
 		
 					}else{
 						//seniorresult = [];
-						//break;	
+						//return;	
 					}
 					var checkout	= seniorresult.find(l => l.body_type != req.query.body_type);
 					if(checkout){
@@ -270,6 +273,7 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 					}
 				}else{
 					res.status(400).send("bad request");
+					return;
 				}
 			}
 		}
@@ -380,53 +384,81 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
  
 //handles sign up
 app.post("/auth/signup", (req, res) => { 
-
-	var hashedPassword = bcrypt.hashSync(req.body.password, 8);
- 	let postit ={
-
- 		"id" : allusers.length + 1,
- 		"email" : req.body.email,
- 		"first_name" : req.body.first_name,
- 		"last_name" : req.body.last_name,
- 		"password" : hashedPassword,
- 		"address" : req.body.address
- 	};
- 	 	
- 	const emailvali = allusers.find(u => u.email === req.body.email);
- 	if(emailvali){
- 		let reply = {
-		 "email" : emailvali.email,
-		 "msg" : "email is taken"
- 	};
- 	res.status(409).json(reply);
+	const schema ={
+		first_name : Joi.string().min(3),
+		last_name : Joi.string().min(3),
+		email : Joi.string().min(3),
+		address : Joi.string().min(3),
+		password : Joi.string().min(6)
+		
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
 		return;
 	}
-  	let 	comfirm = {
-		"id" : allusers.length + 1,
-		"email" : req.body.email,
- 		"name" : req.body.first_name,
- 		"lname" : req.body.last_name,
- 		"address" : req.body.address
- 	};
- 	allusers.push(postit);
-	let token = jwt.sign({user : comfirm}, "ourlittlesecret", { expiresIn: "24h" });//expires in 24 hours }
- 	res.status(200).json({
- 		"status" : 200,
- 		"data" :{
- 		"token" : token,
- 		"id" : allusers.length + 1,
- 		"first_name" : req.body.first_name,
- 		"last_name" : req.body.last_name,
-			"email" : req.body.email
- 		}
- 	});
- 	//console.log(postit);
-});
+   
+   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+		let postit ={
+   
+			"id" : allusers.length + 1,
+			"email" : req.body.email,
+			"first_name" : req.body.first_name,
+			"last_name" : req.body.last_name,
+			"password" : hashedPassword,
+			"address" : req.body.address
+		}
+			 
+		const emailvali = allusers.find(u => u.email === req.body.email);
+		if(emailvali){
+			let reply = {
+			"msg" : "email is taken"
+		}
+		res.status(409).json(reply)
+   return;
+	}
+		 let 	comfirm = {
+	"id" : allusers.length + 1,
+	"email" : req.body.email,
+			"name" : req.body.first_name,
+			"lname" : req.body.last_name,
+			"address" : req.body.address
+		}
+		allusers.push(postit);
+	let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
+		res.status(200).json({
+			"status" : 200,
+			"data" :{
+			"token" : token,
+			"id" : allusers.length + 1,
+			"first_name" : req.body.first_name,
+			"last_name" : req.body.last_name,
+		   "email" : req.body.email
+			}
+		})
+		//console.log(postit);
+	});
 ////////////sign in////////////
-app.post("/auth/signin", (req, res) => { 
- 	const confirm = allusers.find(u => u.email == req.body.user);
+app.post("/auth/signin", (req, res) => {
+	const schema ={
+		email : Joi.string().min(3),
+		password : Joi.string().min(6)
+		
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
+		return;
+	} 
+ 	const confirm = allusers.find(u => u.email == req.body.email);
  	if(confirm){
- 		var passwordIsValid = bcrypt.compareSync(req.body.pass, confirm.password); 
+ 		var passwordIsValid = bcrypt.compareSync(req.body.password, confirm.password); 
  		if (!passwordIsValid){
 			//console.log('cant login')
 			return res.status(401).send({ auth: false, token: null 	});
@@ -464,10 +496,10 @@ app.post("/auth/signin", (req, res) => {
  		"address" : confirm.address
  	};
  
-	// console.log(reply);
+	 //console.log(reply);
  	} else {
  		let reply = {
- 		"back" : "Invalid username or password please try again pass: "
+ 		"msg" : "Invalid username or password please try again"
  	};
 		res.status(404).send(reply);
 		//console.log(reply);
@@ -476,17 +508,37 @@ app.post("/auth/signin", (req, res) => {
  
 ///////////post car end point///////////////////
 app.post("/car", (req, res) => {
+	const schema ={
+		pcposter : Joi.string().min(1),
+		pcowner : Joi.string().min(1),
+		manufacturer : Joi.string().min(1),
+		model : Joi.string().min(2),
+		price : Joi.string().min(1),
+		stateocar : Joi.string().min(1),
+		engine_size : Joi.string().min(1),
+		body_type : Joi.string().min(2),
+		pcpics : Joi.string().min(2),
+		
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
+		return;
+	} 
   	 	let postcarform = {
  		"id" : allcars.length + 1,
 		 "email" : req.body.pcposter,
 		 "owner" : req.body.pcowner,
  		"created_on" : new Date(),
- 		"manufacturer" : req.body.pcman,
- 		"model" : req.body.pcmodel,
- 		"price" : req.body.pprice,
+ 		"manufacturer" : req.body.manufacturer,
+ 		"model" : req.body.model,
+ 		"price" : req.body.price,
  		"state" : req.body.stateocar,
- 		"engine_size" : req.body.pces,
- 		"body_type" : req.body.pccolor,
+ 		"engine_size" : req.body.engine_size,
+ 		"body_type" : req.body.body_type,
 		 "pics" : req.body.pcpics,
 		 "status" : "available"
  	};
@@ -498,13 +550,30 @@ app.post("/car", (req, res) => {
 
 ///////////purchase///////////////////
 app.post("/order", (req, res) => {
+	const schema ={
+		buyer : Joi.string().min(1),
+		car_id : Joi.string().min(1),
+		amount : Joi.string().min(1),
+		order_price : Joi.string().min(3),
+		status : Joi.string().min(3)
+		
+		
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
+		return;
+	} 
 	let purchaseorderform = {
 		"id" : allorders.length + 1,
-		"buyer" : req.body.popoid, 
-		"car_id" : req.body.poid,
-		"amount" : req.body.popprice,
-		"price_offered" : req.body.poprice, 
-		"status" : req.body.stateocarp,
+		"buyer" : req.body.buyer, 
+		"car_id" : req.body.car_id,
+		"amount" : req.body.amount,
+		"price_offered" : req.body.order_price, 
+		"status" : req.body.status,
 		"created_on" : new Date()
 	};
 	
@@ -527,10 +596,25 @@ app.post("/order", (req, res) => {
 
 ///////////edit purchase order price///////////////////
 app.patch("/order/:orderrid/price", (req, res) => {
+	const schema ={
+		
+		order_price : Joi.string().min(3),
+		
+		
+		
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
+		return;
+	} 
 	const checkfororder = allorders.find(u => u.id == req.params.orderrid && u.status == "pending");
 	if(checkfororder){
 		const old_price = checkfororder.price_offered;
-		checkfororder.price_offered = req.body.newpoprice;
+		checkfororder.price_offered = req.body.order_price;
 		//console.log(req.body.newpoprice)
 		
 		let editorderform = {
@@ -560,7 +644,7 @@ app.patch("/order/:orderrid/price", (req, res) => {
 		res.status(404).send({
 			"status" : 404,
 			"error" : "404 not found",
-			"message" : "Oops cant find this order"
+			"msg" : "Oops cant find this order"
 		});
 	}
 });
@@ -568,6 +652,7 @@ app.patch("/order/:orderrid/price", (req, res) => {
 
 ///////////mark carf as sold///////////////////
 app.patch("/car/:carid/status", (req, res) => {
+	
 	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "available");
 	if(checkforcar){
 		checkforcar.status = "sold";
@@ -596,9 +681,24 @@ app.patch("/car/:carid/status", (req, res) => {
 
 ///////////seller edit price///////////////////
 app.patch("/car/:carid/price", (req, res) => {
+	const schema ={
+		owneremail : Joi.string().min(1),
+		price : Joi.string().min(1),
+		
+		
+		
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
+		return;
+	} 
 	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "available");
 	if(checkforcar){
-		checkforcar.price = req.body.dnewprice;
+		checkforcar.price = req.body.price;
 		//console.log("marked");
 		
 		res.status(200).json({
@@ -620,7 +720,7 @@ app.patch("/car/:carid/price", (req, res) => {
 		res.status(404).send({
 			"status" : 404,
 			"error" : "404 not found",
-			"message" : "Oops cant find this ad or have been sold"
+			"msg" : "Oops cant find this ad or have been sold"
 		});
 	}
 });
@@ -641,6 +741,23 @@ app.get("/car/:carid", (req, res) => {
  
 ///////////flag car as frad endpoint///////////////////
 app.post("/flag", (req, res) => {
+	const schema ={
+		car_id : Joi.string().min(1),
+		reason : Joi.string().min(1),
+		description : Joi.string().min(1),
+		reporter_email : Joi.string().min(1),
+		
+		
+		
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
+		return;
+	}
 	let reportform = {
 		"id" : allreports.length + 1,
 		"car_id" : req.body.car_id,

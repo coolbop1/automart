@@ -197,24 +197,39 @@
 							
 							<div class="grouptwo">
 							<div class="groupf">
-								<input id="pcman" name="pcman" class="myinput" placeholder="Manufacture" pattern="[a-zA-Z0-9.-/ ]+" required>
+								<div class="relh">
+								<input id="pcman" name="pcman" class="myinput" placeholder="Manufacture" pattern="[a-zA-Z0-9.-/ ]+" >
+								<label class="label-helperr" for="pcman">Manufacturer</label>
+								</div>
 							</div>
 							<div class="groupf">
-								<input id="pcmodel" name="pcmodel" class="myinput" placeholder="Model" pattern="[a-zA-Z0-9.-/ ]+" required>
+								<div class="relh">
+								<input id="pcmodel" name="pcmodel" class="myinput" placeholder="Model" pattern="[a-zA-Z0-9.-/ ]+" >
+								<label class="label-helperr" for="pcmodel">Model</label>
+							</div>
 							</div>
 						</div>
 						
 						<div class="grouptwo">
 							<div class="groupf">
-								<input id="pccolor" name="pccolor" class="myinput" placeholder="Body type" pattern="[a-zA-Z0-9.-/ ]+" required>
+								<div class="relh">
+								<input id="pccolor" name="pccolor" class="myinput" placeholder="Body type" pattern="[a-zA-Z0-9.-/ ]+" >
+								<label class="label-helperr" for="pccolor">Body-Type(car,van,lorry)</label>
+							</div>
 							</div>
 							<div class="groupf">
-								<input id="pces" name="pces" class="myinput" placeholder="Engine size" pattern="[a-zA-Z0-9.-/ ]+" required>
+								<div class="relh">
+								<input id="pces" name="pces" class="myinput" placeholder="Engine size" pattern="[a-zA-Z0-9.-/ ]+" >
+								<label class="label-helperr" for="pces">Engine size (in literes)</label>
+							</div>
 							</div>
 						</div>
 						
 						<div class="grouptwo">
-								<input type="number" id="pprice" name="pprice" class="myinput" placeholder="Price $"  required>
+								<div class="relh">
+								<input type="number" id="pprice" name="pprice" class="myinput" placeholder="Price $"  >
+								<label class="label-helper" for="pprice">Price</label>
+							</div>
 							</div>
 							<div class="grouptwo irline">
 								Condition : &nbsp; &nbsp; &nbsp;
@@ -264,7 +279,7 @@
 						
 						
 						
-						<input type="hidden" id="pcpics" value="image/car1.jpg<>" name="pcpics" required>
+						<input type="hidden" id="pcpics" value="image/car1.jpg<>" name="pcpics" >
 							<input id="carposter" type="hidden" >
 							<input id="carposterid" type="hidden" >
 						</center>
@@ -298,10 +313,10 @@
 									</div>
 							<div class="grouptwo">
 							<div class="groupff">
-									<input id="pomanid" type="hidden" required>
-										<input id="orderposterid" type="hidden" required>
+									<input id="pomanid" type="hidden" >
+										<input id="orderposterid" type="hidden" >
 										
-								<input id="pomanu" class="myinput" placeholder="Manufacturer" required  disabled>
+								<input id="pomanu" class="myinput" placeholder="Manufacturer"   disabled>
 								<label class="label-helper" for="pomanu">Manufacturer</label>
 							</div>
 						</div>
@@ -313,7 +328,7 @@
 						</div>
 						<div class="grouptwo">
 							<div class="groupff">
-								<input id="poprice" type="number" class="myinput" placeholder="Price $" required disabled>
+								<input id="poprice" type="number" class="myinput" placeholder="Price $" disabled>
 								<label class="label-helper" for="poprice">Willing to Pay</label>
 							</div>
 						</div>
@@ -391,7 +406,7 @@
 								<div class="imgcontain"><a id="single1" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
 									<div class="ralerts" id="rr1">
 										<form id="reportfor1" method="POST" onsubmit="return  confirmrep(this.id)">
-											<textarea id="reportwhy1" class="ereport" placeholder='reason for reporting' required></textarea>  
+											<textarea id="reportwhy1" class="ereport" placeholder='reason for reporting' ></textarea>  
 											<br/>
 											<button id="confirmr1" class="pintabw" type="submit">submit</button>
 										</form>
@@ -436,7 +451,7 @@
 								<div class="imgcontain"><a id="single2" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
 									<div class="ralerts" id="rr2">
 											<form id="reportfor2" method="POST" onsubmit="return  confirmrep(this.id)">
-													<textarea id="reportwhy2" class="ereport" placeholder='reason for reporting' required></textarea>  
+													<textarea id="reportwhy2" class="ereport" placeholder='reason for reporting' ></textarea>  
 													<br/>
 													<button id="confirmr2" class="pintabw" type="submit">submit</button>
 												</form>
@@ -478,7 +493,7 @@
 								<div class="imgcontain"><a id="single3" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
 									<div class="ralerts" id="rr3">
 											<form id="reportfor3" method="POST" onsubmit="return  confirmrep(this.id)">
-													<textarea id="reportwhy3" class="ereport" placeholder='reason for reporting' required></textarea>  
+													<textarea id="reportwhy3" class="ereport" placeholder='reason for reporting' ></textarea>  
 													<br/>
 													<button id="confirmr3" class="pintabw" type="submit">submit</button>
 												</form>
@@ -524,7 +539,7 @@
 								<div class="imgcontain"><a id="single4" onclick="opensingle(this.id)" href="#"><img src="image/car1.jpg"></a></div>
 									<div class="ralerts" id="rr4">
 											<form id="reportfor4" method="POST" onsubmit="return  confirmrep(this.id)">
-													<textarea id="reportwhy4" class="ereport" placeholder='reason for reporting' required></textarea>  
+													<textarea id="reportwhy4" class="ereport" placeholder='reason for reporting' ></textarea>  
 													<br/>
 													<button id="confirmr4" class="pintabw" type="submit">submit</button>
 											</form>
@@ -564,7 +579,7 @@
 								<div class="imgcontain"><a id="single5" onclick="opensingle(this.id)" href="#"><img src="image/car2.jpg"></a></div>
 									<div class="ralerts" id="rr5">
 											<form id="reportfor5" method="POST" onsubmit="return  confirmrep(this.id)">
-													<textarea id="reportwhy5" class="ereport" placeholder='reason for reporting' required></textarea>  
+													<textarea id="reportwhy5" class="ereport" placeholder='reason for reporting' ></textarea>  
 													<br/>
 													<button id="confirmr5" class="pintabw" type="submit">submit</button>
 												</form>
@@ -606,7 +621,7 @@
 								<div class="imgcontain"><a id="single6" onclick="opensingle(this.id)" href="#"><img src="image/car3.jpeg"></a></div>
 								<div class="ralerts" id="rr6">
 										<form id="reportfor6" method="POST" onsubmit="return  confirmrep(this.id)">
-												<textarea id="reportwhy6" class="ereport" placeholder='reason for reporting' required></textarea>  
+												<textarea id="reportwhy6" class="ereport" placeholder='reason for reporting' ></textarea>  
 												<br/>
 												<button id="confirmr6" class="pintabw" type="submit">submit</button>
 											</form>
