@@ -359,6 +359,7 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 				"body_type" : allcars[v].body_type,
 				"engine_size" : allcars[v].engine_size,
 				"pics" : allcars[v].pics
+				
 			};
 			noquerycar.push(allnoqcar);
 		}
@@ -409,7 +410,8 @@ app.post("/auth/signup", (req, res) => {
 			"first_name" : req.body.first_name,
 			"last_name" : req.body.last_name,
 			"password" : hashedPassword,
-			"address" : req.body.address
+			"address" : req.body.address,
+			"is_admin" : "false"
 		}
 			 
 		const emailvali = allusers.find(u => u.email === req.body.email);
@@ -509,15 +511,15 @@ app.post("/auth/signin", (req, res) => {
 ///////////post car end point///////////////////
 app.post("/car", (req, res) => {
 	const schema ={
-		pcposter : Joi.string().min(1),
-		pcowner : Joi.string().min(1),
+		email : Joi.string().min(1),
+		owner : Joi.string().min(1),
 		manufacturer : Joi.string().min(1),
 		model : Joi.string().min(2),
 		price : Joi.string().min(1),
-		stateocar : Joi.string().min(1),
+		state : Joi.string().min(1),
 		engine_size : Joi.string().min(1),
 		body_type : Joi.string().min(2),
-		pcpics : Joi.string().min(2),
+		pics : Joi.string().min(2),
 		
 	}
 	const valid = Joi.validate(req.body,schema);
@@ -531,12 +533,12 @@ app.post("/car", (req, res) => {
   	 	let postcarform = {
  		"id" : allcars.length + 1,
 		 "email" : req.body.pcposter,
-		 "owner" : req.body.pcowner,
+		 "owner" : req.body.owner,
  		"created_on" : new Date(),
  		"manufacturer" : req.body.manufacturer,
  		"model" : req.body.model,
  		"price" : req.body.price,
- 		"state" : req.body.stateocar,
+ 		"state" : req.body.state,
  		"engine_size" : req.body.engine_size,
  		"body_type" : req.body.body_type,
 		 "pics" : req.body.pcpics,
@@ -544,7 +546,7 @@ app.post("/car", (req, res) => {
  	};
  	allcars.push(postcarform);
  	//console.log(postcarform)
-  	res.status(200).json({"status":200,"data":{"id" : allcars.length + 1,"email" : req.body.pcposter,"created_on" : new Date(),"manufacturer" : req.body.pcman,"model" : req.body.pcmodel,"price" : req.body.pprice,"state" : req.body.stateocar,"engine_size" : req.body.pces,"body_type" : req.body.pccolor,"pics" : req.body.pcpics,"status" : "available"},"message" : "Car posted successfully"});
+  	res.status(200).json({"status":200,"data":{"id" : allcars.length + 1,"email" : req.body.pcposter,"created_on" : new Date(),"manufacturer" : req.body.pcman,"model" : req.body.pcmodel,"price" : req.body.pprice,"state" : req.body.state,"engine_size" : req.body.pces,"body_type" : req.body.pccolor,"pics" : req.body.pcpics,"status" : "available"},"message" : "Car posted successfully"});
 });
 /////////////////////////
 
@@ -585,7 +587,7 @@ app.post("/order", (req, res) => {
 			"id" : allorders.length + 1,
 			"car_id" : req.body.poid,
 			"created_on" : new Date(),
-			"status" : req.body.stateocarp,
+			"status" : req.body.statep,
 			"price" : req.body.popprice,
 			"price_offered" : req.body.poprice
 		},
@@ -661,7 +663,7 @@ app.patch("/car/:carid/status", (req, res) => {
 			"status" : 200,
 			"data" : {
 				"id" : checkforcar.id,
-				"email" : req.body.owneremail,
+				"email" : req.body.email,
 				"created_on" :new Date(),
 				"manufacturer" : checkforcar.manufacturer,
 				"model" : checkforcar.model,
@@ -682,7 +684,7 @@ app.patch("/car/:carid/status", (req, res) => {
 ///////////seller edit price///////////////////
 app.patch("/car/:carid/price", (req, res) => {
 	const schema ={
-		owneremail : Joi.string().min(1),
+		email : Joi.string().min(1),
 		price : Joi.string().min(1),
 		
 		
@@ -705,7 +707,7 @@ app.patch("/car/:carid/price", (req, res) => {
 			"status" : 200,
 			"data" : {
 				"id" : checkforcar.id,
-				"email" : req.body.owneremail,
+				"email" : req.body.email,
 				"created_on" :new Date(),
 				"manufacturer" : checkforcar.manufacturer,
 				"model" : checkforcar.model,
@@ -762,8 +764,8 @@ app.post("/flag", (req, res) => {
 		"id" : allreports.length + 1,
 		"car_id" : req.body.car_id,
 		"created_on" : new Date(),
-		"reason" : req.body.rereason, 
-		"description" : req.body.redes,
+		"reason" : req.body.reason, 
+		"description" : req.body.description,
 		"reporter" : req.body.repby
 	};
 	allreports.push(reportform);
@@ -774,8 +776,8 @@ app.post("/flag", (req, res) => {
 			"id" : allreports.length + 1,
 			"car_id" : req.body.car_id,
 			"created_on" : new Date(),
-			"reason" : req.body.rereason, 
-			"description" : req.body.redes,
+			"reason" : req.body.reason, 
+			"description" : req.body.description,
 			"reporter" : req.body.repby
 		},
 		"message" : "Thanks, your report is sent. It will be investigated and acted upon accordingly"

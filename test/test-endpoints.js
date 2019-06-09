@@ -154,10 +154,10 @@ describe('POST /car endpoint', function () {
         "body_type" : "color" , 
         "engine_size" : "21000", 
         "price" : "1000",
-        "stateocar" : "new" , 
-        "pcpics" : "fromcloud",
-        "pcposter":"emailofposter",
-        "pcowner":"1"
+        "state" : "new" , 
+        "pics" : "fromcloud",
+        "email":"emailofposter",
+        "owner":"1"
     }
     
     it('respond with json containing Car posted successfully', function (done) {
@@ -184,10 +184,10 @@ describe('POST /car endpoint', function () {
          "body_type" : "colors" ,
           "engine_size" : "21001",
            "price" : "2000",
-           "stateocar" : "new" ,
-            "pcpics" : "fromclouds",
-            "pcposter":"emailofposter",
-            "pcowner" : "1"
+           "state" : "new" ,
+            "pics" : "fromclouds",
+            "email":"emailofposter",
+            "owner" : "1"
         }
         let 	comfirmsy = {
             "manufacturer" : "" ,
@@ -195,10 +195,10 @@ describe('POST /car endpoint', function () {
              "body_type" : "colors" ,
               "engine_size" : "21001",
                "price" : "2000",
-               "stateocar" : "new" ,
-                "pcpics" : "fromclouds",
-                "pcposter":"emailofposter",
-                "pcowner" : "1"
+               "state" : "new" ,
+                "pics" : "fromclouds",
+                "email":"emailofposter",
+                "owner" : "1"
             }
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
@@ -227,11 +227,11 @@ describe('GET /car no query get all endpoint', function () {
 });
 describe('PATCH /car/:carid/price endpoint', function () {
     let 	comfirms = {
-        "owneremail" : "emailofposter",
+        "email" : "emailofposter",
         "price" : "2000"
     }
     let 	comfirmsy = {
-        "owneremail" : "emailofposter",
+        "email" : "emailofposter",
         "price" : ""
     }
     it('respond with json containing The price have been changed', function (done) {
@@ -736,7 +736,7 @@ describe('GET /allcars endpoint', function () {
             });
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
-                    "owneremail" : "emailofposter",
+                    "email" : "emailofposter",
                     "price" : "2000"
                 }
                 it('respond with json 404 not found', function (done) {
