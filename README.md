@@ -5,7 +5,7 @@ Auto Mart is an online marketplace for automobiles of diverse makes, model or bo
 
 ## Getting Started
 This is a node.js project, so you will have to install node  on your machine to get this up and running 
-but the this project already hosted [here](https://thawing-beach-89294.herokuapp.com/) 
+but then this project is already hosted [here](https://thawing-beach-89294.herokuapp.com/) 
 
 ### Prerequisites
 To start the server, give the following command in terminal
@@ -15,7 +15,7 @@ nodemon server.js
 
 ### Installing
 You may get errors as to packages you have to install to get this running properly
-all you have to do is check the error respond properly and install the missing packages
+all you have to do is check the error response properly and install the missing packages
 For example you may get the following error
 ```
 "express" not found
