@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.text({ type: "application/json" }));
 
-//app.use(express.static("./docs"));
+app.use(express.static("./documentation"));
 //app.use(morgan("dev"));
 
 app.use(function(req, res, next) {
