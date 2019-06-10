@@ -6,7 +6,7 @@ Auto Mart is an online marketplace for automobiles of diverse makes, model or bo
 # Challenge Links
 * **UI LINK** [here](https://coolbop1.github.io/automart/index.html) 
 * **API HOSTED** [here](https://thawing-beach-89294.herokuapp.com/)
-* **[DOCUMENTATION](https://thawing-beach-89294.herokuapp.com/)**
+* **[DOCUMENTATION](https://app.swaggerhub.com/apis-docs/coolbop/AutoMart/v1#/default/post_api_v1_auth_signup)**
 
 ## Getting Started
 This is a node.js project, so you will have to install node  on your machine to get this up and running 
