@@ -30,12 +30,12 @@ app.use(function(req, res, next) {
 	res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type, Authorization");
 	next();
 });
-app.get("/allorders",(req, res) =>{res.status(200).send(allorders);});
-app.get("/allusers",(req, res) =>{res.status(200).send(allusers);});
-app.get("/allcars",(req, res) =>{res.status(200).send(allcars); });
+app.get("/api/v1/allorders",(req, res) =>{res.status(200).send(allorders);});
+app.get("/api/v1/allusers",(req, res) =>{res.status(200).send(allusers);});
+app.get("/api/v1/allcars",(req, res) =>{res.status(200).send(allcars); });
  
 ////delete car ad/////////
-app.delete("/car/:carid",(req, res) =>{
+app.delete("/api/v1/car/:carid",(req, res) =>{
 	 let todelete = req.params.carid;
 	 const checktodelete = allcars.find(del => del.id == todelete);
 	 if(checktodelete){
@@ -54,7 +54,7 @@ app.delete("/car/:carid",(req, res) =>{
 });
 ///////////////////car search query//////////////////
  
-app.get("/car",(req, res) =>{/* istanbul ignore next */
+app.get("/api/v1/car",(req, res) =>{/* istanbul ignore next */
 	let alltoquery=[];
 	let seniorresult = [];
 	let nofit = [];
@@ -384,7 +384,7 @@ app.get("/car",(req, res) =>{/* istanbul ignore next */
 //@codeCoverageIgnoreEnd
  
 //handles sign up
-app.post("/auth/signup", (req, res) => { 
+app.post("/api/v1/auth/signup", (req, res) => { 
 	const schema ={
 		first_name : Joi.string().min(3),
 		last_name : Joi.string().min(3),
@@ -444,7 +444,7 @@ app.post("/auth/signup", (req, res) => {
 		//console.log(postit);
 	});
 ////////////sign in////////////
-app.post("/auth/signin", (req, res) => {
+app.post("/api/v1/auth/signin", (req, res) => {
 	const schema ={
 		email : Joi.string().min(3),
 		password : Joi.string().min(6)
@@ -509,7 +509,7 @@ app.post("/auth/signin", (req, res) => {
 });
  
 ///////////post car end point///////////////////
-app.post("/car", (req, res) => {
+app.post("/api/v1/car", (req, res) => {
 	const schema ={
 		email : Joi.string().min(1),
 		owner : Joi.string().min(1),
@@ -551,7 +551,7 @@ app.post("/car", (req, res) => {
 /////////////////////////
 
 ///////////purchase///////////////////
-app.post("/order", (req, res) => {
+app.post("/api/v1/order", (req, res) => {
 	const schema ={
 		buyer : Joi.string().min(1),
 		car_id : Joi.string().min(1),
@@ -597,7 +597,7 @@ app.post("/order", (req, res) => {
 /////////////////////////
 
 ///////////edit purchase order price///////////////////
-app.patch("/order/:orderrid/price", (req, res) => {
+app.patch("/api/v1/order/:orderrid/price", (req, res) => {
 	const schema ={
 		
 		order_price : Joi.string().min(3),
@@ -653,7 +653,7 @@ app.patch("/order/:orderrid/price", (req, res) => {
 /////////////////////////
 
 ///////////mark carf as sold///////////////////
-app.patch("/car/:carid/status", (req, res) => {
+app.patch("/api/v1/car/:carid/status", (req, res) => {
 	
 	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "available");
 	if(checkforcar){
@@ -682,7 +682,7 @@ app.patch("/car/:carid/status", (req, res) => {
 /////////////////////////
 
 ///////////seller edit price///////////////////
-app.patch("/car/:carid/price", (req, res) => {
+app.patch("/api/v1/car/:carid/price", (req, res) => {
 	const schema ={
 		email : Joi.string().min(1),
 		price : Joi.string().min(1),
@@ -729,7 +729,7 @@ app.patch("/car/:carid/price", (req, res) => {
 /////////////////////////
 
 //handles view single car
-app.get("/car/:carid", (req, res) => {
+app.get("/api/v1/car/:carid", (req, res) => {
  	const confirmcar = allcars.find(u => u.id == req.params.carid);
  	if(confirmcar){
  		
@@ -742,7 +742,7 @@ app.get("/car/:carid", (req, res) => {
 });
  
 ///////////flag car as frad endpoint///////////////////
-app.post("/flag", (req, res) => {
+app.post("/api/v1/flag", (req, res) => {
 	const schema ={
 		car_id : Joi.string().min(1),
 		reason : Joi.string().min(1),
@@ -785,7 +785,7 @@ app.post("/flag", (req, res) => {
 });
 /////////////////////////
 
-app.get("/me", ensureToken, function(req, res) { 
+app.get("/api/v1/me", ensureToken, function(req, res) { 
  
 	jwt.verify(req.token, "ourlittlesecret", function(err, data) { if (err) { res.sendStatus(403); } else{res.status(200).json({ description:data}); } });
 });
