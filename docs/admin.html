@@ -18,16 +18,18 @@
 					</h1>
 				</div>
 				<span id="pmenu" onclick="opennav()"><img src="image/menu.png" ></span>
-				<nav id="topnav">
-					<ul>
-						<li><a href="">Home</a></li>
-						<li><a href="">About</a></li>
-						<li><a href="">Contact</a></li>
-						<li class="hideli"><a onclick="showorder()">purchase order</a></li>
-					<li class="hideli"><a onclick="showpostad()">create Ads</a></li>
-<li class="hideli"><a onclick="showmyads()">my ads</a></li>
+				<div id="topnav">
+				
+					<ul id="navul">
+							<div id="notloged">
+								<span id="notcon">
+									<li tabindex="0"><a href="index.html">Home</a></li>
+									<li tabindex="0"><a href="postad.html">Explore</a></li>
+								</span>
+						
+						</span>
 					</ul>
-				</nav>
+				</div>
 			</div>
 			<div id="nofloat">
 				<div id="midlogo">
@@ -368,22 +370,25 @@
 		<footer>
 			copyright &copy; bidoritunmise@gmail.com(Andela) 2019
 			</footer>
-<div id="overlay">
-			<center><div id="inoverlay"></div></center>
-			<center>
-				<div id="odetails">
-					<div id="fdetail">Manufacturer:<span>Audi 2018</span>
-					<hr/>
-					Condition:<span>New</span>
-					<hr/>
-					Price:<span>$5000</span>
-				</div>
-			</center>
-			<br/>
-			<center>
-			<button onclick="cls()">CLOSE</button>
-			</center>
-		</div>
+			<div id="overlay">
+	
+					<center><div id="inoverlay"></div></center>
+					<center>
+						<div id="odetails">
+							<div id="fdetail">Manufacturer:<span>Audi 2018</span>
+							<hr/>
+							Condition:<span>New</span>
+							<hr/>
+							Price:<span>$5000</span>
+						</div>
+					</center>
+					<br/>
+					<center>
+					<button class="pintabw" onclick="cls()">CLOSE</button>
+					</center>
+				
+			</div>
+			<div id="touchlist" class="hide">&nbsp;</div>
 		<script src="js/main.js"></script>
 		
 	</body>
