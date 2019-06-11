@@ -20,10 +20,10 @@ route.use(bodyParser.urlencoded({
 ///////////flag car as frad endpoint///////////////////
 route.post("/api/v1/flag", (req, res) => {
 	const schema ={
-		car_id : Joi.string().trim().min(1),
-		reason : Joi.string().trim().min(1),
-		description : Joi.string().trim().min(1),
-		reporter_email : Joi.string().trim().min(1),
+		car_id : Joi.number().min(0).required(),
+		reason : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
+		description : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
+		reporter_email : Joi.string().trim().email().required(),
 		
 		
 		

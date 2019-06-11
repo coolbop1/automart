@@ -38,11 +38,11 @@ app.get("/api/v1/allusers",(req, res) =>{res.status(200).send(allusers);});
 //handles sign up
 app.post("/api/v1/auth/signup", (req, res) => { 
 	const schema ={
-		first_name : Joi.string().trim().min(3),
-		last_name : Joi.string().trim().min(3),
-		email : Joi.string().trim().min(3),
-		address : Joi.string().trim().min(3),
-		password : Joi.string().trim().min(6)
+		first_name : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(3),
+		last_name : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(3),
+		email : Joi.string().trim().email().required(),
+		address : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(3),
+		password : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(6)
 		
 	}
 	const valid = Joi.validate(req.body,schema);
@@ -98,8 +98,8 @@ app.post("/api/v1/auth/signup", (req, res) => {
 ////////////sign in////////////
 app.post("/api/v1/auth/signin", (req, res) => {
 	const schema ={
-		email : Joi.string().trim().min(3),
-		password : Joi.string().trim().min(6)
+		email : Joi.string().trim().email().required(),
+		password : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(6)
 		
 	}
 	const valid = Joi.validate(req.body,schema);

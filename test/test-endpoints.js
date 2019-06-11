@@ -11,7 +11,7 @@ describe('POST /auth/signup endpoint', function () {
         
          "first_name" : "test firstname",
          "last_name" : "testlast" ,
-         "email" : "testemail" ,
+         "email" : "testemail@email.coml" ,
          "address" : "testaddress",
           "password" : "thepassword"
            
@@ -27,7 +27,7 @@ describe('POST /auth/signup endpoint', function () {
 });
 describe('POST /auth/signup endpoint', function () {
     let 	comfirms = {
-        "email" : "testemail",
+        "email" : "testemail@email.coml",
          "first_name" : "test firstname",
          "last_name" : "testlast",
           "password" : "thepassword",
@@ -53,9 +53,9 @@ describe('POST /auth/signup endpoint', function () {
     
 });
 describe('POST /auth/signin endpoint', function () {
-    let 	comfirms = {"email" : "testemail" , "password" : "thepassword"}
+    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "thepassword"}
     let 	comfirmsy = {"email" : "" , "password" : ""}
-    let 	notcomfirms = {"email" : "testemaioool" , "password" : "thepassword"}
+    let 	notcomfirms = {"email" : "testemaioool@email.coml" , "password" : "thepassword"}
     it('respond with json details of user', function (done) {
         apps(app)
             .post('/api/v1/auth/signin')
@@ -102,7 +102,7 @@ describe('POST /auth/signin endpoint', function () {
     });
 });
 describe('POST /auth/signin with wrong password', function () {
-    let 	comfirms = {"email" : "testemail" , "password" : "thepassssss"}
+    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "thepassssss"}
     it('respond with 401 unauthorised', function (done) {
         apps(app)
             .post('/api/v1/auth/signin')
@@ -113,7 +113,7 @@ describe('POST /auth/signin with wrong password', function () {
     
 });
 describe('POST /auth/signin endpoint', function () {
-    let 	comfirms = {"email" : "testemail" , "password" : "wrongpassword"}
+    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "wrongpassword"}
     it('unauthorize error', function (done) {
         apps(app)
             .post('/api/v1/auth/signin')
@@ -156,8 +156,8 @@ describe('POST /car endpoint', function () {
         "price" : "1000",
         "state" : "new" , 
         "pics" : "fromcloud",
-        "email":"emailofposter",
-        "owner":"1"
+        "email":"emailofposter@email.com",
+        "owner": 1
     }
     
     it('respond with json containing Car posted successfully', function (done) {
@@ -186,8 +186,8 @@ describe('POST /car endpoint', function () {
            "price" : "2000",
            "state" : "new" ,
             "pics" : "fromclouds",
-            "email":"emailofposter",
-            "owner" : "1"
+            "email":"emailofposter@email.com",
+            "owner" : 1
         }
         let 	comfirmsy = {
             "manufacturer" : "" ,
@@ -197,8 +197,8 @@ describe('POST /car endpoint', function () {
                "price" : "2000",
                "state" : "new" ,
                 "pics" : "fromclouds",
-                "email":"emailofposter",
-                "owner" : "1"
+                "email":"emailofposter@email.com",
+                "owner" : 1
             }
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
@@ -227,11 +227,11 @@ describe('GET /car no query get all endpoint', function () {
 });
 describe('PATCH /car/:carid/price endpoint', function () {
     let 	comfirms = {
-        "email" : "emailofposter",
+        "email" :  "emailofposter@email.coml",
         "price" : "2000"
     }
     let 	comfirmsy = {
-        "email" : "emailofposter",
+        "email" :  "emailofposter@email.coml",
         "price" : ""
     }
     it('respond with json containing The price have been changed', function (done) {
@@ -309,15 +309,15 @@ describe('GET /allcars endpoint', function () {
             });
             describe('POST /order endpoint', function () {
                 let 	comfirms = {
-                    "car_id" : "1" ,
-                     "buyer" : "1",
+                    "car_id" : 1 ,
+                     "buyer" : 1,
                      "order_price" : "1000" ,
                       "status" : "pending",
                        "amount" : "1000"
                 }
                 let 	comfirmsy = {
                     "car_id" : "" ,
-                     "buyer" : "1",
+                     "buyer" : 1,
                      "order_price" : "1000" ,
                       "status" : "pending",
                        "amount" : "1000"
@@ -373,14 +373,14 @@ describe('GET /allcars endpoint', function () {
             });
             describe('POST /flag endpoint', function () {
                 let 	comfirms = {
-                    "reporter_email" : "reporter@.com",
-                "car_id" : "1",
+                    "reporter_email" : "reporter@email.com",
+                "car_id" : 1,
                 "reason" : "fraud",
                 "description" : "fraud"
             }
             let 	comfirmsy = {
-                "reporter_email" : "reporter@.com",
-            "car_id" : "1",
+                "reporter_email" : "reporter@email.com",
+            "car_id" : 1,
             "reason" : "",
             "description" : "fraud"
         }
@@ -615,7 +615,7 @@ describe('GET /allcars endpoint', function () {
                 it('respond with 404 not found status:true min_price:false', function (done) {
                     apps(app)
                         .get('/api/v1/car')
-                        .query({'max_price' : "1"})
+                        .query({'max_price' : 1})
                         .query({'state' : 'new'})
                         
                         
@@ -742,7 +742,7 @@ describe('GET /allcars endpoint', function () {
             });
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
-                    "email" : "emailofposter",
+                    "email" :  "emailofposter@email.coml",
                     "price" : "2000"
                 }
                 it('respond with json 404 not found', function (done) {
