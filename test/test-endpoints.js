@@ -21,7 +21,7 @@ describe('POST /auth/signup endpoint', function () {
             .post('/api/v1/auth/signup')
             .send(comfirms)
             .set('Accept', 'application/json')
-            .expect(200, done);
+            .expect(201, done);
     });
     
 });
@@ -165,7 +165,7 @@ describe('POST /car endpoint', function () {
             .post('/api/v1/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
-            .expect(200, done);
+            .expect(201, done);
     });
     it('respond with only 1', function (done) {
         apps(app)
@@ -205,7 +205,7 @@ describe('POST /car endpoint', function () {
             .post('/api/v1/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
-            .expect(200, done);
+            .expect(201, done);
     });
     it('respond with json conflict', function (done) {
         apps(app)
@@ -327,7 +327,7 @@ describe('GET /allcars endpoint', function () {
                         .post('/api/v1/order')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
-                        .expect(200, done);
+                        .expect(201, done);
                 });
                 it('respond with conflict', function (done) {
                     apps(app)
@@ -335,6 +335,12 @@ describe('GET /allcars endpoint', function () {
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(409, done);
+                });
+                it('respond with allorders ', function (done) {
+                    apps(app)
+                        .get('/api/v1/allorders')
+                        .expect('Content-Type', /json/)
+                        .expect(200, done) //expecting HTTP status code
                 });
                 
             });
@@ -383,7 +389,7 @@ describe('GET /allcars endpoint', function () {
                         .post('/api/v1/flag')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
-                        .expect(200,done)
+                        .expect(201,done)
                         
                 });
                 it('respond with json 409 conflict', function (done) {
