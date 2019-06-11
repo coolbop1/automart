@@ -21,15 +21,15 @@ route.use(bodyParser.urlencoded({
 ///////////post car end point///////////////////
 route.post("/api/v1/car", (req, res) => {
 	const schema ={
-		email : Joi.string().trim().required(1),
-		owner : Joi.string().trim().min(1),
-		manufacturer : Joi.string().trim().min(1),
-		model : Joi.string().trim().min(2),
-		price : Joi.string().trim().min(1),
-		state : Joi.string().trim().min(1),
-		engine_size : Joi.string().trim().min(1),
-		body_type : Joi.string().trim().min(2),
-		pics : Joi.string().trim().min(2),
+		email : Joi.string().trim().email().required(),
+		owner : Joi.number().min(0).required(),
+		manufacturer : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
+		model : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(2),
+		price : Joi.number().min(0).required(),
+		state : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
+		engine_size : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
+		body_type : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(2),
+		pics : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(2),
 		
 	}
 	const valid = Joi.validate(req.body,schema);
@@ -454,8 +454,8 @@ route.patch("/api/v1/car/:carid/status", (req, res) => {
 ///////////seller edit price///////////////////
 route.patch("/api/v1/car/:carid/price", (req, res) => {
 	const schema ={
-		email : Joi.string().trim().min(1),
-		price : Joi.string().trim().min(1),
+		email : Joi.string().trim().email().required(),
+		price : Joi.number().min(0).required(),
 		
 		
 		

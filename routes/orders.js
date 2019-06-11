@@ -20,11 +20,11 @@ route.use(bodyParser.urlencoded({
 ///////////purchase///////////////////
 route.post("/api/v1/order", (req, res) => {
 	const schema ={
-		buyer : Joi.string().trim().min(1),
-		car_id : Joi.string().trim().min(1),
-		amount : Joi.string().trim().min(1),
-		order_price : Joi.string().trim().min(3),
-		status : Joi.string().trim().min(3)
+		buyer : Joi.number().min(0).required(),
+		car_id : Joi.number().min(0).required(),
+		amount : Joi.number().min(0).required(),
+		order_price : Joi.number().min(0).required(),
+		status : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(3)
 	}
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
@@ -65,7 +65,7 @@ route.post("/api/v1/order", (req, res) => {
 route.patch("/api/v1/order/:orderrid/price", (req, res) => {
 	const schema ={
 		
-		order_price : Joi.string().trim().min(3),
+		order_price : Joi.number().min(0).required(),
 		
 		
 		
