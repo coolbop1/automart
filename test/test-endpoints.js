@@ -63,6 +63,7 @@ describe('POST /auth/signin endpoint', function () {
             .send(comfirms)
             .expect(200, done);
     });
+
     before(function(done){
         apps(app)
         .post('/api/v1/auth/signin')

@@ -379,7 +379,13 @@ text-shadow:2px 2px 4px #000000;
 	width:100%;
 	
 }
-
+.stattitlez{
+	padding:5px;
+	color:#021e72;
+	font-size:25px; 
+	width:calc(100%-30px);
+	border-bottom:3px solid #ffffff;;
+}
 .stattitle{
 	padding:10px;
 	text-align:center;
@@ -708,10 +714,13 @@ footer{
 	display:none;
 }
 .underwarn{
-	margin:10px;
-	width:calc(100%-20px);
+	width:50%;
 	border-radius:5px;
 	background:#ffffff;
+	position:fixed;
+	top:70px;
+	z-index: 200;
+	left:25%;
 	
 }
 .heading{
@@ -929,6 +938,16 @@ input:invalid {
 .relh{
 	position:relative;
 	padding-top:10px;
+}
+.sortby{
+	font-size: 20px;
+	font-weight: 700;
+	margin:5px 0  5px 0;
+}
+.sortby select{
+	padding:10px;
+	border-radius: 20px;
+	min-width: 150px;
 }
 /*label{
 	float:left;

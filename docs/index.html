@@ -13,6 +13,9 @@
 	
 	</head>
 	<body>
+			<div class="underwarn"><div class="warning hide" id="regwarning"></div></div>
+
+			<div class="underwarn"><div class="success  hide" id="regsuccess"></div></div>
 		<header>
 			<div class="contain">
 				<div id="sitename">
@@ -60,9 +63,6 @@
 						<div class="righttab" id="fpintab">
 <div class="titletab">SIGN IN <span  class="close" onclick="closetab()">&#10006</span></div>
 <br/>
-<div class="underwarn"><div class="warning hide" id="logwarning"></div></div>
-
-							<div class="underwarn"><div class="success  hide" id="logsuccess"></div></div>
 						<div class="contain">
 								<form method="POST" onsubmit="return  login()">
 									<div class="relh">
@@ -79,9 +79,6 @@
 					</div>
 					<div class="hide" id="spintab">
 						<div class="titletab">SIGN UP <span  class="close" onclick="closetab()">&#10006</span></div>
-						<div class="underwarn"><div class="warning hide" id="regwarning"></div></div>
-
-							<div class="underwarn"><div class="success  hide" id="regsuccess"></div></div>
 						<div class="contain">
 							<form method="POST" onsubmit="return signup()">
 								<div class="relh">
@@ -116,7 +113,31 @@
 			
 			
 			<div id="indexads">
-					<div class="stattitle">Featured Automobile</div>
+					
+					<div class="stattitlez">
+							<div class="sortby">Sort By: &nbsp; 
+									<select>
+										<option value="">
+											All
+										</option>
+										<option value="Manufacturer">
+											Manufacturer
+										</option>
+										<option value="price">
+												Price Range
+										</option>
+										<option value="state">
+												State of Automobile
+										</option>
+										<option value="status">
+												Status
+										</option>
+										<option value="bodytype">
+												Body type
+										</option>
+				
+									</select></div>
+					</div>
 					 <div id="postedd">
 						 <div>
 					 <!------begining of the ads---->

@@ -13,6 +13,9 @@
 	
 	</head>
 	<body>
+			<div class="underwarn"><div class="warning hide" id="regwarning"></div></div>
+
+			<div class="underwarn"><div class="success  hide" id="regsuccess"></div></div>
 		<header>
 			<div class="contain">
 				<div id="sitename">
@@ -47,9 +50,7 @@
 					<div id="myadsti">My Ads</div>
 					<div id="posted">
 						<br/>&nbsp;<br/>
-						<div class="underwarn"><div class="warning hide" id="regwarningi"></div></div>
-
-							<div class="underwarn"><div class="success  hide" id="regsuccessi"></div></div>
+						
 						<div class="boxline">
 						<div class="adsbox">
 							<div id="soldmask1" class="sold"><span>SOLD!</span></div>
@@ -187,9 +188,6 @@
 							<!--<div class="slants"></div>-->
 							<span class="subtitile">INFO:Please fill the form below to creat ad</span>
 						<!--<div class="slant"></div>--></div>
-						<div class="underwarn"><div class="warning hide" id="regwarning"></div></div>
-
-							<div class="underwarn"><div class="success  hide" id="regsuccess"></div></div>
 						<form method="POST" onsubmit="return postcar()">
 						<div id="inputonly">
 						
@@ -304,9 +302,6 @@
 						<div id="inputonly">
 						
 						<center>
-							<div class="underwarn"><div class="warning hide" id="regwarningy"></div></div>
-
-							<div class="underwarn"><div class="success  hide" id="regsuccessy"></div></div>
 							<form method="POST" onsubmit="return postorder()">
 								<div class="groupff">
 									<span class="hide" id="orderimg" ></span>
@@ -348,10 +343,7 @@
 						<div id="postimg">
 							<div id="runorder">
 							<center><span class="subtitile"> Pending Orders </span></center>
-						<div class="underwarn"><div class="warning hide" id="regwarningu"></div></div>
-
-							<div class="underwarn"><div class="success  hide" id="regsuccessu"></div></div>
-								<div class="orderlist">
+							<div class="orderlist">
 							
 							<div class="slanted"></div>
 						 <span class="manu">Audi 2018</span><hr/>
@@ -397,7 +389,31 @@
 			
 			
 				<div id="indexads">
-						<div class="stattitle">Featured Automobile</div>
+						
+						<div class="stattitlez">
+								<div class="sortby">Sort By: &nbsp; 
+										<select>
+											<option value="">
+												All
+											</option>
+											<option value="Manufacturer">
+												Manufacturer
+											</option>
+											<option value="price">
+													Price Range
+											</option>
+											<option value="state">
+													State of Automobile
+											</option>
+											<option value="status">
+													Status
+											</option>
+											<option value="bodytype">
+													Body type
+											</option>
+					
+										</select></div>
+						</div>
 						 <div id="postedd">
 							 <div>
 						 <!------begining of the ads---->
@@ -440,7 +456,7 @@
 								</div>
 								</div>
 								<span class="hide" id="smanu1">Audi 2018</span>
-								<span class="hide" id="scolor1">car</span>
+								<span class="hide" id="scolor1">blue</span>
 									<span class="hide" id="scond1">used</span>
 								<span class="hide" id="samount1">1000</span>
 								
@@ -483,7 +499,7 @@
 								</div>
 								</div>
 									<span class="hide" id="smanu2">Benz 230</span>
-								<span class="hide" id="scolor2">van</span>
+								<span class="hide" id="scolor2">Ash</span>
 									<span class="hide" id="scond2">new</span>
 								<span class="hide" id="samount2">3000</span>
 							</div>
@@ -527,7 +543,7 @@
 								</div>
 								</div>
 								<span class="hide" id="smanu3">Toyota corolla</span>
-								<span class="hide" id="scolor3">jeep</span>
+								<span class="hide" id="scolor3">White</span>
 									<span class="hide" id="scond3">new</span>
 								<span class="hide" id="samount3">5000</span>
 							</div>
@@ -570,7 +586,7 @@
 								</div>
 								</div>
 								<span class="hide" id="smanu4">Golf</span>
-								<span class="hide" id="scolor4">car</span>
+								<span class="hide" id="scolor4">Blue</span>
 									<span class="hide" id="scond4">used</span>
 								<span class="hide" id="samount4">1000</span>
 								
@@ -613,7 +629,7 @@
 								</div>
 								</div>
 							<span class="hide" id="smanu5">Daewoo</span>
-								<span class="hide" id="scolor5">van</span>
+								<span class="hide" id="scolor5">Ash</span>
 									<span class="hide" id="scond5">new</span>
 								<span class="hide" id="samount5">2000</span>
 							</div>
@@ -653,7 +669,7 @@
 								</div>
 								</div>
 							<span class="hide" id="smanu6">Chevrolete</span>
-								<span class="hide" id="scolor6">jeep</span>
+								<span class="hide" id="scolor6">White</span>
 									<span class="hide" id="scond6">new</span>
 								<span class="hide" id="samount6">6000</span>
 							
@@ -666,30 +682,32 @@
 			</section>
 			
 			<footer >
-				copyright &copy; bidoritunmise@gmail.com(Andela) 2019
+				bidoritunmise@gmail.com(Andela) 2019
+				<br/>
+				copyright &copy; 
 				</footer>
-				<div id="overlay">
-	
-						<center><div id="inoverlay"></div></center>
-						<center>
-							<div id="odetails">
-								<div id="fdetail">Manufacturer:<span>Audi 2018</span>
-								<hr/>
-								Condition:<span>New</span>
-								<hr/>
-								Price:<span>$5000</span>
-							</div>
-						</center>
-						<br/>
-						<center>
-						<button class="pintabw" onclick="cls()">CLOSE</button>
-						</center>
-					
-				</div>
+	<div id="overlay">
+		
+				<center><div id="inoverlay"></div></center>
+				<center>
+					<div id="odetails">
+						<div id="fdetail">Manufacturer:<span>Audi 2018</span>
+						<hr/>
+						Condition:<span>New</span>
+						<hr/>
+						Price:<span>$5000</span>
+					</div>
+				</center>
+				<br/>
+				<center>
+				<button class="pintabw" onclick="cls()">CLOSE</button>
+				</center>
+			
+		</div>
 			<div id="touchlist" class="hide">&nbsp;</div>
 			<script src="js/main.js"></script>
-			<script src="js/mockclient.js"></script>
-				<!----<script src="js/client.js"></script>
-				<script src="js/login.js"></script>-->
+				<script src="js/mockclient.js"></script>
+				<!--<script src="js/client.js"></script>
+					<script src="js/login.js"></script>-->
 		</body>
 	</html>
