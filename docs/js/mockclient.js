@@ -37,9 +37,9 @@ function warnreg(){
 ///////////{{{SIGN IN}}}
 
 function login(){
-	document.getElementById("logsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center>Logged in successfully";
-    document.getElementById("logsuccess").classList.replace("hide","show");	
-    document.getElementById("logsuccess").scrollIntoView({block:"center"});
+	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center>Logged in successfully";
+    document.getElementById("regsuccess").classList.replace("hide","show");	
+    document.getElementById("regsuccess").scrollIntoView({block:"center"});
 
 		setTimeout(function(){
  	window.location ="postad.html";
@@ -88,11 +88,11 @@ function postcar(){
 function postorder(){
 	
 	
-	document.getElementById("regsuccessy").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Purchase oder posted succesfully.check back for sellers response"; 
-	document.getElementById("regsuccessy").classList.replace("hide","show");
-	document.getElementById("regsuccessy").scrollIntoView({block: "center"});
+	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Purchase oder posted succesfully.check back for sellers response"; 
+	document.getElementById("regsuccess").classList.replace("hide","show");
+	document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
-			document.getElementById("regsuccessy").classList.replace("show","hide");
+			document.getElementById("regsuccess").classList.replace("show","hide");
 			document.getElementById("pomanid").value = "";	
 			document.getElementById("orderimg").innerHTML = "";
 			document.getElementById("ncarcond").innerHTML = "";  
@@ -129,12 +129,12 @@ function editpo(thisid){
 	let replace1 = theid.replace("editpo","")
 	
 	
-	document.getElementById("regsuccessu").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Order price edited succesfully "; 
-		document.getElementById("regsuccessu").classList.replace("hide","show");
-		document.getElementById("regsuccessu").scrollIntoView({block: "center"});
+	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Order price edited succesfully "; 
+		document.getElementById("regsuccess").classList.replace("hide","show");
+		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		
 		setTimeout(function (){
-			document.getElementById("regsuccessu").classList.replace("show","hide");
+			document.getElementById("regsuccess").classList.replace("show","hide");
 			closepo("clo"+replace1);
 		},3000)
 	
@@ -156,11 +156,11 @@ function editpo(thisid){
 function marksold(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("soldbut","")
-		document.getElementById("regsuccessi").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car marked as sold"; 
-		document.getElementById("regsuccessi").classList.replace("hide","show");
-		document.getElementById("regsuccessi").scrollIntoView({block: "center"});
+		document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car marked as sold"; 
+		document.getElementById("regsuccess").classList.replace("hide","show");
+		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
-			document.getElementById("regsuccessi").classList.replace("show","hide");
+			document.getElementById("regsuccess").classList.replace("show","hide");
 		markssold(theid);
 		},2000)
 	return false;
@@ -184,11 +184,11 @@ function editadprice(thisid){
 	
 	
 	
-		document.getElementById("regsuccessi").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car price changed succesfully";  
-		document.getElementById("regsuccessi").classList.replace("hide","show");
-		document.getElementById("regsuccessi").scrollIntoView({block: "center"});
+		document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car price changed succesfully";  
+		document.getElementById("regsuccess").classList.replace("hide","show");
+		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
-		closedit("cl"+replace1);	document.getElementById("regsuccessi").classList.replace("show","hide");
+		closedit("cl"+replace1);	document.getElementById("regsuccess").classList.replace("show","hide");
 		closedit("cl"+replace1);
 		},2000)
 	
@@ -262,9 +262,9 @@ function logins(){
 	var usern =	document.getElementById("user").value;
 	var passw =	document.getElementById("pwd").value;
 	loadJSON(`/login/${usern}/${passw}`, function(data) {
-	window.localStorage.setItem('accessToken', data.token);	document.getElementById("logsuccess").innerHTML = window.localStorage.getItem('accessToken'); 
-		document.getElementById("logsuccess").style.display = "block";
-		document.getElementById("logsuccess").scrollIntoView({block:"center"});
+	window.localStorage.setItem('accessToken', data.token);	document.getElementById("regsuccess").innerHTML = window.localStorage.getItem('accessToken'); 
+		document.getElementById("regsuccess").style.display = "block";
+		document.getElementById("regsuccess").scrollIntoView({block:"center"});
 
 		setTimeout(function(){
 			
@@ -282,12 +282,12 @@ function logins(){
 	},
 	function(xhr) { 
 		var keys = JSON.parse(xhr.responseText);
-		document.getElementById("logwarning").innerHTML = keys.back;
-		document.getElementById("logwarning").style.display = "block";
-		document.getElementById("logwarning").scrollIntoView({block:"center"});
+		document.getElementById("regwarning").innerHTML = keys.back;
+		document.getElementById("regwarning").style.display = "block";
+		document.getElementById("regwarning").scrollIntoView({block:"center"});
 		setTimeout(function(){
-			document.getElementById("logwarning").innerHTML = "";
-			document.getElementById("logwarning").style.display = "none";
+			document.getElementById("regwarning").innerHTML = "";
+			document.getElementById("regwarning").style.display = "none";
 		}, 2000);
 		console.error(xhr); } );
 	return false;

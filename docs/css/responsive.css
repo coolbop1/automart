@@ -8,6 +8,14 @@
 	#posted{
 		padding-top:10px !important;
 	}
+	.sortby{
+		position: relative;
+	}
+	.underwarn{
+		width:90%;
+		left:5%;
+	}
+
 }
 @media only screen and (max-width:768px){
 	#midlogo{
