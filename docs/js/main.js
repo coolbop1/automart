@@ -270,7 +270,9 @@ function life(){
 				const dtabamount = sessionStorage.getItem('chooseorderamount');
 const dtabid =sessionStorage.getItem('chooseorder');
 if(sessionStorage.getItem('pagetab')){
-	
+	document.getElementById("runorder").classList.replace("show","hide");
+	document.getElementById("unpickedform").classList.replace("show","hide");
+	document.getElementById("pickedform").classList.replace("hide","show");
 document.getElementById("pomanid").value = dtabid;	document.getElementById("orderimg").innerHTML = document.getElementById(dtabimg).innerHTML; 
 	document.getElementById("pomanu").value = document.getElementById(dtabmanu).innerHTML;
 	document.getElementById("pocolor").value = document.getElementById(dtabcolor).innerHTML;
