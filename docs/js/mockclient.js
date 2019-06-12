@@ -93,6 +93,9 @@ function postorder(){
 	document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
 			document.getElementById("regsuccess").classList.replace("show","hide");
+			document.getElementById("runorder").classList.replace("hide","show");
+	document.getElementById("unpickedform").classList.replace("hide","show");
+	document.getElementById("pickedform").classList.replace("show","hide");
 			document.getElementById("pomanid").value = "";	
 			document.getElementById("orderimg").innerHTML = "";
 			document.getElementById("ncarcond").innerHTML = "";  
@@ -298,7 +301,7 @@ function logins(){
 
 //////////////cloudinary upload image and get the path//////////
 
-if(window.location.pathname == "/postad.html"){
+if(window.location.pathname == "/UI/postad.html"){
 
 const cloudName = 'coolbop';
 const unsignedUploadPreset = 'lmxbyuah';

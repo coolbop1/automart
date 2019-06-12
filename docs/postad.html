@@ -268,7 +268,7 @@
   <div class="progress-bar" id="progress-bar">
     <div class="progress" id="progress"></div>
   </div>
-  <div id="gallery" />
+  <center><div id="gallery" /></center>
 	
 						
 						
@@ -301,39 +301,40 @@
 						
 						<div id="inputonly">
 						
-						<center>
-							<form method="POST" onsubmit="return postorder()">
+						
 								<div class="groupff">
 									<span class="hide" id="orderimg" ></span>
 									</div>
+							<center id="unpickedform" class="show">
+								<form method="POST" onsubmit="return postorder()">
 							<div class="grouptwo">
 							<div class="groupff">
 									<input id="pomanid" type="hidden" >
-										<input id="orderposterid" type="hidden" >
+										<input id="orderposteridc" type="hidden" >
 										
-								<input id="pomanu" class="myinput" placeholder="Manufacturer"   disabled>
+								<input id="pomanuc" class="myinput" placeholder="Manufacturer"   disabled>
 								<label class="label-helper" for="pomanu">Manufacturer</label>
 							</div>
 						</div>
 						<div class="grouptwo">
 							<div class="groupff">
-								<input id="pocolor" class="myinput" placeholder="Body type" disabled>
+								<input id="pocolorc" class="myinput" placeholder="Body type" disabled>
 								<label class="label-helper" for="pocolor">Body type</label>
 							</div>
 						</div>
 						<div class="grouptwo">
 							<div class="groupff">
-								<input id="poprice" type="number" class="myinput" placeholder="Price $" disabled>
+								<input id="popricec" type="number" class="myinput" placeholder="Price $" disabled>
 								<label class="label-helper" for="poprice">Willing to Pay</label>
 							</div>
 						</div>
 						<div class="grouptwo">
 							<div class="grouptwo irline">
-									Condition : <span id="ncarcond"></span>&nbsp;&nbsp;|&nbsp;&nbsp;Buyer's Price : $<span id="showpprice"></span>
+									Condition : <span id="ncarcondc"></span>&nbsp;&nbsp;|&nbsp;&nbsp;Buyer's Price : $<span id="showppricec"></span>
 								</div>
 						</div>
 						<div class="grouptwo">
-							<center><button id="postcarorder" class="padbutton" disabled>ORDER</button></center>
+							<center><button id="postcarorderc" class="padbutton" disabled>ORDER</button></center>
 						</div>
 						</form>
 						</center>
@@ -341,7 +342,7 @@
 						
 					</div>
 						<div id="postimg">
-							<div id="runorder">
+							<div id="runorder" class="show">
 							<center><span class="subtitile"> Pending Orders </span></center>
 							<div class="orderlist">
 							
@@ -376,6 +377,39 @@
 						</div>
 						
 					</div>
+					<div id="pickedform" class="hide">
+						<form method="POST" onsubmit="return postorder()">
+						<div class="grouptwo">
+						<div class="groupff">
+								<input id="pomanid" type="hidden" >
+									<input id="orderposterid" type="hidden" >
+									
+							<input id="pomanu" class="myinput" placeholder="Manufacturer"   disabled>
+							<label class="label-helper" for="pomanu">Manufacturer</label>
+						</div>
+					</div>
+					<div class="grouptwo">
+						<div class="groupff">
+							<input id="pocolor" class="myinput" placeholder="Body type" disabled>
+							<label class="label-helper" for="pocolor">Body type</label>
+						</div>
+					</div>
+					<div class="grouptwo">
+						<div class="groupff">
+							<input id="poprice" type="number" class="myinput" placeholder="Price $" disabled>
+							<label class="label-helper" for="poprice">Willing to Pay</label>
+						</div>
+					</div>
+					<div class="grouptwo">
+						<div class="grouptwo irline">
+								Condition : <span id="ncarcond"></span><br/>Buyer's Price : $<span id="showpprice"></span>
+							</div>
+					</div>
+					<div class="grouptwo">
+						<center><button id="postcarorder" class="padbutton" disabled>ORDER</button></center>
+					</div>
+					</form>
+					</div> 
 						
 					</div>	
 					<div class="fn"></div>			
