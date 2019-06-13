@@ -3,7 +3,10 @@
 
 
 function signup(){
-    document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center>Welcome!! registration successful. <br/>Preparing dashboard in 2 sec..."; 
+	document.getElementById("regg").disabled = true;
+	document.getElementById("regg").innerHTML = '<center><div class="spinning"></div></center>';
+	setTimeout(()=>{
+	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center>Welcome!! registration successful. <br/>Preparing dashboard in 2 sec..."; 
 		document.getElementById("regsuccess").style.display = "block";
 		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		document.getElementById("regemail").value = "";
@@ -12,7 +15,7 @@ function signup(){
 		document.getElementById("regadd").value = "";
 		document.getElementById("regpwd").value = "";
 		setTimeout("succesregs()", 2000);
-	
+	}, 1000);
 	return false;
 }
 function succesregs(){
@@ -37,9 +40,13 @@ function warnreg(){
 ///////////{{{SIGN IN}}}
 
 function login(){
+	document.getElementById("logg").disabled = true;
+	document.getElementById("logg").innerHTML = '<center><div class="spinning"></div></center>';
+	setTimeout(function(){
 	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center>Logged in successfully";
     document.getElementById("regsuccess").classList.replace("hide","show");	
-    document.getElementById("regsuccess").scrollIntoView({block:"center"});
+		document.getElementById("regsuccess").scrollIntoView({block:"center"});
+	}, 1000);
 
 		setTimeout(function(){
  	window.location ="postad.html";
@@ -213,16 +220,18 @@ function confirmrep(thisid){
 	let replace1 = theid.replace("reportfor","");
 	
 	
-	
 		document.getElementById("rr"+replace1).style.display ="none";
-		document.getElementById("reportwhy"+replace1).value ="";
-		document.getElementById("ralert"+replace1).innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Report sent and will be reviwed"; 
+		document.getElementById("reportwhy"+replace1).value ="";		
+		document.getElementById("ralert"+replace1).innerHTML = '<center><div class="spinning"></div></center>';
 		document.getElementById("ralert"+replace1).style.display ="block";
+	setTimeout(function(){
+		document.getElementById("ralert"+replace1).innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Report sent and will be reviwed"; 
 		document.getElementById("ralert"+replace1).scrollIntoView({block: "center"});
 		setTimeout(function (){
 			document.getElementById("rr"+replace1).style.display ="none";
 			document.getElementById("ralert"+replace1).style.display ="none";
 		},3000)
+	}, 1000);
 	
 	return false;
 }
