@@ -12,7 +12,9 @@
 			
 	
 	</head>
-	<body>
+	<body onload="showpage()">
+			<div id="loading" class="loading show"><div class="loader"></div></div>
+
 			<div class="underwarn"><div class="warning hide" id="regwarning"></div></div>
 
 			<div class="underwarn"><div class="success  hide" id="regsuccess"></div></div>
@@ -50,7 +52,7 @@
 			</div>
 		</header>
 		<section id="fcontent">
-			<div id="hhold"><div class="heading">Smart way<br/> to buy or sell<br/> auto mobile </div></div>
+			<div id="hhold"><div class="heading">S<span class="logored">mart</span> way<br/> to buy or sell<br/> <span class="logored">auto</span> mobile </div></div>
 				<div id="signs">
 					<div id="forsearch">
 						<form id="serchform">
@@ -60,7 +62,7 @@
 						
 					</div>
 					
-						<div class="righttab" id="fpintab">
+						<div class="show  righttabs" id="fpintab">
 <div class="titletab">SIGN IN <span  class="close" onclick="closetab()">&#10006</span></div>
 <br/>
 						<div class="contain">
@@ -74,10 +76,11 @@
 									<label class="label-helper" for="pwd">Password</label>
 									</div>
 								<button id="logg"  class="padbutton" >login</button>
+								<!---<div class="spinning"></div>-->
 							</form>
 						</div>
 					</div>
-					<div class="hide" id="spintab">
+					<div class="hide righttabs" id="spintab">
 						<div class="titletab">SIGN UP <span  class="close" onclick="closetab()">&#10006</span></div>
 						<div class="contain">
 							<form method="POST" onsubmit="return signup()">
@@ -103,7 +106,7 @@
 									<label class="label-helperr" for="regpwd">Password</label>
 									</div>
 								<!--<input type="password" class="myinput" placeholder="***Retype Password***" id="reegpwd" name="reegpwd">-->
-								<button class="padbutton"  >register</button>
+								<button id="regg" class="padbutton"  >register</button>
 							</form>
 						</div>
 					</div>
@@ -406,9 +409,7 @@
 		</section>
 		
 		<footer >
-			bidoritunmise@gmail.com(Andela) 2019
-			<br/>
-			copyright &copy; 
+				&copy; bidoritunmise@gmail.com(Andela) 2019
 			</footer>
 <div id="overlay">
 	

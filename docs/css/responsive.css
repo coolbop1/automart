@@ -77,6 +77,15 @@ header{
 	top:5px;
 	left:10% !important;
 }
+.righttabs{
+	background:#bf3f3f;
+	width:95%;
+	min-height:500px;
+	position:absolute;
+	right:2.5%;
+	margin-right: 0 !important;
+	opacity: 0;
+}
 .righttab{
 	background:#bf3f3f;
 	width:95%;
@@ -84,7 +93,6 @@ header{
 	position:absolute;
 	right:2.5%;
 	margin-right: 0 !important;
-	top:500px;
 }
 
 .adsbox{

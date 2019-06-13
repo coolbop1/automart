@@ -292,6 +292,16 @@ padding:10px;
 #cl1,#cl2,#cl3,#cl4,#cl5,#cl6{
 	display:none;
 }
+.righttabs{
+	background:#bf3f3f;
+	width:30%;
+	min-height:500px;
+	position:absolute;
+	right:0px;
+	margin-right: 10px;
+	top:0px;
+	z-index:12;
+}
 .righttab{
 	background:#bf3f3f;
 	width:30%;
@@ -300,7 +310,19 @@ padding:10px;
 	right:0px;
 	margin-right: 10px;
 	top:0px;
-	z-index:12
+	z-index:12;
+	-webkit-animation-name: animatebottom;
+	-webkit-animation-duration: 1s;
+	animation-name: animatebottom;
+	animation-duration: 1s;
+}
+@-webkit-keyframes animatebottom{
+	from { top:500px; opacity:0}
+	to { top:0px; opacity:1}
+}
+@keyframes animatebottom{
+	from { top:500px; opacity:0}
+	to { top:0px; opacity:1}
 }
 .hide{
 	display:none;
@@ -950,9 +972,92 @@ input:invalid {
 	margin:5px 0  5px 0;
 }
 .sortby select{
-	padding:10px;
+	padding:5px;
 	border-radius: 20px;
 	min-width: 150px;
+}
+.spinning{
+	height: 15px;
+	width: 15px;
+	border-top :3px solid #bf3f3f;
+	border-right: 3px solid #fff;
+	border-left:  3px solid #fff;
+	border-bottom: 3px solid #fff;
+	border-radius: 50%;
+	-webkit-animation: spin 2s linear infinite;
+	animation:spin 2s linear infinite;
+}
+@-webkit-keyframes spin{
+	0%{-webkit-transform: rotate(0deg);}
+	100%{-webkit-transform: rotate(360deg);}
+}
+@keyframes spin{
+	0%{-webkit-transform: rotate(0deg);}
+	100%{-webkit-transform: rotate(360deg);}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.loading{
+	position:fixed;
+	height:100%;
+	width:100%;
+	background:#021e72;
+	top:0;
+	z-index:100;
+}
+.loader{
+	height: 70px;
+	width:70px;
+	border-radius: 50%;
+	border-top:15px solid #bf3f3f;
+	border-right:15px solid #fff;
+	border-left:15px solid #fff;
+	border-bottom:15px solid #bf3f3f;
+	position:absolute;
+	top: calc(50% - 50px);
+	right: calc(50% - 50px);
+	-webkit-animation: load 2s linear infinite;
+	animation: load 2s linear infinite;
+}
+@-webkit-keyframes load{
+	0%{-webkit-transform: rotate(0deg);}
+	100%{-webkit-transform: rotate(360deg);}
+}
+@keyframes load{
+	0%{-webkit-transform: rotate(0deg);}
+	100%{-webkit-transform: rotate(360deg);}
 }
 /*label{
 	float:left;

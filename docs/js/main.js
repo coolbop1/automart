@@ -43,8 +43,28 @@ function rightSlide(slideid) {
 	 document.body.style.overflow = "auto";
 
 	var elem = document.getElementById(slideid+"tab"); 
-	
+	elem.style.opacity= 1;
 	if(slideid == "fpin"){
+		let elems = document.getElementById("spintab");
+			elems.classList.replace("show", "hide");
+			elem.classList.replace("hide", "show");
+			elem.classList.replace("righttabs", "righttab");
+			document.getElementById("fpin").style.background ="#bf3f3f";
+			document.getElementById("spin").style.background ="inherit";
+
+	}else if(slideid == "spin"){
+		let elems = document.getElementById("fpintab");
+		elems.classList.replace("show", "hide");
+		elem.classList.replace("hide", "show");
+		elem.classList.replace("righttabs", "righttab");
+	document.getElementById("fpin").style.background ="inherit";
+	document.getElementById("spin").style.background ="#bf3f3f";
+	
+
+	}
+
+	
+	/*if(slideid == "fpin"){
 		let elems = document.getElementById("spintab");
 		elems.style.top = "435px";
 		document.getElementById(slideid).style.pointerEvents = "none"; 
@@ -77,12 +97,18 @@ document.getElementById("spin").style.background ="#bf3f3f";
 	setTimeout(function(){
 		document.getElementById("signs").scrollIntoView({block:'start',behavior:'smooth'});
 	},1000);
+	*/
 	
 }
 function closetab(){
-	document.getElementById("spintab").style.top = "500px"; 
-	document.getElementById("fpintab").style.top = "500px"; 
-	document.getElementById("forsearch").style.left = "27.5%"; 
+	document.getElementById("spintab").classList.replace("show", "hide"); 
+	document.getElementById("fpintab").classList.replace("show", "hide"); 
+	//document.getElementById("forsearch").style.left = "27.5%"; 
+}
+function showpage(){
+	setTimeout(() =>{
+document.getElementById("loading").classList.replace("show", "hide") 
+	}, 1000)
 }
 function showmyads(){
 opennavs();
