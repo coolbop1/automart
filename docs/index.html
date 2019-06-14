@@ -115,33 +115,67 @@
 			<section id="extras">
 			
 			
-			<div id="indexads">
+			<div  id="indexads">
 					
 					<div class="stattitlez">
-							<div class="sortby">Sort By: &nbsp; 
-									<select>
+						<div id="pickload" class="left"><a onclick="openfilter()"><img src="image/filter.png" width="20px"> Filter</a></div>&nbsp;
+											<div id="mainsort" class="sortby hide">Make: 
+									<select id="thesort"> 
 										<option value="">
-											All
+											choose
 										</option>
-										<option value="Manufacturer">
-											Manufacturer
+										<option value="audi">
+											Audi
 										</option>
-										<option value="price">
-												Price Range
+										<option value="benz">
+												Benz
 										</option>
-										<option value="state">
-												State of Automobile
+										<option value="toyota">
+												Toyota
 										</option>
-										<option value="status">
-												Status
+										<option value="golf">
+												Golf
 										</option>
-										<option value="bodytype">
-												Body type
+										<option value="volvo">
+												Volvo
 										</option>
 				
-									</select></div>
-					</div>
-					 <div id="postedd">
+									</select> | state: 
+									<select id="thesort"> 
+										<option value="">
+											choose
+										</option>
+										<option value="new">
+											New
+										</option>
+										<option value="old">
+											Old
+										</option>
+										</select> | Body-type: 
+									<select id="thesort"> 
+										<option value="">
+											choose
+										</option>
+										<option value="car">
+											Car
+										</option>
+										<option value="jeep">
+											Jeep
+										</option>
+										<option value="Truck">
+											Truck
+										</option>
+										</select> | Min price:<input type="number"> | Max price:<input type="number">
+										
+										 </div>
+					
+					<button onclick="ddsort()" id="subsort" class="sortrby updatebut hide">apply filter
+					</button>
+		
+					
+				<div class="fn"></div>
+		</div>
+					 <div class="show" id="postedd">
 						 <div>
 					 <!------begining of the ads---->
 					<div class="boxline">
@@ -404,6 +438,7 @@
 					</div>
 					 	</div>
 					 </div>
+					 <center><div id="findfilt" class="hide spinloading"></div></center>
 				</div>
 				<div class="fn"></div>
 		</section>

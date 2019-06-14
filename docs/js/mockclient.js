@@ -67,7 +67,9 @@ function login(){
 
 
 function postcar(){
-
+	document.getElementById("postcarad").disabled = true;
+	document.getElementById("postcarad").innerHTML = '<center><div class="spinning"></div></center>';
+	setTimeout(function(){
 	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car posted succesfully"; 
 		document.getElementById("regsuccess").style.display = "block";
 		document.getElementById("regsuccess").scrollIntoView({block: "center"});
@@ -80,6 +82,7 @@ function postcar(){
 			document.getElementById("pcpics").value = "";
 
 		setTimeout("succesregs()", 2000);
+	},1000)
 
 	return false;
 }
@@ -93,7 +96,9 @@ function postcar(){
 /////{{{{{{{{/// purchase order}}}}}}}}}//////{}
 
 function postorder(){
-	
+	document.getElementById("postcarorder").disabled = true;
+	document.getElementById("postcarorder").innerHTML = '<center><div class="spinning"></div></center>';
+	setTimeout(function(){
 	
 	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Purchase oder posted succesfully.check back for sellers response"; 
 	document.getElementById("regsuccess").classList.replace("hide","show");
@@ -114,7 +119,7 @@ function postorder(){
 			document.getElementById('postcarorder').disabled = true;
 			document.getElementById("postimg").scrollIntoView({block:"start",behavior:"smooth"})
 		},3000)
-	
+	},1000);
 
 	return false;
 }
@@ -137,7 +142,10 @@ function postorder(){
 function editpo(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("editpo","")
-	
+	let replace2 = theid.replace("editpo","editp")
+	document.getElementById(replace2).disabled = true;
+	document.getElementById(replace2).innerHTML = '<center><div class="spinning"></div></center>';
+	setTimeout(function(){
 	
 	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Order price edited succesfully "; 
 		document.getElementById("regsuccess").classList.replace("hide","show");
@@ -145,8 +153,11 @@ function editpo(thisid){
 		
 		setTimeout(function (){
 			document.getElementById("regsuccess").classList.replace("show","hide");
+			document.getElementById(replace2).disabled = false;
+	document.getElementById(replace2).innerHTML = 'update price';
 			closepo("clo"+replace1);
 		},3000)
+	},1000)
 	
 	return false;
 }
@@ -166,6 +177,10 @@ function editpo(thisid){
 function marksold(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("soldbut","")
+	let replace2 = theid.replace("soldbut","soldmask");
+	document.getElementById(replace2).style.display = "table";
+	document.getElementById(replace2).innerHTML = "<center><div style='position:absolute;top: calc(50% - 10.5px);right: calc(50% - 10.5px);' class='spinning'></div></center>"; 
+	setTimeout(()=>{
 		document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car marked as sold"; 
 		document.getElementById("regsuccess").classList.replace("hide","show");
 		document.getElementById("regsuccess").scrollIntoView({block: "center"});
@@ -173,6 +188,7 @@ function marksold(thisid){
 			document.getElementById("regsuccess").classList.replace("show","hide");
 		markssold(theid);
 		},2000)
+	}, 1000)
 	return false;
 }
 
@@ -191,16 +207,21 @@ function marksold(thisid){
 function editadprice(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("editap","")
+	let replace2 = theid.replace("editap","edita")
 	
 	
-	
+	document.getElementById(replace2).innerHTML = "<center><div class='spinning'></div></center>"; 
+
+	setTimeout(function (){
 		document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car price changed succesfully";  
 		document.getElementById("regsuccess").classList.replace("hide","show");
 		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
 		closedit("cl"+replace1);	document.getElementById("regsuccess").classList.replace("show","hide");
+		document.getElementById(replace2).innerHTML = "Update price";
 		closedit("cl"+replace1);
 		},2000)
+	},1000);
 	
 	return false;
 }

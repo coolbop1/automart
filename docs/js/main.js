@@ -63,45 +63,43 @@ function rightSlide(slideid) {
 
 	}
 
+}
+
+
+function ddsort(){
+	document.getElementById("indexads").scrollIntoView({"block":"start","behavior":"smooth"})
+	document.getElementById("postedd").classList.replace("show", "hide");
+		document.getElementById("findfilt").classList.replace("hide", "show");
+	setTimeout(()=>{
+		document.getElementById("postedd").classList.replace("hide", "show");
+		
+		document.getElementById("findfilt").classList.replace("show", "hide");
+		stopfilter();
+		},2000)
+		
+
+		
+}
+function openfilter(){
+	var cliked = document.getElementById("pickload");
+	var rquery = document.getElementById("mainsort");
+	var bquery = document.getElementById("subsort");
+	cliked.innerHTML = "<a onclick='stopfilter()'>&#10006 &nbsp;</a>";
+	rquery.classList.replace("hide","show");
+	bquery.classList.replace("hide","show");	
 	
-	/*if(slideid == "fpin"){
-		let elems = document.getElementById("spintab");
-		elems.style.top = "435px";
-		document.getElementById(slideid).style.pointerEvents = "none"; 
-		document.getElementById("spin").style.pointerEvents = "none"; 
-document.getElementById("fpin").style.background ="#bf3f3f";
-document.getElementById("spin").style.background ="inherit";
-	}else if(slideid == "spin"){
-		let elems = document.getElementById("fpintab");
-		elems.style.top = "500px";
-		document.getElementById(slideid).style.pointerEvents = "none"; 
-		document.getElementById("fpin").style.pointerEvents = "none"; 
-		document.getElementById("fpin").style.background ="inherit";
-document.getElementById("spin").style.background ="#bf3f3f";
-	}
-	elem.className = "righttab";
-	var pos = 435;
-	var id = setInterval(frame, 1/100);
-	function frame() {
-		if (pos == 0) {
-			clearInterval(id);
-			document.getElementById("spin").style.pointerEvents = "auto"; 
-			document.getElementById("fpin").style.pointerEvents = "auto"; 
-      
-		} else {
-			pos--; 
-			//elem.style.top = pos + 'px'; 
-			elem.style.top = pos + "px"; 
-		}
-	}
-	setTimeout(function(){
-		document.getElementById("signs").scrollIntoView({block:'start',behavior:'smooth'});
-	},1000);
-	*/
+}
+function stopfilter(){
+		var cliked = document.getElementById("pickload");
+	var rquery = document.getElementById("mainsort");
+	var bquery = document.getElementById("subsort");
+	cliked.innerHTML = "<a onclick='openfilter()'><img src='image/filter.png' width='20px'> Filter</a>";
+		rquery.classList.replace("show","hide");
+	bquery.classList.replace("show","hide");	
 	
 }
 function closetab(){
-	document.getElementById("spintab").classList.replace("show", "hide"); 
+	doc$ument.getElementById("spintab").classList.replace("show", "hide"); 
 	document.getElementById("fpintab").classList.replace("show", "hide"); 
 	//document.getElementById("forsearch").style.left = "27.5%"; 
 }
@@ -205,6 +203,7 @@ function markssold(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("soldbut","soldmask");
 	document.getElementById(replace1).style.display = "table";
+	document.getElementById(replace1).innerHTML = "<span>SOLD!</span>";
 }
 function reportad(thisid){
 	let theid = thisid;
