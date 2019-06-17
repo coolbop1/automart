@@ -1,21 +1,31 @@
+/*const Pool = require ('pg').Pool;
+const pool = new Pool({
+	user: 'andela',
+	host: '127.0.0.1',
+	database: 'andela',
+	password: '',
+	port: '5432'
+});
+*/
+
+
+
 const Pool = require ('pg').Pool;
 const pool = new Pool({
 	user: 'gkhfnrideiyyoi',
 	host: 'ec2-23-21-91-183.compute-1.amazonaws.com',
 	database: 'ddelc2mc1p0din',
 	password: '75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba',
-	port: '5432'
+	port: '5432',
+	ssl: true
 });
-
-
-
 
 	
 
 
 	
  pool.connect()
- pool.query("CREATE TABLE allusers( ID SERIAL PRIMARY KEY, email VARCHAR(500), first_name VARCHAR(500), last_name VARCHAR(500), password VARCHAR(500), address VARCHAR(500), is_admin VARCHAR(500))")
+ //pool.query("CREATE TABLE allusers( ID SERIAL PRIMARY KEY, email VARCHAR(500), first_name VARCHAR(500), last_name VARCHAR(500), password VARCHAR(500), address VARCHAR(500), is_admin VARCHAR(500))")
 
 
 /*pool.query("select * from allusers where id = $1",[5],(err, res)=>{
@@ -34,7 +44,8 @@ let jwt = require("jsonwebtoken");
 //let config = require('./config');
 //let middleware = require('./middleware');
 const bcrypt = require("bcryptjs");
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3000;
+const port = 3000;
 var bodyParser = require("body-parser");
 
 app.use(express.json());
@@ -253,7 +264,7 @@ function ensureToken(req, res, next) {
 
 }
 
-
+//pool.end();
 
 
 app.listen(port,(req, res) => {
