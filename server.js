@@ -25,7 +25,7 @@ const pool = new Pool({
 
 	
  pool.connect()
- //pool.query("CREATE TABLE allusers( ID SERIAL PRIMARY KEY, email VARCHAR(500), first_name VARCHAR(500), last_name VARCHAR(500), password VARCHAR(500), address VARCHAR(500), is_admin VARCHAR(500))")
+
 
 
 /*pool.query("select * from allusers where id = $1",[5],(err, res)=>{
