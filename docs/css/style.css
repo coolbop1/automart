@@ -1097,3 +1097,22 @@ input:invalid {
 input:focus ~ label{
 	display:block;
 }*/
+.round{
+	width:50px;
+	height:50px;
+	border-radius: calc(50% + 2.5px);
+	border-top:5px solid #021e72;
+	border-right:5px solid #fff;
+	border-left:5px solid #fff;
+	border-bottom:5px solid #fff;
+	-webkit-animation: srock 2s linear infinite;
+	animation: srock 2s linear infinite;
+}
+@-webkit-keyframes srock{
+	0%{-webkit-transform : rotate(0deg);}
+	100%{-webkit-transform : rotate(360deg);}
+}
+@keyframes srock{
+	0%{-webkit-transform : rotate(0deg);}
+	100%{-webkit-transform:rotate(360deg);}
+}
