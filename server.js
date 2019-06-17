@@ -1,28 +1,4 @@
-const Pool = require ('pg').Pool;
-const pool = new Pool({
-	user: 'gkhfnrideiyyoi',
-	host: 'ec2-23-21-91-183.compute-1.amazonaws.com',
-	database: 'ddelc2mc1p0din',
-	password: '75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba',
-	port: '5432'
-});
-
-
-
-
-	
-
-
-	
- pool.connect()
- pool.query("CREATE TABLE allusers( ID SERIAL PRIMARY KEY, email VARCHAR(500), first_name VARCHAR(500), last_name VARCHAR(500), password VARCHAR(500), address VARCHAR(500), is_admin VARCHAR(500))")
-
-
-/*pool.query("select * from allusers where id = $1",[5],(err, res)=>{
-	delete from allusers where email = bidoritunmise@gmail.com
-	console.log(res.rows);
-	//pool.end();
-});*/
+let allusers = [];
 //console.log('starting server');
 const express = require("express");
 const Joi = require("joi");
@@ -57,121 +33,75 @@ app.use(function(req, res, next) {
 
 app.get("/api/v1/allusers",(req, res) =>{res.status(200).send(allusers);});
 
-var allusers = [];
+ 
 
 //@codeCoverageIgnoreEnd
+ 
 //handles sign up
 app.post("/api/v1/auth/signup", (req, res) => { 
-
-			
-			
-				 pool.connect()
-				pool.query("select * from allusers where email = $1 ",[req.body.email],(err,ress)=>{
-					//console.log(ress.rows.length)
-					if(ress.rows.length >= 1 && req.body.email){
-						let reply = {
-							"msg" : "email is taken please try another"
-						}			
-						res.status(409).json(reply)
-						return;			
-					}else{
-						nextValidate();
-					}
-
-				})
-						
-			function nextValidate(){	
-					const schema = {
-						first_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-						last_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-						email : Joi.string().trim().email().required(),
-						address : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-						password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
-					}
-					
-					const valid = Joi.validate(req.body,schema);
-					if(valid.error){
-					let msgclean = valid.error.details[0].message.replace("/^[,. a-z0-9A-Z]+$/","");
-					let reply = {
-						"msg" : msgclean
-					}	
-					res.status(409).send(reply);
-					return;
-					}
-				
-					var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-						let postit ={
-				
-							"email" : req.body.email,
-							"first_name" : req.body.first_name,
-							"last_name" : req.body.last_name,
-							"password" : hashedPassword,
-							"address" : req.body.address,
-							"is_admin" : "false"
-						}
-						let 	comfirm = {
-					"email" : req.body.email,
-							"name" : req.body.first_name,
-							"lname" : req.body.last_name,
-							"address" : req.body.address
-						}
-						 pool.query("INSERT INTO allusers (email, first_name, last_name, password, address, is_admin) VALUES ($1,$2,$3,$4,$5,$6)",[req.body.email,req.body.first_name,req.body.last_name,hashedPassword,req.body.address,"false"],(err,result)=>{
-				
-						let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
-						res.status(201).json({
-							"status" : 201,
-							"data" :{
-							"token" : token,
-							"id" : allusers.length + 1,
-							"first_name" : req.body.first_name,
-							"last_name" : req.body.last_name,
-						"email" : req.body.email
-							},
-							"message":"Welcome!! "+req.body.first_name+" registration successful. <br/>Preparing dashboard in 2 sec..." 
-						})
-								
-					})
-					//console.log(postit);
-}
-			
+	const schema ={
+		first_name : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(3),
+		last_name : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(3),
+		email : Joi.string().trim().email().required(),
+		address : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(3),
+		password : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(6)
 		
-	
-				
-			
-	
-
-		
-});
-	
-	
-	
-	////////// for testing-----delete user endpoint----///
-	app.get("/api/v1/user/:email", (req, res) => {
-		pool.query("DELETE FROM  allusers WHERE email='testemail@email.coml'",(error,result)=>{
-			
-				res.status(200).send({"see":"deleted"});
-		
-		 });
-		//console.log(ress)
-		
-		
-
+	}
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+	let reply = {
+		"msg" : valid.error.details[0].message
+	}	
+	res.status(409).send(reply);
+		return;
+	}
+   
+   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+		let postit ={
+   
+			"id" : allusers.length + 1,
+			"email" : req.body.email,
+			"first_name" : req.body.first_name,
+			"last_name" : req.body.last_name,
+			"password" : hashedPassword,
+			"address" : req.body.address,
+			"is_admin" : "false"
+		}
+			 
+		const emailvali = allusers.find(u => u.email === req.body.email);
+		if(emailvali){
+			let reply = {
+			"msg" : "email is taken"
+		}
+		res.status(409).json(reply)
+   return;
+	}
+		 let 	comfirm = {
+	"id" : allusers.length + 1,
+	"email" : req.body.email,
+			"name" : req.body.first_name,
+			"lname" : req.body.last_name,
+			"address" : req.body.address
+		}
+		allusers.push(postit);
+	let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
+		res.status(201).json({
+			"status" : 201,
+			"data" :{
+			"token" : token,
+			"id" : allusers.length + 1,
+			"first_name" : req.body.first_name,
+			"last_name" : req.body.last_name,
+		   "email" : req.body.email
+			}
+		})
+		//console.log(postit);
 	});
-
-
-	///////////////////////////////////////////////////////
-	
-	
-	
-	
-	
-	
-	
 ////////////sign in////////////
 app.post("/api/v1/auth/signin", (req, res) => {
 	const schema ={
 		email : Joi.string().trim().email().required(),
-		password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
+		password : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(6)
 		
 	}
 	const valid = Joi.validate(req.body,schema);
@@ -182,36 +112,20 @@ app.post("/api/v1/auth/signin", (req, res) => {
 	res.status(409).send(reply);
 		return;
 	} 
-	// const confirm = allusers.find(u => u.email == req.body.email);
-	 pool.connect()
-	 pool.query("select * from allusers where email = $1",[req.body.email],(err,ress)=>{
-		 //console.log(ress.rows.length)
-		 if(ress.rows.length >= 1){
-			//console.log(ress.rows[0].password);
-				nextValidate(ress.rows);
-					
-		 }else {
-			let reply = {
-			"msg" : "Invalid username or password please try again"
-		};
-		   res.status(404).send(reply);
-		   return
-		}
-
-	 })
- 	function nextValidate(thepassword){
- 		var passwordIsValid = bcrypt.compareSync(req.body.password, thepassword[0].password); 
+ 	const confirm = allusers.find(u => u.email == req.body.email);
+ 	if(confirm){
+ 		var passwordIsValid = bcrypt.compareSync(req.body.password, confirm.password); 
  		if (!passwordIsValid){
 			//console.log('cant login')
 			return res.status(401).send({ auth: false, token: null 	});
  		
  		}
  	let 	comfirm = {
-			"id" : thepassword[0].ID,
-			"email" : thepassword[0].email,
- 		"name" : thepassword[0].first_name,
- 		"lname" : thepassword[0].last_name,
- 		"address" : thepassword[0].address
+			"id" : confirm.id,
+			"email" : confirm.email,
+ 		"name" : confirm.first_name,
+ 		"lname" : confirm.last_name,
+ 		"address" : confirm.address
  	};
 		//console.log(comfirm)
  		let token = jwt.sign({user : comfirm}, "ourlittlesecret", { expiresIn: "24h" });//expires in 24 hours }
@@ -220,14 +134,32 @@ app.post("/api/v1/auth/signin", (req, res) => {
 	 	"status" : 200,
 			"data" : {
 				"token" : token,
-				"id": comfirm.id, // user id
-				"first_name": comfirm.name,
-				"last_name": comfirm.lname,
-				"email": comfirm.email
+				"id": confirm.id, // user id
+				"first_name": confirm.first_name,
+				"last_name": confirm.last_name,
+				"email": confirm.email
 			},
-			"message": "Welcome back "+comfirm.name+"<br/> Logged in successful!"
+			"message": "Welcome back "+confirm.first_name+"<br/> Logged in successful!"
  		});
- 	} 
+ 		
+ 	let reply = {
+			"auth" : true,
+			"token" :token,
+			"id" : confirm.id,
+			"email" : confirm.email,
+ 		"name" : confirm.first_name,
+ 		"lname" : confirm.last_name,
+ 		"address" : confirm.address
+ 	};
+ 
+	 //console.log(reply);
+ 	} else {
+ 		let reply = {
+ 		"msg" : "Invalid username or password please try again"
+ 	};
+		res.status(404).send(reply);
+		//console.log(reply);
+ 	}
 });
  
 
@@ -252,9 +184,6 @@ function ensureToken(req, res, next) {
 		next();} else {  res.sendStatus(403); }
 
 }
-
-
-
 
 app.listen(port,(req, res) => {
 	//console.log(`::listening on ${port}::`)

@@ -755,12 +755,4 @@ describe('GET /allcars endpoint', function () {
                 });
                 
             });
-            describe('delete all test inputs', function () {
-                it('respond with json delete succesfull', function (done) {
-                    apps(app)
-                       .get('/api/v1/user/testemail@email.coml')
-                        .expect(200 ,done)
-                });
-                
-            })
             //export COVERALLS_REPO_TOKEN=uXXej4MsUdasVhX6yL01XTtWMJR82UyJo
