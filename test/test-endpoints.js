@@ -734,7 +734,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('try to delete nonexisting car respond with 404 not found', function (done) {
                     apps(app)
-                        .delete('/api/v1/car/10')
+                        .delete('/api/v1/car/b')
                         .expect('Content-Type', /json/)
                         .expect(404, done) //expecting HTTP status code
                        
