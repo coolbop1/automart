@@ -79,10 +79,8 @@ route.post("/api/v1/car", (req, res) => {
  		
  	
  	//console.log(error,sussec)
- 	if(sussec){
-  	res.status(201).json({"status":201,"data":{
+ 	res.status(201).json({"status":201,"data":{
   		"email" : req.body.email,"created_on" : new Date(),"manufacturer" : req.body.pcman,"model" : req.body.pcmodel,"price" : req.body.pprice,"state" : req.body.state,"engine_size" : req.body.pces,"body_type" : req.body.pccolor,"pics" : req.body.pcpics,"status" : "available"},"message" : "Car posted successfully"});
-  		}
   	
   	})
 });
