@@ -1,3 +1,19 @@
+const Pool = require ('pg').Pool;
+const pool = new Pool({
+	user: 'gkhfnrideiyyoi',
+	host: 'ec2-23-21-91-183.compute-1.amazonaws.com',
+	database: 'ddelc2mc1p0din',
+	password: '75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba',
+	port: '5432',
+	ssl: true
+});
+
+	
+
+
+	
+ pool.connect()
+
 let allcars = [];
 const express = require("express");
 const Joi = require("joi");
@@ -13,6 +29,8 @@ route.use(bodyParser.urlencoded({
     route.use(bodyParser.text({ type: "application/json" }));
 
 
+
+
  route.get("/api/v1/allcars",(req, res) =>{res.status(200).send(allcars); });
 
 
@@ -20,16 +38,17 @@ route.use(bodyParser.urlencoded({
 
 ///////////post car end point///////////////////
 route.post("/api/v1/car", (req, res) => {
+	
 	const schema ={
 		email : Joi.string().trim().email().required(),
-		owner : Joi.number().min(0).required(),
-		manufacturer : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
-		model : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(2),
+		owner : Joi.required(),
+		manufacturer : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
+		model : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(2),
 		price : Joi.number().min(0).required(),
-		state : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
-		engine_size : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(1),
-		body_type : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(2),
-		pics : Joi.string().regex(/^[,. a-z0-9]+$/).trim().min(2),
+		state : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
+		engine_size : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
+		body_type : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(2),
+		pics : Joi.string().min(2),
 		
 	}
 	const valid = Joi.validate(req.body,schema);
@@ -40,9 +59,9 @@ route.post("/api/v1/car", (req, res) => {
 	res.status(409).send(reply);
 		return;
 	} 
+	let dddate = new Date();
   	 	let postcarform = {
- 		"id" : allcars.length + 1,
-		 "email" : req.body.pcposter,
+		 "email" : req.body.email,
 		 "owner" : req.body.owner,
  		"created_on" : new Date(),
  		"manufacturer" : req.body.manufacturer,
@@ -51,12 +70,20 @@ route.post("/api/v1/car", (req, res) => {
  		"state" : req.body.state,
  		"engine_size" : req.body.engine_size,
  		"body_type" : req.body.body_type,
-		 "pics" : req.body.pcpics,
+		 "pics" : req.body.pics,
 		 "status" : "available"
  	};
  	allcars.push(postcarform);
- 	//console.log(postcarform)
-  	res.status(201).json({"status":201,"data":{"id" : allcars.length + 1,"email" : req.body.pcposter,"created_on" : new Date(),"manufacturer" : req.body.pcman,"model" : req.body.pcmodel,"price" : req.body.pprice,"state" : req.body.state,"engine_size" : req.body.pces,"body_type" : req.body.pccolor,"pics" : req.body.pcpics,"status" : "available"},"message" : "Car posted successfully"});
+ 	pool.query("INSERT INTO postads (email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",[req.body.email,req.body.owner,dddate,req.body.manufacturer,req.body.model,req.body.price,req.body.state,req.body.engine_size,req.body.body_type,req.body.pics,"available"],(error,sussec)=>{
+ 		
+ 	
+ 	//console.log(error,sussec)
+ 	if(sussec){
+  	res.status(201).json({"status":201,"data":{
+  		"email" : req.body.email,"created_on" : new Date(),"manufacturer" : req.body.pcman,"model" : req.body.pcmodel,"price" : req.body.pprice,"state" : req.body.state,"engine_size" : req.body.pces,"body_type" : req.body.pccolor,"pics" : req.body.pcpics,"status" : "available"},"message" : "Car posted successfully"});
+  		}
+  	
+  	})
 });
 /////////////////////////
 
