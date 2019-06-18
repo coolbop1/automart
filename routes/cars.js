@@ -61,6 +61,7 @@ route.post("/api/v1/car", (req, res) => {
 	} 
 	let dddate = new Date();
   	 	let postcarform = {
+  	 		"id": allcars.length + 1,
 		 "email" : req.body.email,
 		 "owner" : req.body.owner,
  		"created_on" : new Date(),
