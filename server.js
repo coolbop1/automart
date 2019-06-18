@@ -120,20 +120,22 @@ app.post("/api/v1/auth/signup", (req, res) => {
 							"address" : req.body.address,
 							"is_admin" : "false"
 						}
-						let 	comfirm = {
+						
+						 pool.query("INSERT INTO allusers (email, first_name, last_name, password, address, is_admin) VALUES ($1,$2,$3,$4,$5,$6) RETURNING * ",[req.body.email,req.body.first_name,req.body.last_name,hashedPassword,req.body.address,"false"],(err,result)=>{
+						 	let recentid = result.rows[0].id;
+						 	let 	comfirm = {
+						 		"id":recentid,
 					"email" : req.body.email,
 							"name" : req.body.first_name,
 							"lname" : req.body.last_name,
 							"address" : req.body.address
 						}
-						 pool.query("INSERT INTO allusers (email, first_name, last_name, password, address, is_admin) VALUES ($1,$2,$3,$4,$5,$6)",[req.body.email,req.body.first_name,req.body.last_name,hashedPassword,req.body.address,"false"],(err,result)=>{
 				
 						let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
 						res.status(201).json({
 							"status" : 201,
 							"data" :{
 							"token" : token,
-							"id" : allusers.length + 1,
 							"first_name" : req.body.first_name,
 							"last_name" : req.body.last_name,
 						"email" : req.body.email
@@ -218,7 +220,7 @@ app.post("/api/v1/auth/signin", (req, res) => {
  		
  		}
  	let 	comfirm = {
-			"id" : thepassword[0].ID,
+			"id" : thepassword[0].id,
 			"email" : thepassword[0].email,
  		"name" : thepassword[0].first_name,
  		"lname" : thepassword[0].last_name,
@@ -226,6 +228,7 @@ app.post("/api/v1/auth/signin", (req, res) => {
  	};
 		//console.log(comfirm)
  		let token = jwt.sign({user : comfirm}, "ourlittlesecret", { expiresIn: "24h" });//expires in 24 hours }
+ 		//console.log(comfirm)
 
  		res.status(200).json({ 
 	 	"status" : 200,
