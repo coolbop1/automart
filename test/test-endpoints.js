@@ -546,24 +546,7 @@ describe('GET /allcars endpoint', function () {
                         
                        
                 });
-                it('respond with only 1', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'status' : 'available'})
-                        .query({'max_price' : '100000000000000'})
-                        .expect(200, done); //expecting HTTP status code
-                        
-                       
-                });
-                it('respond with only 1', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'max_price' : '100000000000000'})
-                        .query({'status' : 'available'})
-                        .expect(200, done); //expecting HTTP status code
-                        
-                       
-                });
+                
             
         });
             describe('GET /car multiple conflicting queries', function () {

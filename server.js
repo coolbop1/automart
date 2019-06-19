@@ -199,7 +199,7 @@ app.post("/api/v1/auth/signin", (req, res) => {
 	 pool.connect()
 	 pool.query("select * from allusers where email = $1",[req.body.email],(err,ress)=>{
 		 //console.log(ress.rows.length)
-		 if(ress){
+		 if(ress.rows.length >= 1){
 			//console.log(ress.rows[0].password);
 				nextValidate(ress.rows);
 					
