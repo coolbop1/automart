@@ -193,9 +193,7 @@ route.get("/api/v1/car",(req, res) =>{
 +" END",[thesstatus,theminprice,themaxprice,thestate,thetype,themanu],(erro,result)=>{
     //console.log(thesstatus,theminprice,themaxprice,thestate,thetype,themanu)
 //console.log(erro,result);
-    if(result)
-    {
-        if(result.rows.length > 0){
+  if(result.rows.length > 0){
 	        res.status(200).json({
                "status":200,
                "data":	result.rows
@@ -206,7 +204,7 @@ route.get("/api/v1/car",(req, res) =>{
                "msg":"no result for this request"
            });
            }
-        }
+        
 	})
     }
 }else{
@@ -236,12 +234,11 @@ route.get("/api/v1/car",(req, res) =>{
 //handles view single car
 route.get("/api/v1/car/:carid", (req, res) => {
     pool.query("select * from postads where id = $1",[req.params.carid],(error,result)=>{
-        if(result){
+     
             if(result.rows.length > 0)
                 res.status(200).json({ "status" : 200, "data" : result.rows});
             else 
                 res.status(404).send({"error" : "The car was not found"	});
-    }
     })
 });
 ///////////////////////////
