@@ -127,7 +127,7 @@ describe('POST /auth/signin endpoint', function () {
 describe('GET /car/:carid endpoint', function () {
     it('respond The car was not found', function (done) {
         apps(app)
-            .get('/api/v1/car/idisnonexisting')
+            .get('/api/v1/car/0')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(404, done) //expecting HTTP status code
@@ -428,18 +428,7 @@ describe('GET /allcars endpoint', function () {
                        
                 });
             });
-            describe('GET /car with min_price query', function () {
-                it('respond with json no result found', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'min_price' : '10000000000000000000000000000'})
-                        .expect({
-                            "status":404,
-                            "msg":"no result for this request"
-                        }, done); //expecting HTTP status code
-                        
-                });
-            });
+            
             describe('GET /car with max_price query', function () {
                 it('respond with json of not found', function (done) {
                     apps(app)
