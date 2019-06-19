@@ -577,15 +577,7 @@ describe('GET /allcars endpoint', function () {
                          .expect(404, done); //expecting HTTP status code
                         
                 });
-                it('respond with 404 not found status:true min_price:false', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'min_price' : "10000000000000000"})
-                        .query({'body_type' : 'color'})
-                                               
-                        .expect(404, done); //expecting HTTP status code
-                        
-                });
+                
                 it('respond with 404 not found status:true min_price:false', function (done) {
                     apps(app)
                         .get('/api/v1/car')
@@ -607,35 +599,7 @@ describe('GET /allcars endpoint', function () {
                         .expect(404, done); //expecting HTTP status code
                         
                 });
-                it('respond with 404 not found ', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'min_price' : "11000000000000000000000000000"})
-                        .query({'state' : 'new'})
-                        
-                        
-                        
-                        .expect(404, done); //expecting HTTP status code
-                        
-                });
-                it('respond with 404 not found ', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'state' : 'newold'})
-                        .query({'max_price' : "1100000000000"})
-                         
-                        .expect(404, done); //expecting HTTP status code
-                        
-                });
-                it('respond with 404 not found ', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'manufacturer' : "wrong"})
-                        .query({'max_price' : "1100000000000"})
-                         
-                          .expect(404, done); //expecting HTTP status code
-                        
-                });
+               
                
                 
 
