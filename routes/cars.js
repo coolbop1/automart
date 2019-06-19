@@ -152,7 +152,7 @@ route.get("/api/v1/car",(req, res) =>{
                 res.status(400).send("wrong value formart for max_price");
                 return;
             }else
-                theminprice = parseInt(req.query.max_price);
+                themaxprice = parseInt(req.query.max_price);
         }
         else
         themaxprice = null;
@@ -204,7 +204,7 @@ route.get("/api/v1/car",(req, res) =>{
            }else{
            	res.status(404).json({
                "status":404,
-               "data":	"notfound"
+               "msg":"no result for this request"
            });
            }
         }
@@ -222,7 +222,7 @@ route.get("/api/v1/car",(req, res) =>{
            }else{
            	res.status(404).json({
                "status":404,
-               "data":	"notfound"
+               "msg":"no car ad to display"
            });
            }
         }
@@ -580,15 +580,14 @@ route.get("/api/v1/car/:carid", (req, res) => {
 
 //handles view single car
 route.get("/api/v1/car/:carid", (req, res) => {
-    const confirmcar = allcars.find(u => u.id == req.params.carid);
-    if(confirmcar){
-        
-        res.status(200).json({ "status" : 200, "data" : {"id" : confirmcar.id,	"owner" : confirmcar.owner,"created_on" : confirmcar.created_on,"state" : confirmcar.state,"status" : confirmcar.status,"price" : confirmcar.price,"manufacturer" : confirmcar.manufacturer,"model" : confirmcar.model,"body_type" : confirmcar.body_type,"pics" : confirmcar.pics}});
-
-        
-    } else {res.status(404).send({"error" : "The car was not found"	});
-
+    pool.query("select * from postads where id = $1",[req.params.carid],(error,result)=>{
+        if(result){
+            if(result.rows.length > 0)
+                res.status(200).json({ "status" : 200, "data" : result.rows});
+            else 
+                res.status(404).send({"error" : "The car was not found"	});
     }
+    })
 });
 ///////////////////////////
 
