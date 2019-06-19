@@ -14,7 +14,6 @@ const pool = new Pool({
 	
  pool.connect()
 
-let allcars = [];//toremovelater
 const express = require("express");
 const Joi = require("joi");
 
@@ -31,7 +30,7 @@ route.use(bodyParser.urlencoded({
 
 
 
- route.get("/api/v1/allcars",(req, res) =>{res.status(200).send(allcars); });
+ route.get("/api/v1/allcars",(req, res) =>{pool.query("SELECT * FROM postads",(error,result)=>{res.status(200).send(result.rows); })});
 
 
 
@@ -61,7 +60,7 @@ route.post("/api/v1/car", (req, res) => {
 	} 
 	let dddate = new Date();
   	 	let postcarform = {
-  	 		"id": allcars.length + 1,//toremovelater
+  	 		
 		 "email" : req.body.email,
 		 "owner" : req.body.owner,
  		"created_on" : new Date(),
@@ -74,7 +73,7 @@ route.post("/api/v1/car", (req, res) => {
 		 "pics" : req.body.pics,
 		 "status" : "available"
  	};
- 	allcars.push(postcarform);//toremovelater
+ 	
  	pool.query("INSERT INTO postads (email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",[req.body.email,req.body.owner,dddate,req.body.manufacturer,req.body.model,req.body.price,req.body.state,req.body.engine_size,req.body.body_type,req.body.pics,"available"],(error,sussec)=>{
  		
  	
@@ -601,30 +600,29 @@ route.get("/api/v1/car/:carid", (req, res) => {
 
 ///////////mark carf as sold///////////////////
 route.patch("/api/v1/car/:carid/status", (req, res) => {
+	pool.query("update postads set status=$1 where id=$2 and status=$3",["sold",req.params.carid,"available"],(error,result)=>{
+        if(result){            
+            res.status(200).json({
+                "status" : 200,
+                "data" : {
+                    "id" : result.rows[0].id,
+                    "email" : result.rows[0].email,
+                    "created_on" :new Date(),
+                    "manufacturer" : result.rows[0].manufacturer,
+                    "model" : result.rows[0].model,
+                    "price" : result.rows[0].price,
+                    "state" : result.rows[0].state,
+                    "status" : result.rows[0].status
+                },
+                "message" : "The ad have been marked as sold."
+            });
+        } else {
+            res.status(404).send({
+                "status" : 404,
+                "error" : "404 not found","message" : "Oops cant find this ad"});
+        }
+    })
 	
-	const checkforcar = allcars.find(u => u.id == req.params.carid && u.status == "available");
-	if(checkforcar){
-		checkforcar.status = "sold";
-		
-		res.status(200).json({
-			"status" : 200,
-			"data" : {
-				"id" : checkforcar.id,
-				"email" : req.body.email,
-				"created_on" :new Date(),
-				"manufacturer" : checkforcar.manufacturer,
-				"model" : checkforcar.model,
-				"price" : checkforcar.price,
-				"state" : checkforcar.state,
-				"status" : checkforcar.status
-			},
-			"message" : "The ad have been marked as sold."
-		});
-	} else {
-		res.status(404).send({
-			"status" : 404,
-			"error" : "404 not found","message" : "Oops cant find this ad"});
-	}
 });
 /////////////////////////
 
