@@ -172,6 +172,7 @@ describe('POST /car endpoint', function () {
         apps(app)
             .get('/api/v1/car')
             .query({'status' : 'available'})
+            .set("Authorization", "Bearer "+token)
             .expect(200, done); //expecting HTTP status code
             
            
@@ -234,13 +235,13 @@ describe('PATCH /car/:carid/price endpoint', function () {
     let 	comfirmsy = {
         "price" : ""
     }
-    it('respond with json containing The price have been changed', function (done) {
+    it('respond with json containing The car does not belong to you', function (done) {
         apps(app)
             .patch('/api/v1/car/1/price')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
-            .expect(200, done);
+            .expect(404, done);
     });
     it('respond with 409 conflict', function (done) {
         apps(app)
@@ -266,7 +267,7 @@ describe('GET /car/:carid unexistence car endpoints', function () {
 describe('GET /car/:carid  existing car endpoint', function () {
     it('respond json of car with id \"1\"', function (done) {
         apps(app)
-            .get('/api/v1/car/1')
+            .get('/api/v1/car/2')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
