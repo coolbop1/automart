@@ -602,14 +602,14 @@ function reportcarad(path, success, error) {
 			} 
 		} 
 	};  
-const dsession = JSON.parse(sessionStorage.getItem('psession'));
+
 const ddry = sessionStorage.getItem('reasonwhy');
 const ddrc = sessionStorage.getItem('reportedcar');
-let owneremail = dsession.email;
+
 xhwr.open("POST", path, true);
 	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
-	var inputValus = `{"reporter_email" : "${owneremail}","car_id" : "${ddrc}","reason" : "${ddry}","description" : "${ddry}"}`;
+	var inputValus = `{"car_id" : "${ddrc}","reason" : "${ddry}","description" : "${ddry}"}`;
 	xhwr.send(inputValus);
 }
 
