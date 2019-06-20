@@ -23,16 +23,13 @@ const pool = new Pool({
 	
 
 
-	
- pool.connect()
+function connecct(){	
+ pool.connect();
+}
 
 
 
-/*pool.query("select * from allusers where id = $1",[5],(err, res)=>{
-	delete from allusers where email = bidoritunmise@gmail.com
-	console.log(res.rows);
-	//pool.end();
-});*/
+
 //console.log('starting server');
 const express = require("express");
 const Joi = require("joi");
@@ -66,17 +63,14 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.get("/api/v1/allusers",(req, res) =>{res.status(200).send(allusers);});
+app.get("/api/v1/allusers",(req, res) =>{connecct(); res.status(200).send(allusers);});
 
-var allusers = [];
+
 
 //@codeCoverageIgnoreEnd
 //handles sign up
 app.post("/api/v1/auth/signup", (req, res) => { 
-
-			
-			
-				 pool.connect()
+	connecct();
 				pool.query("select * from allusers where email = $1 ",[req.body.email],(err,ress)=>{
 					//console.log(ress.rows.length)
 					if(ress.rows.length >= 1 && req.body.email){
@@ -160,6 +154,7 @@ app.post("/api/v1/auth/signup", (req, res) => {
 	
 	////////// for testing-----delete user endpoint----///
 	app.get("/api/v1/user/:email", (req, res) => {
+		connecct()
 		pool.query("DELETE FROM  allusers WHERE email='testemail@email.coml'",(error,result)=>{
 			
 				res.status(200).send({"see":"deleted"});
@@ -195,8 +190,8 @@ app.post("/api/v1/auth/signin", (req, res) => {
 	res.status(409).send(reply);
 		return;
 	} 
-	// const confirm = allusers.find(u => u.email == req.body.email);
-	 pool.connect()
+	
+	connecct();
 	 pool.query("select * from allusers where email = $1",[req.body.email],(err,ress)=>{
 		 //console.log(ress.rows.length)
 		 if(ress.rows.length >= 1){
@@ -252,6 +247,7 @@ app.post("/api/v1/auth/signin", (req, res) => {
 
 
 app.get("/api/v1/me", ensureToken, function(req, res) { 
+
  
 	jwt.verify(req.token, "ourlittlesecret", function(err, data) { if (err) { res.sendStatus(403); } else{res.status(200).json({ description:data}); } });
 });

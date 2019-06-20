@@ -281,13 +281,43 @@ function(xhr) {
 
 
 /////{{{{{{{{/// purchase order}}}}}}}}}//////{}
+function purchorder(path, success, error) { 
+	var xhwr = new XMLHttpRequest(); 
+	xhwr.onreadystatechange = function() {
+		if (xhwr.readyState === XMLHttpRequest.DONE) {
+			if (xhwr.status === 201) { 
+  	if (success) success(JSON.parse(xhwr.responseText)); 
+			} else { 
+  	if (error) error(xhwr); 
+			} 
+		} 
+	}; 
+	
+	
+	var cariid =	document.getElementById("pomanid").value;
+	var buyerid =	document.getElementById("orderposterid").value;
+	var priceoffered =	document.getElementById("poprice").value;
+		var originalamount =	document.getElementById("showpprice").innerText;
+	
+	
+	xhwr.open("POST", path, true);
+	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");	
+	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
+	var inputValus = `{"car_id" : ${cariid} , "buyer" : ${buyerid},"order_price" : ${priceoffered} , "status" : "pending", "amount" : ${originalamount}}`;
+	xhwr.send(inputValus);
+}
+
+
+
 
 function postorder(){
+	
 	document.getElementById("postcarorder").disabled = true;
 	document.getElementById("postcarorder").innerHTML = '<center><div class="spinning"></div></center>';
+	purchorder("/api/v1/order", function(data) {
 	setTimeout(function(){
 	
-	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Purchase oder posted succesfully.check back for sellers response"; 
+	document.getElementById("regsuccess").innerHTML = data.message;
 	document.getElementById("regsuccess").classList.replace("hide","show");
 	document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
@@ -301,12 +331,23 @@ function postorder(){
 			document.getElementById("pomanu").value = "";
 			document.getElementById("pocolor").value = "";
 			document.getElementById("poprice").value = "";
-			document.getElementById("showpprice").innerHTML = "";
+			document.getElementById("showppricec").innerHTML = "";
 			document.getElementById('poprice').disabled = true;
 			document.getElementById('postcarorder').disabled = true;
 			document.getElementById("postimg").scrollIntoView({block:"start",behavior:"smooth"})
 		},3000)
 	},1000);
+		},
+	function(xhr) {
+ 	var keys = JSON.parse(xhr.responseText);
+		document.getElementById("regwarning").innerHTML = keys.msg
+		document.getElementById("regwarning").classList.replace("hide","show");
+		document.getElementById("regwarning").scrollIntoView({block: "center"});
+		setTimeout(function (){
+			document.getElementById("regwarning").classList.replace("show","hide");
+		},3000)
+	 //console.error(xhr); 
+} );
 
 	return false;
 }
@@ -324,17 +365,48 @@ function postorder(){
 
 
 /////{{{{{{{{///update price of purchase order}}}}}}}}}//////{}
+function putitin(thisid){
+	let theid = thisid;
+	let replace2 = theid.replace("editpo","edited");
+var frets = document.getElementById(replace2).value;
+sessionStorage.setItem('peditprice',frets);
+}
+function edpurchorder(path, success, error) { 
+	var xhwr = new XMLHttpRequest(); 
+	xhwr.onreadystatechange = function() {
+		if (xhwr.readyState === XMLHttpRequest.DONE) {
+			if (xhwr.status === 200) { 
+  	if (success) success(JSON.parse(xhwr.responseText)); 
+			} else { 
+  	if (error) error(xhwr); 
+			} 
+		} 
+	}; 
+
+
+	
+	var fret = sessionStorage.getItem('peditprice');
+	
+	xhwr.open("PATCH", path, true);
+	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	var inputValus = `{"order_price" : ${fret}}`;
+	xhwr.send(inputValus);
+}
 
 
 function editpo(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("editpo","")
 	let replace2 = theid.replace("editpo","editp")
+	putitin(theid);
 	document.getElementById(replace2).disabled = true;
 	document.getElementById(replace2).innerHTML = '<center><div class="spinning"></div></center>';
+	
+	
+	edpurchorder(`/api/v1/order/${replace1}/price`, function(data) {
 	setTimeout(function(){
 	
-	document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Order price edited succesfully "; 
+	document.getElementById("regsuccess").innerHTML = data.message; 
 		document.getElementById("regsuccess").classList.replace("hide","show");
 		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		
@@ -344,7 +416,20 @@ function editpo(thisid){
 	document.getElementById(replace2).innerHTML = 'update price';
 			closepo("clo"+replace1);
 		},3000)
-	},1000)
+	},1000)},
+	function(xhr) {
+ 	var keys = JSON.parse(xhr.responseText);
+		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").classList.replace("hide","show");
+		document.getElementById("regwarning").scrollIntoView({block: "center"});
+		setTimeout(function (){
+			document.getElementById("regwarning").classList.replace("show","hide");
+			document.getElementById(replace2).disabled = false;
+			document.getElementById(replace2).innerHTML = 'update price';
+			closepo("clo"+replace1);
+		},3000)
+ 	console.error(xhr); } );
+sessionStorage.clear('peditprice');
 	
 	return false;
 }
@@ -361,21 +446,54 @@ function editpo(thisid){
 
 
 /////{{{{{{{{///mark car as sold}}}}}}}}}//////{}
+function markassold(path, success, error) { 
+	var xhwr = new XMLHttpRequest(); 
+	xhwr.onreadystatechange = function() {
+		if (xhwr.readyState === XMLHttpRequest.DONE) {
+			if (xhwr.status === 200) { 
+  	if (success) success(JSON.parse(xhwr.responseText)); 
+			} else { 
+  	if (error) error(xhwr); 
+			} 
+		} 
+	}; 
+const dsession = JSON.parse(sessionStorage.getItem('psession'));
+let owneremail = dsession.email;
+xhwr.open("PATCH", path, true);
+	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	xhwr.send();
+}
+
+
+
 function marksold(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("soldbut","")
 	let replace2 = theid.replace("soldbut","soldmask");
 	document.getElementById(replace2).style.display = "table";
 	document.getElementById(replace2).innerHTML = "<center><div style='position:absolute;top: calc(50% - 10.5px);right: calc(50% - 10.5px);' class='spinning'></div></center>"; 
+	markassold(`/api/v1/car/${replace1}/status`, function(data) {
 	setTimeout(()=>{
-		document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car marked as sold"; 
+		document.getElementById("regsuccess").innerHTML = data.message; 
 		document.getElementById("regsuccess").classList.replace("hide","show");
 		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
 			document.getElementById("regsuccess").classList.replace("show","hide");
 		markssold(theid);
 		},2000)
-	}, 1000)
+	}, 1000)},
+	function(xhr) {
+ 	var keys = JSON.parse(xhr.responseText);
+		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").classList.replace("hide","show");
+		document.getElementById("regwarning").scrollIntoView({block: "center"});
+		setTimeout(function (){
+			document.getElementById("regwarning").classList.replace("show","hide");
+			document.getElementById(replace2).style.display = "none";
+	document.getElementById(replace2).innerHTML = ""; 
+	
+		},2000)
+ 	console.error(xhr); } );
 	return false;
 }
 
@@ -390,17 +508,45 @@ function marksold(thisid){
 
 
 /////{{{{{{{{///seller change price of ad}}}}}}}}}//////{}
+function putitup(thisid){
+	let theid = thisid;
+	let replace2 = theid.replace("editap","sedit");
+var frest = document.getElementById(replace2).value;
+sessionStorage.setItem('seditprice',frest);
+}
+function upadprice(path, success, error) { 
+	var xhwr = new XMLHttpRequest(); 
+	xhwr.onreadystatechange = function() {
+		if (xhwr.readyState === XMLHttpRequest.DONE) {
+			if (xhwr.status === 200) { 
+  	if (success) success(JSON.parse(xhwr.responseText)); 
+			} else { 
+  	if (error) error(xhwr); 
+			} 
+		} 
+	}; 
+const dsession = JSON.parse(sessionStorage.getItem('psession'));
+const dnewprice = sessionStorage.getItem('seditprice');
+let owneremail = dsession.email;
+xhwr.open("PATCH", path, true);
+	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	var inputValus = `{"email" : "${owneremail}","price" : "${dnewprice}"}`;
+	xhwr.send(inputValus);
+}
+
+
+
 
 function editadprice(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("editap","")
 	let replace2 = theid.replace("editap","edita")
-	
-	
+	putitup(theid);	
 	document.getElementById(replace2).innerHTML = "<center><div class='spinning'></div></center>"; 
-
+	
+	upadprice(`/api/v1/car/${replace1}/price`, function(data) {
 	setTimeout(function (){
-		document.getElementById("regsuccess").innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Car price changed succesfully";  
+		document.getElementById("regsuccess").innerHTML = data.message;  
 		document.getElementById("regsuccess").classList.replace("hide","show");
 		document.getElementById("regsuccess").scrollIntoView({block: "center"});
 		setTimeout(function (){
@@ -408,7 +554,18 @@ function editadprice(thisid){
 		document.getElementById(replace2).innerHTML = "Update price";
 		closedit("cl"+replace1);
 		},2000)
-	},1000);
+	},1000);},
+	function(xhr) {
+ 	var keys = JSON.parse(xhr.responseText);
+		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").classList.replace("hide","show");
+		document.getElementById("regwarning").scrollIntoView({block: "center"});
+		setTimeout(function (){
+		closedit("cl"+replace1);	
+		document.getElementById("regwarning").classList.replace("show","hide");
+		document.getElementById(replace2).innerHTML = "Update price";
+		},2000)
+ 	console.error(xhr); } );
 	
 	return false;
 }

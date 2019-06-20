@@ -286,7 +286,6 @@ describe('GET /allcars endpoint', function () {
             it('respond with all users ', function (done) {
                 apps(app)
                     .get('/api/v1/allusers')
-                    .expect('Content-Type', /json/)
                     .expect(200, done) //expecting HTTP status code
             });
         });
