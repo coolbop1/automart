@@ -11,9 +11,9 @@ const pool = new Pool({
 	
 
 
-	function connecct(){
+
  pool.connect()
-    }
+    
 
 const express = require("express");
 const Joi = require("joi");
@@ -31,14 +31,14 @@ route.use(bodyParser.urlencoded({
 
 
 
- route.get("/api/v1/allcars",(req, res) =>{connecct();pool.query("SELECT * FROM postads",(error,result)=>{res.status(200).send(result.rows); })});
+ route.get("/api/v1/allcars",(req, res) =>{pool.query("SELECT * FROM postads",(error,result)=>{res.status(200).send(result.rows); })});
 
 
 
 
 ///////////post car end point///////////////////
 route.post("/api/v1/car", (req, res) => {
-	connecct();
+	
 	const schema ={
 		email : Joi.string().trim().email().required(),
 		owner : Joi.required(),
@@ -110,7 +110,7 @@ route.delete("/api/v1/car/:carid",(req, res) =>{
 ///////////////////car search query//////////////////
 
 route.get("/api/v1/car",(req, res) =>{
-    connecct();
+    
 		let allthequeries = Object.keys(req.query).length;
       let thequery = Object.keys(req.query);
       if (allthequeries > 0){
@@ -235,7 +235,7 @@ route.get("/api/v1/car",(req, res) =>{
 
 //handles view single car
 route.get("/api/v1/car/:carid", (req, res) => {
-    connecct();
+    
     pool.query("select * from postads where id = $1",[req.params.carid],(error,result)=>{
      
             if(result.rows.length > 0)
@@ -256,7 +256,7 @@ route.get("/api/v1/car/:carid", (req, res) => {
 
 ///////////mark carf as sold///////////////////
 route.patch("/api/v1/car/:carid/status", (req, res) => {
-    connecct();
+    
 	pool.query("update postads set status=$1 where id=$2 and status=$3 RETURNING *",["sold",req.params.carid,"available"],(error,result)=>{
         
         if(result && result.rows.length > 0){            
@@ -289,7 +289,7 @@ route.patch("/api/v1/car/:carid/status", (req, res) => {
 
 ///////////seller edit price///////////////////
 route.patch("/api/v1/car/:carid/price", (req, res) => {
-    connecct();
+    
 	const schema ={
 		email : Joi.string().trim().email().required(),
 		price : Joi.number().min(0).required(),
