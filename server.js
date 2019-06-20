@@ -63,7 +63,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.get("/api/v1/allusers",(req, res) =>{connecct(); res.status(200).send(allusers);});
+app.get("/api/v1/allusers",(req, res) =>{ connecct(); pool.query("SELECT * FROM allusers",(error,result)=>{res.status(200).send(result.rows);})});
 
 
 
