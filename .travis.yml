@@ -4,6 +4,7 @@ node_js:
 services:
  - postgresql
  before_script:
-  - psql --username=postgres
-  - psql --dbname=ddelc2mc1p0din --file=sql/create-tables.sql
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql --dbname=ddelc2mc1p0din' --file=test-db/create-tables.sql
+  
   
