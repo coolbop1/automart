@@ -579,24 +579,68 @@ function editadprice(thisid){
 
 
 /////{{{{{{{{///buyers report car ad}}}}}}}}}//////{}
+function seereason(thisid){
+	let theid = thisid;
+	let replace2 = theid.replace("reportfor","reportwhy");
+	let replace3 = theid.replace("reportfor","");
+
+var fresty = document.getElementById(replace2).value;
+sessionStorage.setItem('reasonwhy',fresty);
+sessionStorage.setItem('reportedcar',replace3);
+}
+function reportcarad(path, success, error) { 
+	var xhwr = new XMLHttpRequest(); 
+	xhwr.onreadystatechange = function() {
+		if (xhwr.readyState === XMLHttpRequest.DONE) {
+			if (xhwr.status === 201) { 
+  	if (success) success(JSON.parse(xhwr.responseText)); 
+			} else { 
+  	if (error) error(xhwr); 
+			} 
+		} 
+	};  
+const dsession = JSON.parse(sessionStorage.getItem('psession'));
+const ddry = sessionStorage.getItem('reasonwhy');
+const ddrc = sessionStorage.getItem('reportedcar');
+let owneremail = dsession.email;
+xhwr.open("POST", path, true);
+	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	var inputValus = `{"reporter_email" : "${owneremail}","car_id" : "${ddrc}","reason" : "${ddry}","description" : "${ddry}"}`;
+	xhwr.send(inputValus);
+}
+
 
 function confirmrep(thisid){
 	let theid = thisid;
 	let replace1 = theid.replace("reportfor","");
-	
+	seereason(theid);
 	
 		document.getElementById("rr"+replace1).style.display ="none";
 		document.getElementById("reportwhy"+replace1).value ="";		
 		document.getElementById("ralert"+replace1).innerHTML = '<center><div class="spinning"></div></center>';
 		document.getElementById("ralert"+replace1).style.display ="block";
+		
+	
+	
+	reportcarad(`/api/v1/flag/`, function(data) {
 	setTimeout(function(){
-		document.getElementById("ralert"+replace1).innerHTML = "<center style='color:red'>MOCK CLIENT RESPONSE</center> Report sent and will be reviwed"; 
+		document.getElementById("reportbut"+replace1).classList.replace("reporttab","reporttabs");
+		document.getElementById("reportbut"+replace1).innerHTML ="reported";
+		document.getElementById("ralert"+replace1).innerHTML = data.message; 
 		document.getElementById("ralert"+replace1).scrollIntoView({block: "center"});
 		setTimeout(function (){
 			document.getElementById("rr"+replace1).style.display ="none";
 			document.getElementById("ralert"+replace1).style.display ="none";
 		},3000)
-	}, 1000);
+	}, 1000);},
+	function(xhr) {
+ 	var keys = JSON.parse(xhr.responseText);
+		document.getElementById("ralert"+replace1).innerHTML = keys.msg;
+		setTimeout(function (){
+			document.getElementById("rr"+replace1).style.display ="none";
+			document.getElementById("ralert"+replace1).style.display ="none";
+		},3000)
+ 	console.error(xhr); } );
 	
 	return false;
 }
