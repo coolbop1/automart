@@ -23,9 +23,9 @@ const pool = new Pool({
 	
 
 
-function connecct(){	
+
  pool.connect();
-}
+
 
 
 
@@ -63,14 +63,14 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.get("/api/v1/allusers",(req, res) =>{ connecct(); pool.query("SELECT * FROM allusers",(error,result)=>{res.status(200).send(result.rows);})});
+app.get("/api/v1/allusers",(req, res) =>{  pool.query("SELECT * FROM allusers",(error,result)=>{res.status(200).send(result.rows);})});
 
 
 
 //@codeCoverageIgnoreEnd
 //handles sign up
 app.post("/api/v1/auth/signup", (req, res) => { 
-	connecct();
+	
 				pool.query("select * from allusers where email = $1 ",[req.body.email],(err,ress)=>{
 					//console.log(ress.rows.length)
 					if(ress.rows.length >= 1 && req.body.email){
@@ -191,7 +191,7 @@ app.post("/api/v1/auth/signin", (req, res) => {
 		return;
 	} 
 	
-	connecct();
+	
 	 pool.query("select * from allusers where email = $1",[req.body.email],(err,ress)=>{
 		 //console.log(ress.rows.length)
 		 if(ress.rows.length >= 1){

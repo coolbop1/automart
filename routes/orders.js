@@ -11,9 +11,9 @@ const pool = new Pool({
 	
 
 
-function connecct(){	
+	
  pool.connect()
-}
+
 const express = require("express");
 const Joi = require("joi");
 
@@ -30,11 +30,11 @@ route.use(bodyParser.urlencoded({
     
 
 
-    route.get("/api/v1/allorders",(req, res) =>{ connecct(); pool.query("SELECT * FROM orders",(error,result)=>{res.status(200).send(result.rows);})});
+    route.get("/api/v1/allorders",(req, res) =>{  pool.query("SELECT * FROM orders",(error,result)=>{res.status(200).send(result.rows);})});
 
 ///////////purchase///////////////////
 route.post("/api/v1/order", (req, res) => {
-	connecct();
+	
 	const schema ={
 		buyer : Joi.number().min(0).required(),
 		car_id : Joi.number().min(0).required(),
@@ -84,7 +84,7 @@ route.post("/api/v1/order", (req, res) => {
 
 ///////////edit purchase order price///////////////////
 route.patch("/api/v1/order/:orderrid/price", (req, res) => {
-	connecct();
+	
 	const schema ={
 		
 		order_price : Joi.number().min(0).required(),
