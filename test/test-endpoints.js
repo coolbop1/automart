@@ -54,8 +54,7 @@ describe('POST /auth/signup endpoint', function () {
 });
 describe('POST /auth/signin endpoint', function () {
     let 	comfirms = {"email" : "testemail@email.coml" , "password" : "thepassword"}
-    let 	comfirmsy = {"email" : "" , "password" : ""}
-    let 	notcomfirms = {"email" : "testemaioool@email.coml" , "password" : "thepassword"}
+    
     it('respond with json details of user', function (done) {
         apps(app)
             .post('/api/v1/auth/signin')
@@ -63,7 +62,9 @@ describe('POST /auth/signin endpoint', function () {
             .send(comfirms)
             .expect(200, done);
     });
-
+})
+describe('authorized test', function () {
+    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "thepassword"}
     before(function(done){
         apps(app)
         .post('/api/v1/auth/signin')
@@ -74,6 +75,9 @@ describe('POST /auth/signin endpoint', function () {
         })
         
     })
+    describe('POST /me endpoint', function () {
+        let 	comfirmsy = {"email" : "" , "password" : ""}
+    let 	notcomfirms = {"email" : "testemaioool@email.coml" , "password" : "thepassword"}
     it('respond with authorized ', function (done) {
         apps(app)
             .get('/api/v1/me')
@@ -83,7 +87,6 @@ describe('POST /auth/signin endpoint', function () {
     it('respond with not authorized ', function (done) {
         apps(app)
             .get('/api/v1/me')
-            //.set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImV4YW1wbGV1c2VyIiwiZW1haWwiOiJleGFtcGxlQGdtYWlsLmNvbSJ9LCJpYXQiOjE1NTExMTE1ODAsImV4cCI6MTU1MTExMTYxMH0.aSTVC-HcEdrH1KBNtuD_MoLZ8DWnSiM6bCqO4EgJ5zM")
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(403, done);
     });
@@ -129,6 +132,7 @@ describe('GET /car/:carid endpoint', function () {
         apps(app)
             .get('/api/v1/car/0')
             .set('Accept', 'application/json')
+            .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
             .expect(404, done) //expecting HTTP status code
             
@@ -139,12 +143,9 @@ describe('GET /car endpoint', function () {
         apps(app)
             .get('/api/v1/car')
             .set('Accept', 'application/json')
+            .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
-            .expect(404) //expecting HTTP status code
-            .expect({
-                "status":404,
-                "msg":"no car ad to display"
-            }, done) 
+            .expect(404, done) 
     });
 });
 
@@ -157,8 +158,6 @@ describe('POST /car endpoint', function () {
         "price" : "1000",
         "state" : "new" , 
         "pics" : "fromcloud",
-        "email":"emailofposter@email.com",
-        "owner": 1
     }
     
     it('respond with json containing Car posted successfully', function (done) {
@@ -166,6 +165,7 @@ describe('POST /car endpoint', function () {
             .post('/api/v1/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
+            .set("Authorization", "Bearer "+token)
             .expect(201, done);
     });
     it('respond with only 1', function (done) {
@@ -187,8 +187,7 @@ describe('POST /car endpoint', function () {
            "price" : "2000",
            "state" : "new" ,
             "pics" : "fromclouds",
-            "email":"emailofposter@email.com",
-            "owner" : 1
+            
         }
         let 	comfirmsy = {
             "manufacturer" : "" ,
@@ -198,14 +197,14 @@ describe('POST /car endpoint', function () {
                "price" : "2000",
                "state" : "new" ,
                 "pics" : "fromclouds",
-                "email":"emailofposter@email.com",
-                "owner" : 1
+                
             }
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
             .post('/api/v1/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
+            .set("Authorization", "Bearer "+token)
             .expect(201, done);
     });
     it('respond with json conflict', function (done) {
@@ -213,6 +212,7 @@ describe('POST /car endpoint', function () {
             .post('/api/v1/car')
             .send(comfirmsy)
             .set("Content-Type", "application/json; charset=UTF-8")
+            .set("Authorization", "Bearer "+token)
             .expect(409, done);
     });
     
@@ -222,17 +222,16 @@ describe('GET /car no query get all endpoint', function () {
         apps(app)
             .get('/api/v1/car')
             .set('Accept', 'application/json')
+            .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
             .expect(200, done); 
     });
 });
 describe('PATCH /car/:carid/price endpoint', function () {
     let 	comfirms = {
-        "email" :  "emailofposter@email.coml",
         "price" : "2000"
     }
     let 	comfirmsy = {
-        "email" :  "emailofposter@email.coml",
         "price" : ""
     }
     it('respond with json containing The price have been changed', function (done) {
@@ -240,6 +239,7 @@ describe('PATCH /car/:carid/price endpoint', function () {
             .patch('/api/v1/car/1/price')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
+            .set("Authorization", "Bearer "+token)
             .expect(200, done);
     });
     it('respond with 409 conflict', function (done) {
@@ -247,6 +247,7 @@ describe('PATCH /car/:carid/price endpoint', function () {
             .patch('/api/v1/car/1/price')
             .send(comfirmsy)
             .set("Content-Type", "application/json; charset=UTF-8")
+            .set("Authorization", "Bearer "+token)
             .expect(409, done);
     });
     
@@ -255,11 +256,11 @@ describe('PATCH /car/:carid/price endpoint', function () {
 describe('GET /car/:carid unexistence car endpoints', function () {
     it('respond with json of the car details', function (done) {
         apps(app)
-            .get('/api/v1/car/3')
+            .get('/api/v1/car/0')
             .set('Accept', 'application/json')
+            .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
-            .expect(404) //expecting HTTP status code
-            .expect({"error" : "The car was not found"	}, done) 
+            .expect(404, done) 
     });
 });
 describe('GET /car/:carid  existing car endpoint', function () {
@@ -267,6 +268,7 @@ describe('GET /car/:carid  existing car endpoint', function () {
         apps(app)
             .get('/api/v1/car/1')
             .set('Accept', 'application/json')
+            .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
             .expect(200, done) //expecting HTTP status code
             
@@ -310,14 +312,12 @@ describe('GET /allcars endpoint', function () {
             describe('POST /order endpoint', function () {
                 let 	comfirms = {
                     "car_id" : 1 ,
-                     "buyer" : 1,
                      "order_price" : "1000" ,
                       "status" : "pending",
                        "amount" : "1000"
                 }
                 let 	comfirmsy = {
                     "car_id" : "" ,
-                     "buyer" : 1,
                      "order_price" : "1000" ,
                       "status" : "pending",
                        "amount" : "1000"
@@ -327,6 +327,7 @@ describe('GET /allcars endpoint', function () {
                         .post('/api/v1/order')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(201, done);
                 });
                 it('respond with conflict', function (done) {
@@ -334,6 +335,7 @@ describe('GET /allcars endpoint', function () {
                         .post('/api/v1/order')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(409, done);
                 });
                 it('respond with allorders ', function (done) {
@@ -352,6 +354,7 @@ describe('GET /allcars endpoint', function () {
                         .patch('/api/v1/order/1/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done);
                 });
                 it('respond with json containing error message', function (done) {
@@ -359,6 +362,7 @@ describe('GET /allcars endpoint', function () {
                         .patch('/api/v1/order/0/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(404, done);
                         
                 });
@@ -367,19 +371,18 @@ describe('GET /allcars endpoint', function () {
                         .patch('/api/v1/order/0/price')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(409, done);
                         
                 });
             });
             describe('POST /flag endpoint', function () {
                 let 	comfirms = {
-                    "reporter_email" : "reporter@email.com",
                 "car_id" : 1,
                 "reason" : "fraud",
                 "description" : "fraud"
             }
             let 	comfirmsy = {
-                "reporter_email" : "reporter@email.com",
             "car_id" : 1,
             "reason" : "",
             "description" : "fraud"
@@ -389,6 +392,7 @@ describe('GET /allcars endpoint', function () {
                         .post('/api/v1/flag')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(201,done)
                         
                 });
@@ -397,6 +401,7 @@ describe('GET /allcars endpoint', function () {
                         .post('/api/v1/flag')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(409,done)
                         
                 });
@@ -408,10 +413,8 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'status' : 'sold'})
-                        .expect({
-                            "status":404,
-                            "msg":"no result for this request"
-                        }, done) //expecting HTTP status code
+                        .set("Authorization", "Bearer "+token)
+                        .expect(404, done) //expecting HTTP status code
                        
                 });
             });
@@ -420,10 +423,8 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'body_type' : 'f545vfcx'})
-                        .expect({
-                            "status":404,
-                            "msg":"no result for this request"
-                        }, done) //expecting HTTP status code
+                        .set("Authorization", "Bearer "+token)
+                        .expect(404, done) //expecting HTTP status code
                        
                 });
             });
@@ -433,10 +434,8 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'max_price' : '1'})
-                        .expect({
-                            "status":404,
-                            "msg":"no result for this request"
-                        }, done); //expecting HTTP status code
+                        .set("Authorization", "Bearer "+token)
+                        .expect(404, done); //expecting HTTP status code
                         
                 });
             });
@@ -445,10 +444,8 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'manufacturer' : '1sd3223cdfe3'})
-                        .expect({
-                            "status":404,
-                            "msg":"no result for this request"
-                        }, done); //expecting HTTP status code
+                        .set("Authorization", "Bearer "+token)
+                        .expect(404, done); //expecting HTTP status code
                         
                 });
             });
@@ -457,10 +454,8 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'state' : 'invalidstate'})
-                        .expect({
-                            "status":404,
-                            "msg":"no result for this request"
-                        }, done); //expecting HTTP status code
+                        .set("Authorization", "Bearer "+token)
+                        .expect(404, done); //expecting HTTP status code
                         
                 });
             });
@@ -470,18 +465,21 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'body_tpe' : 'color'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(400, done); //expecting HTTP status code
                 });
                 it('respond with bad request due to typo for max price', function (done) {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'max_price' : 'color'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(400, done); //expecting HTTP status code
                 });
                 it('respond with bad request due to typo for min price', function (done) {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'min_price' : 'color'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(400, done); //expecting HTTP status code
                 });
             
@@ -492,6 +490,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'state' : 'new'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                 });
@@ -503,6 +502,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'status' : 'available'})
                         .query({'body_type' : 'color'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                        
@@ -512,6 +512,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'status' : 'available'})
                         .query({'state' : 'new'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                        
@@ -521,6 +522,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'status' : 'available'})
                         .query({'manufacturer' : 'carmanufacturer'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                        
@@ -530,6 +532,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'status' : 'available'})
                         .query({'min_price' : '1'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                        
@@ -543,6 +546,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'state' : 'new'})
                         .query({'body_type' : 'bluu'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(404, done); //expecting HTTP status code
                         
                 });
@@ -551,7 +555,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'body_type' : 'color'})
                         .query({'state' : 'grr'})
-                        
+                        .set("Authorization", "Bearer "+token)
                         .expect(404, done); //expecting HTTP status code
                         
                 });
@@ -560,8 +564,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'status' : 'no'})
                         .query({'state' : "new"})
-                       
-                        
+                        .set("Authorization", "Bearer "+token)                        
                          .expect(404, done); //expecting HTTP status code
                         
                 });
@@ -570,9 +573,8 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'body_type' : 'bee'})
-                        .query({'min_price' : "10"})
-                        
-                                               
+                        .query({'min_price' : "10"})                       
+                        .set("Authorization", "Bearer "+token)                   
                         .expect(404, done); //expecting HTTP status code
                         
                 });
@@ -581,9 +583,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'max_price' : 1})
                         .query({'state' : 'new'})
-                        
-                        
-                        
+                        .set("Authorization", "Bearer "+token)                    
                         .expect(404, done); //expecting HTTP status code
                         
                 });
@@ -597,6 +597,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'status' : 'available'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                 });
@@ -606,6 +607,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'min_price' : '100'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                 });
@@ -615,6 +617,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'max_price' : '7000'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                 });
@@ -624,6 +627,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'manufacturer' : 'carmanufacturer'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                 });
@@ -634,6 +638,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .patch('/api/v1/car/1/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done);
                 });
                 
@@ -653,6 +658,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/car')
                         .query({'status' : 'sold'})
+                        .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
                         
                 });
@@ -662,6 +668,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .delete('/api/v1/car/1')
                         .set('Accept', 'application/json')
+                        .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
                         .expect(200, done) //expecting HTTP status code
                        
@@ -671,6 +678,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .delete('/api/v1/car/b')
                         .expect('Content-Type', /json/)
+                        .set("Authorization", "Bearer "+token)
                         .expect(404, done) //expecting HTTP status code
                        
                         
@@ -678,14 +686,14 @@ describe('GET /allcars endpoint', function () {
             });
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
-                    "email" :  "emailofposter@email.coml",
                     "price" : "2000"
                 }
                 it('respond with json 404 not found', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/1/price')
+                        .patch('/api/v1/car/0/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(404, done);
                 });
                 
@@ -694,8 +702,10 @@ describe('GET /allcars endpoint', function () {
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
                        .get('/api/v1/user/testemail@email.coml')
+                       .set("Authorization", "Bearer "+token)
                         .expect(200 ,done)
                 });
                 
             })
+        });
             //export COVERALLS_REPO_TOKEN=uXXej4MsUdasVhX6yL01XTtWMJR82UyJo
