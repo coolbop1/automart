@@ -149,35 +149,6 @@ describe('GET /car endpoint', function () {
     });
 });
 
-describe('POST /car endpoint', function () {
-    let 	comfirms = {
-        "manufacturer" : "carmanufacturer" , 
-        "model" : "carmodel",
-        "body_type" : "color" , 
-        "engine_size" : "21000", 
-        "price" : "1000",
-        "state" : "new" , 
-        "pics" : "fromcloud",
-    }
-    
-    it('respond with json containing Car posted successfully', function (done) {
-        apps(app)
-            .post('/api/v1/car')
-            .send(comfirms)
-            .set("Content-Type", "application/json; charset=UTF-8")
-            .set("Authorization", "Bearer "+token)
-            .expect(201, done);
-    });
-    it('respond with only 1', function (done) {
-        apps(app)
-            .get('/api/v1/car')
-            .query({'status' : 'available'})
-            .set("Authorization", "Bearer "+token)
-            .expect(200, done); //expecting HTTP status code
-            
-           
-    });
-});
 
 describe('POST /car endpoint', function () {
     let 	comfirms = {
@@ -352,7 +323,7 @@ describe('GET /allcars endpoint', function () {
                 let 	comfirmsy ={"order_price" : ""}
                 it('respond with json containing The order price have been changed', function (done) {
                     apps(app)
-                        .patch('/api/v1/order/1/price')
+                        .patch('/api/v1/order/3/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -637,7 +608,7 @@ describe('GET /allcars endpoint', function () {
                 
                 it('respond with json containing The status of car changed to sold', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/1/status')
+                        .patch('/api/v1/car/3/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done);
@@ -650,6 +621,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .patch('/api/v1/car/0/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
                         .expect(404, done);
                 });
                 

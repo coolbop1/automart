@@ -42,11 +42,7 @@ route.post("/api/v1/flag",ensureToken, (req, res) => {
 	const schema ={
 		car_id : Joi.number().min(0).required(),
 		reason : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
-		description : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
-		reporter_email : Joi.string().trim().email().required(),
-		
-		
-		
+		description : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),		
 	}
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
