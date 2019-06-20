@@ -154,7 +154,7 @@ app.post("/api/v1/auth/signup", (req, res) => {
 	
 	////////// for testing-----delete user endpoint----///
 	app.get("/api/v1/user/:email", (req, res) => {
-		connecct()
+		
 		pool.query("DELETE FROM  allusers WHERE email='testemail@email.coml'",(error,result)=>{
 			
 				res.status(200).send({"see":"deleted"});
