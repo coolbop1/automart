@@ -75,7 +75,8 @@ app.post("/api/v1/auth/signup", (req, res) => {
 					//console.log(ress.rows.length)
 					if(ress.rows.length >= 1 && req.body.email){
 						let reply = {
-							"msg" : "email is taken please try another"
+							"status":409,
+							"error" : "email is taken please try another"
 						}			
 						res.status(409).json(reply)
 						return;			
@@ -98,7 +99,8 @@ app.post("/api/v1/auth/signup", (req, res) => {
 					if(valid.error){
 					let msgclean = valid.error.details[0].message.replace("/^[,. a-z0-9A-Z]+$/","");
 					let reply = {
-						"msg" : msgclean
+						"status":409,
+						"error" : msgclean
 					}	
 					res.status(409).send(reply);
 					return;
@@ -122,7 +124,8 @@ app.post("/api/v1/auth/signup", (req, res) => {
 					"email" : req.body.email,
 							"name" : req.body.first_name,
 							"lname" : req.body.last_name,
-							"address" : req.body.address
+							"address" : req.body.address,
+							"is_admin" : "false"
 						}
 				
 						let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
@@ -185,7 +188,8 @@ app.post("/api/v1/auth/signin", (req, res) => {
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
 	let reply = {
-		"msg" : valid.error.details[0].message
+		"status":409,
+		"error" : valid.error.details[0].message
 	}	
 	res.status(409).send(reply);
 		return;
@@ -200,7 +204,8 @@ app.post("/api/v1/auth/signin", (req, res) => {
 					
 		 }else {
 			let reply = {
-			"msg" : "Invalid username or password please try again"
+				"status":404,
+			"error" : "Invalid username or password please try again"
 		};
 		   res.status(404).send(reply);
 		   return
@@ -259,7 +264,9 @@ function ensureToken(req, res, next) {
 		const berarer = bearerHeader.split(" "); 
 		const bearerToken = berarer[1]; 
 		req.token = bearerToken;
-		next();} else {  res.sendStatus(403); }
+		next();} else {  res.status(403).json({
+			"status":403,
+		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
 
 }
 

@@ -18,7 +18,7 @@ const express = require("express");
 const Joi = require("joi");
 
 const route = express.Router();
-
+let jwt = require("jsonwebtoken");
 var bodyParser = require("body-parser");
 
 route.use(express.json());
@@ -27,16 +27,23 @@ route.use(bodyParser.urlencoded({
 
     route.use(bodyParser.text({ type: "application/json" }));
 
+    route.use(bodyParser.text({ type: "application/json" }));
+route.use(function(req, res, next) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+	res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type, Authorization");
+	next();
+});
+
     
 
 
     route.get("/api/v1/allorders",(req, res) =>{  pool.query("SELECT * FROM orders",(error,result)=>{res.status(200).send(result.rows);})});
 
 ///////////purchase///////////////////
-route.post("/api/v1/order", (req, res) => {
-	
+route.post("/api/v1/order", ensureToken, (req, res) => {
+	let { user } = req.token;
 	const schema ={
-		buyer : Joi.number().min(0).required(),
 		car_id : Joi.number().min(0).required(),
 		amount : Joi.number().min(0).required(),
 		order_price : Joi.number().min(0).required(),
@@ -45,24 +52,18 @@ route.post("/api/v1/order", (req, res) => {
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
 	let reply = {
-		"msg" : valid.error.details[0].message
+		"status":409,
+		"error" : valid.error.details[0].message
 	}	
 	res.status(409).send(reply);
 		return;
 	} 
-	let purchaseorderform = {
-		"buyer" : req.body.buyer, 
-		"car_id" : req.body.car_id,
-		"amount" : req.body.amount,
-		"price_offered" : req.body.order_price, 
-		"status" : req.body.status,
-		"created_on" : new Date()
-	};
+	
 	
 	let pdate = new Date();
 	//allorders.push(purchaseorderform);
 	//console.log(purchaseorderform)
-	pool.query("insert into orders (buyer, car_id, amount, price_offered, status, created_on) values ($1,$2,$3,$4,$5,$6) RETURNING *",[parseInt(req.body.buyer),parseInt(req.body.car_id),parseInt(req.body.amount),parseInt(req.body.order_price),req.body.status,pdate],(error,result)=>{
+	pool.query("insert into orders (buyer, car_id, amount, price_offered, status, created_on) values ($1,$2,$3,$4,$5,$6) RETURNING *",[user.id,parseInt(req.body.car_id),parseInt(req.body.amount),parseInt(req.body.order_price),req.body.status,pdate],(error,result)=>{
 		//console.log(error,result);
 		res.status(201).json({
 		"status" : 201,
@@ -83,24 +84,21 @@ route.post("/api/v1/order", (req, res) => {
 /////////////////////////
 
 ///////////edit purchase order price///////////////////
-route.patch("/api/v1/order/:orderrid/price", (req, res) => {
-	
+route.patch("/api/v1/order/:orderrid/price", ensureToken, (req, res) => {
+	let { user } = req.token;
 	const schema ={
-		
-		order_price : Joi.number().min(0).required(),
-		
-		
-		
+		order_price : Joi.number().min(0).required()
 	}
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
 	let reply = {
-		"msg" : valid.error.details[0].message
+		"status":409,
+		"error" : valid.error.details[0].message
 	}	
 	res.status(409).send(reply);
 		return;
 	} 
-	pool.query("update orders set price_offered=$1 where id=$2 and status=$3 RETURNING *",[req.body.order_price,req.params.orderrid,"pending"],(error,result)=>{
+	pool.query("update orders set price_offered=$1 where id=$2 and status=$3 and buyer=$4 RETURNING *",[req.body.order_price,req.params.orderrid,"pending",user.id],(error,result)=>{
 		if(result.rows.length > 0){
 			//console.log(req.body.newpoprice)
 			
@@ -123,14 +121,37 @@ route.patch("/api/v1/order/:orderrid/price", (req, res) => {
 		
 			res.status(404).json({
 				"status" : 404,
-				"error" : "404 not found",
-				"msg" : "Oops cant find this order"
+				"error" : "Oops cant find this order or does not belong to you"
 			});
 		}
 	});
-	
 });
 /////////////////////////
+function ensureToken(req, res, next) { 
+	const bearerHeader = req.headers["authorization"];
+	if (typeof bearerHeader !== "undefined") {  
+		const berarer = bearerHeader.split(" "); 
+		const bearerToken = berarer[1]; 
+		req.token = bearerToken;
+		jwt.verify(req.token, "ourlittlesecret", function(err, data) {
+			 if (err) {res.status(403).json({
+				status:403,
+			"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); 
+	
+	 	}else{
+			req.token=data;
+			next();
+		}; });
+		} else {  res.status(403).json({
+			status:403,
+		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
+
+}
+
+
+
+
+
 
 
 module.exports = route;

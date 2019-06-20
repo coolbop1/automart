@@ -25,10 +25,9 @@ document.getElementById("notloged").style.display = "none";
   document.getElementById("user").disabled = true;
   document.getElementById("pwd").disabled = true;
   document.getElementById("logg").disabled = true;
-  }else{	document.getElementById("userspace").innerHTML = dsession.email;
- 	document.getElementById("carposter").value = dsession.email;
- 	document.getElementById("carposterid").value = dsession.id;
- 	document.getElementById("orderposterid").value = dsession.id;
+  }else{	
+		document.getElementById("userspace").innerHTML = dsession.email;
+ 
 }
  
 		},function(xhr){
@@ -65,6 +64,7 @@ function register(path, success, error) {
 	var radd =	document.getElementById("regadd").value;
 	xhr.open("POST", path, true);
 	xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	xhr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
 	var inputVal = `{"email" : "${remail}" , "first_name" : "${rfname}","last_name" : "${rlname}" , "password" : "${rpwd}", "address" : "${radd}"}`;
 	xhr.send(inputVal);
 }
@@ -96,7 +96,7 @@ function signup(){
 	}, 1000);},
 	function(xhr) { 
  	var keys = JSON.parse(xhr.responseText);
-		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").innerHTML = keys.error; 
 		document.getElementById("regwarning").classList.replace("hide","show");
 		setTimeout("warnreg()", 2000);
  	console.error(xhr); } );
@@ -162,6 +162,7 @@ function signin(path, success, error) {
 	var lpass =	document.getElementById("pwd").value;
 	xhrl.open("POST", path, true);
 	xhrl.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	xhrl.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
 	var inputVald = `{"email" : "${lusern}" , "password" : "${lpass}"}`;
 	xhrl.send(inputVald);
 }
@@ -182,7 +183,7 @@ function login(){
 		}, 3000);},
 	function(xhrl) { 
  	var keys = JSON.parse(xhrl.responseText);
-		document.getElementById("regwarning").innerHTML = keys.msg;
+		document.getElementById("regwarning").innerHTML = keys.error;
 		document.getElementById("regwarning").classList.replace("hide","show");
 		
 		setTimeout(function(){
@@ -233,12 +234,12 @@ var lookfor = i
 }
 	var stateocar =	 x[lookfor].value;
 		var pcpics =	document.getElementById("pcpics").value;
-		var posterem = document.getElementById("carposter").value;
-		var posteremid = document.getElementById("carposterid").value;
+		
 	
 	xhwr.open("POST", path, true);
 	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	var inputValus = `{"manufacturer" : "${pcman}" , "model" : "${pcmodel}","body_type" : "${pccolor}" , "engine_size" : "${pces}", "price" : "${pprice}","state" : "${stateocar}","pics" : "${pcpics}","email" : "${posterem}","owner":"${posteremid}"}`;
+	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
+	var inputValus = `{"manufacturer" : "${pcman}" , "model" : "${pcmodel}","body_type" : "${pccolor}" , "engine_size" : "${pces}", "price" : "${pprice}","state" : "${stateocar}","pics" : "${pcpics}"}`;
 	xhwr.send(inputValus);
 }
 
@@ -265,7 +266,7 @@ pcad("/api/v1/car", function(data) {
 },	
 function(xhr) {
  	var keys = JSON.parse(xhr.responseText);
-		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").innerHTML = keys.error; 
 	
 	document.getElementById("regwarning").classList.replace("hide","show");		
 		setTimeout("warnregpc()", 3000);
@@ -295,7 +296,6 @@ function purchorder(path, success, error) {
 	
 	
 	var cariid =	document.getElementById("pomanid").value;
-	var buyerid =	document.getElementById("orderposterid").value;
 	var priceoffered =	document.getElementById("poprice").value;
 		var originalamount =	document.getElementById("showpprice").innerText;
 	
@@ -303,7 +303,7 @@ function purchorder(path, success, error) {
 	xhwr.open("POST", path, true);
 	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");	
 	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
-	var inputValus = `{"car_id" : ${cariid} , "buyer" : ${buyerid},"order_price" : ${priceoffered} , "status" : "pending", "amount" : ${originalamount}}`;
+	var inputValus = `{"car_id" : ${cariid} ,"order_price" : ${priceoffered} , "status" : "pending", "amount" : ${originalamount}}`;
 	xhwr.send(inputValus);
 }
 
@@ -340,7 +340,7 @@ function postorder(){
 		},
 	function(xhr) {
  	var keys = JSON.parse(xhr.responseText);
-		document.getElementById("regwarning").innerHTML = keys.msg
+		document.getElementById("regwarning").innerHTML = keys.error
 		document.getElementById("regwarning").classList.replace("hide","show");
 		document.getElementById("regwarning").scrollIntoView({block: "center"});
 		setTimeout(function (){
@@ -389,6 +389,7 @@ function edpurchorder(path, success, error) {
 	
 	xhwr.open("PATCH", path, true);
 	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
 	var inputValus = `{"order_price" : ${fret}}`;
 	xhwr.send(inputValus);
 }
@@ -419,7 +420,7 @@ function editpo(thisid){
 	},1000)},
 	function(xhr) {
  	var keys = JSON.parse(xhr.responseText);
-		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").innerHTML = keys.error; 
 		document.getElementById("regwarning").classList.replace("hide","show");
 		document.getElementById("regwarning").scrollIntoView({block: "center"});
 		setTimeout(function (){
@@ -461,6 +462,7 @@ const dsession = JSON.parse(sessionStorage.getItem('psession'));
 let owneremail = dsession.email;
 xhwr.open("PATCH", path, true);
 	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
 	xhwr.send();
 }
 
@@ -484,7 +486,7 @@ function marksold(thisid){
 	}, 1000)},
 	function(xhr) {
  	var keys = JSON.parse(xhr.responseText);
-		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").innerHTML = keys.error; 
 		document.getElementById("regwarning").classList.replace("hide","show");
 		document.getElementById("regwarning").scrollIntoView({block: "center"});
 		setTimeout(function (){
@@ -525,12 +527,13 @@ function upadprice(path, success, error) {
 			} 
 		} 
 	}; 
-const dsession = JSON.parse(sessionStorage.getItem('psession'));
+
 const dnewprice = sessionStorage.getItem('seditprice');
-let owneremail = dsession.email;
+
 xhwr.open("PATCH", path, true);
 	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	var inputValus = `{"email" : "${owneremail}","price" : "${dnewprice}"}`;
+	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
+	var inputValus = `{"price" : "${dnewprice}"}`;
 	xhwr.send(inputValus);
 }
 
@@ -557,7 +560,7 @@ function editadprice(thisid){
 	},1000);},
 	function(xhr) {
  	var keys = JSON.parse(xhr.responseText);
-		document.getElementById("regwarning").innerHTML = keys.msg; 
+		document.getElementById("regwarning").innerHTML = keys.error; 
 		document.getElementById("regwarning").classList.replace("hide","show");
 		document.getElementById("regwarning").scrollIntoView({block: "center"});
 		setTimeout(function (){
@@ -605,6 +608,7 @@ const ddrc = sessionStorage.getItem('reportedcar');
 let owneremail = dsession.email;
 xhwr.open("POST", path, true);
 	xhwr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	xhwr.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
 	var inputValus = `{"reporter_email" : "${owneremail}","car_id" : "${ddrc}","reason" : "${ddry}","description" : "${ddry}"}`;
 	xhwr.send(inputValus);
 }
@@ -635,7 +639,7 @@ function confirmrep(thisid){
 	}, 1000);},
 	function(xhr) {
  	var keys = JSON.parse(xhr.responseText);
-		document.getElementById("ralert"+replace1).innerHTML = keys.msg;
+		document.getElementById("ralert"+replace1).innerHTML = keys.error;
 		setTimeout(function (){
 			document.getElementById("rr"+replace1).style.display ="none";
 			document.getElementById("ralert"+replace1).style.display ="none";

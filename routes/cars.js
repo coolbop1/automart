@@ -19,7 +19,7 @@ const express = require("express");
 const Joi = require("joi");
 
 const route = express.Router();
-
+let jwt = require("jsonwebtoken");
 var bodyParser = require("body-parser");
 
 route.use(express.json());
@@ -27,6 +27,12 @@ route.use(bodyParser.urlencoded({
 	extended: true }));//middleware
 
     route.use(bodyParser.text({ type: "application/json" }));
+    route.use(function(req, res, next) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+	res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type, Authorization");
+	next();
+});
 
 
 
@@ -37,11 +43,9 @@ route.use(bodyParser.urlencoded({
 
 
 ///////////post car end point///////////////////
-route.post("/api/v1/car", (req, res) => {
+route.post("/api/v1/car",ensureToken, (req, res) => {
 	
 	const schema ={
-		email : Joi.string().trim().email().required(),
-		owner : Joi.required(),
 		manufacturer : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
 		model : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(2),
 		price : Joi.number().min(0).required(),
@@ -54,7 +58,8 @@ route.post("/api/v1/car", (req, res) => {
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
 	let reply = {
-		"msg" : valid.error.details[0].message
+		"status":409,
+		"error" : valid.error.details[0].message
 	}	
 	res.status(409).send(reply);
 		return;
@@ -74,8 +79,8 @@ route.post("/api/v1/car", (req, res) => {
 		 "pics" : req.body.pics,
 		 "status" : "available"
  	};
- 	
- 	pool.query("INSERT INTO postads (email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",[req.body.email,req.body.owner,dddate,req.body.manufacturer,req.body.model,req.body.price,req.body.state,req.body.engine_size,req.body.body_type,req.body.pics,"available"],(error,sussec)=>{
+ 	let { user } = req.token;
+ 	pool.query("INSERT INTO postads (email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",[user.email,user.id,dddate,req.body.manufacturer,req.body.model,req.body.price,req.body.state,req.body.engine_size,req.body.body_type,req.body.pics,"available"],(error,sussec)=>{
  		
  	
  	//console.log(error,sussec)
@@ -88,7 +93,7 @@ route.post("/api/v1/car", (req, res) => {
 
 
 ////delete car ad/////////
-route.delete("/api/v1/car/:carid",(req, res) =>{
+route.delete("/api/v1/car/:carid",ensureToken,(req, res) =>{
     let todelete = req.params.carid;
  
     pool.query("DELETE FROM  postads WHERE id=$1",[todelete],(error,result)=>{
@@ -109,7 +114,7 @@ route.delete("/api/v1/car/:carid",(req, res) =>{
 });
 ///////////////////car search query//////////////////
 
-route.get("/api/v1/car",(req, res) =>{
+route.get("/api/v1/car",ensureToken,(req, res) =>{
     
 		let allthequeries = Object.keys(req.query).length;
       let thequery = Object.keys(req.query);
@@ -127,7 +132,9 @@ route.get("/api/v1/car",(req, res) =>{
        
        }
        function breakthequery(){
-       	res.status(400).send("bad request");
+       	res.status(400).send({
+       		"status":400,
+       	"error":"bad request"});
                    return;
        }
        
@@ -141,7 +148,9 @@ route.get("/api/v1/car",(req, res) =>{
         let thestate ;
         if(typeof req.query.min_price !== "undefined"){
             if(isNaN(req.query.min_price)){
-                res.status(400).send("wrong value formart for min_price");
+                res.status(400).send({
+                	"status":400,
+                "error":"wrong value formart for min_price"});
                 return;
             }else
                 theminprice = parseInt(req.query.min_price);
@@ -150,7 +159,9 @@ route.get("/api/v1/car",(req, res) =>{
         theminprice = null;
         if(typeof req.query.max_price !== "undefined"){
             if(isNaN(req.query.max_price)){
-                res.status(400).send("wrong value formart for max_price");
+                res.status(400).send({
+                	"status":400,
+                	"error":"wrong value formart for max_price"});
                 return;
             }else
                 themaxprice = parseInt(req.query.max_price);
@@ -203,7 +214,7 @@ route.get("/api/v1/car",(req, res) =>{
            }else{
            	res.status(404).json({
                "status":404,
-               "msg":"no result for this request"
+               "error":"no result for this request"
            });
            }
         
@@ -220,7 +231,7 @@ route.get("/api/v1/car",(req, res) =>{
            }else{
            	res.status(404).json({
                "status":404,
-               "msg":"no car ad to display"
+               "error":"no car ad to display"
            });
            }
         
@@ -234,14 +245,14 @@ route.get("/api/v1/car",(req, res) =>{
 
 
 //handles view single car
-route.get("/api/v1/car/:carid", (req, res) => {
+route.get("/api/v1/car/:carid",ensureToken, (req, res) => {
     
     pool.query("select * from postads where id = $1",[req.params.carid],(error,result)=>{
      
             if(result.rows.length > 0)
                 res.status(200).json({ "status" : 200, "data" : result.rows});
             else 
-                res.status(404).send({"error" : "The car was not found"	});
+                res.status(404).send({"status":404,"error" : "The car was not found"	});
     })
 });
 ///////////////////////////
@@ -255,9 +266,9 @@ route.get("/api/v1/car/:carid", (req, res) => {
 
 
 ///////////mark carf as sold///////////////////
-route.patch("/api/v1/car/:carid/status", (req, res) => {
-    
-	pool.query("update postads set status=$1 where id=$2 and status=$3 RETURNING *",["sold",req.params.carid,"available"],(error,result)=>{
+route.patch("/api/v1/car/:carid/status",ensureToken, (req, res) => {
+    let { user } = req.token;
+	pool.query("update postads set status=$1 where id=$2 and status=$3 and owner=$4 RETURNING *",["sold",req.params.carid,"available",user.id],(error,result)=>{
         
         if(result && result.rows.length > 0){            
             res.status(200).json({
@@ -277,7 +288,7 @@ route.patch("/api/v1/car/:carid/status", (req, res) => {
         } else {
             res.status(404).send({
                 "status" : 404,
-                "msg" : "Oops cant find this ad"});
+                "error" : "Oops cant find this ad or does not belong to you"});
         }
     
 
@@ -288,25 +299,23 @@ route.patch("/api/v1/car/:carid/status", (req, res) => {
 
 
 ///////////seller edit price///////////////////
-route.patch("/api/v1/car/:carid/price", (req, res) => {
+route.patch("/api/v1/car/:carid/price",ensureToken, (req, res) => {
     
+    let { user } = req.token;
 	const schema ={
-		email : Joi.string().trim().email().required(),
-		price : Joi.number().min(0).required(),
-		
-		
-		
+		price : Joi.number().min(0).required()		
 	}
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
 	let reply = {
-		"msg" : valid.error.details[0].message
+		"status":409,
+		"error" : valid.error.details[0].message
 	}	
 	res.status(409).send(reply);
 		return;
     } 
-    pool.query("update postads set price=$1 where id=$2 and status<>$3 RETURNING * ",[req.body.price,req.params.carid,"sold"],(error,result)=>{
-        
+    pool.query("update postads set price=$1 where id=$2 and status<>$3 and email=$4 RETURNING * ",[req.body.price,req.params.carid,"sold",user.email],(error,result)=>{
+        (error,result)
             if(result.rows.length > 0){ 
             res.status(200).json({
                 "status" : 200,
@@ -326,8 +335,7 @@ route.patch("/api/v1/car/:carid/price", (req, res) => {
         
             res.status(404).send({
                 "status" : 404,
-                "error" : "404 not found",
-                "msg" : "Oops cant find this ad or have been sold"
+                "error" : "Oops cant find this ad or have been sold or does not belong to you"
             });
         }
     
@@ -337,6 +345,28 @@ route.patch("/api/v1/car/:carid/price", (req, res) => {
 	
 });
 /////////////////////////
+
+
+function ensureToken(req, res, next) { 
+	const bearerHeader = req.headers["authorization"];
+	if (typeof bearerHeader !== "undefined") {  
+		const berarer = bearerHeader.split(" "); 
+		const bearerToken = berarer[1]; 
+		req.token = bearerToken;
+		jwt.verify(req.token, "ourlittlesecret", function(err, data) {
+			 if (err) {res.status(403).json({
+				status:403,
+			"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); 
+	
+	 	}else{
+			req.token=data;
+			next();
+		}; });
+		} else {  res.status(403).json({
+			status:403,
+		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
+
+}
 
 
 module.exports = route;
