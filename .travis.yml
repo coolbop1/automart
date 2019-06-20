@@ -3,4 +3,7 @@ node_js:
   - "10.15.3"
 services:
  - postgresql
+ before_script:
+  - psql --username=postgres
+  - psql --dbname=ddelc2mc1p0din --file=sql/create-tables.sql
   
