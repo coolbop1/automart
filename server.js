@@ -7,24 +7,38 @@ const pool = new Pool({
 	port: '5432'
 });
 */
+console.log(process.env.NODE_ENV);
 
+const Pool = require ("pg").Pool;
+let conusername;
+	let condatabase;
+	let conhost;
+	let conpassword;
 
-
-const Pool = require ('pg').Pool;
-const pool = new Pool({
-	user: 'gkhfnrideiyyoi',
-	host: 'ec2-23-21-91-183.compute-1.amazonaws.com',
-	database: 'ddelc2mc1p0din',
-	password: '75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba',
-	port: '5432',
-	ssl: true
-});
-
+if ( process.env.NODE_ENV === "test" ) {
+	conusername="postgres";
+	condatabase="travis_ci_test";
+	conhost='';
+	 conpassword='';
 	
+	}else{
+		 conusername="gkhfnrideiyyoi";
+	 condatabase="ddelc2mc1p0din";
+	 conhost="ec2-23-21-91-183.compute-1.amazonaws.com";
+	 conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";
+	}
 
+	const pool = new Pool({
+		user: conusername,
+		host: conhost,
+		database: condatabase,
+		password: conpassword,
+		port: "5432",
+		ssl: true
+	});
+	pool.connect();
 
-
- pool.connect();
+ console.log(conusername)
 
 
 
@@ -52,8 +66,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.text({ type: "application/json" }));
 
 app.use(express.static("./home"));
-app.use("/documentation", express.static(__dirname + "/documentation"))
-app.use("/UI", express.static(__dirname + "/docs"))
+app.use("/documentation", express.static(__dirname + "/documentation"));
+app.use("/UI", express.static(__dirname + "/docs"));
 //app.use(morgan("dev"));
 
 app.use(function(req, res, next) {
@@ -63,7 +77,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.get("/api/v1/allusers",(req, res) =>{  pool.query("SELECT * FROM allusers",(error,result)=>{res.status(200).send(result.rows);})});
+app.get("/api/v1/allusers",(req, res) =>{  pool.query("SELECT * FROM allusers",(error,result)=>{res.status(200).send(result.rows);});});
 
 
 
@@ -71,78 +85,78 @@ app.get("/api/v1/allusers",(req, res) =>{  pool.query("SELECT * FROM allusers",(
 //handles sign up
 app.post("/api/v1/auth/signup", (req, res) => { 
 	
-				pool.query("select * from allusers where email = $1 ",[req.body.email],(err,ress)=>{
-					//console.log(ress.rows.length)
-					if(ress.rows.length >= 1 && req.body.email){
-						let reply = {
-							"status":409,
-							"error" : "email is taken please try another"
-						}			
-						res.status(409).json(reply)
-						return;			
-					}else{
-						nextValidate();
-					}
+	pool.query("select * from allusers where email = $1 ",[req.body.email],(err,ress)=>{
+		//console.log(ress.rows.length)
+		if(ress.rows.length >= 1 && req.body.email){
+			let reply = {
+				"status":409,
+				"error" : "email is taken please try another"
+			};			
+			res.status(409).json(reply);
+			return;			
+		}else{
+			nextValidate();
+		}
 
-				})
+	});
 						
-			function nextValidate(){	
-					const schema = {
-						first_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-						last_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-						email : Joi.string().trim().email().required(),
-						address : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-						password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
-					}
+	function nextValidate(){	
+		const schema = {
+			first_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
+			last_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
+			email : Joi.string().trim().email().required(),
+			address : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
+			password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
+		};
 					
-					const valid = Joi.validate(req.body,schema);
-					if(valid.error){
-					let msgclean = valid.error.details[0].message.replace("/^[,. a-z0-9A-Z]+$/","");
-					let reply = {
-						"status":409,
-						"error" : msgclean
-					}	
-					res.status(409).send(reply);
-					return;
-					}
+		const valid = Joi.validate(req.body,schema);
+		if(valid.error){
+			let msgclean = valid.error.details[0].message.replace("/^[,. a-z0-9A-Z]+$/","");
+			let reply = {
+				"status":409,
+				"error" : msgclean
+			};	
+			res.status(409).send(reply);
+			return;
+		}
 				
-					var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-						let postit ={
+		var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+		let postit ={
 				
-							"email" : req.body.email,
-							"first_name" : req.body.first_name,
-							"last_name" : req.body.last_name,
-							"password" : hashedPassword,
-							"address" : req.body.address,
-							"is_admin" : "false"
-						}
+			"email" : req.body.email,
+			"first_name" : req.body.first_name,
+			"last_name" : req.body.last_name,
+			"password" : hashedPassword,
+			"address" : req.body.address,
+			"is_admin" : "false"
+		};
 						
 						 pool.query("INSERT INTO allusers (email, first_name, last_name, password, address, is_admin) VALUES ($1,$2,$3,$4,$5,$6) RETURNING * ",[req.body.email,req.body.first_name,req.body.last_name,hashedPassword,req.body.address,"false"],(err,result)=>{
 						 	let recentid = result.rows[0].id;
 						 	let 	comfirm = {
 						 		"id":recentid,
-					"email" : req.body.email,
-							"name" : req.body.first_name,
-							"lname" : req.body.last_name,
-							"address" : req.body.address,
-							"is_admin" : "false"
-						}
+				"email" : req.body.email,
+				"name" : req.body.first_name,
+				"lname" : req.body.last_name,
+				"address" : req.body.address,
+				"is_admin" : "false"
+			};
 				
-						let token = jwt.sign({user : comfirm}, 'ourlittlesecret', { expiresIn: '24h' })//expires in 24 hours }
-						res.status(201).json({
-							"status" : 201,
-							"data" :{
-							"token" : token,
-							"first_name" : req.body.first_name,
-							"last_name" : req.body.last_name,
-						"email" : req.body.email
-							},
-							"message":"Welcome!! "+req.body.first_name+" registration successful. <br/>Preparing dashboard in 2 sec..." 
-						})
+			let token = jwt.sign({user : comfirm}, "ourlittlesecret", { expiresIn: "24h" });//expires in 24 hours }
+			res.status(201).json({
+				"status" : 201,
+				"data" :{
+					"token" : token,
+					"first_name" : req.body.first_name,
+					"last_name" : req.body.last_name,
+					"email" : req.body.email
+				},
+				"message":"Welcome!! "+req.body.first_name+" registration successful. <br/>Preparing dashboard in 2 sec..." 
+			});
 								
-					})
-					//console.log(postit);
-}
+		});
+		//console.log(postit);
+	}
 			
 		
 	
@@ -155,22 +169,22 @@ app.post("/api/v1/auth/signup", (req, res) => {
 	
 	
 	
-	////////// for testing-----delete user endpoint----///
-	app.get("/api/v1/user/:email", (req, res) => {
+////////// for testing-----delete user endpoint----///
+app.get("/api/v1/user/:email", (req, res) => {
 		
-		pool.query("DELETE FROM  allusers WHERE email='testemail@email.coml'",(error,result)=>{
+	pool.query("DELETE FROM  allusers WHERE email='testemail@email.coml'",(error,result)=>{
 			
-				res.status(200).send({"see":"deleted"});
+		res.status(200).send({"see":"deleted"});
 		
 		 });
-		//console.log(ress)
+	//console.log(ress)
 		
 		
 
-	});
+});
 
 
-	///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 	
 	
 	
@@ -184,14 +198,14 @@ app.post("/api/v1/auth/signin", (req, res) => {
 		email : Joi.string().trim().email().required(),
 		password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
 		
-	}
+	};
 	const valid = Joi.validate(req.body,schema);
 	if(valid.error){
-	let reply = {
-		"status":409,
-		"error" : valid.error.details[0].message
-	}	
-	res.status(409).send(reply);
+		let reply = {
+			"status":409,
+			"error" : valid.error.details[0].message
+		};	
+		res.status(409).send(reply);
 		return;
 	} 
 	
@@ -200,18 +214,18 @@ app.post("/api/v1/auth/signin", (req, res) => {
 		 //console.log(ress.rows.length)
 		 if(ress.rows.length >= 1){
 			//console.log(ress.rows[0].password);
-				nextValidate(ress.rows);
+			nextValidate(ress.rows);
 					
 		 }else {
 			let reply = {
 				"status":404,
-			"error" : "Invalid username or password please try again"
-		};
+				"error" : "Invalid username or password please try again"
+			};
 		   res.status(404).send(reply);
-		   return
+		   return;
 		}
 
-	 })
+	 });
  	function nextValidate(thepassword){
  		var passwordIsValid = bcrypt.compareSync(req.body.password, thepassword[0].password); 
  		if (!passwordIsValid){
@@ -265,7 +279,7 @@ function ensureToken(req, res, next) {
 		const bearerToken = berarer[1]; 
 		req.token = bearerToken;
 		next();} else {  res.status(403).json({
-			"status":403,
+		"status":403,
 		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
 
 }
