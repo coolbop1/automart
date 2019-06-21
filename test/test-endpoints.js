@@ -217,6 +217,16 @@ describe('POST /car endpoint', function () {
             .set("Authorization", "Bearer "+token)
             .expect(409, done);
     });
+    describe('GET /car/:carid endpoint', function () {
+        it('respond with json of  the car', function (done) {
+            apps(app)
+                .get('/api/v1/car/1')
+                .set('Accept', 'application/json')
+                .set("Authorization", "Bearer "+token)
+                .expect(200, done) //expecting HTTP status code
+                
+        });
+    });
     
 });
 describe('GET /car no query get all endpoint', function () {
@@ -359,6 +369,14 @@ describe('GET /allcars endpoint', function () {
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done);
                 });
+                it('respond with json containing The order price have been changed', function (done) {
+                    apps(app)
+                        .patch('/api/v1/order/1/price')
+                        .send(comfirms)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
+                        .expect(200, done);
+                });
                 it('respond with json containing error message', function (done) {
                     apps(app)
                         .patch('/api/v1/order/0/price')
@@ -376,6 +394,13 @@ describe('GET /allcars endpoint', function () {
                         .set("Authorization", "Bearer "+token)
                         .expect(409, done);
                         
+                });
+                it('respond with unauthorized', function (done) {
+                    apps(app)
+                        .patch('/api/v1/order/3/price')
+                        .send(comfirms)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .expect(403, done);
                 });
             });
             describe('POST /flag endpoint', function () {
@@ -405,6 +430,14 @@ describe('GET /allcars endpoint', function () {
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(409,done)
+                        
+                });
+                it('respond with 403 unauthorized', function (done) {
+                    apps(app)
+                        .post('/api/v1/flag')
+                        .send(comfirmsy)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .expect(403,done)
                         
                 });
             });
