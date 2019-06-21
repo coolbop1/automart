@@ -8,7 +8,7 @@ let conusername;
 if ( process.env.NODE_ENV === "test" ) {
 	conusername="postgres";
 	condatabase="travis_ci_test";
-	conhost='';
+	conhost='127.0.0.1';
 	 conpassword='';
 	
 	}else{
