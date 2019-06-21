@@ -17,11 +17,12 @@ let conusername;
 	let conssl;
 
 if ( process.env.NODE_ENV === "test" ) {
-	conusername="postgres";
-	condatabase="travis_ci_test";
-	conhost='127.0.0.1';
-	 conpassword='';
-	conssl=false;
+	conusername="tovlhixtdmbgcz";
+	condatabase="dfvspqpvd9vmc6";
+	conhost='ec2-23-21-91-183.compute-1.amazonaws.com';
+	 conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';
+	 conssl=true;
+	
 	}else{
 		 conusername="gkhfnrideiyyoi";
 	 condatabase="ddelc2mc1p0din";
@@ -172,19 +173,35 @@ app.post("/api/v1/auth/signup", (req, res) => {
 	
 	
 ////////// for testing-----delete user endpoint----///
-app.get("/api/v1/user/:email", (req, res) => {
+app.get("/api/v1/user/truncateuser", (req, res) => {
 		
-	pool.query("DELETE FROM  allusers WHERE email='testemail@email.coml'",(error,result)=>{
-			
-		res.status(200).send({"see":"deleted"});
+	pool.query("truncate table allusers restart identity",(error,result)=>{
+				res.status(200).send({"see":"deleted"});
 		
 		 });
-	//console.log(ress)
-		
-		
 
 });
-
+app.get("/api/v1/user/truncatepostad", (req, res) => {
+		
+	pool.query("truncate table postads restart identity'",(error,result)=>{
+				res.status(200).send({"see":"deleted"});
+		
+		 });
+});
+app.get("/api/v1/user/truncateorders", (req, res) => {
+		
+	pool.query("truncate table orders restart identity'",(error,result)=>{
+				res.status(200).send({"see":"deleted"});
+		
+		 });
+});
+app.get("/api/v1/user/truncatereports", (req, res) => {
+		
+	pool.query("truncate table reports restart identity'",(error,result)=>{
+				res.status(200).send({"see":"deleted"});
+		
+		 });
+});
 
 ///////////////////////////////////////////////////////
 	

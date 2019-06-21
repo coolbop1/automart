@@ -6,11 +6,12 @@ let conusername;
 	let conssl;
 
 if ( process.env.NODE_ENV === "test" ) {
-	conusername="postgres";
-	condatabase="travis_ci_test";
-	conhost='127.0.0.1';
-	 conpassword='';
-	 conssl=false;
+	conusername="tovlhixtdmbgcz";
+	condatabase="dfvspqpvd9vmc6";
+	conhost='ec2-23-21-91-183.compute-1.amazonaws.com';
+	 conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';
+	 conssl=true;
+	
 	
 	}else{
 		 conusername="gkhfnrideiyyoi";

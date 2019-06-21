@@ -674,7 +674,26 @@ describe('GET /allcars endpoint', function () {
             describe('delete all test inputs', function () {
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
-                       .get('/api/v1/user/testemail@email.coml')
+                       .get('/api/v1/user/truncateuser')
+                       .set("Authorization", "Bearer "+token)
+                        .expect(200 ,done)
+                });
+                
+                it('respond with json delete succesfull', function (done) {
+                    apps(app)
+                       .get('/api/v1/user/truncatepostad')
+                       .set("Authorization", "Bearer "+token)
+                        .expect(200 ,done)
+                });
+                 it('respond with json delete succesfull', function (done) {
+                    apps(app)
+                       .get('/api/v1/user/truncateorders')
+                       .set("Authorization", "Bearer "+token)
+                        .expect(200 ,done)
+                });
+                 it('respond with json delete succesfull', function (done) {
+                    apps(app)
+                       .get('/api/v1/user/truncatereports')
                        .set("Authorization", "Bearer "+token)
                         .expect(200 ,done)
                 });
