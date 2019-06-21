@@ -145,7 +145,7 @@ describe('GET /car endpoint', function () {
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
-            .expect(404, done) 
+            .expect(200, done) 
     });
 });
 
@@ -386,7 +386,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'status' : 'sold'})
                         .set("Authorization", "Bearer "+token)
-                        .expect(404, done) //expecting HTTP status code
+                        .expect(200, done) //expecting HTTP status code
                        
                 });
             });
@@ -469,16 +469,7 @@ describe('GET /allcars endpoint', function () {
 
             });
             describe('GET /car never repeat output', function () {
-                it('respond with only 1', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'status' : 'available'})
-                        .query({'body_type' : 'color'})
-                        .set("Authorization", "Bearer "+token)
-                        .expect(200, done); //expecting HTTP status code
-                        
-                       
-                });
+                
                 it('respond with only 1', function (done) {
                     apps(app)
                         .get('/api/v1/car')
@@ -489,16 +480,7 @@ describe('GET /allcars endpoint', function () {
                         
                        
                 });
-                it('respond with only 1', function (done) {
-                    apps(app)
-                        .get('/api/v1/car')
-                        .query({'status' : 'available'})
-                        .query({'manufacturer' : 'carmanufacturer'})
-                        .set("Authorization", "Bearer "+token)
-                        .expect(200, done); //expecting HTTP status code
-                        
-                       
-                });
+                
                 it('respond with only 1', function (done) {
                     apps(app)
                         .get('/api/v1/car')
@@ -600,7 +582,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'manufacturer' : 'carmanufacturer'})
                         .set("Authorization", "Bearer "+token)
-                        .expect(200, done); //expecting HTTP status code
+                        .expect(404, done); //expecting HTTP status code
                         
                 });
             });
@@ -611,7 +593,7 @@ describe('GET /allcars endpoint', function () {
                         .patch('/api/v1/car/3/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
-                        .expect(200, done);
+                        .expect(404, done);
                 });
                 
             });
