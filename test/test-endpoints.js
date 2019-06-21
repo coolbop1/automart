@@ -104,7 +104,7 @@ describe('authorized test', function () {
                 .get('/api/v1/car')
                 .set('Accept', 'application/json')
                 .set("Authorization", "Bearer "+token)
-                .expect(200, done) 
+                .expect(404, done) 
         });
     });
     describe('POST /me endpoint', function () {
@@ -175,7 +175,7 @@ describe('GET /car endpoint', function () {
             .get('/api/v1/car')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
-            .expect(200, done) 
+            .expect(404, done) 
     });
 });
 
@@ -242,7 +242,7 @@ describe('PATCH /car/:carid/price endpoint', function () {
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
-            .expect(404, done);
+            .expect(200, done);
     });
     it('respond with 409 conflict', function (done) {
         apps(app)
@@ -272,7 +272,7 @@ describe('GET /car/:carid  existing car endpoint', function () {
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
-            .expect(200, done) //expecting HTTP status code
+            .expect(404, done) //expecting HTTP status code
             
     });
 });
@@ -357,7 +357,7 @@ describe('GET /allcars endpoint', function () {
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
-                        .expect(200, done);
+                        .expect(404, done);
                 });
                 it('respond with json containing error message', function (done) {
                     apps(app)
@@ -416,7 +416,7 @@ describe('GET /allcars endpoint', function () {
                         .get('/api/v1/car')
                         .query({'status' : 'sold'})
                         .set("Authorization", "Bearer "+token)
-                        .expect(200, done) //expecting HTTP status code
+                        .expect(404, done) //expecting HTTP status code
                        
                 });
             });
