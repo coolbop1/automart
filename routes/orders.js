@@ -1,18 +1,34 @@
-const Pool = require ('pg').Pool;
-const pool = new Pool({
-	user: 'gkhfnrideiyyoi',
-	host: 'ec2-23-21-91-183.compute-1.amazonaws.com',
-	database: 'ddelc2mc1p0din',
-	password: '75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba',
-	port: '5432',
-	ssl: true
-});
 
+const Pool = require ("pg").Pool;
+let conusername;
+	let condatabase;
+	let conhost;
+	let conpassword;
+
+if ( process.env.NODE_ENV === "test" ) {
+	conusername="postgres";
+	condatabase="travis_ci_test";
+	conhost='';
+	 conpassword='';
 	
+	}else{
+		 conusername="gkhfnrideiyyoi";
+	 condatabase="ddelc2mc1p0din";
+	 conhost="ec2-23-21-91-183.compute-1.amazonaws.com";
+	 conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";
+	}
+
+	const pool = new Pool({
+		user: conusername,
+		host: conhost,
+		database: condatabase,
+		password: conpassword,
+		port: "5432",
+		ssl: true
+	});
+	pool.connect();
 
 
-	
- pool.connect()
 
 const express = require("express");
 const Joi = require("joi");

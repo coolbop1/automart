@@ -162,7 +162,6 @@ function signin(path, success, error) {
 	var lpass =	document.getElementById("pwd").value;
 	xhrl.open("POST", path, true);
 	xhrl.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	xhrl.setRequestHeader("Authorization", "Bearer "+localStorage.getItem('accessToken'));
 	var inputVald = `{"email" : "${lusern}" , "password" : "${lpass}"}`;
 	xhrl.send(inputVald);
 }
