@@ -168,6 +168,13 @@ describe('GET /car/:carid endpoint', function () {
             .expect(404, done) //expecting HTTP status code
             
     });
+    it('respond you are forbiden', function (done) {
+        apps(app)
+            .get('/api/v1/car/0')
+            .set('Accept', 'application/json')
+            .expect(403, done) //expecting HTTP status code
+            
+    });
 });
 describe('GET /car endpoint', function () {
     it('respond with json The car was not found', function (done) {
@@ -285,6 +292,15 @@ describe('GET /car/:carid  existing car endpoint', function () {
             .expect(404, done) //expecting HTTP status code
             
     });
+    it('respond json of car with id \"1\"', function (done) {
+        apps(app)
+            .get('/api/v1/car/2')
+            .set('Accept', 'application/json')
+            .set("Authorization", "Bearer uikiu"+token)
+            .expect('Content-Type', /json/)
+            .expect(403, done) //expecting HTTP status code
+            
+    });
 });
 describe('GET /allcars endpoint', function () {
     
@@ -349,6 +365,14 @@ describe('GET /allcars endpoint', function () {
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(409, done);
+                });
+                it('respond with conflict', function (done) {
+                    apps(app)
+                        .post('/api/v1/order')
+                        .send(comfirmsy)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer 3435"+token)
+                        .expect(403, done);
                 });
                 it('respond with allorders ', function (done) {
                     apps(app)
@@ -435,13 +459,21 @@ describe('GET /allcars endpoint', function () {
                 it('respond with 403 unauthorized', function (done) {
                     apps(app)
                         .post('/api/v1/flag')
-                        .send(comfirmsy)
+                        .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(403,done)
                         
                 });
             });
-            
+            it('respond with json 409 conflict', function (done) {
+                    apps(app)
+                        .post('/api/v1/flag')
+                        .send(comfirmsy)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer 3343"+token)
+                        .expect(403,done)
+                        
+                });
            
             describe('GET /car with status query', function () {
                 it('respond with json of the car not found', function (done) {
