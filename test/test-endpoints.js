@@ -5,7 +5,30 @@ var should = require('chai').should();
 var expect = require('chai').expect();
 //import { ensureToken }  from '../server';
 //
-
+describe('delete all test inputs', function () {
+    it('respond with json delete succesfull', function (done) {
+        apps(app)
+           .get('/api/v1/user/truncateuser')
+            .expect(200 ,done)
+    });
+    
+    it('respond with json delete succesfull', function (done) {
+        apps(app)
+           .get('/api/v1/user/truncatepostad')
+            .expect(200 ,done)
+    });
+     it('respond with json delete succesfull', function (done) {
+        apps(app)
+           .get('/api/v1/user/truncateorders')
+            .expect(200 ,done)
+    });
+     it('respond with json delete succesfull', function (done) {
+        apps(app)
+           .get('/api/v1/user/truncatereports')
+            .expect(200 ,done)
+    });
+    
+})
 describe('POST /auth/signup endpoint', function () {
     let 	comfirms = {
         
@@ -75,6 +98,15 @@ describe('authorized test', function () {
         })
         
     })
+    describe('GET /car endpoint', function () {
+        it('respond with json The car was not found', function (done) {
+            apps(app)
+                .get('/api/v1/car')
+                .set('Accept', 'application/json')
+                .set("Authorization", "Bearer "+token)
+                .expect(200, done) 
+        });
+    });
     describe('POST /me endpoint', function () {
         let 	comfirmsy = {"email" : "" , "password" : ""}
     let 	notcomfirms = {"email" : "testemaioool@email.coml" , "password" : "thepassword"}
@@ -133,7 +165,6 @@ describe('GET /car/:carid endpoint', function () {
             .get('/api/v1/car/0')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
-            .expect('Content-Type', /json/)
             .expect(404, done) //expecting HTTP status code
             
     });
@@ -144,7 +175,6 @@ describe('GET /car endpoint', function () {
             .get('/api/v1/car')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
-            .expect('Content-Type', /json/)
             .expect(200, done) 
     });
 });
@@ -587,10 +617,22 @@ describe('GET /allcars endpoint', function () {
                 });
             });
             describe('PATCH /car/:carid/status endpoint', function () {
-                
                 it('respond with json containing The status of car changed to sold', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/3/status')
+                        .patch('/api/v1/car/1/status')
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
+                        .expect(200, done);
+                });
+                it('respond with 403 unuthorized car not your', function (done) {
+                    apps(app)
+                        .patch('/api/v1/car/1/status')
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .expect(403, done);
+                });
+                it('respond with json containing The status of car changed to sold', function (done) {
+                    apps(app)
+                        .patch('/api/v1/car/0/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done);
