@@ -464,7 +464,7 @@ describe('GET /allcars endpoint', function () {
                         .expect(403,done)
                         
                 });
-            });
+            
             it('respond with json 409 conflict', function (done) {
                     apps(app)
                         .post('/api/v1/flag')
@@ -474,7 +474,7 @@ describe('GET /allcars endpoint', function () {
                         .expect(403,done)
                         
                 });
-           
+            });
             describe('GET /car with status query', function () {
                 it('respond with json of the car not found', function (done) {
                     apps(app)
