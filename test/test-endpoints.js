@@ -34,7 +34,7 @@ describe('POST /auth/signup endpoint', function () {
         
          "first_name" : "test firstname",
          "last_name" : "testlast" ,
-         "email" : "testemail@email.coml" ,
+         "email" : "domrand9@gmail.com" ,
          "address" : "testaddress",
           "password" : "thepassword"
            
@@ -50,7 +50,7 @@ describe('POST /auth/signup endpoint', function () {
 });
 describe('POST /auth/signup endpoint', function () {
     let 	comfirms = {
-        "email" : "testemail@email.coml",
+        "email" : "domrand9@gmail.com",
          "first_name" : "test firstname",
          "last_name" : "testlast",
           "password" : "thepassword",
@@ -76,7 +76,7 @@ describe('POST /auth/signup endpoint', function () {
     
 });
 describe('POST /auth/signin endpoint', function () {
-    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "thepassword"}
+    let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassword"}
     
     it('respond with json details of user', function (done) {
         apps(app)
@@ -87,7 +87,7 @@ describe('POST /auth/signin endpoint', function () {
     });
 })
 describe('authorized test', function () {
-    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "thepassword"}
+    let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassword"}
     before(function(done){
         apps(app)
         .post('/api/v1/auth/signin')
@@ -138,7 +138,7 @@ describe('authorized test', function () {
     });
 });
 describe('POST /auth/signin with wrong password', function () {
-    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "thepassssss"}
+    let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassssss"}
     it('respond with 401 unauthorised', function (done) {
         apps(app)
             .post('/api/v1/auth/signin')
@@ -149,7 +149,7 @@ describe('POST /auth/signin with wrong password', function () {
     
 });
 describe('POST /auth/signin endpoint', function () {
-    let 	comfirms = {"email" : "testemail@email.coml" , "password" : "wrongpassword"}
+    let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "wrongpassword"}
     it('unauthorize error', function (done) {
         apps(app)
             .post('/api/v1/auth/signin')
@@ -746,6 +746,61 @@ describe('GET /allcars endpoint', function () {
                         
                 });
             });
+            describe('POST /auth/signin endpoint', function () {
+    let 	comfirms = {"new_password" : "thepassword" , "current_password" : "thepassword"}
+    let 	comfirmsy = {"new_password" : "thepassword" , "current_password" : "thepasword"}
+    let 	comfirmsyu = {"new_password" : "thep" , "current_password" : "thep"}
+    
+    it('respond with not found', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirmsy)
+            .expect(404, done);
+    });
+    it('respond with not found', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirmsyu)
+            .expect(409, done);
+    });
+    it('respond with not found', function (done) {
+        apps(app)
+            .post('/api/v1/user/theemail@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirms)
+            .expect(404, done);
+    });
+    it('respond with not found', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrad9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirms)
+            .expect(404, done);
+    });
+     it('respond password changed', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirms)
+            .expect(200, done);
+    });
+    it('send email to user', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send()
+            .expect(200, done);
+    });
+    it('send email to user', function (done) {
+        apps(app)
+            .post('/api/v1/user/domra9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send()
+            .expect(200, done);
+    });
+})
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
                     "price" : "2000"
