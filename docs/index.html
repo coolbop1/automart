@@ -63,10 +63,10 @@
 					</div>
 					
 						<div class="show  righttabs" id="fpintab">
-<div class="titletab">SIGN IN <span  class="close" onclick="closetab()">&#10006</span></div>
+<div class="titletab">SIGN IN <span  class="close" id="fclose" onclick="closetab(this.id)">&#10006</span><a id="backbut"  class="goback hide" onclick="backtotab()">back</a></div>
 <br/>
 						<div class="contain">
-								<form method="POST" onsubmit="return  login()">
+								<form id="signinform" class="show" method="POST" onsubmit="return  login()">
 									<div class="relh">
 								<input type="email" class="myinput" id="user" placeholder="Email" name="user">
 									<label class="label-helper" for="user">Email</label>
@@ -74,14 +74,42 @@
 							<div class="relh">
 								<input type="password" class="myinput" placeholder="*******" id="pwd" name="pwd">
 									<label class="label-helper" for="pwd">Password</label>
+									
 									</div>
+									<p class="forgpass">Forgotten your password? <a onclick="forgopass()">click here</a></p>
+									
 								<button id="logg"  class="padbutton" >login</button>
+								
 								<!---<div class="spinning"></div>-->
 							</form>
+								<form id="retrieveform" class="hide" method="POST" onsubmit="return  retremail()">
+										<div class="relh">
+								<input type="email" class="myinput" id="retemail" placeholder="Enter registered email" name="retemail" required>
+									<label class="label-helper" for="retemail">Registered Email</label>
+							</div>
+							<div id="firstpass" class="relh hide">
+								<input type="password" class="myinput" placeholder="***current password***" id="fpwd" name="fpwd">
+									<label class="label-helper" for="fpwd">Current Password</label>
+									</div>
+									<div id="secpass" class="relh hide">
+								<input type="password" class="myinput" placeholder="***new password***" id="spwd" name="spwd" >
+									<label class="label-helper" for="spwd">New Password</label>
+									</div>
+									
+										<button id="retrievebut"  class="padsbutton" >Get Password</button>
+										<br/>&nbsp;<br/>
+										<div id="changepasbut"  class="padssbutton show" onclick="openpassf()">change Password</div>
+																			</form>
 						</div>
+						
 					</div>
+					
+					
+					
+					
+					
 					<div class="hide righttabs" id="spintab">
-						<div class="titletab">SIGN UP <span  class="close" onclick="closetab()">&#10006</span></div>
+						<div class="titletab">SIGN UP <span id="sclose"  class="close" onclick="closetab(this.id)">&#10006</span></div>
 						<div class="contain">
 							<form method="POST" onsubmit="return signup()">
 								<div class="relh">

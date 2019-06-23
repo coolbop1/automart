@@ -1,3 +1,22 @@
+function openpassf(){
+	document.getElementById("retrievebut").innerHTML="Change Password";
+document.getElementById("changepasbut").classList.replace("show","hide");
+document.getElementById("firstpass").classList.replace("hide","show");
+document.getElementById("secpass").classList.replace("hide","show");
+}
+function forgopass(){	document.getElementById("signinform").classList.replace("show","hide");
+	document.getElementById("retrieveform").classList.replace("hide","show")
+document.getElementById("backbut").classList.replace("hide","show")
+}
+function backtotab(){
+document.getElementById("retrievebut").innerHTML="Get Password";	document.getElementById("changepasbut").classList.replace("hide","show");
+document.getElementById("firstpass").classList.replace("show","hide");
+document.getElementById("secpass").classList.replace("show","hide");
+	
+	document.getElementById("backbut").classList.replace("show","hide")
+document.getElementById("retemail").value = "";	document.getElementById("signinform").classList.replace("hide","show");
+	document.getElementById("retrieveform").classList.replace("show","hide")
+}
 function editpot(thisid){
 	let theid = thisid;
 	let replace2 = theid.replace("editpo","edited");
@@ -99,7 +118,7 @@ function stopfilter(){
 	
 }
 function closetab(){
-	doc$ument.getElementById("spintab").classList.replace("show", "hide"); 
+backtotab();	document.getElementById("spintab").classList.replace("show", "hide"); 
 	document.getElementById("fpintab").classList.replace("show", "hide"); 
 	//document.getElementById("forsearch").style.left = "27.5%"; 
 }
