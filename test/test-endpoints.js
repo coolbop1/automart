@@ -786,13 +786,7 @@ describe('GET /allcars endpoint', function () {
             .send(comfirms)
             .expect(200, done);
     });
-    it('send email to user', function (done) {
-        apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
-            .set("Content-Type", "application/json; charset=UTF-8")
-            .send()
-            .expect(200, done);
-    });
+   
     it('send email to user', function (done) {
         apps(app)
             .post('/api/v1/user/domra9@gmail.com/reset_password')
