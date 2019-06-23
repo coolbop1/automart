@@ -193,12 +193,6 @@ app.post("/api/v1/auth/signup", (req, res) => {
 		"status":200,
 		"message":"Password have been changed successfully"
 		});
-		}else{
-			res.status(404).send({
-		"status":404,
-		"error":"The account was not found.Cant change password"
-		
-		});
 		}
 	})
 	}
@@ -218,7 +212,7 @@ app.post("/api/v1/auth/signup", (req, res) => {
 		}else{
 		
 		pool.query("update allusers set password = $1 where email = $2 RETURNING * ",["defaultpassk",req.params.email],(error,result)=>{
-			if(result){
+			if(result.rows.length > 0){
 			//sending mail////
 		var transporter =nodemailer.createTransport({
   service: 'gmail',
