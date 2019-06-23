@@ -48,6 +48,7 @@ const bcrypt = require("bcryptjs");
 const port = process.env.PORT || 3000;
 //const port = 3000;
 var bodyParser = require("body-parser");
+var nodemailer = require('nodemailer');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ 
@@ -149,13 +150,133 @@ app.post("/api/v1/auth/signup", (req, res) => {
 	}
 			
 		
-	
-				
-			
-	
-
-		
 });
+	
+	
+	
+	
+	
+	app.post("/api/v1/user/:email/reset_password", (req, res) => {
+		if(typeof req.body.current_password !== "undefined"){
+		const schema ={
+		current_password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6),
+		new_password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6),
+		
+	};
+	const valid = Joi.validate(req.body,schema);
+	if(valid.error){
+		let reply = {
+			"status":409,
+			"error" : valid.error.details[0].message
+		};	
+		res.status(409).send(reply);
+		return;
+	} 
+
+	pool.query("select * from allusers where email=$1",[req.params.email],(err,ress)=>{
+		if(ress.rows.length > 0){
+					var passwordIsValid = bcrypt.compareSync(req.body.current_password, ress.rows[0].password); 
+ 		if (passwordIsValid){
+			ccontinue();
+			}
+			else
+		cstop();
+		}
+		else
+		cstop();
+	})
+	function ccontinue(){
+			var hashedPassword = bcrypt.hashSync(req.body.new_password, 8);
+	pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hashedPassword,req.params.email],(error,result)=>{
+		if(result){
+			res.status(200).send({
+		"status":200,
+		"message":"Password have been changed successfully"
+		});
+		}else{
+			res.status(404).send({
+		"status":404,
+		"error":"The account was not found.Cant change password"
+		
+		});
+		}
+	})
+	}
+	function cstop(){
+		res.status(404).send({
+		"status":404,
+		"error":"The account was: not found.Cant change password"
+		
+		});
+		return
+	}
+	
+	
+	
+	
+	
+		}else{
+		
+		pool.query("update allusers set password = $1 where email = $2 RETURNING * ",["defaultpassk",req.params.email],(error,result)=>{
+			if(result){
+			//sending mail////
+		var transporter =nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'bidoritunmise@gmail.com',
+    pass: 'new password'
+  }
+});
+
+var mailOptions = {
+  from: 'AUTOMART',
+  to: req.params.email,
+  subject: 'Password Request',
+	 html: '<h3>AutoMart Password Retrieval</h3><p>New password : defaultpassk</p>'
+};
+
+transporter.sendMail(mailOptions,function(error, info){
+  if (error) {
+    console.log(error);
+res.status(400).send({
+		"status":400,
+		"error":"Error occured please try again later"
+		
+		});
+  } else {
+  //  console.log('Email sent: ' + info.response);
+res.status(200).send({
+		"status":200,
+		"message":"A password have been sent to your email : "+req.params.email
+		
+		});
+  }
+});
+}else{
+	res.status(404).send({
+		"status":404,
+		"error":req.params.email+" cant be found"
+		
+		});
+}
+//{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}
+			});
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+//	pool.query("truncate table allusers restart identity",(error,result)=>{ });
+	})
 	
 	
 	
@@ -214,7 +335,7 @@ app.post("/api/v1/auth/signin", (req, res) => {
 	
 	 pool.query("select * from allusers where email = $1",[req.body.email],(err,ress)=>{
 		 //console.log(ress.rows.length)
-		 if(ress.rows.length >= 1){
+		 if(ress.rows.length > 0){
 			//console.log(ress.rows[0].password);
 			nextValidate(ress.rows);
 					

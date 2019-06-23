@@ -205,6 +205,77 @@ function login(){
 
 
 
+///////////{{{retrieve password}}}
+function getpasword(path, success, error) { 
+
+	var xhrl = new XMLHttpRequest(); 
+	xhrl.onreadystatechange = function() {
+		if (xhrl.readyState === XMLHttpRequest.DONE) {
+			if (xhrl.status === 200) { 
+  	if (success) success(JSON.parse(xhrl.responseText)); 
+			} else { 
+  	if (error) error(xhrl); 
+			} 
+		} 
+	}; 
+		let oldpass = document.getElementById("fpwd").value;
+		let newpass = document.getElementById("spwd").value;
+	xhrl.open("POST", path, true);
+	xhrl.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	if(oldpass == ""){
+	xhrl.send();
+	}else{
+		var val = `{"current_password":"${oldpass}","new_password":"${newpass}"}`
+	xhrl.send(val);
+	}
+	
+}
+function retremail(){
+let retemaill =	document.getElementById("retemail").value;	document.getElementById("retrievebut").disabled = true;
+	document.getElementById("retrievebut").innerHTML = '<center><div class="spinning"></div></center>';
+	
+	getpasword(`/api/v1/user/${retemaill}/reset_password`, function(data) {
+			document.getElementById("regsuccess").innerHTML = data.message;
+    document.getElementById("regsuccess").classList.replace("hide","show");	
+		document.getElementById("regsuccess").scrollIntoView({block:"center"});
+	
+
+		setTimeout(function(){
+			document.getElementById("regsuccess").classList.replace("show","hide");
+			document.getElementById("retrievebut").disabled = false;
+			document.getElementById("retrievebut").innerHTML = "Get password";
+			document.getElementById("regsuccess").innerHTML = "";
+ 	backtotab();
+		}, 3000);},
+	function(xhrl) { 
+ 	var keys = JSON.parse(xhrl.responseText);
+		document.getElementById("regwarning").innerHTML = keys.error;
+		document.getElementById("regwarning").classList.replace("hide","show");
+		
+		setTimeout(function(){
+			document.getElementById("regwarning").classList.replace("show","hide");
+			document.getElementById("retrievebut").disabled = false;
+			document.getElementById("retrievebut").innerHTML = "Get password";
+			document.getElementById("regwarning").innerHTML = "";
+			
+		}, 2000);
+		console.error(xhrl);
+ 
+ 	}	)
+ 	
+	
+ 	return false;
+	}
+	
+/////{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}
+
+
+
+
+
+
+
+
 
 
 /////{{{{{{{{///Post car}}}}}}}}}//////{}

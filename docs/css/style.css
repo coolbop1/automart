@@ -18,7 +18,7 @@ html{
 	padding:20px;
 	border-style: none;
 	width:calc(100% - 40px);
-	margin-bottom:50px;
+	margin-bottom:20px;
 	border-bottom: 2px solid #021e72;
 	
 
@@ -37,6 +37,24 @@ text-transform: uppercase;
 color:#ffffff;
 border:2px solid #ffffff;
 background:#021e72;
+
+}
+.padsbutton{
+padding:10px;
+min-width:100%;
+text-transform: uppercase;
+color:#ffffff;
+border:2px solid #ffffff;
+background:#021e72;
+
+}
+.padssbutton{
+padding:10px;
+width:calc(100%-40px);
+text-transform: uppercase;
+color:#ffffff;
+border:2px solid #ffffff;
+background:inherit;
 
 }
 .orderlists{
@@ -383,6 +401,13 @@ text-shadow:2px 2px 4px #000000;
 	top:1px;
 	font-size: 20px; 
 	display:none;
+}
+.goback{
+	position:absolute;
+	left:10px;
+	cursor:pointer;
+	top:1px;
+	font-size: 12px; 
 }
 .closes{	
 	cursor:pointer;	
@@ -1031,6 +1056,12 @@ input:invalid {
 @keyframes roll{
 	0%{-webkit-transform:rotate(0deg)}
 	100%{-webkit-transform:rotate(360deg)}
+}
+
+.forgpass a{
+color:#fff;
+tabindex:0;
+cursor:pointer;
 }
 
 
