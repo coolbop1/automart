@@ -210,8 +210,8 @@ app.post("/api/v1/auth/signup", (req, res) => {
 	
 	
 		}else{
-		
-		pool.query("update allusers set password = $1 where email = $2 RETURNING * ",["defaultpassk",req.params.email],(error,result)=>{
+		var hashedPassword = bcrypt.hashSync("defaultpassk", 8);
+		pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hashedPassword,req.params.email],(error,result)=>{
 			if(result.rows.length > 0){
 			//sending mail////
 		var transporter =nodemailer.createTransport({
