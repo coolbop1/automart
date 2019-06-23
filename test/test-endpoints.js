@@ -798,7 +798,7 @@ describe('GET /allcars endpoint', function () {
             .post('/api/v1/user/domra9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send()
-            .expect(200, done);
+            .expect(404, done);
     });
 })
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
