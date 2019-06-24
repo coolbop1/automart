@@ -842,7 +842,54 @@ describe('GET /allcars endpoint', function () {
                        .set("Authorization", "Bearer "+token)
                         .expect(200 ,done)
                 });
-                
+                 it('test production enviroment in flag routes', function (done) {
+                    apps(app)
+                       .get('/api/v1/fenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test test enviroment in flag route', function (done) {
+                    apps(app)
+                       .get('/api/v1/ffenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test production enviroment in car routes', function (done) {
+                    apps(app)
+                       .get('/api/v1/cenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test test enviroment in car route', function (done) {
+                    apps(app)
+                       .get('/api/v1/ccenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test production enviroment in order routes', function (done) {
+                    apps(app)
+                       .get('/api/v1/oenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test test enviroment in order route', function (done) {
+                    apps(app)
+                       .get('/api/v1/ooenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test production enviroment in order routes', function (done) {
+                    apps(app)
+                       .get('/api/v1/uenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test test enviroment in order route', function (done) {
+                    apps(app)
+                       .get('/api/v1/uuenv')
+                  
+                        .expect(200 ,done)
+                });
             })
         });
             //export COVERALLS_REPO_TOKEN=uXXej4MsUdasVhX6yL01XTtWMJR82UyJo
