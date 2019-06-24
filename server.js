@@ -157,7 +157,63 @@ app.post("/api/v1/auth/signup", (req, res) => {
 	
 	
 	app.post("/api/v1/user/:email/reset_password", (req, res) => {
-		if(typeof req.body.current_password !== "undefined"){
+		if((req.body.current_password === "" || req.body.new_password === "") ||(typeof req.body.current_password == "undefined" || typeof req.body.new_password == "undefined")){
+			
+			pool.query("select * from allusers where email=$1",[req.params.email],(err,ress)=>{
+		if(ress.rows.length > 0){
+			function makeid(length) { var result = ''; var characters = 'abcdefghijklmnopqrstuvwxyz'; var charactersLength = characters.length; for ( var i = 0; i < length; i++ ) { result += characters.charAt(Math.floor(Math.random() * charactersLength)); } return result; } 
+			var thenewp = makeid(6);
+							var hashedPassword = bcrypt.hashSync(thenewp, 8);
+ cccontinue(thenewp,hashedPassword)
+		}
+		else
+		cstop();
+	})
+			
+
+		function cccontinue(genpassword,hgenpassword){
+			//sending mail////
+		var transporter =nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'automartmail@gmail.com',
+    pass: 'new password'
+  }
+});
+
+var mailOptions = {
+  from: 'AUTOMART',
+  to: req.params.email,
+  subject: 'Password Request',
+	 html: '<h3>AutoMart Password Retrieval</h3><p>New password : '+genpassword+'</p>'
+};
+
+transporter.sendMail(mailOptions,function(error, info){
+  if (error) {
+    console.log(error);
+res.status(400).send({
+		"status":400,
+		"error":"Error occured please try again later"
+		
+		});
+  } else {
+	pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hgenpassword,req.params.email],(error,result)=>{
+			if(result.rows.length > 0){
+  //  console.log('Email sent: ' + info.response);
+res.status(200).send({
+		"status":200,
+		"message":"A password have been sent to your email : "+req.params.email})
+		}});
+	}
+	});
+
+//{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}
+			
+			}
+		
+		
+		}else{
+			console.log(req.body.new_password)
 		const schema ={
 		current_password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6),
 		new_password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6),
@@ -196,67 +252,11 @@ app.post("/api/v1/auth/signup", (req, res) => {
 		}
 	})
 	}
-	function cstop(){
-		res.status(404).send({
-		"status":404,
-		"error":"The account was: not found.Cant change password"
-		
-		});
-		return
-	}
 	
 	
 	
 	
 	
-		}else{
-			
-		var hashedPassword = bcrypt.hashSync("defaultpassk", 8);
-		pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hashedPassword,req.params.email],(error,result)=>{
-			if(result.rows.length > 0){
-			//sending mail////
-		var transporter =nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'bidoritunmise@gmail.com',
-    pass: 'new password'
-  }
-});
-
-var mailOptions = {
-  from: 'AUTOMART',
-  to: req.params.email,
-  subject: 'Password Request',
-	 html: '<h3>AutoMart Password Retrieval</h3><p>New password : defaultpassk</p>'
-};
-
-transporter.sendMail(mailOptions,function(error, info){
-  if (error) {
-    console.log(error);
-res.status(400).send({
-		"status":400,
-		"error":"Error occured please try again later"
-		
-		});
-  } else {
-  //  console.log('Email sent: ' + info.response);
-res.status(200).send({
-		"status":200,
-		"message":"A password have been sent to your email : "+req.params.email
-		
-		});
-  }
-});
-}else{
-	res.status(404).send({
-		"status":404,
-		"error":req.params.email+" cant be found"
-		
-		});
-}
-//{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}
-			});
-			
 		}
 		
 		
@@ -264,11 +264,15 @@ res.status(200).send({
 		
 		
 		
+		function cstop(){
+		res.status(404).send({
+		"status":404,
+		"error":"The account was not found.Cant change password"
 		
-		
-		
-		
-		
+		});
+		return
+	}
+	
 	
 //	pool.query("truncate table allusers restart identity",(error,result)=>{ });
 	})

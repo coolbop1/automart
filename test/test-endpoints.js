@@ -794,6 +794,13 @@ describe('GET /allcars endpoint', function () {
             .send()
             .expect(404, done);
     });
+ it('really send email to user', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send()
+            .expect(200, done);
+    });
 })
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
