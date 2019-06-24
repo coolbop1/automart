@@ -189,14 +189,7 @@ var mailOptions = {
 };
 
 transporter.sendMail(mailOptions,function(error, info){
-  if (error) {
-    console.log(error);
-res.status(400).send({
-		"status":400,
-		"error":"Error occured please try again later"
-		
-		});
-  } else {
+  if (!error) {
 	pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hgenpassword,req.params.email],(error,result)=>{
 			if(result.rows.length > 0){
   //  console.log('Email sent: ' + info.response);
