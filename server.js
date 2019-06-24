@@ -1,22 +1,27 @@
-/*const Pool = require ('pg').Pool;
-const pool = new Pool({
-	user: 'andela',
-	host: '127.0.0.1',
-	database: 'andela',
-	password: '',
-	port: '5432'
-});
-*/
-
 const Pool = require ("pg").Pool;
-let conusername;
-	let condatabase;
-	let conhost;
-	let conpassword;
-	let conssl;
+let conusername ="gkhfnrideiyyoi";
+	let condatabase= "ddelc2mc1p0din";
+	let conhost="ec2-23-21-91-183.compute-1.amazonaws.com";
+	let conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";
+	let conssl=true;
+	setenvparam();
+	function changeenv(){
+	process.env['NODE_ENV'] = 'test';
+	setenvparam();
+	}
+	function changeenvpro(){
+	process.env['NODE_ENV'] = 'production';
+	setenvparam();
+	}
+function setenvparam(){
+if (process.env.NODE_ENV && process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;}
+else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;}
+else{
+conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-91-183.compute-1.amazonaws.com";conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";conssl=true;
+}
 
-if (process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;}else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;}else{conusername="gkhfnrideiyyoi";condatabase="ddelc2mc1p0din";conhost="ec2-23-21-91-183.compute-1.amazonaws.com";conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";conssl=true;}
-
+//console.log(conusername)
+}
 
 	const pool = new Pool({
 		user: conusername,
@@ -27,7 +32,7 @@ if (process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase=
 		ssl: conssl
 	});
 	pool.connect();
-
+	
  console.log(conusername)
 
 
@@ -71,7 +76,19 @@ app.use(function(req, res, next) {
 app.get("/api/v1/allusers",(req, res) =>{  pool.query("SELECT * FROM allusers",(error,result)=>{res.status(200).send(result.rows);});});
 
 
-
+app.get("/api/v1/uenv", (req, res) => {
+	changeenv();
+	
+		res.status(200).send("ok");
+	
+	
+})
+app.get("/api/v1/uuenv", (req, res) => {
+	changeenvpro();
+	
+		res.status(200).send("ok");
+	
+})
 //@codeCoverageIgnoreEnd
 //handles sign up
 app.post("/api/v1/auth/signup", (req, res) => { 
