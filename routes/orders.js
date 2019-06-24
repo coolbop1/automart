@@ -14,6 +14,10 @@ let conusername ="gkhfnrideiyyoi";
 	process.env['NODE_ENV'] = 'production';
 	setenvparam();
 	}
+		function changeenvoff(){
+	process.env['NODE_ENV'] = 'offline';
+	setenvparam();
+	}
 function setenvparam(){
 if (process.env.NODE_ENV && process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;}
 else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;}
@@ -70,6 +74,13 @@ route.get("/api/v1/ooenv", (req, res) => {
 		res.status(200).send("ok");
 	
 })
+route.get("/api/v1/oooenv", (req, res) => {
+	changeenvoff();
+	
+		res.status(200).send("ok");
+	
+})
+
 
 
     route.get("/api/v1/allorders",(req, res) =>{  pool.query("SELECT * FROM orders",(error,result)=>{res.status(200).send(result.rows);})});
