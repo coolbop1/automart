@@ -189,15 +189,14 @@ var mailOptions = {
 };
 
 transporter.sendMail(mailOptions,function(error, info){
-  if (!error) {
 	pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hgenpassword,req.params.email],(error,result)=>{
-			if(result.rows.length > 0){
+		
   //  console.log('Email sent: ' + info.response);
 res.status(200).send({
 		"status":200,
 		"message":"A password have been sent to your email : "+req.params.email})
-		}});
-	}
+		});
+	
 	});
 
 //{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}
@@ -237,12 +236,11 @@ res.status(200).send({
 	function ccontinue(){
 			var hashedPassword = bcrypt.hashSync(req.body.new_password, 8);
 	pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hashedPassword,req.params.email],(error,result)=>{
-		if(result){
 			res.status(200).send({
 		"status":200,
 		"message":"Password have been changed successfully"
 		});
-		}
+		
 	})
 	}
 	
