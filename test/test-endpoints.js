@@ -890,6 +890,30 @@ describe('GET /allcars endpoint', function () {
                   
                         .expect(200 ,done)
                 });
+                it('test offline enviroment in order route', function (done) {
+                    apps(app)
+                       .get('/api/v1/oooenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test offline enviroment in flag route', function (done) {
+                    apps(app)
+                       .get('/api/v1/offenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test test enviroment in car route', function (done) {
+                    apps(app)
+                       .get('/api/v1/occenv')
+                  
+                        .expect(200 ,done)
+                });
+                it('test offline enviroment in user route', function (done) {
+                    apps(app)
+                       .get('/api/v1/ouuenv')
+                  
+                        .expect(200 ,done)
+                });
             })
         });
             //export COVERALLS_REPO_TOKEN=uXXej4MsUdasVhX6yL01XTtWMJR82UyJo
