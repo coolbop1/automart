@@ -65,21 +65,45 @@ function rightSlide(slideid) {
 	elem.style.opacity= 1;
 	if(slideid == "fpin"){
 		let elems = document.getElementById("spintab");
+		let lems = document.getElementById("tpintab");
+			elems.classList.replace("show", "hide");
 			elems.classList.replace("show", "hide");
 			elem.classList.replace("hide", "show");
 			elem.classList.replace("righttabs", "righttab");
 			document.getElementById("fpin").style.background ="#bf3f3f";
 			document.getElementById("spin").style.background ="inherit";
-
+			document.getElementById("tpin").style.background ="inherit";
+elems.style.opacity= 0;
+lems.style.opacity= 0;
 	}else if(slideid == "spin"){
 		let elems = document.getElementById("fpintab");
+		let lems = document.getElementById("tpintab");
 		elems.classList.replace("show", "hide");
+		lems.classList.replace("show", "hide");
+		elem.classList.replace("hide", "show");
+		
+		elem.classList.replace("righttabs", "righttab");
+		elems.classList.replace("righttab", "righttabs");
+		lems.classList.replace("righttabs", "righttabs");	document.getElementById("fpin").style.background ="inherit";
+	document.getElementById("spin").style.background ="#bf3f3f";
+	document.getElementById("tpin").style.background ="inherit";
+elems.style.opacity= 0;
+lems.style.opacity= 0;
+		console.log(elem);
+		console.log(elems);
+		console.log(lems);
+	}else{
+		let elems = document.getElementById("fpintab");
+		let lems = document.getElementById("spintab");
+		elems.classList.replace("show", "hide");
+		lems.classList.replace("show", "hide");
 		elem.classList.replace("hide", "show");
 		elem.classList.replace("righttabs", "righttab");
+	document.getElementById("tpin").style.background ="#bf3f3f";
+	document.getElementById("spin").style.background ="inherit";
 	document.getElementById("fpin").style.background ="inherit";
-	document.getElementById("spin").style.background ="#bf3f3f";
-	
-
+	elems.style.opacity= 0;
+lems.style.opacity= 0;
 	}
 
 }
@@ -120,6 +144,7 @@ function stopfilter(){
 function closetab(){
 backtotab();	document.getElementById("spintab").classList.replace("show", "hide"); 
 	document.getElementById("fpintab").classList.replace("show", "hide"); 
+	document.getElementById("tpintab").classList.replace("show", "hide"); 
 	//document.getElementById("forsearch").style.left = "27.5%"; 
 }
 function showpage(){
@@ -136,12 +161,14 @@ document.getElementById("myadsti").innerHTML = "My Ads";
 document.getElementById("myadsti").style.display ="block";
 	document.getElementById("posted").style.display ="block";	
 	document.getElementById("postform").style.display = "none";	
-	document.getElementById("prequest").style.display = "none";  
+	document.getElementById("prequest").style.display = "none"; 
+document.getElementById("poffered").style.display = "none";   
 	
 	
 	document.getElementById("navsord").style.background ="inherit";
 document.getElementById("navmad").style.background ="#bf3f3f";
 document.getElementById("navsad").style.background ="inherit";
+document.getElementById("navsoff").style.background ="inherit";
 }
 function showpostad(){
 opennavs();
@@ -153,11 +180,13 @@ document.getElementById("myadsti").style.display ="block";
 document.getElementById("posted").style.display = "none";
 document.getElementById("postform").style.display = "block";
 document.getElementById("prequest").style.display = "none";
+document.getElementById("poffered").style.display = "none";  
 	
 	
 	document.getElementById("navsord").style.background ="inherit";
 document.getElementById("navmad").style.background ="inherit";
 document.getElementById("navsad").style.background ="#bf3f3f";
+document.getElementById("navsoff").style.background ="inherit";
 	
 }
 function showorder(){
@@ -168,12 +197,33 @@ document.body.style.overflow = "auto";
 document.getElementById("myadsti").innerHTML = "Place Order"
 document.getElementById("myadsti").style.display ="block";	
 document.getElementById("prequest").style.display = "block";
+document.getElementById("poffered").style.display = "none";  
 	document.getElementById("posted").style.display = "none";
 	document.getElementById("postform").style.display = "none";
   document.getElementById("navsord").style.background ="#bf3f3f";
 document.getElementById("navmad").style.background ="inherit";
 document.getElementById("navsad").style.background ="inherit";
+document.getElementById("navsoff").style.background ="inherit";
 }
+
+function showoffer(){
+opennavs();
+document.getElementById("touchlist").classList.replace("show","hide");
+document.body.style.overflow = "auto";
+
+document.getElementById("myadsti").innerHTML = "My offers"
+document.getElementById("myadsti").style.display ="block";	
+document.getElementById("prequest").style.display = "none";
+document.getElementById("poffered").style.display = "block";  
+	document.getElementById("posted").style.display = "none";
+	document.getElementById("postform").style.display = "none";
+  document.getElementById("navsord").style.background ="inherit";
+document.getElementById("navmad").style.background ="inherit";
+document.getElementById("navsad").style.background ="inherit";
+document.getElementById("navsoff").style.background ="#bf3f3f";
+}
+
+
 function pedit(clickedbox){
 	let but = clickedbox;
 	let rep = but.replace("ep","sedit");	
@@ -204,6 +254,26 @@ function editop(thisid){
 	document.getElementById(cleid).style.display = "block";
 	document.getElementById(dleid).style.display = "block";
 	document.getElementById(eid).innerHTML = "Update Price";
+}
+function viewop(thisid){
+let eid = thisid;
+let leid = eid.replace('vpo','reyt');
+let cleid = eid.replace('vpo','clot');
+let dleid = eid.replace("vpo","cloot");
+document.getElementById(leid).style.display = "none";
+document.getElementById(cleid).style.display = "block";
+document.getElementById(dleid).style.display = "block";
+}
+function closepot(thisid){
+	let eid = thisid;
+	let leid = eid.replace("clot","reyt");
+	let cleid = eid.replace("clot","vpo");
+		let dleid = eid.replace("clot","cloot");
+	document.getElementById(leid).style.display = "block";
+	
+	document.getElementById(eid).style.display = "none";
+	document.getElementById(dleid).style.display = "none";
+
 }
 function closepo(thisid){
 	let eid = thisid;

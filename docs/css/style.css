@@ -29,6 +29,13 @@ html{
 	
 
 }
+.profbottom{
+	width:100%;
+	position:absolute;
+	height:400px;
+	bottom:0;
+	background-color:rgba(255,255,255,0.3);
+}
 
 .padbutton{
 padding:10px;
@@ -120,26 +127,20 @@ header a{
 }
 #mid{
 	width: 100px;
-  min-height: 100px;
+  height: 100px;
+  object-fit: cover;
   background:#bf3f3f;
 	color:#ffffff;
 	border-radius:50%;
 	border:3px solid #ffffff;
 	text-align:center;
-	text-shadow:0 0 60px #bf3f3f, 0 0 100px #021e72;
-	position:relative;
-	display:none;
-	
-padding:10px;
-  }
- #midlogo{
-  width:5%;
 	position:absolute;
 	top:30px;
-	right:47.5%;
+	right:calc(50% - 60px);
 	z-index:10;
-	display:none;
-}
+	padding:7px;
+  }
+ 
 
 	/*border-right:3px solid #021e72;*/
 #fcontent {
@@ -190,6 +191,18 @@ padding:10px;
 	border-right:5px solid #ffffff;
 	min-width:100px;
 	cursor:pointer;
+}
+.pintabs{
+	position:absolute;
+	font-size:13px;
+	color:#ffffff;
+	background:#bf3f3f;
+	text-align:left;
+	left:0px;
+	padding:5px 20px 5px 20px;
+	border-top:3px solid #ffffff;
+	border-bottom:3px solid #ffffff;
+	width:calc(100% - 40px);
 }
 .pintabw{
 	font-size:15px;
@@ -417,8 +430,22 @@ text-shadow:2px 2px 4px #000000;
 #fpin,#fpijn{
 	top:80px;
 }
+#fpinn{
+	bottom:150px;
+	z-index:1;
+	color:white;
+}
+#profilename{
+	top:160px;
+	position:relative;
+}
 #spin{
 	top:188px;
+}
+#spinn{
+	bottom:228px;
+	z-index:1;
+	color:white
 }
 #tpin{
 	top:306px;
@@ -516,6 +543,17 @@ footer{
 	background:#bf3f3f;
 	border: 3px solid #ffffff;
 	display:none;
+}
+#poffered{
+	float:none ;
+	width:100%;
+	margin:auto ;
+	position:relative;
+	min-height:90%;
+	margin-top:70px;
+	margin-bottom:30px !important;
+	display:none;
+	color:white;
 }
 .adsbox{
 	width:calc(33% - 10px);
@@ -634,6 +672,12 @@ footer{
 	width:27%;
 	float:left;
 	margin:40px 0 40px 0;
+
+}
+.postimg{
+	width:calc(33% - 40px);
+	float:left;
+	margin:20px;
 
 }
 
@@ -904,11 +948,20 @@ footer{
 }
 #userspace{
 	position:absolute;
-	padding:10px;
+	padding:10px 10px 10px 30px;
 	background:white;
 	top:5px;
 	right:5px;
 	color:#bf3f3f;
+}
+#userspace a{
+	color:#bf3f3f;
+	text-decoration:none;
+}
+#userspace img{
+	position:absolute;
+	left:0;
+	bottom:8px;
 }
 #pprice{
 	width:calc(100% - 60px);
