@@ -4,6 +4,7 @@ let conusername ="gkhfnrideiyyoi";
 	let conhost="ec2-23-21-91-183.compute-1.amazonaws.com";
 	let conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";
 	let conssl=true;
+	let thegmail="automartmail@gmail.com";
 	setenvparam();
 	function changeenv(){
 	process.env['NODE_ENV'] = 'test';
@@ -17,12 +18,19 @@ let conusername ="gkhfnrideiyyoi";
 	process.env['NODE_ENV'] = 'offline';
 	setenvparam();
 	}
+	function changeenverr(){
+	process.env['NODE_ENV'] = 'errors';
+	testgmail();
+	}
+	
 function setenvparam(){
-if (process.env.NODE_ENV && process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;}
-else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;}
+if (process.env.NODE_ENV && process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;thegmail="automartcontacts@gmail.com"}
+else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;thegmail="automartmail@gmail.com";}
 else{
-conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-91-183.compute-1.amazonaws.com";conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";conssl=true;
+conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-91-183.compute-1.amazonaws.com";conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";conssl=true;thegmail="automartcontacts@gmail.com";
 }
+
+
 
 //console.log(conusername)
 }
@@ -37,11 +45,15 @@ conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-9
 	});
 	pool.connect();
 	
- console.log(conusername)
+ 
+function testgmail(){
+	 thegmail="testgmail@gmail.com"
+	}
+	
 
 
 
-
+console.log(thegmail);
 
 //console.log('starting server');
 const express = require("express");
@@ -97,6 +109,11 @@ app.get("/api/v1/ouuenv", (req, res) => {
 	changeenvoff();
 	
 		res.status(200).send("ok");
+	
+})
+app.get("/api/v1/testerr", (req, res) => {
+	changeenverr();
+		res.status(200).send({"this":"error"});
 	
 })
 //@codeCoverageIgnoreEnd
@@ -200,14 +217,15 @@ app.post("/api/v1/auth/signup", (req, res) => {
 
 		function cccontinue(genpassword,hgenpassword){
 			//sending mail////
-		var transporter =nodemailer.createTransport({
+				var transporter =nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'automartmail@gmail.com',
+    user: thegmail,
     pass: 'new password'
   }
 });
 
+	
 var mailOptions = {
   from: 'AUTOMART',
   to: req.params.email,
@@ -216,6 +234,7 @@ var mailOptions = {
 };
 
 transporter.sendMail(mailOptions,function(error, info){
+	if(info || process.env.NODE_ENV === "offline" ){
 	pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[hgenpassword,req.params.email],(error,result)=>{
 		
   //  console.log('Email sent: ' + info.response);
@@ -223,6 +242,18 @@ res.status(200).send({
 		"status":200,
 		"message":"A password have been sent to your email : "+req.params.email})
 		});
+		
+	}else{
+		
+		res.status(400).send({
+		"status":400,
+		"error":"An error occured couldnt send password to your email.please try again"})
+		
+	}
+	
+	
+	
+	
 	
 	});
 

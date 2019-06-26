@@ -52,12 +52,14 @@ function showmyads(){
   document.getElementById("postform").style.display = "none";	
   document.getElementById("profiletab").style.display = "none";	
   document.getElementById("prequest").style.display = "none";  
+document.getElementById("poffered").style.display = "none";  
 }
 function showpostad(){
 document.getElementById("postform").style.display = "block";
 document.getElementById("profiletab").style.display = "block";
 document.getElementById("posted").style.display = "none";
 document.getElementById("prequest").style.display = "none";
+document.getElementById("poffered").style.display = "none"; 
 	
 }
 function showorder(){
@@ -65,6 +67,7 @@ document.getElementById("prequest").style.display = "block";
 document.getElementById("profiletab").style.display = "block";
 document.getElementById("posted").style.display = "none";
 document.getElementById("postform").style.display = "none";
+document.getElementById("poffered").style.display = "none"; 
   
 }
 function pedit(clickedbox){
@@ -81,6 +84,16 @@ function closedit(clsbox){
 document.getElementById(clsbox).style.display = "none";	document.getElementById(repcl).innerHTML = "edit price"
 }
 function editop(thisid){
+let eid = thisid;
+let leid = eid.replace('epo','rey');
+let meid = eid.replace('epo','edited');
+let cleid = eid.replace('epo','clo');
+document.getElementById(leid).style.display = "none";
+document.getElementById(meid).style.display = "block";
+document.getElementById(cleid).style.display = "block";
+document.getElementById(eid).innerHTML = "Update Price"
+}
+function viewop(thisid){
 let eid = thisid;
 let leid = eid.replace('epo','rey');
 let meid = eid.replace('epo','edited');

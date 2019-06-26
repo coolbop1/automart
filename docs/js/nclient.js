@@ -19,14 +19,15 @@ function stilllog(){
 		sessionStorage.setItem('psession', JSON.stringify(data.description.user));
 		const dsession = JSON.parse(sessionStorage.getItem('psession'));
 //console.log(data.description.user.email);
-if (window.location.pathname == "/UI/index.html" || window.location.pathname == "/UI") {
+if (window.location.pathname == "/UI/index.html" || window.location.pathname == "/UI" || window.location.pathname == "/index.html" || window.location.pathname == "/") {
 document.getElementById("notloged").style.display = "none";
-    document.getElementById("nowloged").style.display = "block";
-  document.getElementById("user").disabled = true;
-  document.getElementById("pwd").disabled = true;
-  document.getElementById("logg").disabled = true;
+   document.getElementById("fpintab").classList.replace("show","hide"); document.getElementById("nowloged").style.display = "block";
+   document.getElementById("profilename").innerHTML = dsession.name+" "+dsession.lname;
+   document.getElementById("spinn").innerHTML = "Email: "+dsession.email;
+   document.getElementById("fpinn").innerHTML = "Address: "+dsession.address;
+   setTimeout(()=>rightSlide("tpin"),1000);
   }else{	
-		document.getElementById("userspace").innerHTML = dsession.email;
+		document.getElementById("userspace").innerHTML = "<a href='index.html'><img src='image/uicon.jpg' width='25px' >"+dsession.email+"</a>";
  
 }
  

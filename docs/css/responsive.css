@@ -1,7 +1,4 @@
 @media only screen and (max-width:1200px){
-	#midlogo{
-		display:none;
-	}
 	.adsbox{
 		width:calc(50% - 10px);
 	}
@@ -18,9 +15,7 @@
 
 }
 @media only screen and (max-width:768px){
-	#midlogo{
-		display:none;
-	}
+
 	#topnav{
 	float:none;
 	clear:both;
@@ -137,6 +132,15 @@ header{
 	float:none;
 	margin:0px 0 10px 0 !important;
 
+}
+.postimg{
+	width:calc(100% - 40px) !important;
+	float:none;
+	margin:0 20px 30px 20px !important;
+
+}
+#stattab{
+	display:none;
 }
 .orderlist{
 	width:calc(100% - 4px) !important;
