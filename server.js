@@ -401,7 +401,12 @@ app.post("/api/v1/auth/signin", (req, res) => {
  		var passwordIsValid = bcrypt.compareSync(req.body.password, thepassword[0].password); 
  		if (!passwordIsValid){
 			//console.log('cant login')
-			return res.status(401).send({ auth: false, token: null 	});
+			let reply = {
+				"status":401,
+				"error" : "Invalid password, please check and try again"
+			};
+		   res.status(401).send(reply);
+		   return;
  		
  		}
  	let 	comfirm = {
@@ -439,7 +444,7 @@ app.post("/api/v1/auth/signin", (req, res) => {
 app.get("/api/v1/me", ensureToken, function(req, res) { 
 
  
-	jwt.verify(req.token, "ourlittlesecret", function(err, data) { if (err) { res.sendStatus(403); } else{res.status(200).json({ description:data}); } });
+	jwt.verify(req.token, "ourlittlesecret", function(err, data) { if (err) { res.sendStatus(403); } else{res.status(200).json({ status:200,description:data}); } });
 });
  
  

@@ -30,6 +30,7 @@ var userSession = sessionStorage.getItem('student');
     }*/
     }
     function dashboard(){
+    	document.getElementById("tpin").style.background ="inherit";
 window.location = "postad.html";
 }
     
