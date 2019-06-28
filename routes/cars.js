@@ -61,7 +61,7 @@ route.use(bodyParser.urlencoded({
 
 
 
- route.get("/api/v1/allcars",(req, res) =>{pool.query("SELECT * FROM postads",(error,result)=>{res.status(200).send(result.rows); })});
+ route.get("/api/v1/allcars",(req, res) =>{pool.query("SELECT * FROM postads",(error,result)=>{res.status(200).send({"status":200,data:result.rows}); })});
 
 route.get("/api/v1/cenv", (req, res) => {
 	changeenv();
@@ -156,7 +156,7 @@ route.delete("/api/v1/car/:carid",ensureToken,(req, res) =>{
 });
 ///////////////////car search query//////////////////
 
-route.get("/api/v1/car",ensureToken,(req, res) =>{
+route.get("/api/v1/car",(req, res) =>{
     
 		let allthequeries = Object.keys(req.query).length;
       let thequery = Object.keys(req.query);
@@ -287,7 +287,7 @@ route.get("/api/v1/car",ensureToken,(req, res) =>{
 
 
 //handles view single car
-route.get("/api/v1/car/:carid",ensureToken, (req, res) => {
+route.get("/api/v1/car/:carid", (req, res) => {
     
     pool.query("select * from postads where id = $1",[req.params.carid],(error,result)=>{
      
