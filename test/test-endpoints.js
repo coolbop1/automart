@@ -210,6 +210,15 @@ describe('POST /car endpoint', function () {
             
             .expect(403, done);
     });
+     it('respond with unauthorized', function (done) {
+        apps(app)
+            .post('/api/v1/car')
+            .send(comfirms)
+            .set("Content-Type", "application/json; charset=UTF-8")
+             .set("Authorization", "Bearer y13gg"+token)
+            
+            .expect(403, done);
+    });
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
             .post('/api/v1/car')
