@@ -202,6 +202,14 @@ describe('POST /car endpoint', function () {
                 "pics" : "fromclouds",
                 
             }
+            it('respond with unauthorized', function (done) {
+        apps(app)
+            .post('/api/v1/car')
+            .send(comfirms)
+            .set("Content-Type", "application/json; charset=UTF-8")
+            
+            .expect(403, done);
+    });
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
             .post('/api/v1/car')
