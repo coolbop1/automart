@@ -410,7 +410,7 @@ describe('GET /allcars endpoint', function () {
                         .patch('/api/v1/order/3/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
-                        .expect(, done);
+                        .expect(403, done);
                 });
             });
             describe('POST /flag endpoint', function () {
