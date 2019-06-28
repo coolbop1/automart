@@ -317,9 +317,32 @@ function cls(){	document.getElementById("overlay").style.display = "none";
 document.body.style.overflow = "auto";
 }
 function opensingle(thisid){
+let theid = parseInt(thisid.replace("single",""));
 	document.getElementById("inoverlay").innerHTML=document.getElementById(thisid).innerHTML;
 	document.body.style.overflow = "hidden";	
 	document.getElementById("overlay").style.display = "block";
+fetch("/api/v1/car/"+theid,{
+	method:"GET",
+	headers : new Headers({"Content-Type": "application/json; charset=UTF-8"})
+})
+.then((res)=>res.json())
+.then((data)=>{
+	if(data.status === 200){
+		const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[0];
+			var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+document.getElementById("inoverlay").innerHTML="<div class='next'>next</div><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'>";
+document.getElementById("fmanudetail").innerHTML= manufacturer+" "+model;
+document.getElementById("fstatedetail").innerHTML= state;
+document.getElementById("fpricedetail").innerHTML= formatter.format(price);
+document.getElementById("femaildetails").innerHTML= email;
+
+
+	}
+})
+.catch((e)=>console.log("error"));
 	
 }
 function showsold(){

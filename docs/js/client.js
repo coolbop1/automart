@@ -33,6 +33,78 @@ document.getElementById("notloged").style.display = "none";
 
 
 
+///////////populate div with cars/////////
+fetch("/api/v1/car",{
+	method:"GET",
+	headers : new Headers({"Content-Type": "application/json; charset=UTF-8"})
+})
+.then((res)=>{ return res.json() })
+.then((data)=>{
+	if(data.status === 200 && data.data.length > 0){
+
+document.getElementById("allcars").innerHTML = "";
+		//const { data } = data;
+	//	data.data.forEach((allcars) => {
+		for(let i=0 ; i < data.data.length; i++){
+			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[i];
+			var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+		var onecar ="<div class='adsbox'>"
+							+"<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id)' href='#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a></div>"
+								+"<div class='ralerts' id='rr"+id+"'>"
+									+"<form id='reportfor"+id+"' method='POST' onsubmit='return  confirmrep(this.id)'>"
+										+"<textarea id='reportwhy"+id+"' class='ereport' placeholder='reason for reporting' ></textarea>"  
+										+"<br/>"
+										+"<button id='confirmr"+id+"' class='pintabw' type='submit'>submit</button>"
+									+"</form>"
+								+"</div>"
+							+"<div id='ralert"+id+"' class='ralerts'>Thanks, your report is sent. It will be investigated and acted upon accordingly</div>"
+							+"<div class='mark'>"
+									+"<button class='reporttab' onclick='reportad(this.id)' id='reportbut"+id+"'>report</button>"
+									+"</div>";
+						onecar +="<div class='marks'>"
+									+"<button class='reporttaby' onclick='order(this.id)' id='orderbut"+id+"'>order</button>"
+									+"</div>";
+									
+									
+									
+						onecar +="<div class='orangetablep'>"	
+							+"<div class='intp'>"
+								+"<div class='dinsyd'>"
+									+"<span class='manu'>"+manufacturer+" "+model+"</span>"
+									+"<hr/>"
+									+"<span class='carcond'>"
+										+"Condition &nbsp;:&nbsp; "+state
+										+"</span>"
+									+"</div>"
+									+"<div class='pricein'>"
+										+"PRICE"
+										+"<br/>"
+										+formatter.format(price)
+										+"</div>"
+							+"<div class='slant'>"
+								+"</div>"
+							+"</div>"
+							+"</div>"
+							+"<span class='hide' id='smanu"+id+"'>"+manufacturer+" "+model+"</span>"
+							"<span class='hide' id='scolor"+id+"'>"+body_type+"</span>"
+								+"<span class='hide' id='scond"+id+"'>used</span>"
+							+"<span class='hide' id='samount"+id+"'>"+price+"</span>"
+							
+						+"</div>";	document.getElementById("allcars").innerHTML += onecar;
+		}
+	}
+})
+
+////////////////////////////////////{{{{}}}}
+
+
+
+
+
 
 function signup(){
 document.getElementById("regg").disabled = true;

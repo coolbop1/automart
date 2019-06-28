@@ -1,6 +1,6 @@
 body{
-	font-family:Arial, Helvetica, sans-serif;
-	/*font-family:monospace;*/
+	font-family:'K2D';
+	/*font-family:'K2D';*/
 	font-size:15px;
 	padding:0px;
 	margin:0px;
@@ -76,7 +76,7 @@ background:inherit;
 #searchinput::placeholder{ /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #ffffff;
   opacity: 1; /* Firefox */
-  font-family:monospace;
+  font-family:'K2D';
 }
 .logored{
 	color:#bf3f3f;
@@ -438,6 +438,7 @@ text-shadow:2px 2px 4px #000000;
 #profilename{
 	top:160px;
 	position:relative;
+	text-transform:capitalize;
 }
 #spin{
 	top:188px;
@@ -758,15 +759,48 @@ footer{
 	overflow:hidden;
 	
 }
-#inoverlay,#odetails{
+#inoverlay{
 	background:#ffffff;
 	border-radius:5px;
 	margin-top:25px;
-	width:70%;
-	font-weight:bold;
+	width:80%;
+	height:500px;
+	position:relative;
+}
+#odetails{
+	background:#ffffff;
+	margin-top:25px;
+	width: 90%;
+	font-weight:500;
+	text-align:left;
+}
+#fdetail{
+	padding:20px;
+	text-transform:capitalize
+}
+.next{
+	color:white;
+	padding:10px 20px;
+	position:absolute;
+	z-index:10;
+	background:rgba(0,0,0,0.8);
+	cursor:pointer;
+	top:calc(50% - 10px);
+	right:10px;
+	
+}
+.fdetail{
+	padding:20px;
+}
+#odetails hr{
+	background:#021e72;
+	border-style:none;
+	height:1px;
 }
 #inoverlay img{
-	width:90%;
+	width:calc(100% - 20px);
+	height:calc(100% - 20px);
+	object-fit:cover;
 	margin:10px;
 }
 .hideli{
@@ -831,7 +865,7 @@ footer{
 	left:3%;
 	text-transform:uppercase;
 	text-shadow:2px 2px 4px #000000;
-	font-family:monospace;
+	font-family:'K2D';
 }
 #hhold{
 	position:relative;
@@ -855,7 +889,7 @@ footer{
 	width:100%;
 	height:70px;
 	overflow:hidden;
-	font-family:monospace;
+	font-family:'K2D';
 }
 
 .slant{
@@ -941,6 +975,7 @@ footer{
 .manu{
 	font-size:15px;
 	font-weight:300;
+	text-transform:capitalize;
 	
 }
 #nowloged{
