@@ -747,6 +747,7 @@ footer{
 	z-index:100;
 	display:none;
 	overflow-y: scroll;
+	
 }
 
 #touchlist{
@@ -789,6 +790,42 @@ footer{
 	right:10px;
 	
 }
+.prev{
+	color:white;
+	padding:10px 20px;
+	position:absolute;
+	z-index:10;
+	background:rgba(0,0,0,0.8);
+	cursor:pointer;
+	top:calc(50% - 10px);
+	left:10px;
+	
+}
+
+.roller{
+	position:absolute;
+	top:calc(50% - 35px);
+	right:calc(50% - 35px);
+	width:60px;
+	height:60px;
+	border-top:5px solid #bf3f3f;
+	border-right:5px solid #fff;
+	border-left:5px solid #fff;
+	border-bottom:5px solid #bf3f3f;
+	border-radius:50%;
+	-webkit-animation: roload 2s linear infinite;
+	animation: roload 2s linear infinite;
+}
+@-webkit-keyframes roload{
+	0%{-webkit-transform:rotate(0deg)}
+	100%{-webkit-transform:rotate(360deg)}
+}
+@-keyframes roload{
+	0%{-webkit-transform:rotate(0deg)}
+	100%{-webkit-transform:rotate(360deg)}
+}
+
+
 .fdetail{
 	padding:20px;
 }
@@ -968,9 +1005,10 @@ footer{
 	font-size:20px;
 	position:absolute;
 	height:100%;
-	right:15px;
+	right:0px;
 	z-index:1;
 	top:15px;
+	text-align:right;
 }
 .manu{
 	font-size:15px;
