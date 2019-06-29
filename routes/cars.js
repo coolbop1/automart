@@ -1,5 +1,8 @@
-
-const Pool = require ("pg").Pool;
+import express from "express";
+import  Joi from "joi";
+import jwt from "jsonwebtoken";
+import bodyParser from "body-parser";
+import { Pool } from "pg";
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
 	let conhost="ec2-23-21-91-183.compute-1.amazonaws.com";
@@ -39,12 +42,10 @@ conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-9
 	pool.connect();
     
 
-const express = require("express");
-const Joi = require("joi");
+
 
 const route = express.Router();
-let jwt = require("jsonwebtoken");
-var bodyParser = require("body-parser");
+
 
 route.use(express.json());
 route.use(bodyParser.urlencoded({ 

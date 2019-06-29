@@ -316,9 +316,11 @@ function confirmre(thisid){
 function cls(){	document.getElementById("overlay").style.display = "none";
 document.body.style.overflow = "auto";
 }
-function opensingle(thisid){
+function opensingle(thisid,thisimage){
 let theid = parseInt(thisid.replace("single",""));
-	document.getElementById("inoverlay").innerHTML=document.getElementById(thisid).innerHTML;
+let nextImage = thisimage+1
+let prevImage = thisimage-1
+	document.getElementById("inoverlay").innerHTML= "<div class='roller'></div>";
 	document.body.style.overflow = "hidden";	
 	document.getElementById("overlay").style.display = "block";
 fetch("/api/v1/car/"+theid,{
@@ -329,20 +331,32 @@ fetch("/api/v1/car/"+theid,{
 .then((data)=>{
 	if(data.status === 200){
 		const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[0];
-			var formatter = new Intl.NumberFormat('en-US', {
+		let imageArr = pics.split("<>");
+		let imagelength = imageArr.length-1;
+	
+		
+			const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 });
-document.getElementById("inoverlay").innerHTML="<div class='next'>next</div><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'>";
+document.getElementById("inoverlay").innerHTML="<div id='nextimage' onclick='opensingle(`single"+id+"`,"+nextImage+")' class='hide next'>next image</div><div id='previmage' onclick='opensingle(`single"+id+"`,"+prevImage+")' class='hide prev'>prev. image</div><img src='"+imageArr[thisimage].replace("w_150,c_scale/","")+"'>";
 document.getElementById("fmanudetail").innerHTML= manufacturer+" "+model;
 document.getElementById("fstatedetail").innerHTML= state;
 document.getElementById("fpricedetail").innerHTML= formatter.format(price);
 document.getElementById("femaildetails").innerHTML= email;
-
+	if(prevImage >= 0)
+	document.getElementById("previmage").classList.replace("hide","show");
+	else
+	document.getElementById("previmage").classList.replace("show","hide");
+	
+	if(imagelength > 1 && nextImage < imagelength)
+		document.getElementById("nextimage").classList.replace("hide","show");
+		else
+		document.getElementById("nextimage").classList.replace("show","hide")
 
 	}
 })
-.catch((e)=>console.log("error"));
+.catch((e)=>console.log(e));
 	
 }
 function showsold(){

@@ -53,7 +53,7 @@ document.getElementById("allcars").innerHTML = "";
 });
 
 		var onecar ="<div class='adsbox'>"
-							+"<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id)' href='#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a></div>"
+							+"<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id,0)' href='#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a></div>"
 								+"<div class='ralerts' id='rr"+id+"'>"
 									+"<form id='reportfor"+id+"' method='POST' onsubmit='return  confirmrep(this.id)'>"
 										+"<textarea id='reportwhy"+id+"' class='ereport' placeholder='reason for reporting' ></textarea>"  

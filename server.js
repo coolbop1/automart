@@ -1,4 +1,10 @@
-const Pool = require ("pg").Pool;
+import express from "express";
+import  Joi from "joi";
+import jwt from "jsonwebtoken";
+import bodyParser from "body-parser";
+import bcrypt from "bcryptjs";
+import nodemailer from "nodemailer";
+import { Pool } from "pg";
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
 	let conhost="ec2-23-21-91-183.compute-1.amazonaws.com";
@@ -56,20 +62,17 @@ function testgmail(){
 console.log(thegmail);
 
 //console.log('starting server');
-const express = require("express");
-const Joi = require("joi");
+
 //const jwt = require('jwt-simple');
 const app = express(); 
 app.set("jwtTokenSecret", "ourlittlesecret");
 //const jwt = require('jsonwebtoken');
-let jwt = require("jsonwebtoken");
+
 //let config = require('./config');
 //let middleware = require('./middleware');
-const bcrypt = require("bcryptjs");
+
 const port = process.env.PORT || 3000;
 //const port = 3000;
-var bodyParser = require("body-parser");
-var nodemailer = require('nodemailer');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ 

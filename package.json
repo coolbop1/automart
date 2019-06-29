@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "nyc mocha --exit",
-    "start": "node server.js",
+    "start": "node start.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "babel server.js -d lib"
   },
@@ -37,8 +37,8 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
     "chai": "^4.2.0",
     "coveralls": "^3.0.4",
     "cross-env": "^5.2.0",
