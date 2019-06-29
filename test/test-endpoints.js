@@ -1,6 +1,6 @@
 const apps = require('supertest');
 const assert = require('assert');
-const app = require('../server.js');
+const app = require('../start.js');
 var should = require('chai').should();
 var expect = require('chai').expect();
 //import { ensureToken }  from '../server';
