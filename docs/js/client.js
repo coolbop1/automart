@@ -34,7 +34,18 @@ document.getElementById("notloged").style.display = "none";
 
 
 ///////////populate div with cars/////////
-fetch("/api/v1/car",{
+let initquery ="/api/v1/car?";
+initquery +="&status=available"
+paginateallcars(0);
+function paginateallcars(thestart){
+	let sttrt = parseInt(thestart)
+	var strom = sttrt;
+var stopt = strom + 6;
+document.getElementById("allcars").innerHTML = "<div style='height:100px;width:50%'><div class='roller'></div></div>";
+populateallcars(strom,stopt);
+}
+function populateallcars(startfrom,stopat){
+fetch(initquery,{
 	method:"GET",
 	headers : new Headers({"Content-Type": "application/json; charset=UTF-8"})
 })
@@ -43,9 +54,45 @@ fetch("/api/v1/car",{
 	if(data.status === 200 && data.data.length > 0){
 
 document.getElementById("allcars").innerHTML = "";
+
+if(stopat > data.data.length)
+stopat = data.data.length;
+
+if(data.data.length > 6){
+	document.getElementById("pagina").innerHTML = "";
+	let pagenum = Math.ceil(data.data.length/6);
+	
+	for(let k=1; k<=pagenum; k++){
+		if(k == 1)
+		var kb = 0;
+		else{
+			var kb = k - 1;
+			var kb = kb * 6;
+		}
+	if(k<6){	
+	let inpagenub = `&nbsp;<a `;
+	if(startfrom == kb)
+	 inpagenub +=`style='color:blue;font-size:16' `;
+	 else
+	 inpagenub +=`style='color:white;' `;
+	 
+	  inpagenub +=`onclick='paginateallcars(${kb})'>${k}</a>&nbsp; `;
+	  document.getElementById("pagina").innerHTML +=inpagenub;
+	  }
+	else
+	document.getElementById("pagina").innerHTML += "...";
+	}
+if(stopat < data.data.length)	document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${stopat})' class='next'>next</div>`;
+if((startfrom-6) >= 0){
+	let setstart = startfrom-6;
+document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${setstart})' class='prev'>prev.</div>`;
+}
+
+	//<div id='previmage' onclick='opensingle(`single"+id+"`,"+prevImage+")' class='hide prev'>prev. image</div>";
+}
 		//const { data } = data;
 	//	data.data.forEach((allcars) => {
-		for(let i=0 ; i < data.data.length; i++){
+		for(let i=startfrom ; i < stopat; i++){
 			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[i];
 			var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -98,6 +145,7 @@ document.getElementById("allcars").innerHTML = "";
 		}
 	}
 })
+}
 
 ////////////////////////////////////{{{{}}}}
 

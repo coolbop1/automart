@@ -771,15 +771,16 @@ footer{
 	position:relative;
 }
 #odetails{
-	background:#ffffff;
+	border:5px solid #ffffff;
 	margin-top:25px;
-	width: 90%;
+	width: calc(80% - 10px);
 	font-weight:500;
 	text-align:left;
 }
 #fdetail{
 	padding:20px;
-	text-transform:capitalize
+	text-transform:capitalize;
+	background:#cccccc;
 }
 .next{
 	color:white;
@@ -830,9 +831,10 @@ footer{
 
 .fdetail{
 	padding:20px;
+	background:#cccccc;
 }
 #odetails hr{
-	background:#021e72;
+	background:#fff;
 	border-style:none;
 	height:1px;
 }
@@ -1190,6 +1192,9 @@ input:invalid {
 color:#fff;
 tabindex:0;
 cursor:pointer;
+}
+#allcars,#pagina{
+	position:relative;
 }
 
 
