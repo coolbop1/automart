@@ -150,13 +150,13 @@ function stopfilter(){
 	
 }
 function closetab(){
-backtotab();
-	document.getElementById("spintab").classList.replace("righttab", "righttabs");
+backtotab();	document.getElementById("spintab").classList.replace("righttab", "righttabs");
 document.getElementById("spintab").classList.replace("tabtab", "tab"); 
 	document.getElementById("fpintab").classList.replace("righttab", "righttabs");
 document.getElementById("fpintab").classList.replace("tabtab", "tab");
-	document.getElementById("fpintab").classList.replace("righttab", "righttabs");
-document.getElementById("fpintab").classList.replace("tabtab", "tab");
+	document.getElementById("tpintab").classList.replace("righttab", "righttabs");
+document.getElementById("tpintab").classList.replace("tabtab", "tab");
+
 	//document.getElementById("forsearch").style.left = "27.5%"; 
 }
 function showpage(){

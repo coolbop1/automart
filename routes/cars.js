@@ -189,7 +189,7 @@ route.get("/api/v1/car",(req, res) =>{
         let themanu;
         let thetype;
         let thestate ;
-        if(typeof req.query.min_price !== "undefined"){
+        if(typeof req.query.min_price !== "undefined" ){
             if(isNaN(req.query.min_price)){
                 res.status(400).send({
                 	"status":400,
