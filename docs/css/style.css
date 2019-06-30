@@ -332,8 +332,10 @@ header a{
 	margin-right: 10px;
 	top:0px;
 	z-index:12;
+	opacity: 0;
 }
 .righttab{
+	opacity: 1;
 	background:#bf3f3f;
 	width:30%;
 	min-height:500px;

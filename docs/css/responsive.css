@@ -88,6 +88,10 @@ header{
 	position:absolute;
 	right:2.5%;
 	margin-right: 0 !important;
+	opacity: 0;
+}
+.tabtab{
+	opacity: 1 !important;
 }
 #inoverlay,#odetails{
 	width:95%;

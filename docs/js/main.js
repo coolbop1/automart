@@ -62,48 +62,56 @@ function rightSlide(slideid) {
 	 document.body.style.overflow = "auto";
 
 	var elem = document.getElementById(slideid+"tab"); 
-	elem.style.opacity= 1;
+	//elem.style.opacity= 1;
 	if(slideid == "fpin"){
 		let elems = document.getElementById("spintab");
 		let lems = document.getElementById("tpintab");
-			elems.classList.replace("show", "hide");
-			elems.classList.replace("show", "hide");
-			elem.classList.replace("hide", "show");
+			
+			elems.classList.replace("righttab", "righttabs");
+			lems.classList.replace("righttab", "righttabs");
 			elem.classList.replace("righttabs", "righttab");
+			elem.classList.replace("tab", "tabtab");
+			elems.classList.replace("tabtab", "tab");
+			lems.classList.replace("tabtab", "tab");
+			elem.classList.replace("hide", "show");
+			elems.classList.replace("show", "hide");
+			lems.classList.replace("show", "hide");
 			document.getElementById("fpin").style.background ="#bf3f3f";
 			document.getElementById("spin").style.background ="inherit";
 			document.getElementById("tpin").style.background ="inherit";
-elems.style.opacity= 0;
-lems.style.opacity= 0;
+
 	}else if(slideid == "spin"){
 		let elems = document.getElementById("fpintab");
 		let lems = document.getElementById("tpintab");
-		elems.classList.replace("show", "hide");
-		lems.classList.replace("show", "hide");
-		elem.classList.replace("hide", "show");
-		
-		elem.classList.replace("righttabs", "righttab");
 		elems.classList.replace("righttab", "righttabs");
-		lems.classList.replace("righttabs", "righttabs");	document.getElementById("fpin").style.background ="inherit";
+			lems.classList.replace("righttab", "righttabs");
+			elem.classList.replace("righttabs", "righttab");
+			elem.classList.replace("tab", "tabtab");	
+			elems.classList.replace("tabtab", "tab");
+			lems.classList.replace("tabtab", "tab");
+			elem.classList.replace("hide", "show");
+			elems.classList.replace("show", "hide");
+			lems.classList.replace("show", "hide");
+			document.getElementById("fpin").style.background ="inherit";
 	document.getElementById("spin").style.background ="#bf3f3f";
 	document.getElementById("tpin").style.background ="inherit";
-elems.style.opacity= 0;
-lems.style.opacity= 0;
-		console.log(elem);
-		console.log(elems);
-		console.log(lems);
+		
 	}else{
 		let elems = document.getElementById("fpintab");
 		let lems = document.getElementById("spintab");
-		elems.classList.replace("show", "hide");
-		lems.classList.replace("show", "hide");
-		elem.classList.replace("hide", "show");
-		elem.classList.replace("righttabs", "righttab");
+		elems.classList.replace("righttab", "righttabs");
+			lems.classList.replace("righttab", "righttabs");
+			elem.classList.replace("righttabs", "righttab");
+			elem.classList.replace("tab", "tabtab");
+			elems.classList.replace("tabtab", "tab");
+			lems.classList.replace("tabtab", "tab");
+			elem.classList.replace("hide", "show");
+			elems.classList.replace("show", "hide");
+			lems.classList.replace("show", "hide");
 	document.getElementById("tpin").style.background ="#bf3f3f";
 	document.getElementById("spin").style.background ="inherit";
 	document.getElementById("fpin").style.background ="inherit";
-	elems.style.opacity= 0;
-lems.style.opacity= 0;
+
 	}
 
 }
@@ -142,9 +150,13 @@ function stopfilter(){
 	
 }
 function closetab(){
-backtotab();	document.getElementById("spintab").classList.replace("show", "hide"); 
-	document.getElementById("fpintab").classList.replace("show", "hide"); 
-	document.getElementById("tpintab").classList.replace("show", "hide"); 
+backtotab();
+	document.getElementById("spintab").classList.replace("righttab", "righttabs");
+document.getElementById("spintab").classList.replace("tabtab", "tab"); 
+	document.getElementById("fpintab").classList.replace("righttab", "righttabs");
+document.getElementById("fpintab").classList.replace("tabtab", "tab");
+	document.getElementById("fpintab").classList.replace("righttab", "righttabs");
+document.getElementById("fpintab").classList.replace("tabtab", "tab");
 	//document.getElementById("forsearch").style.left = "27.5%"; 
 }
 function showpage(){
