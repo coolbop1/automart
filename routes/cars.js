@@ -163,7 +163,8 @@ route.get("/api/v1/car",(req, res) =>{
       let thequery = Object.keys(req.query);
       if (allthequeries > 0){
        for(let z=0; z < allthequeries; z++){
-       	if(thequery[z] == "status" || thequery[z] == "min_price" || thequery[z] == "max_price" || thequery[z] == "manufacturer" || thequery[z] == "body_type" || thequery[z] == "state"){
+       	if(thequery[z] == "status" || thequery[z] == "min_price" || thequery[z] == "max_price" || thequery[z] == "manufacturer" || thequery[z] == "body_type" || thequery[z] == "state" || 
+thequery[z] == "email"){
        		if(z == allthequeries - 1){
        	dmainsearch();
        }
@@ -189,6 +190,7 @@ route.get("/api/v1/car",(req, res) =>{
         let themanu;
         let thetype;
         let thestate ;
+        let theemail;
         if(typeof req.query.min_price !== "undefined" ){
             if(isNaN(req.query.min_price)){
                 res.status(400).send({
@@ -227,6 +229,10 @@ route.get("/api/v1/car",(req, res) =>{
         themanu = req.query.manufacturer;
         else
         themanu = null;
+        if(typeof req.query.email !== "undefined")
+        theemail = req.query.email;
+        else
+        theemail = null;
 	pool.query("SELECT * FROM postads"
 +" where CASE"
 +" WHEN $1::varchar IS NOT NULL THEN status = $1"
@@ -246,7 +252,10 @@ route.get("/api/v1/car",(req, res) =>{
 +" END and CASE"
 +" WHEN $6::varchar IS NOT NULL THEN manufacturer = $6"
 +" ELSE 1=1"
-+" END",[thesstatus,theminprice,themaxprice,thestate,thetype,themanu],(erro,result)=>{
++" END and CASE"
++" WHEN $7::varchar IS NOT NULL THEN email = $7"
++" ELSE 1=1"
++" END",[thesstatus,theminprice,themaxprice,thestate,thetype,themanu,theemail],(erro,result)=>{
     //console.log(thesstatus,theminprice,themaxprice,thestate,thetype,themanu)
 //console.log(erro,result);
   if(result.rows.length > 0){
