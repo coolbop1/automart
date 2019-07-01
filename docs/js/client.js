@@ -12,6 +12,8 @@ function stilllog(){
 		console.log(user);
 		
 		const dsession = user;
+		
+		
 		if (window.location.pathname == "/UI/index.html" || window.location.pathname == "/UI/" || window.location.pathname == "/index.html" || window.location.pathname == "/") {
 document.getElementById("notloged").style.display = "none";
    document.getElementById("fpintab").classList.replace("show","hide"); document.getElementById("nowloged").style.display = "block";
@@ -20,6 +22,9 @@ document.getElementById("notloged").style.display = "none";
    document.getElementById("fpinn").innerHTML = "Address: "+dsession.address;
    setTimeout(()=>rightSlide("tpin"),1000);
   }else{			document.getElementById("userspace").innerHTML = "<a href='index.html'><img src='image/uicon.jpg' width='25px' >"+dsession.email+"</a>";
+  	var stroom = 0;
+var stoopt = stroom + 3;
+  shhowmyads(dsession.email,stroom,stoopt);
 }
 }else{
 	console.log("not logged in")
@@ -33,9 +38,112 @@ document.getElementById("notloged").style.display = "none";
 
 
 
+	function shhowmyads(myemail,showstart,showend){
+	let emailquery =`/api/v1/car?`;
+emailquery +=`&email=${myemail}`;
+
+	fetch(emailquery,{
+		method:"GET",
+		headers:new Headers({"Content-Type": "application/json; charset=UTF-8"})
+	})
+	.then((res)=>res.json())
+	.then((data)=>{
+		if(data.status === 200 && data.data.length > 0){
+		if(showend > data.data.length)
+		showend = data.data.length;
+			document.getElementById("myadds").innerHTML = "";
+
+			document.getElementById("moreorless").innerHTML ="";
+			
+			if(data.data.length > 3){
+	
+	if(showend < data.data.length)	document.getElementById("moreorless").innerHTML +=`<div onclick="shhowmyads('${myemail}',${showstart+3},${showend+3})" class='next'>next</div>`;
+	
+	
+if((showstart-3) >= 0){
+document.getElementById("moreorless").innerHTML +=`<div onclick="shhowmyads('${myemail}',${showstart-3},${showstart})" class='prev'>prev.</div>`;
+}
+	
+	
+	}
+			
+			
+			for(let md=showstart; md < showend; md++){
+				
+					const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[md];
+			var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+
+
+////////{one car}//{{{/////}}}////{{}}
+var lonecar = 	"<div class='adsbox'>";
+	if(status == "available"){
+				lonecar	+="<div id='soldmask"+id+"' class='sold'><span>SOLD!</span></div>";
+				}
+						else{
+					 	lonecar	+="<div id='soldmask"+id+"' class='solds'><span>SOLD!</span></div>";
+					 	}
+							lonecar	+="<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id,0)' href'#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a>"
+										+"<div class='mark'>"
+									+"<button class='pintab' onclick='marksold(this.id)' id='soldbut"+id+"'>mark as sold</button>"
+									+"</div>"
+									
+										+"<div class='priceedit'>"
+									+"<center>"
+									
+					 +"<form id='editap"+id+"' method='POST' onsubmit='return  editadprice(this.id)'>"
+										+"<input type='number' value='"+price+"' id='sedit"+id+"'>"
+			+"<button id='edita"+id+"' type='submit' class='pintabw hide'>Update price</button></form>"
+			+"<button id='ep"+id+"' class='pintab' onclick='pedit(this.id)'>Edit price</button><center><span id='cl"+id+"'  class='close' onclick='closedit(this.id)'>&#10006</span></center>"
+								+"</div>"
+								
+									
+								+"</div>"
+							
+							+"<div class='orangetablev'>"
+							+"<div class='intp'>"
+								+"<div class='dinsyd'>"
+									+"<span class='manu'>"+manufacturer+" "+model+"</span>"
+									+"<hr/>"
+									+"<span class='carcond'>"
+										+"Condition &nbsp;:&nbsp;"+state
+										+"</span>"
+									+"</div>"
+									+"<div class='pricein'>"
+									+"PRICE"
+										+"<br/>"
+										+formatter.format(price)
+										+"</div>"
+							+"<div class='slant'>"
+								+"</div>"
+							+"</div>"
+							+"</div>";
+
+
+document.getElementById("myadds").innerHTML += lonecar ;
+
+
+
+/////{{{{/////{{{/////////}}}////////}}}}
+
+
+				
+			}
+			
+		}
+		
+	})
+	.catch((e)=>console.log(e))
+	
+}
+
+
 ///////////populate div with cars/////////
-let initquery ="/api/v1/car?";
-initquery +="&status=available"
+let availablequery ="/api/v1/car?";
+availablequery +="&status=available";
 paginateallcars(0);
 function paginateallcars(thestart){
 	let sttrt = parseInt(thestart)
@@ -45,7 +153,7 @@ document.getElementById("allcars").innerHTML = "<div style='height:100px;width:5
 populateallcars(strom,stopt);
 }
 function populateallcars(startfrom,stopat){
-fetch(initquery,{
+fetch(availablequery,{
 	method:"GET",
 	headers : new Headers({"Content-Type": "application/json; charset=UTF-8"})
 })
@@ -72,9 +180,9 @@ if(data.data.length > 6){
 	if(k<6){	
 	let inpagenub = `&nbsp;<a `;
 	if(startfrom == kb)
-	 inpagenub +=`style='color:blue;font-size:16' `;
+	 inpagenub +=`style='color:blue;font-size:16;cursor:pointer' `;
 	 else
-	 inpagenub +=`style='color:white;' `;
+	 inpagenub +=`style='color:white;cursor:pointer' `;
 	 
 	  inpagenub +=`onclick='paginateallcars(${kb})'>${k}</a>&nbsp; `;
 	  document.getElementById("pagina").innerHTML +=inpagenub;
@@ -88,10 +196,8 @@ if((startfrom-6) >= 0){
 document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${setstart})' class='prev'>prev.</div>`;
 }
 
-	//<div id='previmage' onclick='opensingle(`single"+id+"`,"+prevImage+")' class='hide prev'>prev. image</div>";
+
 }
-		//const { data } = data;
-	//	data.data.forEach((allcars) => {
 		for(let i=startfrom ; i < stopat; i++){
 			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[i];
 			var formatter = new Intl.NumberFormat('en-US', {
