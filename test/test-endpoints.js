@@ -564,6 +564,14 @@ describe('GET /allcars endpoint', function () {
                         .expect(200, done); //expecting HTTP status code
                         
                 });
+                it('respond with json with owners cars', function (done) {
+                    apps(app)
+                        .get('/api/v1/car')
+                        .query({'email' : 'domrand9@gmail.com'})
+                        .set("Authorization", "Bearer "+token)
+                        .expect(200, done); //expecting HTTP status code
+                        
+                });
 
             });
             describe('GET /car never repeat output', function () {
