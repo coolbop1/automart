@@ -58,7 +58,7 @@
 						
 					</div>
 					
-						<div class="show righttab tab" id="fpintab">
+						<div class="righttab tab" id="fpintab">
 <div class="titletab">SIGN IN <span  class="close" id="fclose" onclick="closetab(this.id)">&#10006</span><a id="backbut"  class="goback hide" onclick="backtotab()">back</a></div>
 <br/>
 						<div class="contain">
@@ -103,7 +103,7 @@
 					
 					
 					
-					<div class="show righttabs tab" id="spintab">
+					<div class="righttabs tab" id="spintab">
 						<div class="titletab">SIGN UP <span id="sclose"  class="close" onclick="closetab(this.id)">&#10006</span></div>
 						<div class="contain">
 							<form method="POST" onsubmit="return signup()">
@@ -136,11 +136,14 @@
 					
 					
 					
-						<div id="tpintab" class="show righttabs tab"> <div id="myadsti">My Profile</div><span id="tclose"  class="close" onclick="closetab(this.id)">&#10006</span>
+						<div id="tpintab" class="righttabs tab"> <div id="myadsti">My Profile</div><span id="tclose"  class="close" onclick="closetab(this.id)">&#10006</span>
 						<h2 id="profilename"></h2>
 						<img src="image/default.png" id="mid">
-						<span tabindex="0" id="fpinn" onclick="showsold()" class="pintabs">Sold</span>
-						<span tabindex="0" id="spinn" onclick="showsold()" class="pintabs">Sold</span>
+						<span tabindex="0" id="fpinn"  class="pintabss">Sold</span>
+						<span tabindex="0" id="spinn"  class="pintabss">Sold</span>
+						<div id="midsec"><img src="image/icons/envelope.png" width="40px"></div>
+						<div id="midsecs"><img src="image/icons/pie-chart.png" width="40px"></div>
+						<div id="midsect"><img src="image/icons/settings-1.png" width="40px"></div>
 							
 							<div class="profbottom"></div>
 						
@@ -155,7 +158,7 @@
 			<div  id="indexads">
 					
 					<div class="stattitlez">
-						<div id="pickload" class="left"><a onclick="openfilter()"><img src="image/filter.png" width="20px"> Filter</a></div>&nbsp;
+						<div id="pickload" class="left"><a id="filtl" onclick="openfilter()"><img src="image/filter.png" width="20px"> Filter</a></div>&nbsp;
 											<div id="mainsort" class="sortby hide">Make: 
 									<select id="thesort"> 
 										<option value="">

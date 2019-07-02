@@ -6,10 +6,10 @@ function stilllog(){
 	})
 	.then((res)=>res.json())
 	.then((data)=>{
-		console.log(data);
+		//console.log(data);
 		if (data.status === 200){
 		const  {user}  = data.description;
-		console.log(user);
+		//console.log(user);
 		
 		const dsession = user;
 		
@@ -57,11 +57,11 @@ emailquery +=`&email=${myemail}`;
 			
 			if(data.data.length > 3){
 	
-	if(showend < data.data.length)	document.getElementById("moreorless").innerHTML +=`<div onclick="shhowmyads('${myemail}',${showstart+3},${showend+3})" class='next'>next</div>`;
+	if(showend < data.data.length)	document.getElementById("moreorless").innerHTML +=`<div onclick="shhowmyads('${myemail}',${showstart+3},${showend+3})" class='next'><img src="image/whiteicon/next.png" width="20px"></div>`;
 	
 	
 if((showstart-3) >= 0){
-document.getElementById("moreorless").innerHTML +=`<div onclick="shhowmyads('${myemail}',${showstart-3},${showstart})" class='prev'>prev.</div>`;
+document.getElementById("moreorless").innerHTML +=`<div onclick="shhowmyads('${myemail}',${showstart-3},${showstart})" class='prev'><img src="image/whiteicon/back.png" width="20px"></div>`;
 }
 	
 	
@@ -95,9 +95,9 @@ var lonecar = 	"<div class='adsbox'>";
 									+"<center>"
 									
 					 +"<form id='editap"+id+"' method='POST' onsubmit='return  editadprice(this.id)'>"
-										+"<input type='number' value='"+price+"' id='sedit"+id+"'>"
+										+"<input type='number' value='"+price+"' class='sedit' id='sedit"+id+"'>"
 			+"<button id='edita"+id+"' type='submit' class='pintabw hide'>Update price</button></form>"
-			+"<button id='ep"+id+"' class='pintab' onclick='pedit(this.id)'>Edit price</button><center><span id='cl"+id+"'  class='close' onclick='closedit(this.id)'>&#10006</span></center>"
+			+"<button id='ep"+id+"' class='pintab ep' onclick='pedit(this.id)'>Edit price</button><center><span id='cl"+id+"'  class='cl' onclick='closedit(this.id)'>&#10006</span></center>"
 								+"</div>"
 								
 									
@@ -190,10 +190,10 @@ if(data.data.length > 6){
 	else
 	document.getElementById("pagina").innerHTML += "...";
 	}
-if(stopat < data.data.length)	document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${stopat})' class='next'>next</div>`;
+if(stopat < data.data.length)	document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${stopat})' class='next'><img src="image/whiteicon/next.png" width="20px"></div>`;
 if((startfrom-6) >= 0){
 	let setstart = startfrom-6;
-document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${setstart})' class='prev'>prev.</div>`;
+document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${setstart})' class='prev'><img src="image/whiteicon/back.png" width="20px"></div>`;
 }
 
 
@@ -244,7 +244,7 @@ document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${s
 							+"</div>"
 							+"<span class='hide' id='smanu"+id+"'>"+manufacturer+" "+model+"</span>"
 							"<span class='hide' id='scolor"+id+"'>"+body_type+"</span>"
-								+"<span class='hide' id='scond"+id+"'>used</span>"
+								+"<span class='hide' id='scond"+id+"'>"+state+"</span>"
 							+"<span class='hide' id='samount"+id+"'>"+price+"</span>"
 							
 						+"</div>";	document.getElementById("allcars").innerHTML += onecar;
@@ -538,7 +538,9 @@ function postorder(){
 	document.getElementById("pickedform").classList.replace("show","hide");
 			document.getElementById("pomanid").value = "";	
 			document.getElementById("orderimg").innerHTML = "";
-			document.getElementById("ncarcond").innerHTML = "";  
+
+document.getElementById("orderimg").classList.replace("show","hide");
+	document.getElementById("ncarcond").innerHTML = "";  
 			document.getElementById("pomanu").value = "";
 			document.getElementById("pocolor").value = "";
 			document.getElementById("poprice").value = "";

@@ -351,7 +351,7 @@ fetch("/api/v1/car/"+theid,{
   style: 'currency',
   currency: 'USD',
 });
-document.getElementById("inoverlay").innerHTML="<div id='nextimage' onclick='opensingle(`single"+id+"`,"+nextImage+")' class='hide next'>next image</div><div id='previmage' onclick='opensingle(`single"+id+"`,"+prevImage+")' class='hide prev'>prev. image</div><img src='"+imageArr[thisimage].replace("w_150,c_scale/","")+"'>";
+document.getElementById("inoverlay").innerHTML="<div id='nextimage' onclick='opensingle(`single"+id+"`,"+nextImage+")' class='hide next'><img src='image/whiteicon/next.png' width='20px'></div><div id='previmage' onclick='opensingle(`single"+id+"`,"+prevImage+")' class='hide prev'><img src='image/whiteicon/back.png' width='20px'></div><img class='inoimg' src='"+imageArr[thisimage].replace("w_150,c_scale/","")+"'>";
 document.getElementById("fmanudetail").innerHTML= manufacturer+" "+model;
 document.getElementById("fstatedetail").innerHTML= state;
 document.getElementById("fpricedetail").innerHTML= formatter.format(price);
@@ -401,30 +401,55 @@ function deletead(thisid){
 	document.getElementById(replace1).style.display = "none";
 }
 function order(thisid){
+	document.getElementById(thisid).innerHTML = "<div class='spinning'></div>";
+	
 	let theid = thisid;
 	let replace1 = theid.replace("orderbut","");
-	let replace2 = theid.replace("orderbut","single");
-	let replace3 = theid.replace("orderbut","smanu");
-	let replace4 = theid.replace("orderbut","scolor");
-	let replace5 = theid.replace("orderbut","scond");
-	let replace6 = theid.replace("orderbut","samount");
-	sessionStorage.setItem('chooseorder', replace1);
-	sessionStorage.setItem('chooseordermanu', replace3);
-	sessionStorage.setItem('chooseordercolor', replace4);
-	sessionStorage.setItem('chooseordercond', replace5);
-	sessionStorage.setItem('chooseorderamount', replace6);
-	sessionStorage.setItem('chooseorderimg', replace2);
-	sessionStorage.setItem('pagetab', 'order');
-	if(window.location.pathname == "/postad.html"){
+	fetch("/api/v1/car/"+replace1,{
+		method:"GET"
+	})
+	.then((res)=>res.json())
+	.then((data)=>{
+		if(data.status === 200 && data.data.length > 0){
 		
-		life();
-		} else {
-	window.location = "postad.html";
-	}
+			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[0];
+			
+			
+			sessionStorage.setItem('chooseorder',id);
+	sessionStorage.setItem('chooseordermanu',manufacturer);
+	sessionStorage.setItem('chooseordercolor', body_type);
+	sessionStorage.setItem('chooseordercond', state);
+	sessionStorage.setItem('chooseorderamount', parseInt(price));
+	sessionStorage.setItem('chooseorderimg', pics.split("<>")[0].replace("w_150,c_scale/",""));
+	sessionStorage.setItem('pagetab', 'order');
+			
+			
+			
+			
+		}
+		
+	})
+	.then((e)=>toshoworder())
+	.catch((e)=>console.log(e))
+	//console.log(document.getElementById(replace6).innerHTML);
+	//console.log(replace4);
 	
+	
+
+
+	
+	
+}
+function toshoworder(){
+	window.location = "postad.html";
+//console.log(sessionStorage.getItem('chooseordermanu'))	
 }
 life();
 function life(){
+		var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 	const dtab = sessionStorage.getItem('pagetab');
 			const dtabimg = sessionStorage.getItem('chooseorderimg');
 				const dtabmanu = sessionStorage.getItem('chooseordermanu');
@@ -436,22 +461,23 @@ if(sessionStorage.getItem('pagetab')){
 	document.getElementById("runorder").classList.replace("show","hide");
 	document.getElementById("unpickedform").classList.replace("show","hide");
 	document.getElementById("pickedform").classList.replace("hide","show");
-document.getElementById("pomanid").value = dtabid;	document.getElementById("orderimg").innerHTML = document.getElementById(dtabimg).innerHTML; 
-	document.getElementById("pomanu").value = document.getElementById(dtabmanu).innerHTML;
-	document.getElementById("pocolor").value = document.getElementById(dtabcolor).innerHTML;
-document.getElementById("poprice").value = document.getElementById(dtabamount).innerHTML;
-document.getElementById("showpprice").innerHTML = document.getElementById(dtabamount).innerHTML;
+document.getElementById("pomanid").value = dtabid;	document.getElementById("orderimg").innerHTML = "<img src='"+dtabimg+"' >"; 
+	document.getElementById("pomanu").value = dtabmanu;
+	document.getElementById("pocolor").value = dtabcolor;
+document.getElementById("poprice").value = parseInt(dtabamount);
+document.getElementById("showpprice").innerHTML = dtabamount;
 
 document.getElementById('poprice').disabled = false;
 document.getElementById('postcarorder').disabled = false;
-if(document.getElementById(dtabcond).innerHTML == "new"){
+if(dtabcond == "new"){
 		document.getElementById("ncarcond").innerHTML = 'New:<input type="radio" class="radioinput" value="new"  name="postateocar"  checked>';
 	} else {
 		document.getElementById("ncarcond").innerHTML = 'Used:<input type="radio" class="radioinput" value="used"  name="postateocar"  checked>';
 	}
 	showorder();
 
-document.getElementById("orderimg").style.display = "block";	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
+document.getElementById("orderimg").classList.replace("hide","show");
+	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
 	setTimeout(function (){
 		sessionStorage.clear('chooseorder');
 		sessionStorage.clear('pagetab');
