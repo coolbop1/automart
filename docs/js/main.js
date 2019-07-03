@@ -181,6 +181,7 @@ document.getElementById("poffered").style.display = "none";
 document.getElementById("navmad").style.background ="#bf3f3f";
 document.getElementById("navsad").style.background ="inherit";
 document.getElementById("navsoff").style.background ="inherit";
+document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
 }
 function showpostad(){
 opennavs();
@@ -199,6 +200,8 @@ document.getElementById("poffered").style.display = "none";
 document.getElementById("navmad").style.background ="inherit";
 document.getElementById("navsad").style.background ="#bf3f3f";
 document.getElementById("navsoff").style.background ="inherit";
+
+document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
 	
 }
 function showorder(){
@@ -218,6 +221,8 @@ document.getElementById("navsad").style.background ="inherit";
 document.getElementById("navsoff").style.background ="inherit";
 
   stilllog(3);
+  document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
+  
 }
 
 function showoffer(){
@@ -235,6 +240,8 @@ document.getElementById("poffered").style.display = "block";
 document.getElementById("navmad").style.background ="inherit";
 document.getElementById("navsad").style.background ="inherit";
 document.getElementById("navsoff").style.background ="#bf3f3f";
+stilllog(4);
+  document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
 }
 
 

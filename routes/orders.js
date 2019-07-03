@@ -177,15 +177,22 @@ route.patch("/api/v1/order/:orderrid/price", ensureToken, (req, res) => {
 
 route.get("/api/v1/order",ensureToken,(req,res)=>{
 	let buyerquery;
+	let sellerquery;
 	
 	if(typeof req.query.buyer !== "undefined"){
 		buyerquery = parseInt(req.query.buyer);
 	}else{
 		buyerquery = null;
 	}
-	pool.query("select a.*,b.manufacturer,b.model,b.id from orders a join postads b on a.car_id=b.id"
+	if(typeof req.query.seller !== "undefined"){
+		sellerquery = parseInt(req.query.seller);
+	}else{
+		sellerquery = null;
+	}
+	pool.query("select a.*,b.manufacturer,b.model,b.id,b.owner from orders a join postads b on a.car_id=b.id"
 	+" where CASE"
-	+" WHEN $1::varchar IS NOT NULL THEN a.buyer = $1 ELSE 1=1 END",[buyerquery],(error,result)=>{
+	+" WHEN $1::varchar IS NOT NULL THEN a.buyer = $1 ELSE 1=1 END and CASE"
+	+" WHEN $2::int IS NOT NULL THEN b.owner = $2 ELSE 1=1 END",[buyerquery,sellerquery],(error,result)=>{
 		//console.log(error,result);
 		if(result.rows.length > 0){
 			res.status(200).json({

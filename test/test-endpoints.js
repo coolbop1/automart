@@ -387,6 +387,7 @@ describe('GET /allcars endpoint', function () {
                     apps(app)
                         .get('/api/v1/order')
                          .query({'buyer' : '1'})
+                         .query({'seller' : '1'})
                          .set("Authorization", "Bearer "+token)
                         
                         .expect('Content-Type', /json/)

@@ -26,6 +26,7 @@ document.getElementById("notloged").style.display = "none";
 var stoopt = stroom + 3;
   shhowmyads(dsession.email,stroom,stoopt);
  if(tab === 3) showmyorder(dsession.id,stroom,stoopt,0);
+if(tab === 4) showmyoffers(dsession.id,stroom,stoopt,0);
 }
 }else{
 	console.log("not logged in")
@@ -69,6 +70,7 @@ document.getElementById("seesmore").innerHTML += `<a onclick='showmyorder(${myid
 document.getElementById("mypendingo").innerHTML = "";	
 			for(let t=showstart; t < showend; t++){
 				const { id,buyer,car_id,amount,price_offered, status,created_on,manufacturer,model } = data.data[t];
+				if(status == "pending"){
 				var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -91,7 +93,74 @@ document.getElementById("mypendingo").innerHTML = "";
 						+"<br/>";
 						
 	document.getElementById("mypendingo").innerHTML += 	inmyorder;				
+				}
 				
+			}
+			
+		}
+	})
+	.catch((e)=>console.log(e))
+	
+}
+
+
+function showmyoffers(myid,showstart,showend,state){
+	let apiprefix = `/api/v1/order?`;
+	apiprefix += `&seller=${myid}`
+	fetch(apiprefix,{
+		method:"GET",
+		headers:new Headers({"Content-Type": "application/json; charset=UTF-8","Authorization": "Bearer "+localStorage.getItem('accessToken')})
+	})
+	.then((res)=>res.json())
+	.then((data)=>{
+		if(data.status === 200){
+		if(state === 0)	document.getElementById("moff").innerHTML = "";	
+		else
+		document.getElementById("moff").innerHTML = "<div style='height:100px;width:50%'><div class='roller'></div></div>";	
+if(showend > data.data.length)
+showend = data.data.length;
+
+document.getElementById("seessmore").innerHTML = "";
+
+if(data.data.length > 3){
+	if(data.data.length > showend)
+document.getElementById("seessmore").innerHTML += `<a onclick='showmyoffers(${myid},${showstart + 3},${showend +3},1)' class='next'><img src="image/whiteicon/next.png" width="15px"></a>`;
+
+if(showstart > 0){
+	let nstrt = showstart - 3;
+	let nend = nstrt + 3;
+document.getElementById("seessmore").innerHTML += `<a onclick='showmyoffers(${myid},${nstrt},${nend},1)' class='prev'><img src="image/whiteicon/back.png" width="15px"></a>`;
+}
+}
+document.getElementById("moff").innerHTML = "";	
+			for(let t=showstart; t < showend; t++){
+				const { id,buyer,car_id,amount,price_offered, status,created_on,manufacturer,model } = data.data[t];
+				if(status == "pending"){
+				var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+				
+				let inmyorder = "<div class='orderlisted'>"
+						 +"<span class='manu'>"+manufacturer+" "+model+"</span><hr/>"
+						 +"<span class='carcond' id='reyt"+id+"'>Price:"+formatter.format(amount)+"</span>" 
+						 +"<span id='clot"+id+"'  class='closes' onclick='closepot(this.id)'>&#10006</span>"
+ +"<span class='hide' id='cloot"+id+"'>"
+						 +"<form id='viewpo"+id+"' method='POST' onsubmit='return editpojj(this.id)'>"
++"<a >Contact Buyer</a>"
++"<br/>"
++"Price offered:"+formatter.format(price_offered)
++"<br/>"
++"<button  class='padsbuttons' type='submit' >accept</button><button  class='padsbuttons' type='submit' >reject</button>"
++"<div class='fn'></div>"
++"</form>"
++"</span>"
++"<div id='vpo"+id+"' class='aref' tabindex='0' onclick='viewop(this.id)' >&nbsp;view&nbsp;</div>"
+						+"</div>"
+						+"<br/>";
+						
+	document.getElementById("moff").innerHTML += 	inmyorder;				
+				}
 				
 			}
 			
