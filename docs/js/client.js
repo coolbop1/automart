@@ -1,4 +1,4 @@
-function stilllog(){
+function stilllog(tab){
 	
 	fetch("/api/v1/me",{
 		method:"GET",
@@ -25,6 +25,7 @@ document.getElementById("notloged").style.display = "none";
   	var stroom = 0;
 var stoopt = stroom + 3;
   shhowmyads(dsession.email,stroom,stoopt);
+ if(tab === 3) showmyorder(dsession.id,stroom,stoopt,0);
 }
 }else{
 	console.log("not logged in")
@@ -34,6 +35,76 @@ var stoopt = stroom + 3;
 	.catch((e)=>console.log("error"))
 		
 }
+
+
+
+function showmyorder(myid,showstart,showend,state){
+	let apiprefix = `/api/v1/order?`;
+	apiprefix += `&buyer=${myid}`
+	fetch(apiprefix,{
+		method:"GET",
+		headers:new Headers({"Content-Type": "application/json; charset=UTF-8","Authorization": "Bearer "+localStorage.getItem('accessToken')})
+	})
+	.then((res)=>res.json())
+	.then((data)=>{
+		if(data.status === 200){
+		if(state === 0)	document.getElementById("mypendingo").innerHTML = "";	
+		else
+		document.getElementById("mypendingo").innerHTML = "<div style='height:100px;width:50%'><div class='roller'></div></div>";	
+if(showend > data.data.length)
+showend = data.data.length;
+
+document.getElementById("seesmore").innerHTML = "";
+
+if(data.data.length > 3){
+	if(data.data.length > showend)
+document.getElementById("seesmore").innerHTML += `<a onclick='showmyorder(${myid},${showstart + 3},${showend +3},1)' class='next'><img src="image/whiteicon/next.png" width="15px"></a>`;
+
+if(showstart > 0){
+	let nstrt = showstart - 3;
+	let nend = nstrt + 3;
+document.getElementById("seesmore").innerHTML += `<a onclick='showmyorder(${myid},${nstrt},${nend},1)' class='prev'><img src="image/whiteicon/back.png" width="15px"></a>`;
+}
+}
+document.getElementById("mypendingo").innerHTML = "";	
+			for(let t=showstart; t < showend; t++){
+				const { id,buyer,car_id,amount,price_offered, status,created_on,manufacturer,model } = data.data[t];
+				var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+				
+				let inmyorder = "<div class='orderlist'>"
+							
+							+"<div class='slanted'></div>"
+						 +"<span class='manu'>"+manufacturer+" "+model+"</span><hr/>"
+						 +"<span class='carcond' id='rey"+id+"'>Price: "+formatter.format(amount)+"</span>" 
+						 +"<span id='clo"+id+"'  class='closes' onclick='closepo(this.id)'>&#10006</span><span class='hide' id='cloo"+id+"'>"
+						 +"<form id='editpo"+id+"' method='POST' onsubmit='return editpo(this.id)'>"
++"<input id='edited"+id+"' class='orderinp' type='number' value='"+price_offered+"' >"
++"<button id='editp"+id+"' class='updatebut' type='submit' >update price</button>"
++"<div class='fn'></div>"
++"</form>"
++"</span>"
++"<div id='epo"+id+"' class='aref' tabindex='0' onclick='editop(this.id)' >Edit Price</div>"
+						+"</div>"
+						+"<br/>";
+						
+	document.getElementById("mypendingo").innerHTML += 	inmyorder;				
+				
+				
+			}
+			
+		}
+	})
+	.catch((e)=>console.log(e))
+	
+}
+
+
+
+
+
 
 
 
