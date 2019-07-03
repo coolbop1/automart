@@ -383,6 +383,33 @@ describe('GET /allcars endpoint', function () {
                         .expect('Content-Type', /json/)
                         .expect(200, done) //expecting HTTP status code
                 });
+                it('respond with myorders ', function (done) {
+                    apps(app)
+                        .get('/api/v1/order')
+                         .query({'buyer' : '1'})
+                         .set("Authorization", "Bearer "+token)
+                        
+                        .expect('Content-Type', /json/)
+                        .expect(200, done) //expecting HTTP status code
+                });
+                it('respond with every orders ', function (done) {
+                    apps(app)
+                        .get('/api/v1/order')
+                      
+                         .set("Authorization", "Bearer "+token)
+                        
+                        .expect('Content-Type', /json/)
+                        .expect(200, done) //expecting HTTP status code
+                });
+                it('respond with 404 not found error ', function (done) {
+                    apps(app)
+                        .get('/api/v1/order')
+                         .query({'buyer' : '0'})
+                         .set("Authorization", "Bearer "+token)
+                        
+                        .expect('Content-Type', /json/)
+                        .expect(404, done) //expecting HTTP status code
+                });
                 
             });
             describe('PATCH /order/:orderrid/price', function () {

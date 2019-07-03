@@ -1275,10 +1275,10 @@ color:#fff;
 tabindex:0;
 cursor:pointer;
 }
-#allcars,#pagina,#moreorless{
+#allcars,#pagina,#moreorless,#seesmore{
 	position:relative;
 }
-#moreorless{
+#moreorless,#seesmore{
 	height:50px
 }
 

@@ -173,6 +173,43 @@ route.patch("/api/v1/order/:orderrid/price", ensureToken, (req, res) => {
 	});
 });
 /////////////////////////
+
+
+route.get("/api/v1/order",ensureToken,(req,res)=>{
+	let buyerquery;
+	
+	if(typeof req.query.buyer !== "undefined"){
+		buyerquery = parseInt(req.query.buyer);
+	}else{
+		buyerquery = null;
+	}
+	pool.query("select a.*,b.manufacturer,b.model,b.id from orders a join postads b on a.car_id=b.id"
+	+" where CASE"
+	+" WHEN $1::varchar IS NOT NULL THEN a.buyer = $1 ELSE 1=1 END",[buyerquery],(error,result)=>{
+		//console.log(error,result);
+		if(result.rows.length > 0){
+			res.status(200).json({
+				"status":200,
+				"data":result.rows
+			})
+		}else{
+			res.status(404).json({
+				"status":404,
+				"error":"could not find order by this buyer"
+				})
+		}
+		
+		
+	})
+	
+	
+})
+
+
+
+
+
+
 function ensureToken(req, res, next) { 
 	const bearerHeader = req.headers["authorization"];
 	if (typeof bearerHeader !== "undefined") {  

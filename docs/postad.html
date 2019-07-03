@@ -410,11 +410,7 @@ Price offered:5000
 								<label class="label-helper" for="poprice">Willing to Pay</label>
 							</div>
 						</div>
-						<div class="grouptwo">
-							<div class="grouptwo irline">
-									Condition : <span id="ncarcondc"></span>&nbsp;&nbsp;|&nbsp;&nbsp;Buyer's Price : $<span id="showppricec"></span>
-								</div>
-						</div>
+					
 						<div class="grouptwo">
 							<center><button id="postcarorderc" class="padbutton" disabled>ORDER</button></center>
 						</div>
@@ -426,6 +422,7 @@ Price offered:5000
 						<div id="postimg">
 							<div id="runorder" class="show">
 							<center><span class="subtitile"> Pending Orders </span></center>
+							<div id="mypendingo">
 							<div class="orderlist">
 							
 							<div class="slanted"></div>
@@ -457,7 +454,8 @@ Price offered:5000
 </span>
 <div id="epo2" class="aref" tabindex="0" onclick="editop(this.id)" >Edit Price</div>
 						</div>
-						
+						</div>
+						<div id="seesmore"></div>
 					</div>
 					<div id="pickedform" class="hide">
 						<form method="POST" onsubmit="return postorder()">

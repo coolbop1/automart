@@ -216,6 +216,8 @@ document.getElementById("poffered").style.display = "none";
 document.getElementById("navmad").style.background ="inherit";
 document.getElementById("navsad").style.background ="inherit";
 document.getElementById("navsoff").style.background ="inherit";
+
+  stilllog(3);
 }
 
 function showoffer(){
@@ -474,7 +476,7 @@ if(dtabcond == "new"){
 	} else {
 		document.getElementById("ncarcond").innerHTML = 'Used:<input type="radio" class="radioinput" value="used"  name="postateocar"  checked>';
 	}
-	showorder();
+
 
 document.getElementById("orderimg").classList.replace("hide","show");
 	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
@@ -483,6 +485,7 @@ document.getElementById("orderimg").classList.replace("hide","show");
 		sessionStorage.clear('pagetab');
 	
 	},2000)
+	showorder();
 }
 }
 /*function login(){
