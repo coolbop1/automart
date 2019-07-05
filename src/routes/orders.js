@@ -178,6 +178,8 @@ route.patch("/api/v1/order/:orderrid/price", ensureToken, (req, res) => {
 route.get("/api/v1/order",ensureToken,(req,res)=>{
 	let buyerquery;
 	let sellerquery;
+	let statusquery;
+	let statusequery;
 	
 	if(typeof req.query.buyer !== "undefined"){
 		buyerquery = parseInt(req.query.buyer);
@@ -189,10 +191,22 @@ route.get("/api/v1/order",ensureToken,(req,res)=>{
 	}else{
 		sellerquery = null;
 	}
-	pool.query("select a.*,b.manufacturer,b.model,b.id,b.owner from orders a join postads b on a.car_id=b.id"
+	if(typeof req.query.status !== "undefined"){
+		statusquery = req.query.status;
+	}else{
+		statusquery = null;
+	}
+	if(typeof req.query.statuses !== "undefined"){
+		statusequery = req.query.statuses;
+	}else{
+		statusequery = null;
+	}
+	pool.query("select a.*,b.manufacturer,b.model,b.id as carid,b.owner from orders a join postads b on a.car_id=b.id"
 	+" where CASE"
 	+" WHEN $1::varchar IS NOT NULL THEN a.buyer = $1 ELSE 1=1 END and CASE"
-	+" WHEN $2::int IS NOT NULL THEN b.owner = $2 ELSE 1=1 END",[buyerquery,sellerquery],(error,result)=>{
+	+" WHEN $2::int IS NOT NULL THEN b.owner = $2 ELSE 1=1 END and CASE"
+	+" WHEN $3::varchar IS NOT NULL THEN a.status = $3 ELSE 1=1 END and CASE"
+	+" WHEN $4::varchar IS NOT NULL THEN a.status != $4 ELSE 1=1 END",[buyerquery,sellerquery,statusquery,statusequery],(error,result)=>{
 		//console.log(error,result);
 		if(result.rows.length > 0){
 			res.status(200).json({
@@ -210,6 +224,25 @@ route.get("/api/v1/order",ensureToken,(req,res)=>{
 	})
 	
 	
+})
+
+
+route.patch("/api/v1/order/status/:orderid",ensureToken,(req,res)=>{
+	pool.query("update orders set status=$1 where id=$2 and status=$3 RETURNING * ",["accepted",req.params.orderid,"pending"],(err,result)=>{
+		console.log(req.params.orderid)
+		if(result.rows.length > 0){
+			res.status(200).json({
+				"status":200,
+				"message":"The order have been marked accepted"
+				})
+			}else{
+				res.status(404).json({
+				"status":404,
+				"error":"Cannot Mark Order as accepted"
+				})
+			}
+		
+	})
 })
 
 

@@ -12,7 +12,8 @@ function stilllog(tab){
 		//console.log(user);
 		
 		const dsession = user;
-		
+		sessionStorage.setItem('myId',dsession.id);
+
 		
 		if (window.location.pathname == "/UI/index.html" || window.location.pathname == "/UI/" || window.location.pathname == "/index.html" || window.location.pathname == "/") {
 document.getElementById("notloged").style.display = "none";
@@ -30,13 +31,14 @@ if(tab === 4) showmyoffers(dsession.id,stroom,stoopt,0);
 }
 }else{
 	console.log("not logged in")
+	
 }
 		
 	})
+	.then((b)=>paginateallcars(0))
 	.catch((e)=>console.log("error"))
 		
 }
-
 
 
 function showmyorder(myid,showstart,showend,state){
@@ -106,7 +108,8 @@ document.getElementById("mypendingo").innerHTML = "";
 
 function showmyoffers(myid,showstart,showend,state){
 	let apiprefix = `/api/v1/order?`;
-	apiprefix += `&seller=${myid}`
+	apiprefix += `&seller=${myid}`;
+	apiprefix += `&status=pending`;
 	fetch(apiprefix,{
 		method:"GET",
 		headers:new Headers({"Content-Type": "application/json; charset=UTF-8","Authorization": "Bearer "+localStorage.getItem('accessToken')})
@@ -135,7 +138,7 @@ document.getElementById("seessmore").innerHTML += `<a onclick='showmyoffers(${my
 document.getElementById("moff").innerHTML = "";	
 			for(let t=showstart; t < showend; t++){
 				const { id,buyer,car_id,amount,price_offered, status,created_on,manufacturer,model } = data.data[t];
-				if(status == "pending"){
+			
 				var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -146,21 +149,73 @@ document.getElementById("moff").innerHTML = "";
 						 +"<span class='carcond' id='reyt"+id+"'>Price:"+formatter.format(amount)+"</span>" 
 						 +"<span id='clot"+id+"'  class='closes' onclick='closepot(this.id)'>&#10006</span>"
  +"<span class='hide' id='cloot"+id+"'>"
-						 +"<form id='viewpo"+id+"' method='POST' onsubmit='return editpojj(this.id)'>"
-+"<a >Contact Buyer</a>"
++"<div class='lefts'><a >Contact Buyer</a></div>"
 +"<br/>"
 +"Price offered:"+formatter.format(price_offered)
 +"<br/>"
-+"<button  class='padsbuttons' type='submit' >accept</button><button  class='padsbuttons' type='submit' >reject</button>"
++"<button id='accpo"+id+"' onclick='acceptorder(this.id)'  class='padsbuttons' type='submit' >accept</button><button id='rejpo"+id+"' onclick='rejectorder(this.id)'  class='padsbuttons' type='submit' >reject</button>"
 +"<div class='fn'></div>"
-+"</form>"
 +"</span>"
 +"<div id='vpo"+id+"' class='aref' tabindex='0' onclick='viewop(this.id)' >&nbsp;view&nbsp;</div>"
 						+"</div>"
 						+"<br/>";
 						
 	document.getElementById("moff").innerHTML += 	inmyorder;				
+				
+				
+			}
+			
+		}
+	})
+	.then((f)=>seenorder(myid))
+	.catch((e)=>console.log(e))
+	
+}
+
+
+
+
+
+
+
+function seenorder(myid){
+	let apiprefix = `/api/v1/order?`;
+	apiprefix += `&seller=${myid}`;
+	apiprefix += `&statuses=pending`;
+	fetch(apiprefix,{
+		method:"GET",
+		headers:new Headers({"Content-Type": "application/json; charset=UTF-8","Authorization": "Bearer "+localStorage.getItem('accessToken')})
+	})
+	.then((res)=>res.json())
+	.then((data)=>{
+		if(data.status === 200){
+			document.getElementById("mmoff").innerHTML = "";	
+
+let showstart=0;
+let showend=3;			
+if(showend > data.data.length)
+showend = data.data.length;
+
+
+document.getElementById("mmoff").innerHTML = "";	
+			for(let t=showstart; t < showend; t++){
+				const { id,buyer,car_id,amount,price_offered, status,created_on,manufacturer,model } = data.data[t];
+			
+				var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+				
+				let inmyorder = "<div class='orderlistee'>";
+				if(status == "accepted"){
+				inmyorder +=" <span class='leftss'>"+status+"</span>";
 				}
+				inmyorder +="&nbsp; &nbsp; &nbsp;<span class='manu'>"+manufacturer+" "+model+"</span><hr/>"
+						 +"<span class='carcond' >Price: "+formatter.format(price_offered)+"</span> </div>"
+						+"<br/>";
+						
+	document.getElementById("mmoff").innerHTML += 	inmyorder;				
+				
 				
 			}
 			
@@ -170,6 +225,57 @@ document.getElementById("moff").innerHTML = "";
 	
 }
 
+
+
+
+
+
+
+function acceptorder(thisid){
+	
+	let theid = thisid.replace("accpo","");
+//alert(theid);
+	document.getElementById(thisid).innerHTML = '<center><div class="spinning"></div></center>';
+	document.getElementById(thisid).disabled = true;
+	fetch("/api/v1/order/status/"+theid,{
+		method:"PATCH",
+		headers:new Headers({"Content-Type": "application/json; charset=UTF-8","Authorization": "Bearer "+localStorage.getItem('accessToken')})
+	})
+	.then((res)=>res.json())
+	.then((data)=>{
+		if(data.status === 200){
+			const { message }=data;
+			document.getElementById("regsuccess").innerHTML = message; 
+		document.getElementById("regsuccess").classList.replace("hide","show");
+		document.getElementById("regsuccess").scrollIntoView({block: "center"});
+		
+		setTimeout(function (){
+			document.getElementById("regsuccess").classList.replace("show","hide");
+			document.getElementById(thisid).innerHTML = "accept";
+			document.getElementById(thisid).disabled = false;
+			showoffer();
+
+		},3000)
+
+		}else{
+			const { error } = data;
+			document.getElementById("regwarning").innerHTML = error;
+		document.getElementById("regwarning").classList.replace("hide","show");
+		
+		setTimeout(function(){
+			document.getElementById("regwarning").classList.replace("show","hide");
+			document.getElementById(thisid).innerHTML = "accept";
+			document.getElementById(thisid).disabled = false;
+			document.getElementById("regwarning").innerHTML = "";
+			
+		}, 2000);
+				
+			}
+	})
+	.catch((e)=>console.log(e))
+	
+	
+}
 
 
 
@@ -226,8 +332,9 @@ var lonecar = 	"<div class='adsbox'>";
 						else{
 					 	lonecar	+="<div id='soldmask"+id+"' class='solds'><span>SOLD!</span></div>";
 					 	}
-							lonecar	+="<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id,0)' href'#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a>"
-										+"<div class='mark'>"
+							lonecar	+="<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id,0)' href'#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a>";
+								if(status == "available"){
+										lonecar +="<div class='mark'>"
 									+"<button class='pintab' onclick='marksold(this.id)' id='soldbut"+id+"'>mark as sold</button>"
 									+"</div>"
 									
@@ -238,10 +345,10 @@ var lonecar = 	"<div class='adsbox'>";
 										+"<input type='number' value='"+price+"' class='sedit' id='sedit"+id+"'>"
 			+"<button id='edita"+id+"' type='submit' class='pintabw hide'>Update price</button></form>"
 			+"<button id='ep"+id+"' class='pintab ep' onclick='pedit(this.id)'>Edit price</button><center><span id='cl"+id+"'  class='cl' onclick='closedit(this.id)'>&#10006</span></center>"
-								+"</div>"
+								+"</div>";}
 								
 									
-								+"</div>"
+								lonecar += "</div>"
 							
 							+"<div class='orangetablev'>"
 							+"<div class='intp'>"
@@ -282,9 +389,8 @@ document.getElementById("myadds").innerHTML += lonecar ;
 
 
 ///////////populate div with cars/////////
-let availablequery ="/api/v1/car?";
-availablequery +="&status=available";
-paginateallcars(0);
+
+
 function paginateallcars(thestart){
 	let sttrt = parseInt(thestart)
 	var strom = sttrt;
@@ -292,7 +398,13 @@ var stopt = strom + 6;
 document.getElementById("allcars").innerHTML = "<div style='height:100px;width:50%'><div class='roller'></div></div>";
 populateallcars(strom,stopt);
 }
-function populateallcars(startfrom,stopat){
+function
+ populateallcars(startfrom,stopat){
+	let availablequery ="/api/v1/car?";
+availablequery +="&status=available";
+
+const sessionId = sessionStorage.getItem('myId');
+
 fetch(availablequery,{
 	method:"GET",
 	headers : new Headers({"Content-Type": "application/json; charset=UTF-8"})
@@ -346,8 +458,9 @@ document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${s
 });
 
 		var onecar ="<div class='adsbox'>"
-							+"<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id,0)' href='#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a></div>"
-								+"<div class='ralerts' id='rr"+id+"'>"
+							+"<div class='imgcontain'><a id='single"+id+"' onclick='opensingle(this.id,0)' href='#'><img src='"+pics.split("<>")[0].replace("w_150,c_scale/","")+"'></a></div>";
+							if(sessionId != owner){
+						onecar +="<div class='ralerts' id='rr"+id+"'>"
 									+"<form id='reportfor"+id+"' method='POST' onsubmit='return  confirmrep(this.id)'>"
 										+"<textarea id='reportwhy"+id+"' class='ereport' placeholder='reason for reporting' ></textarea>"  
 										+"<br/>"
@@ -357,10 +470,11 @@ document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${s
 							+"<div id='ralert"+id+"' class='ralerts'>Thanks, your report is sent. It will be investigated and acted upon accordingly</div>"
 							+"<div class='mark'>"
 									+"<button class='reporttab' onclick='reportad(this.id)' id='reportbut"+id+"'>report</button>"
+									+"</div>"
+									+"<div class='marks'>"
+									+"<spansessionId class='reporttaby' onclick='order(this.id)' id='orderbut"+id+"'><img src='image/icons/shopping-cart.png' height='20px'>order</span>"
 									+"</div>";
-						onecar +="<div class='marks'>"
-									+"<button class='reporttaby' onclick='order(this.id)' id='orderbut"+id+"'>order</button>"
-									+"</div>";
+									}
 									
 									
 									
@@ -391,6 +505,9 @@ document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${s
 		}
 	}
 })
+.then((b)=>sessionStorage.clear('myId'))
+.catch((e)=>console.log(e))
+
 }
 
 ////////////////////////////////////{{{{}}}}
