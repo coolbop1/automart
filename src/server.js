@@ -80,9 +80,9 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.text({ type: "application/json" }));
 
-app.use(express.static("./home"));
-app.use("/documentation", express.static(__dirname + "/documentation"));
-app.use("/UI", express.static(__dirname + "/docs"));
+app.use(express.static("./src/home"));
+app.use("/documentation", express.static("./src/documentation"));
+app.use("/UI", express.static("./docs"));
 //app.use(morgan("dev"));
 
 app.use(function(req, res, next) {

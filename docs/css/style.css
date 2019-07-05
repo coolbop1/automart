@@ -290,19 +290,25 @@ header a{
 	cursor:pointer;
 }
 .reporttaby{
-	position:absolute;
+	position:relative;
 	font-size:16px;
 	color:#021e72;
 	background:#ffffff;
 	left:0px;
-	padding:5px 5px 5px 5px;
+	padding:5px 5px 5px 25px;
 	text-transform: uppercase;
 	border-bottom:2px solid #021e72;
-	border-bottom:2px solid #021e72;
+	border-top:2px solid #ffffff;
 	border-right:2px solid #021e72;
 	border-left:2px solid #021e72;
 	cursor:pointer;
+	display:inline-block;
 }
+.reporttaby img{
+	position:absolute;
+	left:0;
+	top:1px;
+	}
 .reporttabs{
 	position:absolute;
 	font-size:10px;
@@ -417,6 +423,15 @@ header a{
 }
 .left{
 	float:left;
+}
+.lefts{
+	text-align:left;
+}
+.leftss{
+	position:absolute;
+	left:10px;
+	color:#021e72;
+	text-transform:capitalize;
 }
 #forsearch{
 	position:absolute;
@@ -647,7 +662,8 @@ footer{
 	position:absolute;
 	top:0;
 	z-index:10;
-	right:100px;
+	right:30px;
+	min-width:70px;
 }
 
 .sold{

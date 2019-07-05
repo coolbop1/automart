@@ -9,6 +9,7 @@ stilllog();
 
 }else{
 console.log("notlogin")
+paginateallcars(0)
 }
 var userSession = sessionStorage.getItem('student');
    // console.log('userSession: ', JSON.parse(userSession));
