@@ -413,24 +413,7 @@ describe('GET /allcars endpoint', function () {
                         .expect('Content-Type', /json/)
                         .expect(404, done) //expecting HTTP status code
                 });
-                it('respond with order status changes succesfull', function (done) {
-                    apps(app)
-                        .patch('/api/v1/order/status/1')
-                        .set("Content-Type", "application/json; charset=UTF-8")
-                        .set("Authorization", "Bearer "+token)
-                        .expect(200, done);
-                });
-                it('respond with myorders ', function (done) {
-                    apps(app)
-                        .get('/api/v1/order')
-                         .query({'buyer' : '1'})
-                         .query({'statuses' : 'pending'})
-                         
-                         .set("Authorization", "Bearer "+token)
-                        
-                        .expect('Content-Type', /json/)
-                        .expect(200, done) //expecting HTTP status code
-                });
+                
                 
             });
             describe('PATCH /order/:orderrid/price', function () {
@@ -476,6 +459,31 @@ describe('GET /allcars endpoint', function () {
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(403, done);
+                });
+                it('respond with order status changes succesfull', function (done) {
+                    apps(app)
+                        .patch('/api/v1/order/status/1')
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
+                        .expect(200, done);
+                });
+                 it('respond with cant change order status', function (done) {
+                    apps(app)
+                        .patch('/api/v1/order/status/1')
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
+                        .expect(200, done);
+                });
+                it('respond with myorders ', function (done) {
+                    apps(app)
+                        .get('/api/v1/order')
+                         .query({'buyer' : '1'})
+                         .query({'statuses' : 'pending'})
+                         
+                         .set("Authorization", "Bearer "+token)
+                        
+                        .expect('Content-Type', /json/)
+                        .expect(200, done) //expecting HTTP status code
                 });
             });
             describe('POST /flag endpoint', function () {
