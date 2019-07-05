@@ -472,7 +472,7 @@ describe('GET /allcars endpoint', function () {
                         .patch('/api/v1/order/status/1')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
-                        .expect(200, done);
+                        .expect(404, done);
                 });
                 it('respond with myorders ', function (done) {
                     apps(app)
