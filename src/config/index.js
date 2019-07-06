@@ -8,7 +8,7 @@ import { Pool } from "pg";
 	 
 	 module.exports = {
 	 	getPool: function (conusername,condatabase,conhost,conpassword,conssl){
-	 		if(pool) return pool;
+	 		//if(pool) return pool;
 	 		const pool = new Pool({
 		user: conusername,
 		host: conhost,
