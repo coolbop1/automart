@@ -2,12 +2,15 @@ import express from "express";
 import  Joi from "joi";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
-import { Pool } from "pg";
+import db from "../config";
+let pool;
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
 	let conhost="ec2-23-21-91-183.compute-1.amazonaws.com";
 	let conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";
 	let conssl=true;
+	let thegmail="automartmail@gmail.com";
+	
 	setenvparam();
 	function changeenv(){
 	process.env['NODE_ENV'] = 'test';
@@ -17,30 +20,25 @@ let conusername ="gkhfnrideiyyoi";
 	process.env['NODE_ENV'] = 'production';
 	setenvparam();
 	}
-		function changeenvoff(){
+	function changeenvoff(){
 	process.env['NODE_ENV'] = 'offline';
 	setenvparam();
 	}
-function setenvparam(){
-if (process.env.NODE_ENV && process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;}
-else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;}
+	function changeenverr(){
+	process.env['NODE_ENV'] = 'errors';
+	testgmail();
+	}
+	
+	function setenvparam(){
+if (process.env.NODE_ENV && process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;thegmail="automartcontacts@gmail.com"}
+else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;thegmail="automartmail@gmail.com";}
 else{
-conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-91-183.compute-1.amazonaws.com";conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";conssl=true;
+conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-91-183.compute-1.amazonaws.com";conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";conssl=true;thegmail="automartcontacts@gmail.com";
 }
 
+pool = db.getPool(conusername,condatabase,conhost,conpassword,conssl);
 //console.log(conusername)
 }
-
-	const pool = new Pool({
-		user: conusername,
-		host: conhost,
-		database: condatabase,
-		password: conpassword,
-		port: "5432",
-		ssl: conssl
-	});
-	pool.connect();
-    
 
 
 
