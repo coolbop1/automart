@@ -43,7 +43,7 @@ pool = db.getPool(conusername,condatabase,conhost,conpassword,conssl);
 }
 
 
-
+//pool.end();
 
 	//connection();
  //pool();

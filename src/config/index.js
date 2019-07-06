@@ -17,10 +17,11 @@ import { Pool } from "pg";
 		port: "5432",
 		ssl: conssl
 	});
-	pool.connect();
 	return pool;
 	 	}
 	 	
+	 	
 	 }
+	 
 
 	
