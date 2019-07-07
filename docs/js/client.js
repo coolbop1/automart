@@ -98,6 +98,9 @@ document.getElementById("mypendingo").innerHTML = "";
 				}
 				
 			}
+			if(state !== 0)
+			document.getElementById("mypendingo").scrollIntoView({block:"start",behavior:"smooth"})
+			
 			
 		}
 	})
@@ -164,6 +167,8 @@ document.getElementById("moff").innerHTML = "";
 				
 				
 			}
+			if(state !== 0)
+			document.getElementById("moff").scrollIntoView({block:"start",behavior:"smooth"})
 			
 		}
 	})
@@ -198,6 +203,7 @@ showend = data.data.length;
 
 
 document.getElementById("mmoff").innerHTML = "";	
+			document.getElementById("mmoff").scrollIntoView({block:"start",behavior:"smooth"})
 			for(let t=showstart; t < showend; t++){
 				const { id,buyer,car_id,amount,price_offered, status,created_on,manufacturer,model } = data.data[t];
 			
@@ -309,7 +315,7 @@ emailquery +=`&email=${myemail}`;
 if((showstart-3) >= 0){
 document.getElementById("moreorless").innerHTML +=`<div onclick="shhowmyads('${myemail}',${showstart-3},${showstart})" class='prev'><img src="image/whiteicon/back.png" width="20px"></div>`;
 }
-	
+	if(showstart !== 0)	document.getElementById("myadds").scrollIntoView({block:"start",behavior:"smooth"})
 	
 	}
 			
@@ -447,6 +453,9 @@ if((startfrom-6) >= 0){
 	let setstart = startfrom-6;
 document.getElementById("pagina").innerHTML +=`<div onclick='paginateallcars(${setstart})' class='prev'><img src="image/whiteicon/back.png" width="20px"></div>`;
 }
+
+if(startfrom !== 0)
+			document.getElementById("allcars").scrollIntoView({block:"start",behavior:"smooth"})
 
 
 }
