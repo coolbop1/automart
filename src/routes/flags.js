@@ -3,6 +3,7 @@ import  Joi from "joi";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
 import db from "../config";
+import confirm from "../controllers";
 let pool;
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
@@ -83,7 +84,7 @@ route.get("/api/v1/offenv", (req, res) => {
 })
  
 ///////////flag car as frad endpoint///////////////////
-route.post("/api/v1/flag",ensureToken, (req, res) => {
+route.post("/api/v1/flag",confirm.ensureToken, (req, res) => {
 	const schema ={
 		car_id : Joi.number().min(0).required(),
 		reason : Joi.string().regex(/^[,. !a-z0-9A-Z]+$/).trim().min(1),
@@ -119,26 +120,6 @@ route.post("/api/v1/flag",ensureToken, (req, res) => {
 	
 });
 /////////////////////////
-function ensureToken(req, res, next) { 
-	const bearerHeader = req.headers["authorization"];
-	if (typeof bearerHeader !== "undefined") {  
-		const berarer = bearerHeader.split(" "); 
-		const bearerToken = berarer[1]; 
-		req.token = bearerToken;
-		jwt.verify(req.token, "ourlittlesecret", function(err, data) {
-			 if (err) {res.status(403).json({
-				status:403,
-			"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); 
-	
-	 	}else{
-			req.token=data;
-			next();
-		}; });
-		} else {  res.status(403).json({
-			status:403,
-		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
-
-}
 
 
 

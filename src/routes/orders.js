@@ -3,6 +3,7 @@ import  Joi from "joi";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser"
 import db from "../config";
+import confirm from "../controllers";
 let pool;
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
@@ -83,7 +84,7 @@ route.get("/api/v1/oooenv", (req, res) => {
     route.get("/api/v1/allorders",(req, res) =>{  pool.query("SELECT * FROM orders",(error,result)=>{res.status(200).send(result.rows);})});
 
 ///////////purchase///////////////////
-route.post("/api/v1/order", ensureToken, (req, res) => {
+route.post("/api/v1/order", confirm.ensureToken, (req, res) => {
 	let { user } = req.token;
 	const schema ={
 		car_id : Joi.number().min(0).required(),
@@ -126,7 +127,7 @@ route.post("/api/v1/order", ensureToken, (req, res) => {
 /////////////////////////
 
 ///////////edit purchase order price///////////////////
-route.patch("/api/v1/order/:orderrid/price", ensureToken, (req, res) => {
+route.patch("/api/v1/order/:orderrid/price", confirm.ensureToken, (req, res) => {
 	let { user } = req.token;
 	const schema ={
 		order_price : Joi.number().min(0).required()
@@ -171,7 +172,7 @@ route.patch("/api/v1/order/:orderrid/price", ensureToken, (req, res) => {
 /////////////////////////
 
 
-route.get("/api/v1/order",ensureToken,(req,res)=>{
+route.get("/api/v1/order",confirm.ensureToken,(req,res)=>{
 	let buyerquery;
 	let sellerquery;
 	let statusquery;
@@ -223,7 +224,7 @@ route.get("/api/v1/order",ensureToken,(req,res)=>{
 })
 
 
-route.patch("/api/v1/order/status/:orderid",ensureToken,(req,res)=>{
+route.patch("/api/v1/order/status/:orderid",confirm.ensureToken,(req,res)=>{
 	pool.query("update orders set status=$1 where id=$2 and status=$3 RETURNING * ",["accepted",req.params.orderid,"pending"],(err,result)=>{
 		console.log(req.params.orderid)
 		if(result.rows.length > 0){
@@ -246,26 +247,7 @@ route.patch("/api/v1/order/status/:orderid",ensureToken,(req,res)=>{
 
 
 
-function ensureToken(req, res, next) { 
-	const bearerHeader = req.headers["authorization"];
-	if (typeof bearerHeader !== "undefined") {  
-		const berarer = bearerHeader.split(" "); 
-		const bearerToken = berarer[1]; 
-		req.token = bearerToken;
-		jwt.verify(req.token, "ourlittlesecret", function(err, data) {
-			 if (err) {res.status(403).json({
-				status:403,
-			"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); 
-	
-	 	}else{
-			req.token=data;
-			next();
-		}; });
-		} else {  res.status(403).json({
-			status:403,
-		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
 
-}
 
 
 

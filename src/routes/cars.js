@@ -3,6 +3,7 @@ import  Joi from "joi";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
 import db from "../config";
+import confirm from "../controllers";
 let pool;
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
@@ -82,7 +83,7 @@ route.get("/api/v1/occenv", (req, res) => {
 
 
 ///////////post car end point///////////////////
-route.post("/api/v1/car",ensureToken, (req, res) => {
+route.post("/api/v1/car",confirm.ensureToken, (req, res) => {
 	
 	const schema ={
 		manufacturer : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
@@ -132,7 +133,7 @@ route.post("/api/v1/car",ensureToken, (req, res) => {
 
 
 ////delete car ad/////////
-route.delete("/api/v1/car/:carid",ensureToken,(req, res) =>{
+route.delete("/api/v1/car/:carid",confirm.ensureToken,(req, res) =>{
     let todelete = req.params.carid;
  
     pool.query("DELETE FROM  postads WHERE id=$1",[todelete],(error,result)=>{
@@ -314,7 +315,7 @@ route.get("/api/v1/car/:carid", (req, res) => {
 
 
 ///////////mark carf as sold///////////////////
-route.patch("/api/v1/car/:carid/status",ensureToken, (req, res) => {
+route.patch("/api/v1/car/:carid/status",confirm.ensureToken, (req, res) => {
     let { user } = req.token;
 	pool.query("update postads set status=$1 where id=$2 and status=$3 and owner=$4 RETURNING *",["sold",req.params.carid,"available",user.id],(error,result)=>{
         
@@ -347,7 +348,7 @@ route.patch("/api/v1/car/:carid/status",ensureToken, (req, res) => {
 
 
 ///////////seller edit price///////////////////
-route.patch("/api/v1/car/:carid/price",ensureToken, (req, res) => {
+route.patch("/api/v1/car/:carid/price",confirm.ensureToken, (req, res) => {
     
     let { user } = req.token;
 	const schema ={
@@ -395,26 +396,6 @@ route.patch("/api/v1/car/:carid/price",ensureToken, (req, res) => {
 /////////////////////////
 
 
-function ensureToken(req, res, next) { 
-	const bearerHeader = req.headers["authorization"];
-	if (typeof bearerHeader !== "undefined") {  
-		const berarer = bearerHeader.split(" "); 
-		const bearerToken = berarer[1]; 
-		req.token = bearerToken;
-		jwt.verify(req.token, "ourlittlesecret", function(err, data) {
-			 if (err) {res.status(403).json({
-				status:403,
-			"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); 
-	
-	 	}else{
-			req.token=data;
-			next();
-		}; });
-		} else {  res.status(403).json({
-			status:403,
-		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
-
-}
 
 
 module.exports = route;

@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 import db from "./config";
+import confirm from "./controllers";
 let pool;
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
@@ -42,7 +43,7 @@ pool = db.getPool(conusername,condatabase,conhost,conpassword,conssl);
 //console.log(conusername)
 }
 
-
+//ensureToken = confirm.ensureToken(req, res, next)
 //pool.end();
 
 	//connection();
@@ -86,6 +87,8 @@ app.use(function(req, res, next) {
 	res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type, Authorization");
 	next();
 });
+
+
 
 app.get("/api/v1/allusers",(req, res) =>{  pool.query("SELECT * FROM allusers",(error,result)=>{res.status(200).send(result.rows);});});
 
@@ -439,24 +442,13 @@ app.post("/api/v1/auth/signin", (req, res) => {
 
 
 
-app.get("/api/v1/me", ensureToken, function(req, res) { 
+app.get("/api/v1/me", confirm.ensure, function(req, res) { 
 
  
 	jwt.verify(req.token, "ourlittlesecret", function(err, data) { if (err) { res.sendStatus(403); } else{res.status(200).json({ status:200,description:data}); } });
 });
  
  
-function ensureToken(req, res, next) { 
-	const bearerHeader = req.headers["authorization"];
-	if (typeof bearerHeader !== "undefined") {  
-		const berarer = bearerHeader.split(" "); 
-		const bearerToken = berarer[1]; 
-		req.token = bearerToken;
-		next();} else {  res.status(403).json({
-		"status":403,
-		"error":"Opps!! you are not authorized to perform this operation,please login to get authorized token"}); }
-
-}
 
 //pool.end();
 
