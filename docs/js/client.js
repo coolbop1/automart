@@ -11,8 +11,9 @@ function stilllog(tab){
 		const  {user}  = data.description;
 		//console.log(user);
 		
-		const dsession = user;
+	 dsession = user;
 		sessionStorage.setItem('myId',dsession.id);
+		sessionStorage.setItem('myEmail',dsession.email);
 
 		
 		if (window.location.pathname == "/UI/index.html" || window.location.pathname == "/UI/" || window.location.pathname == "/index.html" || window.location.pathname == "/") {
@@ -22,7 +23,11 @@ document.getElementById("notloged").style.display = "none";
    document.getElementById("spinn").innerHTML = "Email: "+dsession.email;
    document.getElementById("fpinn").innerHTML = "Address: "+dsession.address;
    setTimeout(()=>rightSlide("tpin"),1000);
-  }else{			document.getElementById("userspace").innerHTML = "<a href='index.html'><img src='image/uicon.jpg' width='25px' >"+dsession.email+"</a>";
+  }else{
+		sessionStorage.setItem('myId',dsession.id);
+		sessionStorage.setItem('myEmail',dsession.email);
+		console.log(sessionStorage.getItem('myEmail'));
+				document.getElementById("userspace").innerHTML = "<a href='index.html'><img src='image/uicon.jpg' width='25px' >"+dsession.email+"</a>";
   	var stroom = 0;
 var stoopt = stroom + 3;
   shhowmyads(dsession.email,stroom,stoopt);
@@ -401,6 +406,7 @@ function paginateallcars(thestart){
 	let sttrt = parseInt(thestart)
 	var strom = sttrt;
 var stopt = strom + 6;
+if(strom !== 0)
 document.getElementById("allcars").innerHTML = "<div style='height:100px;width:50%'><div class='roller'></div></div>";
 populateallcars(strom,stopt);
 }
@@ -733,6 +739,19 @@ document.getElementById("postcarad").innerHTML = '<center><div class="spinning">
 	var pces =	document.getElementById("pces").value;
 	var pprice =	document.getElementById("pprice").value;
 	var x = document.getElementsByName("stateocar");
+	
+	let owner;
+	let owneremails;
+	if(typeof dsession !== "undefined"){
+	 owner = dsession.id;
+	 owneremails = dsession.email;
+	}else{
+	 owner = 0;
+	 owneremails = "mockemail@eemail.com";
+	}
+	
+	
+	
 var i;
 for (i = 0; i < x.length; i++) {
    if(x[i].checked == true)
@@ -744,7 +763,7 @@ var lookfor = i
 fetch("/api/v1/car",{
 	method:"POST",
 	headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
-	body:JSON.stringify({"manufacturer" : pcman , "model" : pcmodel,"body_type" : pccolor , "engine_size" : pces, "price" : pprice,"state" : stateocar,"pics" : pcpics})
+	body:JSON.stringify({"id":owner,"email":owneremails,"manufacturer" : pcman , "model" : pcmodel,"body_type" : pccolor , "engine_size" : pces, "price" : pprice,"state" : stateocar,"pics" : pcpics})
 })
 .then((res)=>res.json())
 .then((data)=>{

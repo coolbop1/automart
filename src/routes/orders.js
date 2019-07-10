@@ -3,7 +3,7 @@ import  Joi from "joi";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser"
 import db from "../config";
-import confirm from "../controllers";
+import confirm from "../middleware/verifytoken";
 let pool;
 let conusername ="gkhfnrideiyyoi";
 	let condatabase= "ddelc2mc1p0din";
