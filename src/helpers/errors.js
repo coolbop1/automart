@@ -14,5 +14,12 @@ module.exports = {
             "error":"The account was not found.Cant change password"
         }
         return error;
+    },
+    badreq: function (){
+        let error ={
+            "status":400,
+            "error":"bad request"
+        };
+        return error;;
     }
 }

@@ -1,6 +1,6 @@
 const apps = require('supertest');
 const assert = require('assert');
-const app = require('../start.js');
+const {app} = require('../start.js');
 var should = require('chai').should();
 var expect = require('chai').expect();
 //import { ensureToken }  from '../server';
@@ -8,26 +8,9 @@ var expect = require('chai').expect();
 describe('delete all test inputs', function () {
     it('respond with json delete succesfull', function (done) {
         apps(app)
-           .get('/api/v1/user/truncateuser')
+           .delete('/api/v1/user/truncateuser')
             .expect(200 ,done)
     });
-    
-    it('respond with json delete succesfull', function (done) {
-        apps(app)
-           .get('/api/v1/user/truncatepostad')
-            .expect(200 ,done)
-    });
-     it('respond with json delete succesfull', function (done) {
-        apps(app)
-           .get('/api/v1/user/truncateorders')
-            .expect(200 ,done)
-    });
-     it('respond with json delete succesfull', function (done) {
-        apps(app)
-           .get('/api/v1/user/truncatereports')
-            .expect(200 ,done)
-    });
-    
 })
 describe('POST /auth/signup endpoint', function () {
     let 	comfirms = {
@@ -414,7 +397,6 @@ describe('GET /allcars endpoint', function () {
                         .expect(404, done) //expecting HTTP status code
                 });
                 
-                
             });
             describe('PATCH /order/:orderrid/price', function () {
                 let 	comfirms ={"order_price" : "2000"}
@@ -459,31 +441,6 @@ describe('GET /allcars endpoint', function () {
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(403, done);
-                });
-                it('respond with order status changes succesfull', function (done) {
-                    apps(app)
-                        .patch('/api/v1/order/status/1')
-                        .set("Content-Type", "application/json; charset=UTF-8")
-                        .set("Authorization", "Bearer "+token)
-                        .expect(200, done);
-                });
-                 it('respond with cant change order status', function (done) {
-                    apps(app)
-                        .patch('/api/v1/order/status/1')
-                        .set("Content-Type", "application/json; charset=UTF-8")
-                        .set("Authorization", "Bearer "+token)
-                        .expect(404, done);
-                });
-                it('respond with myorders ', function (done) {
-                    apps(app)
-                        .get('/api/v1/order')
-                         .query({'buyer' : '1'})
-                         .query({'statuses' : 'pending'})
-                         
-                         .set("Authorization", "Bearer "+token)
-                        
-                        .expect('Content-Type', /json/)
-                        .expect(200, done) //expecting HTTP status code
                 });
             });
             describe('POST /flag endpoint', function () {
@@ -904,65 +861,15 @@ describe('error test', function () {
             describe('delete all test inputs', function () {
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
-                       .get('/api/v1/user/truncateuser')
+                       .delete('/api/v1/user/truncateuser')
                        .set("Authorization", "Bearer "+token)
                         .expect(200 ,done)
                 });
                 
-                it('respond with json delete succesfull', function (done) {
-                    apps(app)
-                       .get('/api/v1/user/truncatepostad')
-                       .set("Authorization", "Bearer "+token)
-                        .expect(200 ,done)
-                });
-                 it('respond with json delete succesfull', function (done) {
-                    apps(app)
-                       .get('/api/v1/user/truncateorders')
-                       .set("Authorization", "Bearer "+token)
-                        .expect(200 ,done)
-                });
-                 it('respond with json delete succesfull', function (done) {
-                    apps(app)
-                       .get('/api/v1/user/truncatereports')
-                       .set("Authorization", "Bearer "+token)
-                        .expect(200 ,done)
-                });
-                 it('test production enviroment in flag routes', function (done) {
-                    apps(app)
-                       .get('/api/v1/fenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in flag route', function (done) {
-                    apps(app)
-                       .get('/api/v1/ffenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test production enviroment in car routes', function (done) {
-                    apps(app)
-                       .get('/api/v1/cenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in car route', function (done) {
-                    apps(app)
-                       .get('/api/v1/ccenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test production enviroment in order routes', function (done) {
-                    apps(app)
-                       .get('/api/v1/oenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in order route', function (done) {
-                    apps(app)
-                       .get('/api/v1/ooenv')
-                  
-                        .expect(200 ,done)
-                });
+               
+                 
+                
+                
                 it('test production enviroment in order routes', function (done) {
                     apps(app)
                        .get('/api/v1/uenv')
@@ -972,24 +879,6 @@ describe('error test', function () {
                 it('test test enviroment in order route', function (done) {
                     apps(app)
                        .get('/api/v1/uuenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test offline enviroment in order route', function (done) {
-                    apps(app)
-                       .get('/api/v1/oooenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test offline enviroment in flag route', function (done) {
-                    apps(app)
-                       .get('/api/v1/offenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in car route', function (done) {
-                    apps(app)
-                       .get('/api/v1/occenv')
                   
                         .expect(200 ,done)
                 });

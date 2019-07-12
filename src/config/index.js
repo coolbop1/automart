@@ -8,8 +8,8 @@ import nodemailer from "nodemailer";
 	 	getPool: function (conusername,condatabase,conhost,conpassword,conssl){
 	 		//if(pool) return pool;
 	 		const pool = new Pool({
-				user: conusername,
 				host: conhost,
+				user: conusername,
 				database: condatabase,
 				password: conpassword,
 				port: "5432",

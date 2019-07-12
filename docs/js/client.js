@@ -740,15 +740,6 @@ document.getElementById("postcarad").innerHTML = '<center><div class="spinning">
 	var pprice =	document.getElementById("pprice").value;
 	var x = document.getElementsByName("stateocar");
 	
-	let owner;
-	let owneremails;
-	if(typeof dsession !== "undefined"){
-	 owner = dsession.id;
-	 owneremails = dsession.email;
-	}else{
-	 owner = 0;
-	 owneremails = "mockemail@eemail.com";
-	}
 	
 	
 	
@@ -763,7 +754,7 @@ var lookfor = i
 fetch("/api/v1/car",{
 	method:"POST",
 	headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
-	body:JSON.stringify({"id":owner,"email":owneremails,"manufacturer" : pcman , "model" : pcmodel,"body_type" : pccolor , "engine_size" : pces, "price" : pprice,"state" : stateocar,"pics" : pcpics})
+	body:JSON.stringify({"manufacturer" : pcman , "model" : pcmodel,"body_type" : pccolor , "engine_size" : pces, "price" : pprice,"state" : stateocar,"pics" : pcpics})
 })
 .then((res)=>res.json())
 .then((data)=>{

@@ -80,7 +80,8 @@ login: function (email){
                  "email" : ress.rows[0].email,
                  "name" : ress.rows[0].first_name,
                  "lname" : ress.rows[0].last_name,
-                 "address" : ress.rows[0].address
+                 "address" : ress.rows[0].address,
+                 "is_admin" : ress.rows[0].is_admin
              };
              resolve(comfirm);
             

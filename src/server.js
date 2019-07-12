@@ -69,7 +69,7 @@ module.exports = {
 		configdatabase: condatabase,
 		configpassword: conpassword,
 		configport: "5432",
-		congigssl: conssl,
+		configssl: conssl,
 		thegmail:thegmail
 	
 	};
