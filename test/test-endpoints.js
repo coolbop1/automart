@@ -219,6 +219,14 @@ describe('POST /car endpoint', function () {
             .expect(409, done);
     });
     describe('GET /car/:carid endpoint', function () {
+        it('respond bad fequest not a number', function (done) {
+            apps(app)
+                .get('/api/v1/car/be')
+                .set('Accept', 'application/json')
+                .set("Authorization", "Bearer "+token)
+                .expect(400, done) //expecting HTTP status code
+                
+        });
         it('respond with json of  the car', function (done) {
             apps(app)
                 .get('/api/v1/car/1')
@@ -247,6 +255,14 @@ describe('PATCH /car/:carid/price endpoint', function () {
     let 	comfirmsy = {
         "price" : ""
     }
+    it('respond with bad formart can change price', function (done) {
+        apps(app)
+            .patch('/api/v1/car/be/price')
+            .send(comfirms)
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .set("Authorization", "Bearer "+token)
+            .expect(400, done);
+    });
     it('respond with json containing The car does not belong to you', function (done) {
         apps(app)
             .patch('/api/v1/car/1/price')
@@ -706,6 +722,13 @@ describe('GET /allcars endpoint', function () {
                 });
             });
             describe('PATCH /car/:carid/status endpoint', function () {
+                it('respond with bad format', function (done) {
+                    apps(app)
+                        .patch('/api/v1/car/be/status')
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
+                        .expect(400, done);
+                });
                 it('respond with json containing The status of car changed to sold', function (done) {
                     apps(app)
                         .patch('/api/v1/car/1/status')
