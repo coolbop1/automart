@@ -1,14 +1,13 @@
 import db from "../config";
 
-let pool;
-module.exports = {
+const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
 
+module.exports = {
     carquery : function (preparedquery,queryparam,expectedstatus){
-        pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
                //console.log(error,result)
-                if(result.rows.length >0 ){
+                if(result.rows.length >0){
                     let reply = {
                         status:expectedstatus,
                         data:result.rows
@@ -22,9 +21,8 @@ module.exports = {
     },
     deleteacar : function (preparedquery,queryparam){
         return new Promise(function(resolve,reject){
-            pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
             pool.query(preparedquery,queryparam,(error,result)=>{
-                if(result && process.env.NODE_ENV !== "errors"){
+                if(result){
                     let reply = {
                         "status" : 200,
                         "data" : "Car Ad successfully deleted"
