@@ -26,7 +26,8 @@ setenvparam();
 	testgmail();
 	}
 	function testgmail(){
-		thegmail="testgmail@gmail.com"
+		thegmail="testgmail@gmail.com";
+		setapp();
    	}
 
 function setenvparam(){
