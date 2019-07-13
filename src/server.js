@@ -8,18 +8,18 @@ import express from "express";
 	let conssl=true;
 	let thegmail="automartmail@gmail.com";
 	let app;
-setenvparam();
+setenvparam(0);
 	function changeenv(){
 		process.env['NODE_ENV'] = 'test';
-	setenvparam();
+	setenvparam(1);
 	}
 	function changeenvpro(){
 		process.env['NODE_ENV'] = 'production';
-	setenvparam();
+	setenvparam(1);
 	}
 	function changeenvoff(){
 		process.env['NODE_ENV'] = 'offline';
-	setenvparam();
+	setenvparam(1);
 	}
 	function changeenverr(){
 		process.env['NODE_ENV'] = 'errors';
@@ -27,18 +27,22 @@ setenvparam();
 	}
 	function testgmail(){
 		thegmail="testgmail@gmail.com";
-		setapp();
+		exportd();
+
    	}
 
-function setenvparam(){
+function setenvparam(arrg){
 		if (process.env.NODE_ENV && process.env.NODE_ENV === "test" ) {conusername="tovlhixtdmbgcz";condatabase="dfvspqpvd9vmc6";conhost='ec2-23-21-91-183.compute-1.amazonaws.com';conpassword='f48766c6c29f9b25108448b51c39d55084235c27d9352129da35c9cddbb78823';conssl=true;thegmail="automartcontacts@gmail.com"}
 		else if(process.env.NODE_ENV === "offline"){conusername="andela";condatabase="andela";conhost="localhost";conpassword="";conssl=false;thegmail="automartmail@gmail.com";}
 		else{
 		conusername ="gkhfnrideiyyoi";condatabase= "ddelc2mc1p0din";conhost="ec2-23-21-91-183.compute-1.amazonaws.com";conpassword="75f800626b4be7b6fe829d59277b3a5aca40c09ac1538bf69cbde20997d957ba";conssl=true;thegmail="automartcontacts@gmail.com";
 		}
- 		setapp();
+		if(arrg == 0)
+		 setapp();
+		 else
+		 exportd();
 }
-	console.log(conusername);
+	
 
 function setapp(){
 	app = express();
@@ -63,6 +67,7 @@ const flags = require("./routes/flags");
 app.use("/", flags);
  
  function exportd(){
+	console.log(thegmail);
 module.exports = {
 		app:app,
 	 	configuser: conusername,
