@@ -1,7 +1,7 @@
 import db from "../config";
 
 const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
-const transporter = db.setTransporter(process.env['EMAIL']);
+
 
 module.exports = {
     createuser :  function (inputarrays){
@@ -31,9 +31,11 @@ module.exports = {
     })
 },
 sendingMail: function (mailparam,to,pass){
+    const transporter = db.setTransporter(process.env['EMAIL']);
+    //console.log(process.env['EMAIL'])
     return new Promise(function(resolve,reject){
         transporter.sendMail(mailparam,function(error, info){
-            if(info || process.env.NODE_ENV === "offline" ){
+            if(info){
                 
            pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[pass,to],(error,result)=>{
                 if(result){

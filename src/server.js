@@ -23,6 +23,7 @@ setenvparam(0);
 	setenvparam(1);
 	}
 	function changeenverr(){
+		thegmail="testgmail@gmail.com";
 		process.env['NODE_ENV'] = 'errors';
 		setenvparam(1)
 	}
