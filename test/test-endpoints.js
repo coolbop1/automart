@@ -765,7 +765,7 @@ describe('GET /allcars endpoint', function () {
                         .delete('/api/v1/car/b')
                         .expect('Content-Type', /json/)
                         .set("Authorization", "Bearer "+token)
-                        .expect(404, done) //expecting HTTP status code
+                        .expect(400, done) //expecting HTTP status code
                        
                         
                 });
@@ -780,7 +780,7 @@ describe('GET /allcars endpoint', function () {
             .post('/api/v1/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirmsy)
-            .expect(404, done);
+            .expect(400, done);
     });
     it('respond with not found', function (done) {
         apps(app)
@@ -794,14 +794,14 @@ describe('GET /allcars endpoint', function () {
             .post('/api/v1/user/theemail@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
-            .expect(404, done);
+            .expect(400, done);
     });
     it('respond with not found', function (done) {
         apps(app)
             .post('/api/v1/user/domrad9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
-            .expect(404, done);
+            .expect(400, done);
     });
      it('respond password changed', function (done) {
         apps(app)
