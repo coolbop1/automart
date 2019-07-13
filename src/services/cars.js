@@ -7,7 +7,7 @@ module.exports = {
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
                //console.log(error,result)
-                if(result.rows.length >0){
+                if(result.rows.length >0 ){
                     let reply = {
                         status:expectedstatus,
                         data:result.rows
@@ -22,7 +22,7 @@ module.exports = {
     deleteacar : function (preparedquery,queryparam){
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
-                if(result){
+                if(result && process.env.NODE_ENV !== "errors"){
                     let reply = {
                         "status" : 200,
                         "data" : "Car Ad successfully deleted"

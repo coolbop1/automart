@@ -749,7 +749,37 @@ describe('GET /allcars endpoint', function () {
                         
                 });
             });
+            describe('error test', function () {
+                before(function(done){
+                    apps(app)
+                    .get('/api/v1/testerr')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
+                
+                it('respond with 404 cant find car', function (done) {
+                    apps(app)
+                        .delete('/api/v1/car/1')
+                        .set('Accept', 'application/json')
+                        .set("Authorization", "Bearer "+token)
+                        .expect('Content-Type', /json/)
+                        .expect(404, done) //expecting HTTP status code
+                       
+                        
+                });
+                
+                })
             describe('delete /car/:carid', function () {
+                before(function(done){
+                    apps(app)
+                    .get('/api/v1/uenv')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
                         .delete('/api/v1/car/1')
