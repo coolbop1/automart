@@ -750,6 +750,26 @@ describe('GET /allcars endpoint', function () {
                 });
             });
             describe('delete /car/:carid', function () {
+                it('respond with not found', function (done) {
+                    apps(app)
+                        .delete('/api/v1/car/20')
+                        .set('Accept', 'application/json')
+                        .set("Authorization", "Bearer "+token)
+                        .expect('Content-Type', /json/)
+                        .expect(404, done) //expecting HTTP status code
+                       
+                        
+                });
+                it('respond with bad request NAN', function (done) {
+                    apps(app)
+                        .delete('/api/v1/car/be')
+                        .set('Accept', 'application/json')
+                        .set("Authorization", "Bearer "+token)
+                        .expect('Content-Type', /json/)
+                        .expect(400, done) //expecting HTTP status code
+                       
+                        
+                });
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
                         .delete('/api/v1/car/1')
