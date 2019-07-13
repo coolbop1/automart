@@ -41,6 +41,7 @@
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.4",
     "cross-env": "^5.2.0",

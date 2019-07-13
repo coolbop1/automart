@@ -8,26 +8,9 @@ var expect = require('chai').expect();
 describe('delete all test inputs', function () {
     it('respond with json delete succesfull', function (done) {
         apps(app)
-           .get('/api/v1/user/truncateuser')
+           .delete('/api/v1/user/truncateuser')
             .expect(200 ,done)
     });
-    
-    it('respond with json delete succesfull', function (done) {
-        apps(app)
-           .get('/api/v1/user/truncatepostad')
-            .expect(200 ,done)
-    });
-     it('respond with json delete succesfull', function (done) {
-        apps(app)
-           .get('/api/v1/user/truncateorders')
-            .expect(200 ,done)
-    });
-     it('respond with json delete succesfull', function (done) {
-        apps(app)
-           .get('/api/v1/user/truncatereports')
-            .expect(200 ,done)
-    });
-    
 })
 describe('POST /auth/signup endpoint', function () {
     let 	comfirms = {
@@ -878,65 +861,15 @@ describe('error test', function () {
             describe('delete all test inputs', function () {
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
-                       .get('/api/v1/user/truncateuser')
+                       .delete('/api/v1/user/truncateuser')
                        .set("Authorization", "Bearer "+token)
                         .expect(200 ,done)
                 });
                 
-                it('respond with json delete succesfull', function (done) {
-                    apps(app)
-                       .get('/api/v1/user/truncatepostad')
-                       .set("Authorization", "Bearer "+token)
-                        .expect(200 ,done)
-                });
-                 it('respond with json delete succesfull', function (done) {
-                    apps(app)
-                       .get('/api/v1/user/truncateorders')
-                       .set("Authorization", "Bearer "+token)
-                        .expect(200 ,done)
-                });
-                 it('respond with json delete succesfull', function (done) {
-                    apps(app)
-                       .get('/api/v1/user/truncatereports')
-                       .set("Authorization", "Bearer "+token)
-                        .expect(200 ,done)
-                });
-                 it('test production enviroment in flag routes', function (done) {
-                    apps(app)
-                       .get('/api/v1/fenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in flag route', function (done) {
-                    apps(app)
-                       .get('/api/v1/ffenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test production enviroment in car routes', function (done) {
-                    apps(app)
-                       .get('/api/v1/cenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in car route', function (done) {
-                    apps(app)
-                       .get('/api/v1/ccenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test production enviroment in order routes', function (done) {
-                    apps(app)
-                       .get('/api/v1/oenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in order route', function (done) {
-                    apps(app)
-                       .get('/api/v1/ooenv')
-                  
-                        .expect(200 ,done)
-                });
+               
+                 
+                
+                
                 it('test production enviroment in order routes', function (done) {
                     apps(app)
                        .get('/api/v1/uenv')
@@ -946,24 +879,6 @@ describe('error test', function () {
                 it('test test enviroment in order route', function (done) {
                     apps(app)
                        .get('/api/v1/uuenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test offline enviroment in order route', function (done) {
-                    apps(app)
-                       .get('/api/v1/oooenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test offline enviroment in flag route', function (done) {
-                    apps(app)
-                       .get('/api/v1/offenv')
-                  
-                        .expect(200 ,done)
-                });
-                it('test test enviroment in car route', function (done) {
-                    apps(app)
-                       .get('/api/v1/occenv')
                   
                         .expect(200 ,done)
                 });
