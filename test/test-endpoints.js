@@ -772,6 +772,28 @@ describe('GET /allcars endpoint', function () {
                         
                 });
             });
+            describe('error test', function () {
+                before(function(done){
+                    apps(app)
+                    .get('/api/v1/testerr')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
+                
+                it('respond with json error occured', function (done) {
+                    apps(app)
+                        .delete('/api/v1/car/1')
+                        .set('Accept', 'application/json')
+                        .set("Authorization", "Bearer "+token)
+                        .expect('Content-Type', /json/)
+                        .expect(400, done) //expecting HTTP status code
+                       
+                        
+                });
+                
+                })
             describe('delete /car/:carid', function () {
                 it('respond with not found', function (done) {
                     apps(app)
