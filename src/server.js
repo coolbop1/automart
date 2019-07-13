@@ -66,8 +66,8 @@ app.use("/", flags);
  
  function exportd(){
 	process.env['DATABASE'] = condatabase;
-	process.env['PASS'] = condatabase;
-	process.env['USER'] = condatabase;
+	process.env['PASS'] = conpassword;
+	process.env['USER'] = conusername;
 	process.env['HOST'] = conhost;
 	process.env['EMAIL'] = thegmail;
 	process.env['SSL'] = conssl;
