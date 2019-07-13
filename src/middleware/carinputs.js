@@ -2,7 +2,7 @@ import  Joi from "joi";
 import db from "../config";
 import badrequest from "../helpers/errors";
 
-const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
+let pool;
     
 const { badreq,authError } = badrequest;
 
@@ -73,6 +73,7 @@ carstatuscheck : function(req,res,next){
         res.status(400).send(badreq());
     return;
     }else{
+        pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
         let { user } = req.token;
         pool.query("select * from postads where id=$1 and owner=$2 and status<>$3",[req.params.carid,user.id,"sold"],(err,result)=>{
             if(result.rows.length > 0){
@@ -107,6 +108,7 @@ carpricecheck : function(req,res,next){
 	res.status(409).send(reply);
 		return;
     }else{
+        pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
         pool.query("select * from postads where id=$1 and owner=$2 and status<>$3",[req.params.carid,user.id,"sold"],(err,result)=>{
             if(result.rows.length > 0){
                 req.action = "patchprice";
@@ -130,6 +132,7 @@ checktodelete : function(req,res,next){
         res.status(400).send(badreq());
     return;
     }else{
+        pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
         let { user } = req.token;
         pool.query("select * from postads where id=$1 and owner=$2 ",[req.params.carid,user.id,],(err,result)=>{
             if(result.rows.length > 0){

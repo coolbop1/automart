@@ -1,9 +1,10 @@
 import db from "../config";
 
-const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
-
+let pool;
 module.exports = {
+
     carquery : function (preparedquery,queryparam,expectedstatus){
+        pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
                //console.log(error,result)
@@ -21,6 +22,7 @@ module.exports = {
     },
     deleteacar : function (preparedquery,queryparam){
         return new Promise(function(resolve,reject){
+            pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
             pool.query(preparedquery,queryparam,(error,result)=>{
                 if(result && process.env.NODE_ENV !== "errors"){
                     let reply = {
