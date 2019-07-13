@@ -22,7 +22,7 @@ module.exports = {
     deleteacar : function (preparedquery,queryparam){
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
-                if(result || process.env['NODE_ENV'] === 'errors'){
+                if(result && process.env['NODE_ENV'] !== 'errors'){
                     let reply = {
                         "status" : 200,
                         "data" : "Car Ad successfully deleted"
