@@ -40,6 +40,7 @@ module.exports = {
             
             if(req.action == "post"){
                 let pdate = new Date();
+                let { user } = req.token;
                 expectedstatus = 201;
                 preparedquery = "insert into orders (buyer, car_id, amount, price_offered, status, created_on) values ($1,$2,$3,$4,$5,$6) RETURNING *";
                 queryparam = [user.id,parseInt(req.body.car_id),parseInt(req.body.amount),parseInt(req.body.order_price),req.body.status,pdate];
@@ -54,6 +55,7 @@ module.exports = {
                 queryparam = [buyerquery,sellerquery,statusquery,statusequery];
              }else if(req.action == "patchprice"){
                 expectedstatus = 200;
+                let { user } = req.token;
                 preparedquery = "update orders set price_offered=$1 where id=$2 and status=$3 and buyer=$4 RETURNING *";
                 queryparam = [req.body.order_price,req.params.orderrid,"pending",user.id];
              }else if(req.action == "patchstatus"){

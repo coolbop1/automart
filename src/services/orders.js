@@ -9,7 +9,7 @@ module.exports = {
     orderdb : function(preparedquery,queryparam,expectedstatus){
         return new Promise(function (resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
-                console.log(error,result);
+                //console.log(error,result);
                 if(result.rows.length > 0){
                     let reply ={
                             "status" : expectedstatus,
