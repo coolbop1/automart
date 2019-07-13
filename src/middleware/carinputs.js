@@ -1,10 +1,8 @@
 import  Joi from "joi";
 import db from "../config";
-import con from "../server";
 import badrequest from "../helpers/errors";
 
-const { configuser,configdatabase,confighost,configpassword,configssl } = con;
-const pool = db.getPool(configuser,configdatabase,confighost,configpassword,configssl);
+const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
     
 const { badreq,authError } = badrequest;
 

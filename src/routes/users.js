@@ -32,7 +32,7 @@ route.get("/api/v1/me", confirm.ensure, function(req, res) {
  
 	jwt.verify(req.token, "ourlittlesecret", function(err, data) { if (err) { res.sendStatus(403); } else{res.status(200).json({ status:200,description:data}); } });
 });
- 
+//console.log(route.get('env'));
  module.exports = {
  	users:route
  }

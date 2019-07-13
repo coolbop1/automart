@@ -827,9 +827,16 @@ describe('GET /allcars endpoint', function () {
     });
 })
 describe('error test', function () {
+    before(function(done){
+        apps(app)
+        .get('/api/v1/testerr')
+        .end(function(err, res){
+            done();
+        })
+        
+    })
     
     it('return error', function (done) {
-        process.env['NODE_ENV'] = 'errors';
         apps(app)
             .post('/api/v1/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")

@@ -1,10 +1,7 @@
 import db from "../config";
-import con from "../server";
 
-
-const { configuser,configdatabase,confighost,configpassword,configssl,thegmail } = con;
-const pool = db.getPool(configuser,configdatabase,confighost,configpassword,configssl);
-const transporter = db.setTransporter(thegmail);
+const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
+const transporter = db.setTransporter(process.env['EMAIL']);
 
 module.exports = {
     createuser :  function (inputarrays){
@@ -74,6 +71,7 @@ updatepass: function (to,pass){
 login: function (email){
     return new Promise(function(resolve,reject){
         pool.query("select * from allusers where email = $1 ",[email],(err,ress)=>{
+           // console.log(process.env['EMAIL']);
             if(ress.rows.length > 0){
                 let 	comfirm = {
                  "id" : ress.rows[0].id,

@@ -5,6 +5,7 @@ const { carquery,deleteacar } = carservices;
 
 module.exports = {
     allcarquery : function (req, res) {
+        
         async function searchcar() {
         let theminprice;
         let themaxprice;

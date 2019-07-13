@@ -1,12 +1,10 @@
 import  Joi from "joi";
 import db from "../config";
-import con from "../server";
 import bcrypt from "bcryptjs";
 import error from "../helpers/errors";
 
 const { operationError } = error;
-const { configuser,configdatabase,confighost,configpassword,configssl } = con;
-const pool = db.getPool(configuser,configdatabase,confighost,configpassword,configssl);
+const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
 
 module.exports = {
 	validateuserinputs: function (req,res,next){	

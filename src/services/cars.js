@@ -1,15 +1,12 @@
 import db from "../config";
-import con from "../server";
 
-
-const { configuser,configdatabase,confighost,configpassword,configssl } = con;
-const pool = db.getPool(configuser,configdatabase,confighost,configpassword,configssl);
+const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
 
 module.exports = {
     carquery : function (preparedquery,queryparam,expectedstatus){
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
-                //console.log(error,result)
+               // console.log(error,result)
                 if(result.rows.length >0){
                     let reply = {
                         status:expectedstatus,

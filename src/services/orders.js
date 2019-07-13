@@ -1,9 +1,5 @@
 import db from "../config";
-import con from "../server";
-
-
-const { configuser,configdatabase,confighost,configpassword,configssl } = con;
-const pool = db.getPool(configuser,configdatabase,confighost,configpassword,configssl);
+const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env['HOST'],process.env['PASS'],Boolean(parseInt(process.env['SSL'])));
  
 module.exports = {
     orderdb : function(preparedquery,queryparam,expectedstatus){
