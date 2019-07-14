@@ -210,6 +210,14 @@ describe('POST /car endpoint', function () {
             .set("Authorization", "Bearer "+token)
             .expect(201, done);
     });
+    it('respond with json containing Car posted successfully', function (done) {
+        apps(app)
+            .post('/api/v1/car')
+            .send(comfirms)
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .set("Authorization", "Bearer "+token)
+            .expect(201, done);
+    });
     it('respond with json conflict', function (done) {
         apps(app)
             .post('/api/v1/car')
@@ -295,7 +303,7 @@ describe('GET /car/:carid unexistence car endpoints', function () {
 describe('GET /car/:carid  existing car endpoint', function () {
     it('respond json of car with id \"1\"', function (done) {
         apps(app)
-            .get('/api/v1/car/2')
+            .get('/api/v1/car/5')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
@@ -784,11 +792,11 @@ describe('GET /allcars endpoint', function () {
                 
                 it('respond with json error occured', function (done) {
                     apps(app)
-                        .delete('/api/v1/car/1')
+                        .delete('/api/v1/car/2')
                         .set('Accept', 'application/json')
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
-                        .expect(400, done) //expecting HTTP status code
+                        .expect(404, done) //expecting HTTP status code
                        
                         
                 });
