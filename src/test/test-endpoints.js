@@ -858,6 +858,49 @@ describe('error test', function () {
                 });
                 
             });
+            
+            
+            describe('mark as accepted', function () {
+    before(function(done){
+        apps(app)
+        .get('/api/v1/order/status/1')
+        .end(function(err, res){
+            done();
+        })
+        
+    })
+     it('respond with myorders ', function (done) {
+                    apps(app)
+                        .get('/api/v1/order')
+                         .query({'buyer' : '1'})
+                         .query({'seller' : '1'})
+                         .query({'statuses' : 'pending'})
+                         
+                         .set("Authorization", "Bearer "+token)
+                        
+                        .expect('Content-Type', /json/)
+                        .expect(200, done) //expecting HTTP status code
+                });
+    
+    
+    
+    
+    
+    
+    
+    })
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             describe('delete all test inputs', function () {
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
