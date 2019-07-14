@@ -20,17 +20,9 @@ module.exports = {
         }
     },
     validatedelete : function(req,res,next){
-        let { user } = req.token;
-        if(user.is_admin == false){
-            let reply = {
-                "status":409,
-                "error" : "you have no right for this action"
-            }	
-            res.status(409).send(reply);
-                return ;
-        }else{
+        
             next();
-        }
+        
 
     }
 }
