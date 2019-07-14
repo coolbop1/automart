@@ -21,13 +21,13 @@ const route = express.Router();
 	next();
 	});
 
-route.post("/api/v1/auth/signup",validateuserinputs,verifynewemail, signup);
-route.get("/api/v1/allusers", users);
-route.post("/api/v1/user/:email/reset_password", verifyaction,sendPassword)
-route.post("/api/v1/auth/signin",validateloginputs, signin);
+route.post("/auth/signup",validateuserinputs,verifynewemail, signup);
+route.get("/allusers", users);
+route.post("/user/:email/reset_password", verifyaction,sendPassword)
+route.post("/auth/signin",validateloginputs, signin);
  
 
-route.get("/api/v1/me", confirm.ensure, function(req, res) { 
+route.get("/me", confirm.ensure, function(req, res) { 
 
  
 	jwt.verify(req.token, "ourlittlesecret", function(err, data) { if (err) { res.sendStatus(403); } else{res.status(200).json({ status:200,description:data}); } });

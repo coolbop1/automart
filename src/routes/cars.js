@@ -24,13 +24,13 @@ route.use(bodyParser.urlencoded({
 	next();
 });
 
-route.post("/api/v1/car",confirm.ensureToken,postcarinputs,allcarquery);
-route.get("/api/v1/car",carquerycheck,allcarquery);
-route.get("/api/v1/car/:carid",carparamcheck,allcarquery);
-route.get("/api/v1/allcars",allcarquery);
-route.patch("/api/v1/car/:carid/status",confirm.ensureToken,carstatuscheck,allcarquery);
-route.patch("/api/v1/car/:carid/price",confirm.ensureToken,carpricecheck,allcarquery);
-route.delete("/api/v1/car/:carid",confirm.ensureToken,checktodelete,deletecar);
+route.post("/car",confirm.ensureToken,postcarinputs,allcarquery);
+route.get("/car",carquerycheck,allcarquery);
+route.get("/car/:carid",carparamcheck,allcarquery);
+route.get("/allcars",allcarquery);
+route.patch("/car/:carid/status",confirm.ensureToken,carstatuscheck,allcarquery);
+route.patch("/car/:carid/price",confirm.ensureToken,carpricecheck,allcarquery);
+route.delete("/car/:carid",confirm.ensureToken,checktodelete,deletecar);
 
 
 module.exports = route;

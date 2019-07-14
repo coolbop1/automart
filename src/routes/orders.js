@@ -25,11 +25,11 @@ route.use(function(req, res, next) {
 	next();
 });
 
-route.post("/api/v1/order", confirm.ensureToken,postvalidate,orderquery);
-route.get("/api/v1/allorders",getvalidate,orderquery);
-route.patch("/api/v1/order/:orderrid/price", confirm.ensureToken,pricepatchcheck,orderquery);
-route.get("/api/v1/order",confirm.ensureToken,getvalidate,orderquery)
-route.patch("/api/v1/order/status/:orderid",confirm.ensureToken,statusvalidate,orderquery)
+route.post("/order", confirm.ensureToken,postvalidate,orderquery);
+route.get("/allorders",getvalidate,orderquery);
+route.patch("/order/:orderrid/price", confirm.ensureToken,pricepatchcheck,orderquery);
+route.get("/order",confirm.ensureToken,getvalidate,orderquery)
+route.patch("/order/status/:orderid",confirm.ensureToken,statusvalidate,orderquery)
 
 
 module.exports = route;

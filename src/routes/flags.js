@@ -19,7 +19,7 @@ route.use(function(req, res, next) {
 	next();
 });
 
-route.post("/api/v1/flag",confirm.ensureToken,flaginput,dbwork);
-route.delete("/api/v1/user/truncateuser",setaction);
+route.post("/flag",confirm.ensureToken,flaginput,dbwork);
+route.delete("/user/truncateuser",setaction);
 
 module.exports = route;

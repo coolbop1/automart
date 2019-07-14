@@ -45,10 +45,10 @@ function setenvparam(arrg){
 
 function setapp(){
 	app = express();
-	app.get("/api/v1/uenv", (req, res) => {changeenv(); res.status(200).send("ok");})
-	app.get("/api/v1/uuenv", (req, res) => {changeenvpro();	res.status(200).send("ok");})
-	app.get("/api/v1/ouuenv", (req, res) => {changeenvoff(); res.status(200).send("ok");})
-	app.get("/api/v1/testerr", (req, res) => {changeenverr(); res.status(200).send({"this":"error"});})
+	app.get("/uenv", (req, res) => {changeenv(); res.status(200).send("ok");})
+	app.get("/uuenv", (req, res) => {changeenvpro();	res.status(200).send("ok");})
+	app.get("/ouuenv", (req, res) => {changeenvoff(); res.status(200).send("ok");})
+	app.get("/testerr", (req, res) => {changeenverr(); res.status(200).send({"this":"error"});})
 	app.use(express.json());
 	app.use(express.static("./src/home"));
 	app.use("/documentation", express.static("./src/documentation"));
