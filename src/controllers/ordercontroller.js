@@ -24,7 +24,10 @@ module.exports = {
         }
         if(typeof req.query.status !== "undefined"){
             statusquery = req.query.status;
-        }else if(typeof req.query.statuses !== "undefined"){
+        }else{
+            statusquery = null;
+        }
+        if(typeof req.query.statuses !== "undefined"){
             statusequery = req.query.statuses;
         }else{
             statusequery = null;

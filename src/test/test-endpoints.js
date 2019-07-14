@@ -863,7 +863,7 @@ describe('error test', function () {
             describe('mark as accepted', function () {
     before(function(done){
         apps(app)
-        .get('/api/v1/order/status/1')
+        .patch('/api/v1/order/status/1')
         .end(function(err, res){
             done();
         })
