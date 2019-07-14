@@ -89,14 +89,33 @@ module.exports = {
         }
             try{
            let outcome = await carquery(preparedquery,queryparam,expectedstatus);
-           if(outcome.status==201)
-           outcome.message = "Car posted successfully";
-           if(outcome.status==200 && req.action == "patchstatus")
-           outcome.message = "The ad have been marked as sold.";
-           if(outcome.status==200 && req.action == "patchprice")
-           outcome.message = "The price have been changed successfully.";
+           if(expectedstatus==201){
+           	res.status(201).json({
+           		status:202,
+           		data:outcome[0],
+           		message:"Car posted successfully"
+           	});
+           }else if(expectedstatus==200 && req.action == "patchstatus"){
+           	res.status(200).json({
+           		status:200,
+           		data:outcome[0],
+           		message:"The ad have been marked as sold."
+           	});
+       }else if(expectedstatus==200 && req.action == "patchprice"){
+       	res.status(200).json({
+           		status:200,
+           		data:outcome[0],
+           		message:"The price have been changed successfully."
+           	});
+       }else{
+       	res.status(200).json({
+           		status:200,
+           		data:outcome
+           	});
+       }
            
-            res.status(outcome.status).json(outcome);
+           
+            
         
          }catch(e){
             res.status(404).json({

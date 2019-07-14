@@ -6,18 +6,10 @@ module.exports = {
     carquery : function (preparedquery,queryparam,expectedstatus){
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
-               console.log(queryparam)
+               //console.log(queryparam)
                 if(result){
-                	let reply;
-                	if(expectedstatus != 201){
-                    reply = {
-                        status:expectedstatus,
-                        data:result.rows
-                        }
-                    }else{
-                    	reply =result.rows[0]
-                        
-                    }
+                	let reply = result.rows
+              
                      resolve(reply)
                 }else{
                 reject(new Error('Ooops, something broke!')); }               
