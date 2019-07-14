@@ -344,7 +344,7 @@ let prevImage = thisimage-1
 	document.getElementById("inoverlay").innerHTML= "<div class='roller'></div>";
 	document.body.style.overflow = "hidden";	
 	document.getElementById("overlay").style.display = "block";
-fetch("/api/v1/car/"+theid,{
+fetch("/car/"+theid,{
 	method:"GET",
 	headers : new Headers({"Content-Type": "application/json; charset=UTF-8"})
 })
@@ -414,7 +414,7 @@ function order(thisid){
 	
 	let theid = thisid;
 	let replace1 = theid.replace("orderbut","");
-	fetch("/api/v1/car/"+replace1,{
+	fetch("/car/"+replace1,{
 		method:"GET"
 	})
 	.then((res)=>res.json())

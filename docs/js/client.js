@@ -1,6 +1,6 @@
 function stilllog(tab){
 	
-	fetch("/api/v1/me",{
+	fetch("/me",{
 		method:"GET",
 		headers:new Headers({"Authorization": "Bearer "+localStorage.getItem('accessToken')}),
 	})
@@ -47,7 +47,7 @@ if(tab === 4) showmyoffers(dsession.id,stroom,stoopt,0);
 
 
 function showmyorder(myid,showstart,showend,state){
-	let apiprefix = `/api/v1/order?`;
+	let apiprefix = `/order?`;
 	apiprefix += `&buyer=${myid}`
 	fetch(apiprefix,{
 		method:"GET",
@@ -115,7 +115,7 @@ document.getElementById("mypendingo").innerHTML = "";
 
 
 function showmyoffers(myid,showstart,showend,state){
-	let apiprefix = `/api/v1/order?`;
+	let apiprefix = `/order?`;
 	apiprefix += `&seller=${myid}`;
 	apiprefix += `&status=pending`;
 	fetch(apiprefix,{
@@ -189,7 +189,7 @@ document.getElementById("moff").innerHTML = "";
 
 
 function seenorder(myid){
-	let apiprefix = `/api/v1/order?`;
+	let apiprefix = `/order?`;
 	apiprefix += `&seller=${myid}`;
 	apiprefix += `&statuses=pending`;
 	fetch(apiprefix,{
@@ -248,7 +248,7 @@ function acceptorder(thisid){
 //alert(theid);
 	document.getElementById(thisid).innerHTML = '<center><div class="spinning"></div></center>';
 	document.getElementById(thisid).disabled = true;
-	fetch("/api/v1/order/status/"+theid,{
+	fetch("/order/status/"+theid,{
 		method:"PATCH",
 		headers:new Headers({"Content-Type": "application/json; charset=UTF-8","Authorization": "Bearer "+localStorage.getItem('accessToken')})
 	})
@@ -296,7 +296,7 @@ function acceptorder(thisid){
 
 
 	function shhowmyads(myemail,showstart,showend){
-	let emailquery =`/api/v1/car?`;
+	let emailquery =`/car?`;
 emailquery +=`&email=${myemail}`;
 
 	fetch(emailquery,{
@@ -412,7 +412,7 @@ populateallcars(strom,stopt);
 }
 function
  populateallcars(startfrom,stopat){
-	let availablequery ="/api/v1/car?";
+	let availablequery ="/car?";
 availablequery +="&status=available";
 
 const sessionId = sessionStorage.getItem('myId');
@@ -544,7 +544,7 @@ var remail =	document.getElementById("regemail").value;
 	var rpwd =	document.getElementById("regpwd").value;
 	var radd =	document.getElementById("regadd").value;
 
-fetch('/api/v1/auth/signup', { 
+fetch('/auth/signup', { 
 method: 'POST', 
 headers : new Headers({"Content-Type": "application/json; charset=UTF-8"}), body:JSON.stringify({"email" : remail, "first_name" : rfname,"last_name" : rlname , "password" : rpwd, "address" : radd}) })
 .then((res) => res.json()) 
@@ -606,7 +606,7 @@ function login(){
 	document.getElementById("logg").innerHTML = '<center><div class="spinning"></div></center>';
 		var lusern =	document.getElementById("user").value;
 	var lpass =	document.getElementById("pwd").value;
-	fetch("/api/v1/auth/signin", {
+	fetch("/auth/signin", {
 		method:"POST",
 		headers : new Headers({"Content-Type":"application/json; charset=UTF-8"}),
 		body:JSON.stringify({"email" : lusern , "password" : lpass})
@@ -661,7 +661,7 @@ let retemaill =	document.getElementById("retemail").value;	document.getElementBy
 	changePassword();
 	}
 	function changePassword(){
-	fetch("/api/v1/user/"+retemaill+"/reset_password",{
+	fetch("/user/"+retemaill+"/reset_password",{
 		method:"POST",
 		headers:new Headers({"Content-Type":"application/json; charset=UTF-8"}),
 		body:JSON.stringify({"current_password":oldpass,"new_password":newpass})
@@ -680,7 +680,7 @@ let retemaill =	document.getElementById("retemail").value;	document.getElementBy
 	.catch((e)=>console.log("error"))
 	}
 	function getPassword(){
-		fetch("/api/v1/user/"+retemaill+"/reset_password",{
+		fetch("/user/"+retemaill+"/reset_password",{
 			method:"POST",
 			headers:new Headers({"Content-Type":"application/json; charset=UTF-8"})
 		})
@@ -751,7 +751,7 @@ var lookfor = i
 	var stateocar =	 x[lookfor].value;
 		var pcpics =	document.getElementById("pcpics").value;
 
-fetch("/api/v1/car",{
+fetch("/car",{
 	method:"POST",
 	headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
 	body:JSON.stringify({"manufacturer" : pcman , "model" : pcmodel,"body_type" : pccolor , "engine_size" : pces, "price" : pprice,"state" : stateocar,"pics" : pcpics})
@@ -795,7 +795,7 @@ function postorder(){
 	var priceoffered =	document.getElementById("poprice").value;
 		var originalamount =	document.getElementById("showpprice").innerText;
 	
-	fetch("/api/v1/order",{
+	fetch("/order",{
 		method:"POST",
 		headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
 		body:JSON.stringify({"car_id" : cariid,"order_price" : priceoffered, "status" : "pending", "amount" : originalamount})
@@ -859,7 +859,7 @@ function editpo(thisid){
 var frets = document.getElementById(replace3).value;
 	document.getElementById(replace2).disabled = true;
 	document.getElementById(replace2).innerHTML = '<center><div class="spinning"></div></center>';
-	fetch("/api/v1/order/"+replace1+"/price",{
+	fetch("/order/"+replace1+"/price",{
 		method:"PATCH",
 		headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
 		body:JSON.stringify({"order_price":frets})
@@ -909,7 +909,7 @@ function marksold(thisid){
 	let replace2 = theid.replace("soldbut","soldmask");
 	document.getElementById(replace2).style.display = "table";
 	document.getElementById(replace2).innerHTML = "<center><div style='position:absolute;top: calc(50% - 10.5px);right: calc(50% - 10.5px);' class='spinning'></div></center>";
-	fetch("/api/v1/car/"+replace1+"/status",{
+	fetch("/car/"+replace1+"/status",{
 		method:"PATCH",
 		headers:new Headers({"Authorization":"Bearer "+localStorage.getItem('accessToken')})
 	}) 
@@ -958,7 +958,7 @@ function marksold(thisid){
 	let replace3 = theid.replace("editap","sedit");
 var frest = document.getElementById(replace3).value;
 	document.getElementById(replace2).innerHTML = "<center><div class='spinning'></div></center>";
-	fetch("/api/v1/car/"+replace1+"/price",{
+	fetch("/car/"+replace1+"/price",{
 		method:"PATCH",
 		headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
 		body:JSON.stringify({"price":frest})
@@ -1012,7 +1012,7 @@ var fresty = document.getElementById(replace2).value;
 		document.getElementById("reportwhy"+replace1).value ="";		
 		document.getElementById("ralert"+replace1).innerHTML = '<center><div class="spinning"></div></center>';
 		document.getElementById("ralert"+replace1).style.display ="block";
-		fetch("/api/v1/flag/",{
+		fetch("/flag/",{
 			method:"POST",
 			headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
 			body:JSON.stringify({"car_id" : replace3,"reason" : fresty,"description" : fresty})
