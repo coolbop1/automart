@@ -8,16 +8,8 @@ const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env[
 
 module.exports = {
 	validateuserinputs: function (req,res,next){	
-		const schema = {
-			first_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-			last_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-			email : Joi.string().trim().email().required(),
-			address : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-			password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
-		};
-					
-		const valid = Joi.validate(req.body,schema);
-		if(if(typeof req.body.first_name == "undefined" || typeof req.body.last_name == "undefined" || typeof req.body.email == "undefined" || typeof req.body.address == "undefined" || typeof req.body.password == "undefined"){
+		
+		if(typeof req.body.first_name == "undefined" || typeof req.body.last_name == "undefined" || typeof req.body.email == "undefined" || typeof req.body.address == "undefined" || typeof req.body.password == "undefined"){
 			let msgclean = "Error in input field , please correct and try again"
 			let reply = {
 				"status":409,
