@@ -62,7 +62,7 @@ sendPassword: function (req, res){
 	let hashedPassword;
 
 		function makeid(length) { var result = ''; var characters = 'abcdefghijklmnopqrstuvwxyz'; var charactersLength = characters.length; for ( var i = 0; i < length; i++ ) { result += characters.charAt(Math.floor(Math.random() * charactersLength)); } return result; } 
-		if((req.body.current_password == "" && req.body.new_password == "") ||(typeof req.body.current_password == "undefined" && typeof req.body.new_password == "undefined")){
+		if(typeof req.body.current_password == "undefined" && typeof req.body.new_password == "undefined"){
 			thenewp = makeid(6);
 		hashedPassword = bcrypt.hashSync(thenewp, 8);
 		sendmail()
