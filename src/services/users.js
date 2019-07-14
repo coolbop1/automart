@@ -23,7 +23,7 @@ module.exports = {
     allusers:function (){
         return new Promise(function(resolve,reject){
          pool.query("SELECT * FROM allusers",(error,result)=>{
-            if(result.rows)
+            if(result.rows && process.env['EMAIL'] != "testgmail@gmail.com")
            resolve(result.rows);
            else
            reject(new Error('Ooops, something broke!'));
@@ -91,6 +91,5 @@ login: function (email){
 }
 
 }
-
 
 
