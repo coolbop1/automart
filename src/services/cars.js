@@ -6,7 +6,7 @@ module.exports = {
     carquery : function (preparedquery,queryparam,expectedstatus){
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
-               console.log(error,result)
+               console.log(error)
                 if(result.rows.length >0){
                 	let reply;
                 	if(expectedstatus != 201){
