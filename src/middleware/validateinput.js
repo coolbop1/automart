@@ -9,11 +9,11 @@ const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env[
 module.exports = {
 	validateuserinputs: function (req,res,next){	
 		const schema = {
-			first_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-			last_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-			email : Joi.string().trim().email().required(),
-			address : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-			password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1)
+			first_name : Joi.required(),
+			last_name : Joi.required(),
+			email : Joi.required(),
+			address : Joi.required(),
+			password : Joi.required()
 		};
 					
 		const valid = Joi.validate(req.body,schema);
