@@ -8,27 +8,9 @@ const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env[
 
 module.exports = {
 	validateuserinputs: function (req,res,next){	
-		const schema = {
-			first_name : Joi.required(),
-			last_name : Joi.required(),
-			email : Joi.required(),
-			address : Joi.required(),
-			password : Joi.required(),
-			is_admin : Joi.required()
-		};
-					
-		const valid = Joi.validate(req.body,schema);
-		if(valid.error){
-			let msgclean = valid.error.details[0].message.replace("/^[,. a-z0-9A-Z]+$/","");
-			let reply = {
-				"status":409,
-				"error" : msgclean
-			};	
-			res.status(409).send(reply);
-			return;
-		}else{
+		
 			next();
-		}
+		
 	},
 	verifynewemail: function (req,res,next){
 		pool.query("select * from allusers where email = $1 ",[req.body.email],(err,ress)=>{
