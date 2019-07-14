@@ -803,6 +803,39 @@ describe('GET /allcars endpoint', function () {
                         
                 });
             });
+            describe('error test', function () {
+    before(function(done){
+        apps(app)
+        .get('/api/v1/testerr')
+        .end(function(err, res){
+            done();
+        })
+        
+    })
+    let 	comfirms = {"new_password" : "thepassword" , "current_password" : "thepassword"}
+    it('respond password changed', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirms)
+            .expect(400, done);
+    });
+    it('return error', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send()
+            .expect(400, done);
+    });
+    after(function(done){
+                    apps(app)
+                    .get('/api/v1/uenv')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
+    })
             describe('POST /auth/signin endpoint', function () {
     let 	comfirms = {"new_password" : "thepassword" , "current_password" : "thepassword"}
     let 	comfirmsy = {"new_password" : "thepassword" , "current_password" : "thepasword"}
@@ -859,39 +892,7 @@ describe('GET /allcars endpoint', function () {
             .expect(200, done);
     });
 })
-describe('error test', function () {
-    before(function(done){
-        apps(app)
-        .get('/api/v1/testerr')
-        .end(function(err, res){
-            done();
-        })
-        
-    })
-    let 	comfirms = {"new_password" : "thepassword" , "current_password" : "thepassword"}
-    it('respond password changed', function (done) {
-        apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
-            .set("Content-Type", "application/json; charset=UTF-8")
-            .send(comfirms)
-            .expect(400, done);
-    });
-    it('return error', function (done) {
-        apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
-            .set("Content-Type", "application/json; charset=UTF-8")
-            .send()
-            .expect(400, done);
-    });
-    after(function(done){
-                    apps(app)
-                    .get('/api/v1/uenv')
-                    .end(function(err, res){
-                        done();
-                    })
-                    
-                })
-    })
+
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
                     "price" : "2000"
