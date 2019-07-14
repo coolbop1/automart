@@ -8,8 +8,10 @@ module.exports = {
             pool.query(preparedquery,queryparam,(error,result)=>{
                //console.log(error,result)
                 if(result.rows.length >0){
-                    let reply = result.rows
-                    
+                    let reply = {
+                        status:expectedstatus,
+                        data:result.rows
+                    }
                      resolve(reply)
                 }else
                 reject(new Error('Ooops, something broke!'));                
