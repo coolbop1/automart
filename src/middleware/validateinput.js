@@ -38,16 +38,11 @@ module.exports = {
 		
 	},
 	validateloginputs : function (req,res,next){
-		const schema ={
-			email : Joi.string().trim().email().required(),
-			password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
-			
-		};
-		const valid = Joi.validate(req.body,schema);
-		if(valid.error){
+		
+		if(typeof req.body.email == "undefined" || typeof req.body.password == "undefined"){
 			let reply = {
 				"status":409,
-				"error" : valid.error.details[0].message
+				"error" : "All inputs are required, pleasetry again"
 			};	
 			res.status(409).send(reply);
 			return;
