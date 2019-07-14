@@ -15,9 +15,8 @@ module.exports = {
                         data:result.rows
                         }
                     }else{
-                    	reply = {
-                        result.rows[0]
-                        }
+                    	reply =result.rows[0]
+                        
                     }
                      resolve(reply)
                 }else
