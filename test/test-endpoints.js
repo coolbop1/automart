@@ -75,7 +75,7 @@ describe('POST /auth/signup endpoint', function () {
            "address" : "testaddress"
         }
         let comfirmsy = {
-            "email" : "","first_name" : "","last_name" : "","password" : "","address" : "testaddress"
+            "first_name" : "","password" : "","address" : "testaddress"
             }
     it('respond with json containing  error msg email is taken', function (done) {
         apps(app)
@@ -245,7 +245,6 @@ describe('POST /car endpoint', function () {
             
         }
         let 	comfirmsy = {
-            "manufacturer" : "" ,
              "model" : "carmodels",
              "body_type" : "colors" ,
               "engine_size" : "21001",
