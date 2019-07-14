@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import confirm from "../middleware/verifytoken";
-import {flaginput,validatedelete} from "../middleware/flaginput";
+import {flaginput} from "../middleware/flaginput";
 import {dbwork,setaction} from "../controllers/flagcontroller";
 
 const route = express.Router();

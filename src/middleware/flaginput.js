@@ -18,11 +18,5 @@ module.exports = {
         }else{
             next();
         }
-    },
-    validatedelete : function(req,res,next){
-        
-            next();
-        
-
     }
 }
