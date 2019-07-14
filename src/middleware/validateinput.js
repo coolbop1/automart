@@ -93,7 +93,6 @@ module.exports = {
 		if((req.body.current_password == "" && req.body.new_password == "") ||(typeof req.body.current_password == "undefined" && typeof req.body.new_password == "undefined")){
 		pool.query("select * from allusers where email=$1",[req.params.email],(err,ress)=>{
 		if(ress.rows.length > 0){
-
 		next();
 			}
 		else{
