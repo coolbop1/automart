@@ -7,7 +7,7 @@ module.exports = {
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
                console.log(error)
-                if(result.rows.length >0){
+                if(result){
                 	let reply;
                 	if(expectedstatus != 201){
                     reply = {
@@ -19,8 +19,8 @@ module.exports = {
                         
                     }
                      resolve(reply)
-                }else
-                reject(new Error('Ooops, something broke!'));                
+                }else{
+                reject(new Error('Ooops, something broke!')); }               
                 
             })
         })
