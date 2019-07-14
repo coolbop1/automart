@@ -954,6 +954,14 @@ describe('error test', function () {
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done);
                 });
+                it('respond with order stat changed', function (done) {
+                    apps(app)
+                        .patch('/api/v1/order/status/1')
+                        .send(comfirms)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
+                        .expect(200, done);
+                });
                 
             });
             describe('error test', function () {
