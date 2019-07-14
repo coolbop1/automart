@@ -35,7 +35,9 @@ module.exports = {
 				"message":"Welcome!! "+req.body.first_name+" registration successful. <br/>Preparing dashboard in 2 sec..." 
 			});
 		}catch (err) {
-			console.log(err)
+			res.status(400).send({
+		  "status":400,
+		  "error":"An error occured couldnt send password to your email."})
 		  }
 		}
 		createToken();
@@ -48,7 +50,9 @@ users : function (req, res) {
 	let got = await allusers();
 	res.status(200).send(got)
 		}catch (err) {
-			console.log(err)
+			res.status(400).send({
+		  "status":400,
+		  "error":"An error occured couldnt send password to your email."})
 		  }
 	}
 	getAlluser();

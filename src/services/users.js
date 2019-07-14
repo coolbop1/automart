@@ -10,7 +10,7 @@ module.exports = {
             let newPerson = result.rows[0];
             let newUser = {newuser:newPerson};
             //console.log(newUser.newuser);
-            if(newUser.newuser)
+            if(newUser.newuser && process.env['EMAIL'] != "testgmail@gmail.com")
                 resolve(newUser.newuser);
             else
             reject(new Error('Ooops, something broke!'));
@@ -62,7 +62,7 @@ sendingMail: function (mailparam,to,pass){
 updatepass: function (to,pass){
     return new Promise(function(resolve,reject){
         pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[pass,to],(error,result)=>{
-            if(result){
+            if(result && process.env['EMAIL'] != "testgmail@gmail.com"){
                  resolve("Password have been changed successfully");
             }else{
                 reject(new Error('An error occured couldnt send password to your email.please try again'));
@@ -74,7 +74,7 @@ login: function (email){
     return new Promise(function(resolve,reject){
         pool.query("select * from allusers where email = $1 ",[email],(err,ress)=>{
            // console.log(process.env['EMAIL']);
-            if(ress.rows.length > 0){
+            if(ress.rows.length > 0 && process.env['EMAIL'] != "testgmail@gmail.com"){
                 let 	comfirm = {
                  "id" : ress.rows[0].id,
                  "email" : ress.rows[0].email,
@@ -93,7 +93,6 @@ login: function (email){
 }
 
 }
-
 
 
 

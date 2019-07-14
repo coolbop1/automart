@@ -22,6 +22,15 @@ describe('POST /auth/signup endpoint', function () {
           "password" : "thepassword"
            
         }
+        let 	comfirmss = {
+        
+         "first_name" : "test firstname",
+         "last_name" : "testlast" ,
+         "email" : "domyrand9@gmail.com" ,
+         "address" : "testaddress",
+          "password" : "thepassword"
+           
+        }
     it('respond with json containing the registered', function (done) {
         apps(app)
             .post('/api/v1/auth/signup')
@@ -29,6 +38,29 @@ describe('POST /auth/signup endpoint', function () {
             .set('Accept', 'application/json')
             .expect(201, done);
     });
+    before(function(done){
+        apps(app)
+        .get('/api/v1/testerr')
+        .end(function(err, res){
+            done();
+        })
+        
+    })
+    it('respond with json containing the registered', function (done) {
+        apps(app)
+            .post('/api/v1/auth/signup')
+            .send(comfirmss)
+            .set('Accept', 'application/json')
+            .expect(400, done);
+    });
+    after(function(done){
+        apps(app)
+        .get('/api/v1/uenv')
+        .end(function(err, res){
+            done();
+        })
+        
+    })
     
 });
 describe('POST /auth/signup endpoint', function () {
@@ -68,6 +100,32 @@ describe('POST /auth/signin endpoint', function () {
             .send(comfirms)
             .expect(200, done);
     });
+    before(function(done){
+        apps(app)
+        .get('/api/v1/testerr')
+        .end(function(err, res){
+            done();
+        })
+        
+    })
+    it('respond error error', function (done) {
+        apps(app)
+            .post('/api/v1/auth/signin')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirms)
+            .expect(400, done);
+    });
+    after(function(done){
+        apps(app)
+        .get('/api/v1/uenv')
+        .end(function(err, res){
+            done();
+        })
+        
+    })
+    
+    
+    
 })
 describe('authorized test', function () {
     let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassword"}
@@ -962,8 +1020,22 @@ describe('error test', function () {
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done);
                 });
+                it('respond with myorders ', function (done) {
+                    apps(app)
+                        .get('/api/v1/order')
+                        
+                         .query({'statuses' : 'pending'})
+                         
+                         .set("Authorization", "Bearer "+token)
+                        
+                        .expect('Content-Type', /json/)
+                        .expect(200, done) //expecting HTTP status code
+                });
                 
             });
+            
+            
+            
             describe('error test', function () {
                 before(function(done){
                     apps(app)
