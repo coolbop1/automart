@@ -121,6 +121,11 @@ describe('POST /auth/signin endpoint', function () {
             .send(comfirms)
             .expect(400, done);
     });
+    it('respond with 404 ', function (done) {
+                apps(app)
+                    .get('/api/v1/allusers')
+                    .expect(400, done) //expecting HTTP status code
+            });
     after(function(done){
         apps(app)
         .get('/api/v1/uenv')

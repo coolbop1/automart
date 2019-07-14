@@ -38,15 +38,13 @@ sendingMail: function (mailparam,to,pass){
             if(info){
                 
            pool.query("update allusers set password = $1 where email = $2 RETURNING * ",[pass,to],(error,result)=>{
-                if(result){
+                
                     let updateParam = {
                         userEmail : to,
                         newPass : pass
                     }
                     resolve(updateParam);
-                }else{
-                    reject(new Error('An error occured couldnt send password to your email.please try again'));
-                }
+               
             });
             
             
@@ -93,7 +91,6 @@ login: function (email){
 }
 
 }
-
 
 
 
