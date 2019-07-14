@@ -8,9 +8,16 @@ module.exports = {
             pool.query(preparedquery,queryparam,(error,result)=>{
                //console.log(error,result)
                 if(result.rows.length >0){
+                	if(expectedstatus != 201){
                     let reply = {
                         status:expectedstatus,
                         data:result.rows
+                        }
+                    }else{
+                    	let reply = {
+                        status:expectedstatus,
+                        data:result.rows[0]
+                        }
                     }
                      resolve(reply)
                 }else
