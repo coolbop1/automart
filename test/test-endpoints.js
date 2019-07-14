@@ -8,7 +8,7 @@ var expect = require('chai').expect();
 describe('delete all test inputs', function () {
     it('respond with json delete succesfull', function (done) {
         apps(app)
-           .delete('/api/v1/user/truncateuser')
+           .delete('/user/truncateuser')
             .expect(200 ,done)
     });
 })
@@ -25,7 +25,7 @@ describe('POST /auth/signup endpoint', function () {
        
     it('respond with json containing the registered', function (done) {
         apps(app)
-            .post('/api/v1/auth/signup')
+            .post('/auth/signup')
             .send(comfirms)
             .set('Accept', 'application/json')
             .expect(201, done);
@@ -43,7 +43,7 @@ describe('POST /auth/signup endpoint', function () {
         }
     before(function(done){
         apps(app)
-        .get('/api/v1/testerr')
+        .get('/testerr')
         .end(function(err, res){
             done();
         })
@@ -51,14 +51,14 @@ describe('POST /auth/signup endpoint', function () {
     })
     it('respond with json containing the registered', function (done) {
         apps(app)
-            .post('/api/v1/auth/signup')
+            .post('/auth/signup')
             .send(comfirmss)
             .set('Accept', 'application/json')
             .expect(400, done);
     });
     after(function(done){
         apps(app)
-        .get('/api/v1/uenv')
+        .get('/uenv')
         .end(function(err, res){
             done();
         })
@@ -79,14 +79,14 @@ describe('POST /auth/signup endpoint', function () {
             }
     it('respond with json containing  error msg email is taken', function (done) {
         apps(app)
-            .post('/api/v1/auth/signup')
+            .post('/auth/signup')
             .set('Accept', 'application/json')
             .send(comfirms)
             .expect(409, done);
     });
     it('respond with json containing  cant be empty', function (done) {
         apps(app)
-            .post('/api/v1/auth/signup')
+            .post('/auth/signup')
             .set('Accept', 'application/json')
             .send(comfirmsy)
             .expect(409, done);
@@ -98,7 +98,7 @@ describe('POST /auth/signin endpoint', function () {
     
     it('respond with json details of user', function (done) {
         apps(app)
-            .post('/api/v1/auth/signin')
+            .post('/auth/signin')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
             .expect(200, done);
@@ -108,7 +108,7 @@ describe('POST /auth/signin endpoint', function () {
     let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassword"}
     before(function(done){
         apps(app)
-        .get('/api/v1/testerr')
+        .get('/testerr')
         .end(function(err, res){
             done();
         })
@@ -116,19 +116,19 @@ describe('POST /auth/signin endpoint', function () {
     })
     it('respond error error', function (done) {
         apps(app)
-            .post('/api/v1/auth/signin')
+            .post('/auth/signin')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
             .expect(400, done);
     });
     it('respond with 404 ', function (done) {
                 apps(app)
-                    .get('/api/v1/allusers')
+                    .get('/allusers')
                     .expect(400, done) //expecting HTTP status code
             });
     after(function(done){
         apps(app)
-        .get('/api/v1/uenv')
+        .get('/uenv')
         .end(function(err, res){
             done();
         })
@@ -142,7 +142,7 @@ describe('authorized test', function () {
     let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassword"}
     before(function(done){
         apps(app)
-        .post('/api/v1/auth/signin')
+        .post('/auth/signin')
         .send(comfirms)
         .end(function(err, res){
             token = res.body.data.token;
@@ -153,7 +153,7 @@ describe('authorized test', function () {
     describe('GET /car endpoint', function () {
         it('respond with json The car was not found', function (done) {
             apps(app)
-                .get('/api/v1/car')
+                .get('/car')
                 .set('Accept', 'application/json')
                 .set("Authorization", "Bearer "+token)
                 .expect(404, done) 
@@ -164,26 +164,26 @@ describe('authorized test', function () {
     let 	notcomfirms = {"email" : "testemaioool@email.coml" , "password" : "thepassword"}
     it('respond with authorized ', function (done) {
         apps(app)
-            .get('/api/v1/me')
+            .get('/me')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/, done) //expecting HTTP status code
     });
     it('respond with not authorized ', function (done) {
         apps(app)
-            .get('/api/v1/me')
+            .get('/me')
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(403, done);
     });
     it('respond with 404 unexistence email', function (done) {
         apps(app)
-            .post('/api/v1/auth/signin')
+            .post('/auth/signin')
             .send(notcomfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(404, done);
     });
     it('respond with 409 conflict', function (done) {
         apps(app)
-            .post('/api/v1/auth/signin')
+            .post('/auth/signin')
             .send(comfirmsy)
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(409, done);
@@ -193,7 +193,7 @@ describe('POST /auth/signin with wrong password', function () {
     let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassssss"}
     it('respond with 401 unauthorised', function (done) {
         apps(app)
-            .post('/api/v1/auth/signin')
+            .post('/auth/signin')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(401, done);
@@ -204,7 +204,7 @@ describe('POST /auth/signin endpoint', function () {
     let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "wrongpassword"}
     it('unauthorize error', function (done) {
         apps(app)
-            .post('/api/v1/auth/signin')
+            .post('/auth/signin')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .expect(401, done);
@@ -214,7 +214,7 @@ describe('POST /auth/signin endpoint', function () {
 describe('GET /car/:carid endpoint', function () {
     it('respond The car was not found', function (done) {
         apps(app)
-            .get('/api/v1/car/0')
+            .get('/car/0')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect(404, done) //expecting HTTP status code
@@ -225,7 +225,7 @@ describe('GET /car/:carid endpoint', function () {
 describe('GET /car endpoint', function () {
     it('respond with json The car was not found', function (done) {
         apps(app)
-            .get('/api/v1/car')
+            .get('/car')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect(404, done) 
@@ -256,7 +256,7 @@ describe('POST /car endpoint', function () {
             }
             it('respond with unauthorized', function (done) {
         apps(app)
-            .post('/api/v1/car')
+            .post('/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             
@@ -264,7 +264,7 @@ describe('POST /car endpoint', function () {
     });
      it('respond with unauthorized', function (done) {
         apps(app)
-            .post('/api/v1/car')
+            .post('/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
              .set("Authorization", "Bearer y13gg"+token)
@@ -273,7 +273,7 @@ describe('POST /car endpoint', function () {
     });
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
-            .post('/api/v1/car')
+            .post('/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
@@ -281,7 +281,7 @@ describe('POST /car endpoint', function () {
     });
     it('respond with json containing Car posted successfully', function (done) {
         apps(app)
-            .post('/api/v1/car')
+            .post('/car')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
@@ -289,7 +289,7 @@ describe('POST /car endpoint', function () {
     });
     it('respond with json conflict', function (done) {
         apps(app)
-            .post('/api/v1/car')
+            .post('/car')
             .send(comfirmsy)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
@@ -298,7 +298,7 @@ describe('POST /car endpoint', function () {
     describe('GET /car/:carid endpoint', function () {
         it('respond bad fequest not a number', function (done) {
             apps(app)
-                .get('/api/v1/car/be')
+                .get('/car/be')
                 .set('Accept', 'application/json')
                 .set("Authorization", "Bearer "+token)
                 .expect(400, done) //expecting HTTP status code
@@ -306,7 +306,7 @@ describe('POST /car endpoint', function () {
         });
         it('respond with json of  the car', function (done) {
             apps(app)
-                .get('/api/v1/car/1')
+                .get('/car/1')
                 .set('Accept', 'application/json')
                 .set("Authorization", "Bearer "+token)
                 .expect(200, done) //expecting HTTP status code
@@ -318,7 +318,7 @@ describe('POST /car endpoint', function () {
 describe('GET /car no query get all endpoint', function () {
     it('respond with json of all car', function (done) {
         apps(app)
-            .get('/api/v1/car')
+            .get('/car')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
@@ -334,7 +334,7 @@ describe('PATCH /car/:carid/price endpoint', function () {
     }
     it('respond with bad formart can change price', function (done) {
         apps(app)
-            .patch('/api/v1/car/be/price')
+            .patch('/car/be/price')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
@@ -342,7 +342,7 @@ describe('PATCH /car/:carid/price endpoint', function () {
     });
     it('respond with json containing The car does not belong to you', function (done) {
         apps(app)
-            .patch('/api/v1/car/1/price')
+            .patch('/car/1/price')
             .send(comfirms)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
@@ -350,7 +350,7 @@ describe('PATCH /car/:carid/price endpoint', function () {
     });
     it('respond with 409 conflict', function (done) {
         apps(app)
-            .patch('/api/v1/car/1/price')
+            .patch('/car/1/price')
             .send(comfirmsy)
             .set("Content-Type", "application/json; charset=UTF-8")
             .set("Authorization", "Bearer "+token)
@@ -362,7 +362,7 @@ describe('PATCH /car/:carid/price endpoint', function () {
 describe('GET /car/:carid unexistence car endpoints', function () {
     it('respond with json of the car details', function (done) {
         apps(app)
-            .get('/api/v1/car/0')
+            .get('/car/0')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
@@ -372,7 +372,7 @@ describe('GET /car/:carid unexistence car endpoints', function () {
 describe('GET /car/:carid  existing car endpoint', function () {
     it('respond json of car with id \"1\"', function (done) {
         apps(app)
-            .get('/api/v1/car/5')
+            .get('/car/5')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
@@ -385,7 +385,7 @@ describe('GET /allcars endpoint', function () {
     
         it('respond with allcars ', function (done) {
             apps(app)
-                .get('/api/v1/allcars')
+                .get('/allcars')
                 .expect('Content-Type', /json/)
                 .expect(200, done) //expecting HTTP status code
         });
@@ -394,7 +394,7 @@ describe('GET /allcars endpoint', function () {
         
             it('respond with all users ', function (done) {
                 apps(app)
-                    .get('/api/v1/allusers')
+                    .get('/allusers')
                     .expect(200, done) //expecting HTTP status code
             });
         });
@@ -402,7 +402,7 @@ describe('GET /allcars endpoint', function () {
             
                 it('respond with 403 ', function (done) {
                     apps(app)
-                        .get('/api/v1/me')
+                        .get('/me')
                         .set("Authorization", "Bearer ")
                         .expect('Forbidden', done) //expecting HTTP status code
                 });
@@ -411,7 +411,7 @@ describe('GET /allcars endpoint', function () {
             
                 it('respond with 403 ', function (done) {
                     apps(app)
-                        .get('/api/v1/me')
+                        .get('/me')
                         .set("Authorization", "Bearer 7o757ygvhvhgfiuytuyguyhgiuftyfgufg")
                         .expect(403, done) //expecting HTTP status code
                 });
@@ -431,7 +431,7 @@ describe('GET /allcars endpoint', function () {
                 }
                 it('respond with json containing order sent successfully', function (done) {
                     apps(app)
-                        .post('/api/v1/order')
+                        .post('/order')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -439,7 +439,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with conflict', function (done) {
                     apps(app)
-                        .post('/api/v1/order')
+                        .post('/order')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -447,7 +447,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with conflict', function (done) {
                     apps(app)
-                        .post('/api/v1/order')
+                        .post('/order')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer 3435"+token)
@@ -455,13 +455,13 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with allorders ', function (done) {
                     apps(app)
-                        .get('/api/v1/allorders')
+                        .get('/allorders')
                         .expect('Content-Type', /json/)
                         .expect(200, done) //expecting HTTP status code
                 });
                 it('respond with myorders ', function (done) {
                     apps(app)
-                        .get('/api/v1/order')
+                        .get('/order')
                          .query({'buyer' : '1'})
                          .query({'seller' : '1'})
                          .query({'status' : 'pending'})
@@ -473,7 +473,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with every orders ', function (done) {
                     apps(app)
-                        .get('/api/v1/order')
+                        .get('/order')
                       
                          .set("Authorization", "Bearer "+token)
                         
@@ -482,7 +482,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with 404 not found error ', function (done) {
                     apps(app)
-                        .get('/api/v1/order')
+                        .get('/order')
                          .query({'buyer' : '0'})
                          .set("Authorization", "Bearer "+token)
                         
@@ -496,7 +496,7 @@ describe('GET /allcars endpoint', function () {
                 let 	comfirmsy ={"order_price" : ""}
                 it('respond with json containing The order price have been changed', function (done) {
                     apps(app)
-                        .patch('/api/v1/order/3/price')
+                        .patch('/order/3/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -504,7 +504,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with json containing The order price have been changed', function (done) {
                     apps(app)
-                        .patch('/api/v1/order/1/price')
+                        .patch('/order/1/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -512,7 +512,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with json containing error message', function (done) {
                     apps(app)
-                        .patch('/api/v1/order/0/price')
+                        .patch('/order/0/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -521,7 +521,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with 409 conflict', function (done) {
                     apps(app)
-                        .patch('/api/v1/order/0/price')
+                        .patch('/order/0/price')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -530,7 +530,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with unauthorized', function (done) {
                     apps(app)
-                        .patch('/api/v1/order/3/price')
+                        .patch('/order/3/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(403, done);
@@ -549,7 +549,7 @@ describe('GET /allcars endpoint', function () {
         }
                 it('respond with json containing your report is sent successfully', function (done) {
                     apps(app)
-                        .post('/api/v1/flag')
+                        .post('/flag')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -558,7 +558,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with json 409 conflict', function (done) {
                     apps(app)
-                        .post('/api/v1/flag')
+                        .post('/flag')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -567,7 +567,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with  unauthorized', function (done) {
                     apps(app)
-                        .post('/api/v1/flag')
+                        .post('/flag')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(403,done)
@@ -576,7 +576,7 @@ describe('GET /allcars endpoint', function () {
             
             it('respond with json 409 conflict', function (done) {
                     apps(app)
-                        .post('/api/v1/flag')
+                        .post('/flag')
                         .send(comfirmsy)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer 3343"+token)
@@ -587,7 +587,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with status query', function () {
                 it('respond with json of the car not found', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'status' : 'sold'})
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done) //expecting HTTP status code
@@ -597,7 +597,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with body_type query', function () {
                 it('respond with json of the car not found', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'body_type' : 'f545vfcx'})
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done) //expecting HTTP status code
@@ -608,7 +608,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with max_price query', function () {
                 it('respond with json of not found', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'max_price' : '1'})
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done); //expecting HTTP status code
@@ -618,7 +618,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with manufacturer query', function () {
                 it('respond with json of not found', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'manufacturer' : '1sd3223cdfe3'})
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done); //expecting HTTP status code
@@ -628,7 +628,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with state query', function () {
                 it('respond with json of not found', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'state' : 'invalidstate'})
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done); //expecting HTTP status code
@@ -639,21 +639,21 @@ describe('GET /allcars endpoint', function () {
                
                 it('respond with bad request due to typo', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'body_tpe' : 'color'})
                         .set("Authorization", "Bearer "+token)
                         .expect(400, done); //expecting HTTP status code
                 });
                 it('respond with bad request due to typo for max price', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'max_price' : 'color'})
                         .set("Authorization", "Bearer "+token)
                         .expect(400, done); //expecting HTTP status code
                 });
                 it('respond with bad request due to typo for min price', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'min_price' : 'color'})
                         .set("Authorization", "Bearer "+token)
                         .expect(400, done); //expecting HTTP status code
@@ -664,7 +664,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with state query', function () {
                 it('respond with json with new cars', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'state' : 'new'})
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
@@ -672,7 +672,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with json with owners cars', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'email' : 'domrand9@gmail.com'})
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
@@ -684,7 +684,7 @@ describe('GET /allcars endpoint', function () {
                 
                 it('respond with only 1', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'status' : 'available'})
                         .query({'state' : 'new'})
                         .set("Authorization", "Bearer "+token)
@@ -695,7 +695,7 @@ describe('GET /allcars endpoint', function () {
                 
                 it('respond with only 1', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'status' : 'available'})
                         .query({'min_price' : '1'})
                         .set("Authorization", "Bearer "+token)
@@ -709,7 +709,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car multiple conflicting queries', function () {
                 it('respond with 404 not found state:true body_type:false', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'state' : 'new'})
                         .query({'body_type' : 'bluu'})
                         .set("Authorization", "Bearer "+token)
@@ -718,7 +718,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with 404 not found state:false body_type:true', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'body_type' : 'color'})
                         .query({'state' : 'grr'})
                         .set("Authorization", "Bearer "+token)
@@ -727,7 +727,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with 404 not found status:false body_type:true', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'status' : 'no'})
                         .query({'state' : "new"})
                         .set("Authorization", "Bearer "+token)                        
@@ -737,7 +737,7 @@ describe('GET /allcars endpoint', function () {
                 
                 it('respond with 404 not found status:true min_price:false', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'body_type' : 'bee'})
                         .query({'min_price' : "10"})                       
                         .set("Authorization", "Bearer "+token)                   
@@ -746,7 +746,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with 404 not found status:true min_price:false', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'max_price' : 1})
                         .query({'state' : 'new'})
                         .set("Authorization", "Bearer "+token)                    
@@ -761,7 +761,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with status available query', function () {
                 it('respond with json with available cars', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'status' : 'available'})
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
@@ -771,7 +771,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with correct min_price query', function () {
                 it('respond with json with cars price above 100', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'min_price' : '100'})
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
@@ -781,7 +781,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with correct max_price query', function () {
                 it('respond with json with cars price below 7000', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'max_price' : '7000'})
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
@@ -791,7 +791,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with correct manufacturer query', function () {
                 it('respond with json with cars the manufacture \"carmanufacturer\"', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'manufacturer' : 'carmanufacturer'})
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done); //expecting HTTP status code
@@ -801,27 +801,27 @@ describe('GET /allcars endpoint', function () {
             describe('PATCH /car/:carid/status endpoint', function () {
                 it('respond with bad format', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/be/status')
+                        .patch('/car/be/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(400, done);
                 });
                 it('respond with json containing The status of car changed to sold', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/1/status')
+                        .patch('/car/1/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done);
                 });
                 it('respond with 403 unuthorized car not your', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/1/status')
+                        .patch('/car/1/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .expect(403, done);
                 });
                 it('respond with json containing The status of car changed to sold', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/0/status')
+                        .patch('/car/0/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done);
@@ -832,7 +832,7 @@ describe('GET /allcars endpoint', function () {
                 
                 it('respond with json containing The status error', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/0/status')
+                        .patch('/car/0/status')
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
                         .expect(404, done);
@@ -842,7 +842,7 @@ describe('GET /allcars endpoint', function () {
             describe('GET /car with status sold query', function () {
                 it('respond with json with sold cars', function (done) {
                     apps(app)
-                        .get('/api/v1/car')
+                        .get('/car')
                         .query({'status' : 'sold'})
                         .set("Authorization", "Bearer "+token)
                         .expect(200, done); //expecting HTTP status code
@@ -852,7 +852,7 @@ describe('GET /allcars endpoint', function () {
             describe('error test', function () {
                 before(function(done){
                     apps(app)
-                    .get('/api/v1/testerr')
+                    .get('/testerr')
                     .end(function(err, res){
                         done();
                     })
@@ -861,7 +861,7 @@ describe('GET /allcars endpoint', function () {
                 
                 it('respond with json error occured', function (done) {
                     apps(app)
-                        .delete('/api/v1/car/2')
+                        .delete('/car/2')
                         .set('Accept', 'application/json')
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
@@ -876,7 +876,7 @@ describe('GET /allcars endpoint', function () {
             }
                 it('respond with bad format.cant report', function (done) {
                     apps(app)
-                        .post('/api/v1/flag')
+                        .post('/flag')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -886,7 +886,7 @@ describe('GET /allcars endpoint', function () {
           
                 after(function(done){
                     apps(app)
-                    .get('/api/v1/uenv')
+                    .get('/uenv')
                     .end(function(err, res){
                         done();
                     })
@@ -898,7 +898,7 @@ describe('GET /allcars endpoint', function () {
             describe('delete /car/:carid', function () {
                 it('respond with not found', function (done) {
                     apps(app)
-                        .delete('/api/v1/car/20')
+                        .delete('/car/20')
                         .set('Accept', 'application/json')
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
@@ -908,7 +908,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with bad request NAN', function (done) {
                     apps(app)
-                        .delete('/api/v1/car/be')
+                        .delete('/car/be')
                         .set('Accept', 'application/json')
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
@@ -918,7 +918,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
-                        .delete('/api/v1/car/1')
+                        .delete('/car/1')
                         .set('Accept', 'application/json')
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
@@ -928,7 +928,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('try to delete nonexisting car respond with 404 not found', function (done) {
                     apps(app)
-                        .delete('/api/v1/car/b')
+                        .delete('/car/b')
                         .expect('Content-Type', /json/)
                         .set("Authorization", "Bearer "+token)
                         .expect(400, done) //expecting HTTP status code
@@ -939,7 +939,7 @@ describe('GET /allcars endpoint', function () {
             describe('error test', function () {
     before(function(done){
         apps(app)
-        .get('/api/v1/testerr')
+        .get('/testerr')
         .end(function(err, res){
             done();
         })
@@ -948,21 +948,21 @@ describe('GET /allcars endpoint', function () {
     let 	comfirms = {"new_password" : "thepassword" , "current_password" : "thepassword"}
     it('respond password changed', function (done) {
         apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .post('/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
             .expect(400, done);
     });
     it('return error', function (done) {
         apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .post('/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send()
             .expect(400, done);
     });
     after(function(done){
                     apps(app)
-                    .get('/api/v1/uenv')
+                    .get('/uenv')
                     .end(function(err, res){
                         done();
                     })
@@ -976,35 +976,35 @@ describe('GET /allcars endpoint', function () {
     
     it('respond with not found', function (done) {
         apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .post('/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirmsy)
             .expect(400, done);
     });
     it('respond with not found', function (done) {
         apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .post('/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirmsyu)
             .expect(409, done);
     });
     it('respond with not found', function (done) {
         apps(app)
-            .post('/api/v1/user/theemail@gmail.com/reset_password')
+            .post('/user/theemail@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
             .expect(400, done);
     });
     it('respond with not found', function (done) {
         apps(app)
-            .post('/api/v1/user/domrad9@gmail.com/reset_password')
+            .post('/user/domrad9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
             .expect(400, done);
     });
      it('respond password changed', function (done) {
         apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .post('/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send(comfirms)
             .expect(200, done);
@@ -1012,14 +1012,14 @@ describe('GET /allcars endpoint', function () {
     
     it('send email to user', function (done) {
         apps(app)
-            .post('/api/v1/user/domra9@gmail.com/reset_password')
+            .post('/user/domra9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send()
             .expect(404, done);
     });
  it('really send email to user', function (done) {
         apps(app)
-            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .post('/user/domrand9@gmail.com/reset_password')
             .set("Content-Type", "application/json; charset=UTF-8")
             .send()
             .expect(200, done);
@@ -1032,7 +1032,7 @@ describe('GET /allcars endpoint', function () {
                 }
                 it('respond with json 404 not found', function (done) {
                     apps(app)
-                        .patch('/api/v1/car/0/price')
+                        .patch('/car/0/price')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -1040,7 +1040,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with order stat changed', function (done) {
                     apps(app)
-                        .patch('/api/v1/order/status/1')
+                        .patch('/order/status/1')
                         .send(comfirms)
                         .set("Content-Type", "application/json; charset=UTF-8")
                         .set("Authorization", "Bearer "+token)
@@ -1048,7 +1048,7 @@ describe('GET /allcars endpoint', function () {
                 });
                 it('respond with myorders ', function (done) {
                     apps(app)
-                        .get('/api/v1/order')
+                        .get('/order')
                         
                          .query({'statuses' : 'pending'})
                          
@@ -1065,7 +1065,7 @@ describe('GET /allcars endpoint', function () {
             describe('error test', function () {
                 before(function(done){
                     apps(app)
-                    .get('/api/v1/testerr')
+                    .get('/testerr')
                     .end(function(err, res){
                         done();
                     })
@@ -1073,13 +1073,13 @@ describe('GET /allcars endpoint', function () {
                 })
                 it('respond with json bad request cant truncate', function (done) {
                     apps(app)
-                       .delete('/api/v1/user/truncateuser')
+                       .delete('/user/truncateuser')
                        .set("Authorization", "Bearer "+token)
                         .expect(400 ,done)
                 });
                 after(function(done){
                     apps(app)
-                    .get('/api/v1/uenv')
+                    .get('/uenv')
                     .end(function(err, res){
                         done();
                     })
@@ -1091,7 +1091,7 @@ describe('GET /allcars endpoint', function () {
             describe('delete all test inputs', function () {
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
-                       .delete('/api/v1/user/truncateuser')
+                       .delete('/user/truncateuser')
                        .set("Authorization", "Bearer "+token)
                         .expect(200 ,done)
                 });
@@ -1102,19 +1102,19 @@ describe('GET /allcars endpoint', function () {
                 
                 it('test production enviroment in order routes', function (done) {
                     apps(app)
-                       .get('/api/v1/uenv')
+                       .get('/uenv')
                   
                         .expect(200 ,done)
                 });
                 it('test test enviroment in order route', function (done) {
                     apps(app)
-                       .get('/api/v1/uuenv')
+                       .get('/uuenv')
                   
                         .expect(200 ,done)
                 });
                 it('test offline enviroment in user route', function (done) {
                     apps(app)
-                       .get('/api/v1/ouuenv')
+                       .get('/ouuenv')
                   
                         .expect(200 ,done)
                 });
