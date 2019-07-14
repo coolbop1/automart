@@ -13,7 +13,8 @@ module.exports = {
 			last_name : Joi.required(),
 			email : Joi.required(),
 			address : Joi.required(),
-			password : Joi.required()
+			password : Joi.required(),
+			is_admin : Joi.required()
 		};
 					
 		const valid = Joi.validate(req.body,schema);
