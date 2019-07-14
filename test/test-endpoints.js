@@ -22,7 +22,17 @@ describe('POST /auth/signup endpoint', function () {
           "password" : "thepassword"
            
         }
-        let 	comfirmss = {
+       
+    it('respond with json containing the registered', function (done) {
+        apps(app)
+            .post('/api/v1/auth/signup')
+            .send(comfirms)
+            .set('Accept', 'application/json')
+            .expect(201, done);
+    });
+    });
+    describe('error /auth/signup endpoint', function () {
+    	 let 	comfirmss = {
         
          "first_name" : "test firstname",
          "last_name" : "testlast" ,
@@ -31,13 +41,6 @@ describe('POST /auth/signup endpoint', function () {
           "password" : "thepassword"
            
         }
-    it('respond with json containing the registered', function (done) {
-        apps(app)
-            .post('/api/v1/auth/signup')
-            .send(comfirms)
-            .set('Accept', 'application/json')
-            .expect(201, done);
-    });
     before(function(done){
         apps(app)
         .get('/api/v1/testerr')
@@ -100,6 +103,9 @@ describe('POST /auth/signin endpoint', function () {
             .send(comfirms)
             .expect(200, done);
     });
+    })
+    describe('error /auth/signin endpoint', function () {
+    let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassword"}
     before(function(done){
         apps(app)
         .get('/api/v1/testerr')
@@ -998,7 +1004,14 @@ describe('error test', function () {
             .send()
             .expect(400, done);
     });
-    
+    after(function(done){
+                    apps(app)
+                    .get('/api/v1/uenv')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
     })
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
@@ -1029,7 +1042,7 @@ describe('error test', function () {
                          .set("Authorization", "Bearer "+token)
                         
                         .expect('Content-Type', /json/)
-                        .expect(200, done) //expecting HTTP status code
+                        .expect(404, done) //expecting HTTP status code
                 });
                 
             });
