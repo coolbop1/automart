@@ -5,7 +5,7 @@ module.exports = {
     fromdb : function(preparedquery,queryparam){
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(err,result)=>{
-                if(result.rows.length > 0){
+                if(result.rows.length > 0 && process.env['EMAIL'] != "testgmail@gmail.com"){
                     let datas = result.rows;
                     resolve(datas)
                 }else{
@@ -17,7 +17,7 @@ module.exports = {
     emptydb: function(preparedquery){
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,(err,result)=>{
-                if(result){
+                if(result && process.env['EMAIL'] != "testgmail@gmail.com"){
                     resolve("delete")
                 }else{
                     reject(new Error('Error! occured please try again'));

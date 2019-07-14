@@ -800,6 +800,26 @@ describe('GET /allcars endpoint', function () {
                        
                         
                 });
+                let 	comfirms = {
+                "car_id" : 1,
+                "reason" : "fraud",
+                "description" : "fraud"
+            }
+                it('respond with bad format.cant report', function (done) {
+                    apps(app)
+                        .post('/api/v1/flag')
+                        .send(comfirms)
+                        .set("Content-Type", "application/json; charset=UTF-8")
+                        .set("Authorization", "Bearer "+token)
+                        .expect(400,done)
+                        
+                });
+                it('respond with json bad request cant truncate', function (done) {
+                    apps(app)
+                       .delete('/api/v1/user/truncateuser')
+                       .set("Authorization", "Bearer "+token)
+                        .expect(400 ,done)
+                });
                 after(function(done){
                     apps(app)
                     .get('/api/v1/uenv')
