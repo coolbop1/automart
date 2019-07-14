@@ -803,7 +803,7 @@ describe('GET /allcars endpoint', function () {
                         
                 });
             });
-            describe('error test', function () {
+           describe('error test', function () {
     before(function(done){
         apps(app)
         .get('/api/v1/testerr')
@@ -836,6 +836,7 @@ describe('GET /allcars endpoint', function () {
                     
                 })
     })
+    
             describe('POST /auth/signin endpoint', function () {
     let 	comfirms = {"new_password" : "thepassword" , "current_password" : "thepassword"}
     let 	comfirmsy = {"new_password" : "thepassword" , "current_password" : "thepasword"}
