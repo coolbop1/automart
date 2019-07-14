@@ -792,6 +792,15 @@ describe('GET /allcars endpoint', function () {
                        
                         
                 });
+                after(function(done){
+                    apps(app)
+                    .get('/api/v1/uenv')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
+                
                 
                 })
             describe('delete /car/:carid', function () {
