@@ -58,7 +58,7 @@ module.exports = {
                 let { user } = req.token;
                 preparedquery = "update orders set price_offered=$1 where id=$2 and status=$3 and buyer=$4 RETURNING *";
                 queryparam = [req.body.order_price,req.params.orderrid,"pending",user.id];
-             }else if(req.action == "patchstatus"){
+             }else{
                 expectedstatus = 200;
                 preparedquery = "update orders set status=$1 where id=$2 and status=$3 RETURNING * ";
                 queryparam = ["accepted",req.params.orderid,"pending"];
