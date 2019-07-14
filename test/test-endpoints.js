@@ -965,7 +965,7 @@ describe('error test', function () {
                     })
                     
                 })
-                t('respond with json bad request cant truncate', function (done) {
+                it('respond with json bad request cant truncate', function (done) {
                     apps(app)
                        .delete('/api/v1/user/truncateuser')
                        .set("Authorization", "Bearer "+token)
