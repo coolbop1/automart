@@ -8,21 +8,11 @@ const { badreq,authError } = badrequest;
 
 module.exports = {
     postcarinputs : function(req,res,next){
-        const schema ={
-            manufacturer : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
-            model : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(2),
-            price : Joi.number().min(0).required(),
-            state : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
-            engine_size : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1),
-            body_type : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(2),
-            pics : Joi.string().min(2),
-            
-        }
-        const valid = Joi.validate(req.body,schema);
-        if(valid.error){
+        
+        if(typeof req.body.manufacturer == "undefined" || typeof req.body.model == "undefined" || typeof req.body.price == "undefined" || typeof req.body.state == "undefined" || typeof req.body.body_type == "undefined"){
         let reply = {
             "status":409,
-            "error" : valid.error.details[0].message
+            "error" : "Required fields are ommitted please try again"
         }	
         res.status(409).send(reply);
             return;
