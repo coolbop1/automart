@@ -814,12 +814,7 @@ describe('GET /allcars endpoint', function () {
                         .expect(400,done)
                         
                 });
-                it('respond with json bad request cant truncate', function (done) {
-                    apps(app)
-                       .delete('/api/v1/user/truncateuser')
-                       .set("Authorization", "Bearer "+token)
-                        .expect(400 ,done)
-                });
+          
                 after(function(done){
                     apps(app)
                     .get('/api/v1/uenv')
@@ -961,6 +956,32 @@ describe('error test', function () {
                 });
                 
             });
+            describe('error test', function () {
+                before(function(done){
+                    apps(app)
+                    .get('/api/v1/testerr')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
+                t('respond with json bad request cant truncate', function (done) {
+                    apps(app)
+                       .delete('/api/v1/user/truncateuser')
+                       .set("Authorization", "Bearer "+token)
+                        .expect(400 ,done)
+                });
+                after(function(done){
+                    apps(app)
+                    .get('/api/v1/uenv')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
+                
+                
+                })
             describe('delete all test inputs', function () {
                 it('respond with json delete succesfull', function (done) {
                     apps(app)
