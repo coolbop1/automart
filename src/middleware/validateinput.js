@@ -13,7 +13,7 @@ module.exports = {
 			last_name : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
 			email : Joi.string().trim().email().required(),
 			address : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3),
-			password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6)
+			password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(1)
 		};
 					
 		const valid = Joi.validate(req.body,schema);
