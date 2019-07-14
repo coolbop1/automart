@@ -864,6 +864,8 @@ describe('error test', function () {
     before(function(done){
         apps(app)
         .patch('/api/v1/order/status/1')
+        .set("Authorization", "Bearer "+token)
+                        
         .end(function(err, res){
             done();
         })
@@ -872,8 +874,7 @@ describe('error test', function () {
      it('respond with myorders ', function (done) {
                     apps(app)
                         .get('/api/v1/order')
-                         .query({'buyer' : '1'})
-                         .query({'seller' : '1'})
+                        
                          .query({'statuses' : 'pending'})
                          
                          .set("Authorization", "Bearer "+token)
