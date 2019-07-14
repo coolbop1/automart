@@ -868,6 +868,14 @@ describe('error test', function () {
         })
         
     })
+    let 	comfirms = {"new_password" : "thepassword" , "current_password" : "thepassword"}
+    it('respond password changed', function (done) {
+        apps(app)
+            .post('/api/v1/user/domrand9@gmail.com/reset_password')
+            .set("Content-Type", "application/json; charset=UTF-8")
+            .send(comfirms)
+            .expect(400, done);
+    });
     it('return error', function (done) {
         apps(app)
             .post('/api/v1/user/domrand9@gmail.com/reset_password')
@@ -875,7 +883,14 @@ describe('error test', function () {
             .send()
             .expect(400, done);
     });
-    
+    after(function(done){
+                    apps(app)
+                    .get('/api/v1/uenv')
+                    .end(function(err, res){
+                        done();
+                    })
+                    
+                })
     })
             describe('PATCH /car/:carid/price nonexistence carid endpoint', function () {
                 let 	comfirms = {
