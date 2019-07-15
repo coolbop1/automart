@@ -71,10 +71,14 @@ module.exports = {
             		message:"Your offer have been sent to the seller and still pending, Please check your order dashboard to see when it is accepted"
             	})
             }else if(expectedstatus == 200 && req.action == "patchprice"){
-            	outcome[0].new_price_offered = req.body.order_price;
-            	outcome[0].old_price_offered = req.body.order_price
-            outcome[0].message="Your order price have been updated successfully";
-            	res.status(200).send(outcome[0])
+            		let doutcome = outcome[0];
+            	 doutcome.old_price_offered = req.body.order_price
+            	doutcome.new_price_offered = req.body.order_price;
+            	
+            	res.status(200).send(
+            		data:doutcome,
+            		message:"Your order price have been updated successfully"
+            	})
             }else if(expectedstatus == 200 && req.action == "patchstatus"){
             	res.status(200).send({
             		status:200,
