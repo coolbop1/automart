@@ -85,14 +85,11 @@ carpricecheck : function(req,res,next){
     }else{
 
         let { user } = req.token;
-	const schema ={
-		price : Joi.number().min(0).required()		
-	}
-	const valid = Joi.validate(req.body,schema);
-	if(valid.error){
+	
+	if(typeof req.body.price == "undefined"){
 	let reply = {
 		"status":409,
-		"error" : valid.error.details[0].message
+		"error" : "Error!! please fill all required fields"
 	}	
 	res.status(409).send(reply);
 		return;

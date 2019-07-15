@@ -3,17 +3,11 @@ import  Joi from "joi";
 
 module.exports = {
     postvalidate : function (req,res,next){
-	const schema ={
-		car_id : Joi.number().min(0).required(),
-		amount : Joi.number().min(0).required(),
-		order_price : Joi.number().min(0).required(),
-		status : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(3)
-	}
-	const valid = Joi.validate(req.body,schema);
-	if(valid.error){
+	
+	if(typeof req.body.car_id == "undefined" || typeof req.body.order_price == "undefined" || typeof req.body.amount == "undefined" || typeof req.body.status == "undefined"){
 	let reply = {
 		"status":409,
-		"error" : valid.error.details[0].message
+		"error" : "Error!! please fill all required input fields"
 	}	
 	res.status(409).send(reply);
 		return;
@@ -29,14 +23,11 @@ module.exports = {
         next();
     },
     pricepatchcheck: function (req,res,next){
-	const schema ={
-		order_price : Joi.number().min(0).required()
-	}
-	const valid = Joi.validate(req.body,schema);
-	if(valid.error){
+	
+	if(typeof req.body.order_price == "undefined"){
 	let reply = {
 		"status":409,
-		"error" : valid.error.details[0].message
+		"error" : "Error!! please fill required input fields "
 	}	
 	res.status(409).send(reply);
 		return;
