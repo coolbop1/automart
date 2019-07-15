@@ -24,7 +24,7 @@ module.exports = {
     },
     pricepatchcheck: function (req,res,next){
 	
-if(typeof req.body == "undefined"){
+if(typeof req.body.new_price_offered == "undefined"){
 	let reply = {
 		"status":409,
 		"error" : "Error!! please fill required input fields "
