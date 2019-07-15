@@ -20,7 +20,7 @@ describe('POST /auth/signup endpoint', function () {
          "email" : "domrand9@gmail.com" ,
          "address" : "testaddress",
           "password" : "thepassword",
-          "is_admin" : true
+          "is_admin" : "true"
            
         }
        
