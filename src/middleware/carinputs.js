@@ -79,7 +79,7 @@ carstatuscheck : function(req,res,next){
     }
 },
 carpricecheck : function(req,res,next){
-    console.log("this is the body cpice"+Object.keys(req.body));
+    //console.log("this is the body cpice"+Object.keys(req.body));
     if(isNaN(req.params.carid)){
         res.status(400).send(badreq());
     return;
@@ -119,16 +119,15 @@ checktodelete : function(req,res,next){
     return;
     }else{
         let { user } = req.token;
-        pool.query("select * from postads where id=$1 and owner=$2 ",[req.params.carid,user.id,],(err,result)=>{
-            if(result.rows.length > 0){
+         if(user.is_admin == true){
                 next();
             }else{
-                res.status(404).send({
-                    "status" : 404,
-                    "error" : "Oops cant find this ad, or does not belong to you"});
+                res.status(403).send({
+                    "status" : 403,
+                    "error" : "unauthorized"});
                     return;
             }
-        })
+        
     }
 }
 
