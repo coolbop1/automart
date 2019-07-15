@@ -43,7 +43,7 @@ module.exports = {
                 let { user } = req.token;
                 expectedstatus = 201;
                 preparedquery = "insert into orders (buyer, car_id, amount, price_offered, status, created_on) values ($1,$2,$3,$4,$5,$6) RETURNING *";
-                queryparam = [user.id,parseInt(req.body.car_id),parseInt(req.body.amount),parseInt(req.body.order_price),req.body.status,pdate];
+                queryparam = [user.id,parseInt(req.body.car_id),parseInt(req.body.amount),parseInt(req.body.price_offered),"pending",pdate];
              }else if(req.action == "getall"){
                 expectedstatus = 200;
                 preparedquery = "select a.*,b.manufacturer,b.model,b.id as carid,b.owner from orders a join postads b on a.car_id=b.id"
@@ -57,7 +57,7 @@ module.exports = {
                 expectedstatus = 200;
                 let { user } = req.token;
                 preparedquery = "update orders set price_offered=$1 where id=$2 and buyer=$3 RETURNING *";
-                queryparam = [req.body.order_price,req.params.orderrid,user.id];
+                queryparam = [req.body.new_price_offered,req.params.orderrid,user.id];
              }else{
                 expectedstatus = 200;
                 preparedquery = "update orders set status=$1 where id=$2 and status=$3 RETURNING * ";
