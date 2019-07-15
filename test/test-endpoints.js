@@ -326,10 +326,9 @@ describe('GET /car no query get all endpoint', function () {
 });
 describe('PATCH /car/:carid/price endpoint', function () {
     let 	comfirms = {
-        "price" : "2000"
+        "price" : 2000
     }
     let 	comfirmsy = {
-        "price" : ""
     }
     it('respond with bad formart can change price', function (done) {
         apps(app)
