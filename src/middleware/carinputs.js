@@ -79,7 +79,7 @@ carstatuscheck : function(req,res,next){
     }
 },
 carpricecheck : function(req,res,next){
-    console.log("this is the body"+Object.keys(req.body));
+    console.log("this is the body cprice "+Object.keys(req.body));
     if(isNaN(req.params.carid)){
         res.status(400).send(badreq());
     return;
@@ -87,7 +87,7 @@ carpricecheck : function(req,res,next){
 
         let { user } = req.token;
 	
-	if(typeof req.body.price == "undefined"){
+	if(typeof req.body.amount == "undefined"){
 	let reply = {
 		"status":409,
 		"error" : "Error!! please fill all required fields"
