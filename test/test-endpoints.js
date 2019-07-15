@@ -418,13 +418,12 @@ describe('GET /allcars endpoint', function () {
             describe('POST /order endpoint', function () {
                 let 	comfirms = {
                     "car_id" : 1 ,
-                     "order_price" : "1000" ,
+                     "price" : "1000" ,
                       "status" : "pending",
                        "amount" : "1000"
                 }
                 let 	comfirmsy = {
-                    "car_id" : "" ,
-                     "order_price" : "1000" ,
+                     "price" : "1000" ,
                       "status" : "pending",
                        "amount" : "1000"
                 }
@@ -491,8 +490,8 @@ describe('GET /allcars endpoint', function () {
                 
             });
             describe('PATCH /order/:orderrid/price', function () {
-                let 	comfirms ={"order_price" : "2000"}
-                let 	comfirmsy ={"order_price" : ""}
+                let 	comfirms ={"price" : "2000"}
+                let 	comfirmsy ={}
                 it('respond with json containing The order price have been changed', function (done) {
                     apps(app)
                         .patch('/order/3/price')
