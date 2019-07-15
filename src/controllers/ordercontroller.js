@@ -57,7 +57,7 @@ module.exports = {
                 expectedstatus = 200;
                 let { user } = req.token;
                 preparedquery = "update orders set price_offered=$1 where id=$2 and buyer=$3 RETURNING *";
-                queryparam = [req.body.new_price_offered,req.params.orderrid,user.id];
+                queryparam = [req.body.amount,req.params.orderrid,user.id];
              }else{
                 expectedstatus = 200;
                 preparedquery = "update orders set status=$1 where id=$2 and status=$3 RETURNING * ";
