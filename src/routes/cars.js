@@ -25,8 +25,8 @@ route.use(bodyParser.urlencoded({
 });
 
 route.post("/car",confirm.ensureToken,postcarinputs,allcarquery);
-route.get("/car",carquerycheck,allcarquery);
-route.get("/car/:carid",carparamcheck,allcarquery);
+route.get("/car",confirm.ensureToken,carquerycheck,allcarquery);
+route.get("/car/:carid",confirm.ensureToken,carparamcheck,allcarquery);
 route.get("/allcars",allcarquery);
 route.patch("/car/:carid/status",confirm.ensureToken,carstatuscheck,allcarquery);
 route.patch("/car/:carid/price",confirm.ensureToken,carpricecheck,allcarquery);
