@@ -8,7 +8,7 @@ const { badreq,authError } = badrequest;
 
 module.exports = {
     postcarinputs : function(req,res,next){
-        console.log("this is the body cpice"+Object.keys(req.body));
+        
         if(typeof req.body.manufacturer == "undefined" || typeof req.body.model == "undefined" || typeof req.body.price == "undefined" || typeof req.body.state == "undefined" || typeof req.body.body_type == "undefined"){
         let reply = {
             "status":409,
@@ -79,7 +79,7 @@ carstatuscheck : function(req,res,next){
     }
 },
 carpricecheck : function(req,res,next){
-    //console.log("this is the body cpice"+Object.keys(req.body));
+    console.log("this is the body cdppo "+Object.keys(req.body));
     if(isNaN(req.params.carid)){
         res.status(400).send(badreq());
     return;
