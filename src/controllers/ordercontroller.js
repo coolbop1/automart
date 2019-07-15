@@ -71,6 +71,8 @@ module.exports = {
             		message:"Your offer have been sent to the seller and still pending, Please check your order dashboard to see when it is accepted"
             	})
             }else if(expectedstatus == 200 && req.action == "patchprice"){
+            	outcome[0].new_price_offered = req.body.order_price;
+            	outcome[0].old_price_offered = req.body.order_price
             	res.status(200).send({
             		status:200,
             		data:outcome[0],
