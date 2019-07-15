@@ -23,11 +23,27 @@ describe('POST /auth/signup endpoint', function () {
           "is_admin" : "true"
            
         }
+        let 	noadmin = {
+        
+         "first_name" : "test firstname",
+         "last_name" : "testlast" ,
+         "email" : "dnoadmin@gmail.com" ,
+         "address" : "testaddress",
+          "password" : "thepassword"
+           
+        }
        
-    it('respond with json containing the registered', function (done) {
+    it('respond with json containing the registered admin', function (done) {
         apps(app)
             .post('/auth/signup')
             .send(comfirms)
+            .set('Accept', 'application/json')
+            .expect(201, done);
+    });
+    it('respond with json containing the registered ', function (done) {
+        apps(app)
+            .post('/auth/signup')
+            .send(noadmin)
             .set('Accept', 'application/json')
             .expect(201, done);
     });
@@ -141,12 +157,24 @@ describe('POST /auth/signin endpoint', function () {
 })
 describe('authorized test', function () {
     let 	comfirms = {"email" : "domrand9@gmail.com" , "password" : "thepassword"}
+    
+    let 	comfirmeds = {"email" : "dnoadmin@gmail.com" , "password" : "thepassword"}
     before(function(done){
         apps(app)
         .post('/auth/signin')
         .send(comfirms)
         .end(function(err, res){
             token = res.body.data.token;
+            done();
+        })
+        
+    })
+    before(function(done){
+        apps(app)
+        .post('/auth/signin')
+        .send(comfirmeds)
+        .end(function(err, res){
+            tokened = res.body.data.token;
             done();
         })
         
@@ -912,6 +940,16 @@ describe('GET /allcars endpoint', function () {
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
                         .expect(400, done) //expecting HTTP status code
+                       
+                        
+                });
+                it('respond with not admin , cant delete', function (done) {
+                    apps(app)
+                        .delete('/car/1')
+                        .set('Accept', 'application/json')
+                        .set("Authorization", "Bearer "+tokened)
+                        .expect('Content-Type', /json/)
+                        .expect(403, done) //expecting HTTP status code
                        
                         
                 });
