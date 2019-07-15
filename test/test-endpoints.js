@@ -19,7 +19,8 @@ describe('POST /auth/signup endpoint', function () {
          "last_name" : "testlast" ,
          "email" : "domrand9@gmail.com" ,
          "address" : "testaddress",
-          "password" : "thepassword"
+          "password" : "thepassword",
+          "is_admin" : true
            
         }
        
@@ -364,7 +365,7 @@ describe('GET /car/:carid unexistence car endpoints', function () {
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
             .expect('Content-Type', /json/)
-            .expect(404, done) 
+            .expect(400, done) 
     });
 });
 describe('GET /car/:carid  existing car endpoint', function () {
@@ -862,7 +863,7 @@ describe('GET /allcars endpoint', function () {
                         .set('Accept', 'application/json')
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
-                        .expect(404, done) //expecting HTTP status code
+                        .expect(403, done) //expecting HTTP status code
                        
                         
                 });
@@ -893,13 +894,14 @@ describe('GET /allcars endpoint', function () {
                 
                 })
             describe('delete /car/:carid', function () {
-                it('respond with not found', function (done) {
+               
+                it('respond with bad request NAN', function (done) {
                     apps(app)
-                        .delete('/car/20')
+                        .delete('/car/be')
                         .set('Accept', 'application/json')
                         .set("Authorization", "Bearer "+token)
                         .expect('Content-Type', /json/)
-                        .expect(404, done) //expecting HTTP status code
+                        .expect(400, done) //expecting HTTP status code
                        
                         
                 });
@@ -1052,7 +1054,7 @@ describe('GET /allcars endpoint', function () {
                          .set("Authorization", "Bearer "+token)
                         
                         .expect('Content-Type', /json/)
-                        .expect(404, done) //expecting HTTP status code
+                        .expect(200, done) //expecting HTTP status code
                 });
                 
             });
