@@ -23,12 +23,13 @@ module.exports = {
         next();
     },
     pricepatchcheck: function (req,res,next){
-	
-if(typeof req.body.price == "undefined" || isNaN(req.body.price)){
+        console.log(req.body)
+if(typeof req.body == "undefined" ){
 	let reply = {
 		"status":409,
 		"error" : "Error!! please fill required input fields "
-	}	
+    }
+    
 	res.status(409).send(reply);
 		return;
 	}else{
