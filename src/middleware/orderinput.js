@@ -4,7 +4,7 @@ import  Joi from "joi";
 module.exports = {
     postvalidate : function (req,res,next){
 	
-	if(typeof req.body.car_id == "undefined" || typeof req.body.order_price == "undefined" || typeof req.body.amount == "undefined" || typeof req.body.status == "undefined"){
+	if(typeof req.body.car_id == "undefined" || typeof req.body.order_price == "undefined"){
 	let reply = {
 		"status":409,
 		"error" : "Error!! please fill all required input fields"
