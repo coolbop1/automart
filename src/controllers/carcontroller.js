@@ -79,7 +79,7 @@ module.exports = {
         }else if(req.action == "patchprice"){
             let { user } = req.token;
             preparedquery="update postads set price=$1 where id=$2 and email=$3 RETURNING * ";
-            queryparam = [req.body.price,req.params.carid,user.email];
+            queryparam = [req.body.price,req.params.car-id,user.email];
             expectedstatus=200;
         }else{
             preparedquery="SELECT * FROM postads where CASE  WHEN $1::varchar IS NOT NULL THEN status = $1 ELSE 1=1 END and CASE WHEN $2::int IS NOT NULL THEN price >=$2 ELSE 1=1 END and CASE WHEN $3::int IS NOT NULL THEN price <= $3 ELSE 1=1 END and CASE WHEN $4::varchar IS NOT NULL THEN state = $4"
