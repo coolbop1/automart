@@ -50,7 +50,7 @@ thequery[z] == "email"){
     }
 },
 carparamcheck : function(req,res,next){
-    if(isNaN(req.params.carid) || req.params.carid <= 0){
+    if((isNaN(req.params.carid)) || (req.params.carid <= 0)){
         res.status(400).send(badreq());
     return;
     }else{
