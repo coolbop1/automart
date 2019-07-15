@@ -64,13 +64,32 @@ module.exports = {
                 queryparam = ["accepted",req.params.orderid,"pending"];
              }
             let outcome = await orderdb(preparedquery,queryparam,expectedstatus);
-            if(outcome.status == 201)
-            outcome.message= "Your offer have been sent to the seller and still pending, Please check your order dashboard to see when it is accepted";
-            if(outcome.status == 200 && req.action == "patchprice")
-            outcome.message= "Your order price have been updated successfully";
-            if(outcome.status == 200 && req.action == "patchstatus")
-            outcome.message= "Your order price have been updated successfully";
-            res.status(outcome.status).json(outcome);
+            if(expectedstatus == 201){
+            	res.status(201).send({
+            		status:201,
+            		data:outcome[0],
+            		message:"Your offer have been sent to the seller and still pending, Please check your order dashboard to see when it is accepted"
+            	})
+            }else if(expectedstatus == 200 && req.action == "patchprice"){
+            	res.status(200).send({
+            		status:200,
+            		data:outcome[0],
+            		message:"Your order price have been updated successfully"
+            	})
+            }else if(expectedstatus == 200 && req.action == "patchstatus"){
+            	res.status(200).send({
+            		status:200,
+            		data:outcome[0],
+            		message:"Your order price have been updated successfully"
+            	})
+            }else{
+            	res.status(expectedstatus).send({
+            		status:expectedstatus,
+            		data:outcome
+            	})
+            }
+            
+            
         }catch(e){
             res.status(404).json({error:""+e});
         }
