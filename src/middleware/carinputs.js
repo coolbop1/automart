@@ -94,7 +94,7 @@ carpricecheck : function(req,res,next){
 	res.status(409).send(reply);
 		return;
     }else{
-        pool.query("select * from postads where id=$1 and owner=$2 and status<>$3",[req.params.carid,user.id,"sold"],(err,result)=>{
+        pool.query("select * from postads where id=$1 and owner=$2 ",[req.params.carid,user.id],(err,result)=>{
             if(result.rows.length > 0){
                 req.action = "patchprice";
                 next();
