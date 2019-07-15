@@ -79,6 +79,7 @@ carstatuscheck : function(req,res,next){
     }
 },
 carpricecheck : function(req,res,next){
+    console.log("this is the body"+Object.keys(req.body));
     if(isNaN(req.params.carid)){
         res.status(400).send(badreq());
     return;

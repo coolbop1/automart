@@ -23,7 +23,7 @@ module.exports = {
         next();
     },
     pricepatchcheck: function (req,res,next){
-        console.log("this is the body"+req.body)
+        console.log("this is the body"+Object.keys(req.body))
 if(typeof req.body.price == "undefined" ){
 	let reply = {
 		"status":409,
