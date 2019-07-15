@@ -4,8 +4,14 @@ import { createuser,allusers,sendingMail,updatepass,login } from "../services/us
 
 module.exports = {
 	signup : function (req, res) { 
+	let isadmin;
 			
 		var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+		if(typeof req.body.is_admin !== "undefined")
+		isadmin = req.body.is_admin;
+		else
+		isadmin = "false";
+		
 		let postit ={
 				
 			"email" : req.body.email,
@@ -13,9 +19,9 @@ module.exports = {
 			"last_name" : req.body.last_name,
 			"password" : hashedPassword,
 			"address" : req.body.address,
-			"is_admin" : "false"
+			"is_admin" : isadmin
 		};
-		let inputArr = [req.body.email,req.body.first_name,req.body.last_name,hashedPassword,req.body.address,"false"];
+		let inputArr = [req.body.email,req.body.first_name,req.body.last_name,hashedPassword,req.body.address,postit.is_admin];
 		let comfirm
 		async function createToken() {
 		try {
