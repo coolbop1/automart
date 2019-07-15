@@ -7,7 +7,7 @@ module.exports = {
         return new Promise(function(resolve,reject){
             pool.query(preparedquery,queryparam,(error,result)=>{
                //console.log(queryparam)
-                if(result){
+                if(result.rows.length > 0){
                 	let reply = result.rows
               
                      resolve(reply)
