@@ -24,7 +24,7 @@ module.exports = {
     },
     pricepatchcheck: function (req,res,next){
 	
-if(typeof req.body.price == "undefined" || isNaN(req.body.price)){
+if(typeof req.body == "undefined" || isNaN(req.body)){
 	let reply = {
 		"status":409,
 		"error" : "Error!! please fill required input fields "
