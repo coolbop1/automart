@@ -107,6 +107,12 @@ module.exports = {
            		data:outcome[0],
            		message:"The price have been changed successfully."
            	});
+       }else if(typeof req.params.carid !== "undefined"){
+       	
+       	res.status(200).json({
+           		status:200,
+           		data:outcome[0]})
+           		
        }else{
        	res.status(200).json({
            		status:200,
