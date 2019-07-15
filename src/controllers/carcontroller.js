@@ -69,7 +69,7 @@ module.exports = {
             let dddate = new Date();
             let { user } = req.token;
             preparedquery="INSERT INTO postads (email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING * ";
-            queryparam = [user.email,user.id,dddate,req.body.manufacturer,req.body.model,req.body.price,req.body.state,req.body.engine_size,req.body.body_type,req.body.pics,"available"];
+            queryparam = [user.email,user.id,dddate,req.body.manufacturer,req.body.model,req.body.price,req.body.state,req.body.engine_size,req.body.body_type,req.body.image_url,"available"];
             expectedstatus=201;
         }else if(req.action == "patchstatus"){
             let { user } = req.token;
