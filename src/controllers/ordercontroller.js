@@ -72,9 +72,9 @@ module.exports = {
             	})
             }else if(expectedstatus == 200 && req.action == "patchprice"){
             		let doutcome = outcome[0];
-            	 doutcome.old_price_offered = req.body.order_price;
+            	 doutcome.old_price_offered = outcome[0].amount;
             	 
-            	doutcome.new_price_offered = req.body.order_price;
+            	doutcome.new_price_offered = outcome[0].amount;
             	
             	res.status(200).send({
             		status:200,

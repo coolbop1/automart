@@ -24,17 +24,17 @@ module.exports = {
     },
     pricepatchcheck: function (req,res,next){
 	
-/*	if(typeof req.body.amount == "undefined"){
+if(typeof req.body == "undefined"){
 	let reply = {
 		"status":409,
 		"error" : "Error!! please fill required input fields "
 	}	
 	res.status(409).send(reply);
 		return;
-	}else{*/
+	}else{
         req.action = "patchprice";
         next();
-    //} 
+    } 
     },
     statusvalidate: function (req,res,next){
         req.action = "patchstatus";
