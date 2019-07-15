@@ -930,7 +930,7 @@ describe('GET /allcars endpoint', function () {
                          .set("Authorization", "Bearer "+token)
                         
                         .expect('Content-Type', /json/)
-                        .expect(200, done) //expecting HTTP status code
+                        .expect(404, done) //expecting HTTP status code
                 });
     
     
