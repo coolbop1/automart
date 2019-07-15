@@ -160,7 +160,7 @@ describe('authorized test', function () {
         });
     });
     describe('POST /me endpoint', function () {
-        let 	comfirmsy = {"email" : "" , "password" : ""}
+        let 	comfirmsy = { "password" : ""}
     let 	notcomfirms = {"email" : "testemaioool@email.coml" , "password" : "thepassword"}
     it('respond with authorized ', function (done) {
         apps(app)
@@ -217,7 +217,7 @@ describe('GET /car/:carid endpoint', function () {
             .get('/car/0')
             .set('Accept', 'application/json')
             .set("Authorization", "Bearer "+token)
-            .expect(404, done) //expecting HTTP status code
+            .expect(400, done) //expecting HTTP status code
             
     });
     
@@ -239,18 +239,18 @@ describe('POST /car endpoint', function () {
          "model" : "carmodels",
          "body_type" : "colors" ,
           "engine_size" : "21001",
-           "price" : "2000",
+           "price" : 2000,
            "state" : "new" ,
-            "pics" : "fromclouds",
+            "image_url" : "fromclouds",
             
         }
         let 	comfirmsy = {
              "model" : "carmodels",
              "body_type" : "colors" ,
               "engine_size" : "21001",
-               "price" : "2000",
+               "price" : 2000,
                "state" : "new" ,
-                "pics" : "fromclouds",
+                "image_url" : "fromclouds",
                 
             }
             it('respond with unauthorized', function (done) {
