@@ -50,7 +50,7 @@ thequery[z] == "email"){
     }
 },
 carparamcheck : function(req,res,next){
-    if(isNaN(req.params.car-id) || req.params.car-id <= 0){
+    if(isNaN(req.params.carid) || req.params.carid <= 0){
         res.status(400).send(badreq());
     return;
     }else{
@@ -59,12 +59,12 @@ carparamcheck : function(req,res,next){
     }
 },
 carstatuscheck : function(req,res,next){
-    if(isNaN(req.params.car-id)){
+    if(isNaN(req.params.carid)){
         res.status(400).send(badreq());
     return;
     }else{
         let { user } = req.token;
-        pool.query("select * from postads where id=$1 and owner=$2 and status<>$3",[req.params.car-id,user.id,"sold"],(err,result)=>{
+        pool.query("select * from postads where id=$1 and owner=$2 and status<>$3",[req.params.carid,user.id,"sold"],(err,result)=>{
             if(result.rows.length > 0){
                 req.action = "patchstatus";
                 next();
@@ -79,7 +79,7 @@ carstatuscheck : function(req,res,next){
     }
 },
 carpricecheck : function(req,res,next){
-    if(isNaN(req.params.car-id)){
+    if(isNaN(req.params.carid)){
         res.status(400).send(badreq());
     return;
     }else{
@@ -94,7 +94,7 @@ carpricecheck : function(req,res,next){
 	res.status(409).send(reply);
 		return;
     }else{
-        pool.query("select * from postads where id=$1 and owner=$2 and status<>$3",[req.params.car-id,user.id,"sold"],(err,result)=>{
+        pool.query("select * from postads where id=$1 and owner=$2 and status<>$3",[req.params.carid,user.id,"sold"],(err,result)=>{
             if(result.rows.length > 0){
                 req.action = "patchprice";
                 next();
@@ -113,12 +113,12 @@ carpricecheck : function(req,res,next){
 },
 checktodelete : function(req,res,next){
 
-    if(isNaN(req.params.car-id)){
+    if(isNaN(req.params.carid)){
         res.status(400).send(badreq());
     return;
     }else{
         let { user } = req.token;
-        pool.query("select * from postads where id=$1 and owner=$2 ",[req.params.car-id,user.id,],(err,result)=>{
+        pool.query("select * from postads where id=$1 and owner=$2 ",[req.params.carid,user.id,],(err,result)=>{
             if(result.rows.length > 0){
                 next();
             }else{
