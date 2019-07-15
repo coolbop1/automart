@@ -119,6 +119,7 @@ checktodelete : function(req,res,next){
     return;
     }else{
         let { user } = req.token;
+        console.log(user.is_admin);
          if(user.is_admin == true){
                 next();
             }else{
