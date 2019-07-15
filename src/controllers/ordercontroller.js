@@ -73,11 +73,8 @@ module.exports = {
             }else if(expectedstatus == 200 && req.action == "patchprice"){
             	outcome[0].new_price_offered = req.body.order_price;
             	outcome[0].old_price_offered = req.body.order_price
-            	res.status(200).send({
-            		status:200,
-            		data:outcome[0],
-            		message:"Your order price have been updated successfully"
-            	})
+            outcome[0].message="Your order price have been updated successfully";
+            	res.status(200).send(outcome[0])
             }else if(expectedstatus == 200 && req.action == "patchstatus"){
             	res.status(200).send({
             		status:200,
