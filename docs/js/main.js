@@ -351,8 +351,8 @@ fetch("/allcars/"+theid,{
 .then((res)=>res.json())
 .then((data)=>{
 	if(data.status === 200){
-		const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[0];
-		let imageArr = pics.split("<>");
+		const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data[0];
+		let imageArr = image_url.split("<>");
 		let imagelength = imageArr.length-1;
 	
 		
@@ -421,7 +421,7 @@ function order(thisid){
 	.then((data)=>{
 		if(data.status === 200 && data.data.length > 0){
 		
-			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,pics,status } = data.data[0];
+			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data[0];
 			
 			
 			sessionStorage.setItem('chooseorder',id);
@@ -429,7 +429,7 @@ function order(thisid){
 	sessionStorage.setItem('chooseordercolor', body_type);
 	sessionStorage.setItem('chooseordercond', state);
 	sessionStorage.setItem('chooseorderamount', parseInt(price));
-	sessionStorage.setItem('chooseorderimg', pics.split("<>")[0].replace("w_150,c_scale/",""));
+	sessionStorage.setItem('chooseorderimg', image_url.split("<>")[0].replace("w_150,c_scale/",""));
 	sessionStorage.setItem('pagetab', 'order');
 			
 			
