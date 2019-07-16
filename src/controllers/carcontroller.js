@@ -91,7 +91,7 @@ module.exports = {
            let outcome = await carquery(preparedquery,queryparam,expectedstatus);
            if(expectedstatus==201){
            	res.status(201).json({
-           		status:202,
+           		status:201,
            		data:outcome[0],
            		message:"Car posted successfully"
            	});

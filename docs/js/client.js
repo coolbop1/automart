@@ -301,7 +301,7 @@ emailquery +=`&email=${myemail}`;
 
 	fetch(emailquery,{
 		method:"GET",
-		headers:new Headers({"Content-Type": "application/json; charset=UTF-8"})
+		headers:new Headers({"Content-Type": "application/json; charset=UTF-8","Authorization": "Bearer "+localStorage.getItem('accessToken')})
 	})
 	.then((res)=>res.json())
 	.then((data)=>{
