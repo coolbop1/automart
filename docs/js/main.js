@@ -351,7 +351,7 @@ fetch("/allcars/"+theid,{
 .then((res)=>res.json())
 .then((data)=>{
 	if(data.status === 200){
-		const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data[0];
+		const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data;
 		let imageArr = image_url.split("<>");
 		let imagelength = imageArr.length-1;
 	
