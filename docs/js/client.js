@@ -412,7 +412,7 @@ populateallcars(strom,stopt);
 }
 function
  populateallcars(startfrom,stopat){
-	let availablequery ="/car?";
+	let availablequery ="/allcars?";
 availablequery +="&status=available";
 
 const sessionId = sessionStorage.getItem('myId');
@@ -754,7 +754,7 @@ var lookfor = i
 fetch("/car",{
 	method:"POST",
 	headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
-	body:JSON.stringify({"manufacturer" : pcman , "model" : pcmodel,"body_type" : pccolor , "engine_size" : pces, "price" : pprice,"state" : stateocar,"pics" : pcpics})
+	body:JSON.stringify({"manufacturer" : pcman , "model" : pcmodel,"body_type" : pccolor , "engine_size" : pces, "price" : pprice,"state" : stateocar,"image_url" : pcpics})
 })
 .then((res)=>res.json())
 .then((data)=>{
@@ -862,7 +862,7 @@ var frets = document.getElementById(replace3).value;
 	fetch("/order/"+replace1+"/price",{
 		method:"PATCH",
 		headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
-		body:JSON.stringify({"order_price":frets})
+		body:JSON.stringify({"price":frets})
 	})
 	.then((res)=>res.json())
 	.then((data)=>{

@@ -340,6 +340,13 @@ describe('POST /car endpoint', function () {
                 .expect(200, done) //expecting HTTP status code
                 
         });
+        it('respond with json of  the car', function (done) {
+            apps(app)
+                .get('/allcars/1')
+                .set('Accept', 'application/json')
+                .expect(200, done) //expecting HTTP status code
+                
+        });
     });
     
 });
