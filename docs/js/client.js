@@ -16,7 +16,7 @@ function stilllog(tab){
 		sessionStorage.setItem('myEmail',dsession.email);
 
 		
-		if (window.location.pathname == "/UI/index.html" || window.location.pathname == "/UI/" || window.location.pathname == "/index.html" || window.location.pathname == "/") {
+		if (window.location.pathname == "/index.html" || window.location.pathname == "/" || window.location.pathname == "/index.html" || window.location.pathname == "/") {
 document.getElementById("notloged").style.display = "none";
    document.getElementById("fpintab").classList.replace("show","hide"); document.getElementById("nowloged").style.display = "block";
    document.getElementById("profilename").innerHTML = dsession.name+" "+dsession.lname;
@@ -1108,7 +1108,7 @@ var fresty = document.getElementById(replace2).value;
 		
 		//////////////cloudinary upload image and get the path//////////
 
-if(window.location.pathname == "/UI/postad.html"){
+if(window.location.pathname == "/postad.html"){
 
 const cloudName = 'coolbop';
 const unsignedUploadPreset = 'lmxbyuah';
