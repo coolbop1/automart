@@ -296,7 +296,7 @@ function acceptorder(thisid){
 
 
 	function shhowmyads(myemail,showstart,showend){
-	let emailquery =`/car?`;
+	let emailquery =`https://thawing-beach-89294.herokuapp.com/car?`;
 emailquery +=`&email=${myemail}`;
 
 	fetch(emailquery,{
