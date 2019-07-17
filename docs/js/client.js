@@ -418,7 +418,7 @@ function
 	 let sortmin = document.getElementById("thesortmin").value;
 	 let sortmax = document.getElementById("thesortmax").value;
 
-	let availablequery ="/allcars?";
+	let availablequery ="https://thawing-beach-89294.herokuapp.com/allcars?";
 availablequery +="&status=available";
 if(sortmanu  != "")
 availablequery +="&manufacturer="+sortmanu;
@@ -570,7 +570,7 @@ var remail =	document.getElementById("regemail").value;
 	var rpwd =	document.getElementById("regpwd").value;
 	var radd =	document.getElementById("regadd").value;
 
-fetch('/auth/signup', { 
+fetch('https://thawing-beach-89294.herokuapp.com/auth/signup', { 
 method: 'POST', 
 headers : new Headers({"Content-Type": "application/json; charset=UTF-8"}), body:JSON.stringify({"email" : remail, "first_name" : rfname,"last_name" : rlname , "password" : rpwd, "address" : radd}) })
 .then((res) => res.json()) 
