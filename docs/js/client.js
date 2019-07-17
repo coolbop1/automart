@@ -1107,9 +1107,9 @@ var fresty = document.getElementById(replace2).value;
 		
 		
 		//////////////cloudinary upload image and get the path//////////
-
-if(window.location.pathname == "/postad.html"){
-
+		
+if(typeof  document.getElementById("fileSelect") != "undefined" ){
+//console.log(window.location.pathname);
 const cloudName = 'coolbop';
 const unsignedUploadPreset = 'lmxbyuah';
 
