@@ -163,7 +163,7 @@ header a{
 #postcontent{
 	width:calc(100% - 10px);
 	min-height:435px;
-	background:#021e72;
+	background:#dfe2db;
 	margin:10px 5px 5px 5px;
 }
 #signs{
@@ -500,7 +500,7 @@ text-shadow:2px 2px 4px #000000;
 	top:80px;
 }
 #fpinn{
-	bottom:150px;
+	bottom:120px;
 	z-index:1;
 	color:white;
 }
@@ -612,9 +612,10 @@ footer{
 	min-height:90%;
 	margin-top:70px;
 	margin-bottom:30px !important;
-	background:#bf3f3f;
+	background:#cccccc;
 	border: 3px solid #ffffff;
 	display:none;
+	color:#191919;
 }
 #poffered{
 	float:none ;
@@ -633,7 +634,7 @@ footer{
 	margin:5px;
 	min-height:300px;
 	background:#f1f1f1;
-	box-shadow: 3px 5px 5px #000000;
+	/*box-shadow: 3px 5px 5px #000000;*/
 	position:relative;	
 	overflow:hidden;
 }
@@ -801,9 +802,9 @@ footer{
 }
 .orderlisted{
 	width:100%;
-	background:#bf3f3f;
+	background:#cccccc;
 	border:2px solid #fff;
-	color:#fff;
+	color:#666;
 	position:relative;
 	overflow:hidden;
 	
@@ -1009,7 +1010,7 @@ footer{
 	position:absolute;
 	width:100%;
 	bottom:10px;
-	background:#bf3f3f;
+	background:#dfe2db;
 	color:#ffffff;
 }
 .orangetablev{
@@ -1145,11 +1146,14 @@ footer{
 	font-weight:bold;
 	top:10px;
 	left:10px;
-	text-shadow:2px 2px 4px #000000;
+	/*text-shadow:2px 2px 4px #000000;*/
+}
+#postcontent #myadsti{
+	color:#021e72;
 }
 .irline{
 	font-size:20px;
-	color:#ffffff;
+	color:#666;
 	padding:0px;
 	margin-left:10px;
 	text-align:left;
@@ -1172,7 +1176,6 @@ footer{
 }
 #fileSelect{
 	text-decoration:none;
-	color:white;
 }
 
 
@@ -1182,7 +1185,7 @@ footer{
   transition: .2s bottom, .2s opacity;
   bottom: 0;
 	left: 5px;
-	color:white;
+	color:#666;
   z-index: 1; }
   input:focus + .label-helperr, input:invalid + .label-helperr {
   bottom: 80%;
@@ -1299,7 +1302,9 @@ cursor:pointer;
 }
 
 
-
+#extras .manu,#extras .carcond,.show .subtitile,.postimg .subtitile,#last3{
+	color:#191919;
+}
 
 
 

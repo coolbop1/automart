@@ -20,6 +20,6 @@ module.exports = {
             "status":400,
             "error":"bad request"
         };
-        return error;;
+        return error;
     }
 }

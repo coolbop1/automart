@@ -38,10 +38,10 @@ if(tab === 4) showmyoffers(dsession.id,stroom,stoopt,0);
 	console.log("not logged in")
 	
 }
+paginateallcars(0);
 		
 	})
-	.then((b)=>paginateallcars(0))
-	.catch((e)=>console.log("error"))
+	.catch((e)=>console.log(e))
 		
 }
 
@@ -412,8 +412,27 @@ populateallcars(strom,stopt);
 }
 function
  populateallcars(startfrom,stopat){
+	 let sortmanu = document.getElementById("thesortmanu").value;
+	 let sortbody = document.getElementById("thesortbody").value;
+	 let sortstate = document.getElementById("thesortstate").value;
+	 let sortmin = document.getElementById("thesortmin").value;
+	 let sortmax = document.getElementById("thesortmax").value;
+
 	let availablequery ="/allcars?";
 availablequery +="&status=available";
+if(sortmanu  != "")
+availablequery +="&manufacturer="+sortmanu;
+if(sortbody  != "")
+availablequery +="&body_type="+sortbody;
+if(sortstate  != "")
+availablequery +="&state="+sortstate;
+if(sortmin  != "")
+availablequery +="&min_price="+sortmin;
+if(sortmax  != "")
+availablequery +="&max_price="+sortmax;
+
+
+
 
 const sessionId = sessionStorage.getItem('myId');
 
@@ -424,6 +443,11 @@ fetch(availablequery,{
 .then((res)=>{ return res.json() })
 .then((data)=>{
 	if(data.status === 200 && data.data.length > 0){
+		for(let jk=0; jk<data.data.length; jk++){
+			const { manufacturer,body_type } = data.data[jk];
+			document.getElementById("thesortmanu").innerHTML += `<option value="${manufacturer}">${manufacturer}</option>`;
+			document.getElementById("thesortbody").innerHTML += `<option value="${body_type}">${body_type}</option>`;
+		}
 
 document.getElementById("allcars").innerHTML = "";
 
@@ -518,6 +542,8 @@ if(startfrom !== 0)
 							
 						+"</div>";	document.getElementById("allcars").innerHTML += onecar;
 		}
+	}else{
+		document.getElementById("allcars").innerHTML = "NO car found please refresh";
 	}
 })
 .then((b)=>sessionStorage.clear('myId'))

@@ -126,7 +126,8 @@ function ddsort(){
 		
 		document.getElementById("findfilt").classList.replace("show", "hide");
 		stopfilter();
-		},2000)
+		paginateallcars(0);
+		},1000)
 		
 
 		
@@ -414,17 +415,18 @@ function order(thisid){
 	
 	let theid = thisid;
 	let replace1 = theid.replace("orderbut","");
+	
 	fetch("/allcars/"+replace1,{
 		method:"GET"
 	})
 	.then((res)=>res.json())
 	.then((data)=>{
-		if(data.status === 200 && data.data.length > 0){
+		if(data.status === 200){
 		
-			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data[0];
+			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data;
+			console.log(email);
 			
-			
-			sessionStorage.setItem('chooseorder',id);
+	sessionStorage.setItem('chooseorder',id);
 	sessionStorage.setItem('chooseordermanu',manufacturer);
 	sessionStorage.setItem('chooseordercolor', body_type);
 	sessionStorage.setItem('chooseordercond', state);
