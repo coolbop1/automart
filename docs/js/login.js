@@ -1,6 +1,6 @@
 function logout(){
 localStorage.clear();
-window.location = ""
+window.location = "index.html"
 }
 	const myToken = window.localStorage.getItem('accessToken');
 	
@@ -8,7 +8,8 @@ if(myToken){
 stilllog();
 
 }else{
-
+console.log("notlogin")
+paginateallcars(0)
 }
 var userSession = sessionStorage.getItem('student');
    // console.log('userSession: ', JSON.parse(userSession));
@@ -20,7 +21,7 @@ var userSession = sessionStorage.getItem('student');
      	userIemail = userAllInfo[0].email;
      	 userIaddress = userAllInfo[0].address;
  
-   // console.log(userAllInfo[0].name);
+   console.log(userAllInfo[0].name);
     
     }else{
   /*  if(window.location.pathname == "/" || window.location.pathname == "/index.html")	{
@@ -30,6 +31,7 @@ var userSession = sessionStorage.getItem('student');
     }*/
     }
     function dashboard(){
+    	document.getElementById("tpin").style.background ="inherit";
 window.location = "postad.html";
 }
     

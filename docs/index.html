@@ -6,9 +6,10 @@
 		<title>
 			Auto mart
 		</title>
-		<link rel="stylesheet" href="css/style.css" >
+		
+<link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css" >
 			<link rel="stylesheet" href="css/responsive.css" >
-
 			
 	
 	</head>
@@ -37,19 +38,14 @@
 						<li id="spin" onclick="rightSlide(this.id)" tabindex="0"><a>Signup</a></li>
 						</div>
 						<span id="nowloged">
+							<li id="tpin" onclick="rightSlide(this.id)" tabindex="0"><a  >Profile</a></li>
 						<li onclick="dashboard()" tabindex="0"><a  >Dashboard</a></li>
 						<li  onclick="logout()" tabindex="0"><a>Logout</a></li>
 						</span>
 					</ul>
 				</div>
 			</div>
-			<div id="nofloat">
-				<div id="midlogo">
-					<center>
-						<div id="mid"><a href="index.html"><img src="image/logb.png" width="100px"></a></div>
-					</center>
-				</div>
-			</div>
+			
 		</header>
 		<section id="fcontent">
 			<div id="hhold"><div class="heading">S<span class="logored">mart</span> way<br/> to buy or sell<br/> <span class="logored">auto</span> mobile </div></div>
@@ -62,11 +58,11 @@
 						
 					</div>
 					
-						<div class="show  righttabs" id="fpintab">
-<div class="titletab">SIGN IN <span  class="close" onclick="closetab()">&#10006</span></div>
+						<div class="righttab tab" id="fpintab">
+<div class="titletab">SIGN IN <span  class="close" id="fclose" onclick="closetab(this.id)">&#10006</span><a id="backbut"  class="goback hide" onclick="backtotab()">back</a></div>
 <br/>
 						<div class="contain">
-								<form method="POST" onsubmit="return  login()">
+								<form id="signinform" class="show" method="POST" onsubmit="return  login()">
 									<div class="relh">
 								<input type="email" class="myinput" id="user" placeholder="Email" name="user">
 									<label class="label-helper" for="user">Email</label>
@@ -74,14 +70,41 @@
 							<div class="relh">
 								<input type="password" class="myinput" placeholder="*******" id="pwd" name="pwd">
 									<label class="label-helper" for="pwd">Password</label>
+									
 									</div>
+									<p class="forgpass">Password problem? <a onclick="forgopass()">click here</a> </p>
+									
 								<button id="logg"  class="padbutton" >login</button>
+								
 								<!---<div class="spinning"></div>-->
 							</form>
+								<form id="retrieveform" class="hide" method="POST" onsubmit="return  retremail()">
+										<div class="relh">
+								<input type="email" class="myinput" id="retemail" placeholder="Enter registered email" name="retemail" required>
+									<label class="label-helper" for="retemail">Registered Email</label>
+							</div>
+							<div id="firstpass" class="relh hide">
+								<input type="password" class="myinput" placeholder="***current password***" id="fpwd" name="fpwd">
+									<label class="label-helper" for="fpwd">Current Password</label>
+									</div>
+									<div id="secpass" class="relh hide">
+								<input type="password" class="myinput" placeholder="***new password***" id="spwd" name="spwd" >
+									<label class="label-helper" for="spwd">New Password</label>
+									</div>
+									
+										<button id="retrievebut"  class="padsbutton" >Get Password</button>
+										<br/>&nbsp;<br/>
+										<div id="changepasbut"  class="padssbutton show" onclick="openpassf()">change Password</div>
+																			</form>
 						</div>
+						
 					</div>
-					<div class="hide righttabs" id="spintab">
-						<div class="titletab">SIGN UP <span  class="close" onclick="closetab()">&#10006</span></div>
+					
+					
+					
+					
+					<div class="righttabs tab" id="spintab">
+						<div class="titletab">SIGN UP <span id="sclose"  class="close" onclick="closetab(this.id)">&#10006</span></div>
 						<div class="contain">
 							<form method="POST" onsubmit="return signup()">
 								<div class="relh">
@@ -110,9 +133,26 @@
 							</form>
 						</div>
 					</div>
+					
+					
+					
+						<div id="tpintab" class="righttabs tab"> <div id="myadsti">My Profile</div><span id="tclose"  class="close" onclick="closetab(this.id)">&#10006</span>
+						<h2 id="profilename"></h2>
+						<img src="image/default.png" id="mid">
+						<span tabindex="0" id="fpinn"  class="pintabss">Sold</span>
+						<span tabindex="0" id="spinn"  class="pintabss">Sold</span>
+						<div id="midsec"><img src="image/icons/envelope.png" width="40px"></div>
+						<div id="midsecs"><img src="image/icons/pie-chart.png" width="40px"></div>
+						<div id="midsect"><img src="image/icons/settings-1.png" width="40px"></div>
+							
+							<div class="profbottom"></div>
+						
+						<div>
+					
+					
 				</div>
 		</section>
-			<section id="extras">
+		<section id="extras">
 			
 			
 			<div  id="indexads">
@@ -120,52 +160,30 @@
 					<div class="stattitlez">
 						<div id="pickload" class="left"><a onclick="openfilter()"><img src="image/filter.png" width="20px"> Filter</a></div>&nbsp;
 											<div id="mainsort" class="sortby hide">Make: 
-									<select id="thesort"> 
+									<select id="thesortmanu"> 
 										<option value="">
 											choose
 										</option>
-										<option value="audi">
-											Audi
-										</option>
-										<option value="benz">
-												Benz
-										</option>
-										<option value="toyota">
-												Toyota
-										</option>
-										<option value="golf">
-												Golf
-										</option>
-										<option value="volvo">
-												Volvo
-										</option>
+										
 				
 									</select> | state: 
-									<select id="thesort"> 
+									<select id="thesortstate"> 
 										<option value="">
 											choose
 										</option>
 										<option value="new">
 											New
 										</option>
-										<option value="old">
-											Old
+										<option value="used">
+											Used
 										</option>
 										</select> | Body-type: 
-									<select id="thesort"> 
+									<select id="thesortbody"> 
 										<option value="">
 											choose
 										</option>
-										<option value="car">
-											Car
-										</option>
-										<option value="jeep">
-											Jeep
-										</option>
-										<option value="Truck">
-											Truck
-										</option>
-										</select> | Min price:<input type="number"> | Max price:<input type="number">
+	
+										</select> | Min price:<input type="number" id="thesortmin"> | Max price:<input type="number" id="thesortmax">
 										
 										 </div>
 					
@@ -176,7 +194,7 @@
 				<div class="fn"></div>
 		</div>
 					 <div class="show" id="postedd">
-						 <div>
+						 <div id="allcars">
 					 <!------begining of the ads---->
 					<div class="boxline">
 						<div class="adsbox">
@@ -440,7 +458,8 @@
 					 </div>
 					 <center><div id="findfilt" class="hide spinloading"></div></center>
 				</div>
-				<div class="fn"></div>
+				<center><div id="pagina" class="show fn"></div></center>
+					<br/>
 		</section>
 		
 		<footer >
@@ -448,26 +467,33 @@
 			</footer>
 <div id="overlay">
 	
-			<center><div id="inoverlay"></div></center>
+			<center> <div  id="inoverlay"></div></center>
 			<center>
 				<div id="odetails">
-					<div id="fdetail">Manufacturer:<span>Audi 2018</span>
+					<div id="fdetail">Manufacturer:<span id="fmanudetail">Audi 2018</span>
 					<hr/>
-					Condition:<span>New</span>
+					Condition:<span id="fstatedetail">New</span>
 					<hr/>
-					Price:<span>$5000</span>
+					Price:<span id="fpricedetail">$5000</span>
+				</div>
 				</div>
 			</center>
+			<center>
+				<div id="odetails">
+					<div class="fdetail">Seller:<span id="femaildetails">mockuser@gmail.com</span>
+					</div>
+					</div>
+					</center>
 			<br/>
 			<center>
 			<button class="pintabw" onclick="cls()">CLOSE</button>
 			</center>
 		
 	</div>
-		<div id="touchlist" class="hide">&nbsp;</div>
+		<div onclick="opennav()" id="touchlist" class="hide">&nbsp;</div>
 		<script src="js/main.js"></script>
-			<script src="js/mockclient.js"></script>
-			<!--<script src="js/client.js"></script>
-				<script src="js/login.js"></script>-->
+			<!--<script src="js/mockclient.js"></script>-->
+			<script src="js/client.js"></script>
+				<script src="js/login.js"></script>
 	</body>
 </html>

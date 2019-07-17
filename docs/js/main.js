@@ -1,3 +1,22 @@
+function openpassf(){
+	document.getElementById("retrievebut").innerHTML="Change Password";
+document.getElementById("changepasbut").classList.replace("show","hide");
+document.getElementById("firstpass").classList.replace("hide","show");
+document.getElementById("secpass").classList.replace("hide","show");
+}
+function forgopass(){	document.getElementById("signinform").classList.replace("show","hide");
+	document.getElementById("retrieveform").classList.replace("hide","show")
+document.getElementById("backbut").classList.replace("hide","show")
+}
+function backtotab(){
+document.getElementById("retrievebut").innerHTML="Get Password";	document.getElementById("changepasbut").classList.replace("hide","show");
+document.getElementById("firstpass").classList.replace("show","hide");
+document.getElementById("secpass").classList.replace("show","hide");
+	
+	document.getElementById("backbut").classList.replace("show","hide")
+document.getElementById("retemail").value = "";	document.getElementById("signinform").classList.replace("hide","show");
+	document.getElementById("retrieveform").classList.replace("show","hide")
+}
 function editpot(thisid){
 	let theid = thisid;
 	let replace2 = theid.replace("editpo","edited");
@@ -43,23 +62,55 @@ function rightSlide(slideid) {
 	 document.body.style.overflow = "auto";
 
 	var elem = document.getElementById(slideid+"tab"); 
-	elem.style.opacity= 1;
+	//elem.style.opacity= 1;
 	if(slideid == "fpin"){
 		let elems = document.getElementById("spintab");
-			elems.classList.replace("show", "hide");
-			elem.classList.replace("hide", "show");
+		let lems = document.getElementById("tpintab");
+			
+			elems.classList.replace("righttab", "righttabs");
+			lems.classList.replace("righttab", "righttabs");
 			elem.classList.replace("righttabs", "righttab");
+			elem.classList.replace("tab", "tabtab");
+			elems.classList.replace("tabtab", "tab");
+			lems.classList.replace("tabtab", "tab");
+			elem.classList.replace("hide", "show");
+			elems.classList.replace("show", "hide");
+			lems.classList.replace("show", "hide");
 			document.getElementById("fpin").style.background ="#bf3f3f";
 			document.getElementById("spin").style.background ="inherit";
+			document.getElementById("tpin").style.background ="inherit";
 
 	}else if(slideid == "spin"){
 		let elems = document.getElementById("fpintab");
-		elems.classList.replace("show", "hide");
-		elem.classList.replace("hide", "show");
-		elem.classList.replace("righttabs", "righttab");
-	document.getElementById("fpin").style.background ="inherit";
+		let lems = document.getElementById("tpintab");
+		elems.classList.replace("righttab", "righttabs");
+			lems.classList.replace("righttab", "righttabs");
+			elem.classList.replace("righttabs", "righttab");
+			elem.classList.replace("tab", "tabtab");	
+			elems.classList.replace("tabtab", "tab");
+			lems.classList.replace("tabtab", "tab");
+			elem.classList.replace("hide", "show");
+			elems.classList.replace("show", "hide");
+			lems.classList.replace("show", "hide");
+			document.getElementById("fpin").style.background ="inherit";
 	document.getElementById("spin").style.background ="#bf3f3f";
-	
+	document.getElementById("tpin").style.background ="inherit";
+		
+	}else{
+		let elems = document.getElementById("fpintab");
+		let lems = document.getElementById("spintab");
+		elems.classList.replace("righttab", "righttabs");
+			lems.classList.replace("righttab", "righttabs");
+			elem.classList.replace("righttabs", "righttab");
+			elem.classList.replace("tab", "tabtab");
+			elems.classList.replace("tabtab", "tab");
+			lems.classList.replace("tabtab", "tab");
+			elem.classList.replace("hide", "show");
+			elems.classList.replace("show", "hide");
+			lems.classList.replace("show", "hide");
+	document.getElementById("tpin").style.background ="#bf3f3f";
+	document.getElementById("spin").style.background ="inherit";
+	document.getElementById("fpin").style.background ="inherit";
 
 	}
 
@@ -75,7 +126,8 @@ function ddsort(){
 		
 		document.getElementById("findfilt").classList.replace("show", "hide");
 		stopfilter();
-		},2000)
+		paginateallcars(0);
+		},1000)
 		
 
 		
@@ -99,8 +151,13 @@ function stopfilter(){
 	
 }
 function closetab(){
-	doc$ument.getElementById("spintab").classList.replace("show", "hide"); 
-	document.getElementById("fpintab").classList.replace("show", "hide"); 
+backtotab();	document.getElementById("spintab").classList.replace("righttab", "righttabs");
+document.getElementById("spintab").classList.replace("tabtab", "tab"); 
+	document.getElementById("fpintab").classList.replace("righttab", "righttabs");
+document.getElementById("fpintab").classList.replace("tabtab", "tab");
+	document.getElementById("tpintab").classList.replace("righttab", "righttabs");
+document.getElementById("tpintab").classList.replace("tabtab", "tab");
+
 	//document.getElementById("forsearch").style.left = "27.5%"; 
 }
 function showpage(){
@@ -117,12 +174,15 @@ document.getElementById("myadsti").innerHTML = "My Ads";
 document.getElementById("myadsti").style.display ="block";
 	document.getElementById("posted").style.display ="block";	
 	document.getElementById("postform").style.display = "none";	
-	document.getElementById("prequest").style.display = "none";  
+	document.getElementById("prequest").style.display = "none"; 
+document.getElementById("poffered").style.display = "none";   
 	
 	
 	document.getElementById("navsord").style.background ="inherit";
 document.getElementById("navmad").style.background ="#bf3f3f";
 document.getElementById("navsad").style.background ="inherit";
+document.getElementById("navsoff").style.background ="inherit";
+document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
 }
 function showpostad(){
 opennavs();
@@ -134,11 +194,15 @@ document.getElementById("myadsti").style.display ="block";
 document.getElementById("posted").style.display = "none";
 document.getElementById("postform").style.display = "block";
 document.getElementById("prequest").style.display = "none";
+document.getElementById("poffered").style.display = "none";  
 	
 	
 	document.getElementById("navsord").style.background ="inherit";
 document.getElementById("navmad").style.background ="inherit";
 document.getElementById("navsad").style.background ="#bf3f3f";
+document.getElementById("navsoff").style.background ="inherit";
+
+document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
 	
 }
 function showorder(){
@@ -149,12 +213,39 @@ document.body.style.overflow = "auto";
 document.getElementById("myadsti").innerHTML = "Place Order"
 document.getElementById("myadsti").style.display ="block";	
 document.getElementById("prequest").style.display = "block";
+document.getElementById("poffered").style.display = "none";  
 	document.getElementById("posted").style.display = "none";
 	document.getElementById("postform").style.display = "none";
   document.getElementById("navsord").style.background ="#bf3f3f";
 document.getElementById("navmad").style.background ="inherit";
 document.getElementById("navsad").style.background ="inherit";
+document.getElementById("navsoff").style.background ="inherit";
+
+  stilllog(3);
+  document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
+  
 }
+
+function showoffer(){
+opennavs();
+document.getElementById("touchlist").classList.replace("show","hide");
+document.body.style.overflow = "auto";
+
+document.getElementById("myadsti").innerHTML = "My offers"
+document.getElementById("myadsti").style.display ="block";	
+document.getElementById("prequest").style.display = "none";
+document.getElementById("poffered").style.display = "block";  
+	document.getElementById("posted").style.display = "none";
+	document.getElementById("postform").style.display = "none";
+  document.getElementById("navsord").style.background ="inherit";
+document.getElementById("navmad").style.background ="inherit";
+document.getElementById("navsad").style.background ="inherit";
+document.getElementById("navsoff").style.background ="#bf3f3f";
+stilllog(4);
+  document.getElementById("myadsti").scrollIntoView({block:"start",behavior:"smooth"});
+}
+
+
 function pedit(clickedbox){
 	let but = clickedbox;
 	let rep = but.replace("ep","sedit");	
@@ -185,6 +276,26 @@ function editop(thisid){
 	document.getElementById(cleid).style.display = "block";
 	document.getElementById(dleid).style.display = "block";
 	document.getElementById(eid).innerHTML = "Update Price";
+}
+function viewop(thisid){
+let eid = thisid;
+let leid = eid.replace('vpo','reyt');
+let cleid = eid.replace('vpo','clot');
+let dleid = eid.replace("vpo","cloot");
+document.getElementById(leid).style.display = "none";
+document.getElementById(cleid).style.display = "block";
+document.getElementById(dleid).style.display = "block";
+}
+function closepot(thisid){
+	let eid = thisid;
+	let leid = eid.replace("clot","reyt");
+	let cleid = eid.replace("clot","vpo");
+		let dleid = eid.replace("clot","cloot");
+	document.getElementById(leid).style.display = "block";
+	
+	document.getElementById(eid).style.display = "none";
+	document.getElementById(dleid).style.display = "none";
+
 }
 function closepo(thisid){
 	let eid = thisid;
@@ -227,10 +338,47 @@ function confirmre(thisid){
 function cls(){	document.getElementById("overlay").style.display = "none";
 document.body.style.overflow = "auto";
 }
-function opensingle(thisid){
-	document.getElementById("inoverlay").innerHTML=document.getElementById(thisid).innerHTML;
+function opensingle(thisid,thisimage){
+let theid = parseInt(thisid.replace("single",""));
+let nextImage = thisimage+1
+let prevImage = thisimage-1
+	document.getElementById("inoverlay").innerHTML= "<div class='roller'></div>";
 	document.body.style.overflow = "hidden";	
 	document.getElementById("overlay").style.display = "block";
+fetch("https://thawing-beach-89294.herokuapp.com/allcars/"+theid,{
+	method:"GET",
+	headers : new Headers({"Content-Type": "application/json; charset=UTF-8"})
+})
+.then((res)=>res.json())
+.then((data)=>{
+	if(data.status === 200){
+		const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data;
+		let imageArr = image_url.split("<>");
+		let imagelength = imageArr.length-1;
+	
+		
+			const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+document.getElementById("inoverlay").innerHTML="<div id='nextimage' onclick='opensingle(`single"+id+"`,"+nextImage+")' class='hide next'><img src='image/whiteicon/next.png' width='20px'></div><div id='previmage' onclick='opensingle(`single"+id+"`,"+prevImage+")' class='hide prev'><img src='image/whiteicon/back.png' width='20px'></div><img class='inoimg' src='"+imageArr[thisimage].replace("w_150,c_scale/","")+"'>";
+document.getElementById("fmanudetail").innerHTML= manufacturer+" "+model;
+document.getElementById("fstatedetail").innerHTML= state;
+document.getElementById("fpricedetail").innerHTML= formatter.format(price);
+document.getElementById("femaildetails").innerHTML= email;
+	if(prevImage >= 0)
+	document.getElementById("previmage").classList.replace("hide","show");
+	else
+	document.getElementById("previmage").classList.replace("show","hide");
+	
+	if(imagelength > 1 && nextImage < imagelength)
+		document.getElementById("nextimage").classList.replace("hide","show");
+		else
+		document.getElementById("nextimage").classList.replace("show","hide")
+
+	}
+})
+.catch((e)=>console.log(e));
 	
 }
 function showsold(){
@@ -263,30 +411,56 @@ function deletead(thisid){
 	document.getElementById(replace1).style.display = "none";
 }
 function order(thisid){
+	document.getElementById(thisid).innerHTML = "<div class='spinning'></div>";
+	
 	let theid = thisid;
 	let replace1 = theid.replace("orderbut","");
-	let replace2 = theid.replace("orderbut","single");
-	let replace3 = theid.replace("orderbut","smanu");
-	let replace4 = theid.replace("orderbut","scolor");
-	let replace5 = theid.replace("orderbut","scond");
-	let replace6 = theid.replace("orderbut","samount");
-	sessionStorage.setItem('chooseorder', replace1);
-	sessionStorage.setItem('chooseordermanu', replace3);
-	sessionStorage.setItem('chooseordercolor', replace4);
-	sessionStorage.setItem('chooseordercond', replace5);
-	sessionStorage.setItem('chooseorderamount', replace6);
-	sessionStorage.setItem('chooseorderimg', replace2);
-	sessionStorage.setItem('pagetab', 'order');
-	if(window.location.pathname == "/postad.html"){
-		
-		life();
-		} else {
-	window.location = "postad.html";
-	}
 	
+	fetch("https://thawing-beach-89294.herokuapp.com/allcars/"+replace1,{
+		method:"GET"
+	})
+	.then((res)=>res.json())
+	.then((data)=>{
+		if(data.status === 200){
+		
+			const { id,email,owner,created_on,manufacturer,model,price,state,engine_size,body_type,image_url,status } = data.data;
+			console.log(email);
+			
+	sessionStorage.setItem('chooseorder',id);
+	sessionStorage.setItem('chooseordermanu',manufacturer);
+	sessionStorage.setItem('chooseordercolor', body_type);
+	sessionStorage.setItem('chooseordercond', state);
+	sessionStorage.setItem('chooseorderamount', parseInt(price));
+	sessionStorage.setItem('chooseorderimg', image_url.split("<>")[0].replace("w_150,c_scale/",""));
+	sessionStorage.setItem('pagetab', 'order');
+			
+			
+			
+			
+		}
+		
+	})
+	.then((e)=>toshoworder())
+	.catch((e)=>console.log(e))
+	//console.log(document.getElementById(replace6).innerHTML);
+	//console.log(replace4);
+	
+	
+
+
+	
+	
+}
+function toshoworder(){
+	window.location = "postad.html";
+//console.log(sessionStorage.getItem('chooseordermanu'))	
 }
 life();
 function life(){
+		var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 	const dtab = sessionStorage.getItem('pagetab');
 			const dtabimg = sessionStorage.getItem('chooseorderimg');
 				const dtabmanu = sessionStorage.getItem('chooseordermanu');
@@ -298,27 +472,29 @@ if(sessionStorage.getItem('pagetab')){
 	document.getElementById("runorder").classList.replace("show","hide");
 	document.getElementById("unpickedform").classList.replace("show","hide");
 	document.getElementById("pickedform").classList.replace("hide","show");
-document.getElementById("pomanid").value = dtabid;	document.getElementById("orderimg").innerHTML = document.getElementById(dtabimg).innerHTML; 
-	document.getElementById("pomanu").value = document.getElementById(dtabmanu).innerHTML;
-	document.getElementById("pocolor").value = document.getElementById(dtabcolor).innerHTML;
-document.getElementById("poprice").value = document.getElementById(dtabamount).innerHTML;
-document.getElementById("showpprice").innerHTML = document.getElementById(dtabamount).innerHTML;
+document.getElementById("pomanid").value = dtabid;	document.getElementById("orderimg").innerHTML = "<img src='"+dtabimg+"' >"; 
+	document.getElementById("pomanu").value = dtabmanu;
+	document.getElementById("pocolor").value = dtabcolor;
+document.getElementById("poprice").value = parseInt(dtabamount);
+document.getElementById("showpprice").innerHTML = dtabamount;
 
 document.getElementById('poprice').disabled = false;
 document.getElementById('postcarorder').disabled = false;
-if(document.getElementById(dtabcond).innerHTML == "new"){
+if(dtabcond == "new"){
 		document.getElementById("ncarcond").innerHTML = 'New:<input type="radio" class="radioinput" value="new"  name="postateocar"  checked>';
 	} else {
 		document.getElementById("ncarcond").innerHTML = 'Used:<input type="radio" class="radioinput" value="used"  name="postateocar"  checked>';
 	}
-	showorder();
 
-document.getElementById("orderimg").style.display = "block";	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
+
+document.getElementById("orderimg").classList.replace("hide","show");
+	document.getElementById("prequest").scrollIntoView({block:'start',behavior:'smooth'});
 	setTimeout(function (){
 		sessionStorage.clear('chooseorder');
 		sessionStorage.clear('pagetab');
 	
 	},2000)
+	showorder();
 }
 }
 /*function login(){
