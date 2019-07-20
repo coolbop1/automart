@@ -47,7 +47,7 @@ paginateallcars(0);
 
 
 function showmyorder(myid,showstart,showend,state){
-	let apiprefix = `/order?`;
+	let apiprefix = `https://thawing-beach-89294.herokuapp.com/order?`;
 	apiprefix += `&buyer=${myid}`
 	fetch(apiprefix,{
 		method:"GET",
@@ -115,7 +115,7 @@ document.getElementById("mypendingo").innerHTML = "";
 
 
 function showmyoffers(myid,showstart,showend,state){
-	let apiprefix = `/order?`;
+	let apiprefix = `https://thawing-beach-89294.herokuapp.com/order?`;
 	apiprefix += `&seller=${myid}`;
 	apiprefix += `&status=pending`;
 	fetch(apiprefix,{
@@ -189,7 +189,7 @@ document.getElementById("moff").innerHTML = "";
 
 
 function seenorder(myid){
-	let apiprefix = `/order?`;
+	let apiprefix = `https://thawing-beach-89294.herokuapp.com/order?`;
 	apiprefix += `&seller=${myid}`;
 	apiprefix += `&statuses=pending`;
 	fetch(apiprefix,{
