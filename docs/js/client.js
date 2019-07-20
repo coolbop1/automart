@@ -400,7 +400,7 @@ document.getElementById("myadds").innerHTML += lonecar ;
 
 
 ///////////populate div with cars/////////
-
+ddsort();
 
 function paginateallcars(thestart){
 	let sttrt = parseInt(thestart)
