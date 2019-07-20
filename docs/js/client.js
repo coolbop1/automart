@@ -824,7 +824,7 @@ function postorder(){
 	fetch("https://thawing-beach-89294.herokuapp.com/order",{
 		method:"POST",
 		headers:new Headers({"Content-Type":"application/json; charset=UTF-8","Authorization":"Bearer "+localStorage.getItem('accessToken')}),
-		body:JSON.stringify({"car_id" : cariid,"order_price" : priceoffered, "status" : "pending", "amount" : originalamount})
+		body:JSON.stringify({"car_id" : cariid,"price_offered" : priceoffered, "status" : "pending", "amount" : originalamount})
 	})
 	.then((res)=>res.json())
 	.then((data)=>{
