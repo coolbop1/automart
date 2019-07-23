@@ -1,4 +1,3 @@
-import  Joi from "joi";
 import db from "../config";
 import bcrypt from "bcryptjs";
 import error from "../helpers/errors";
@@ -9,20 +8,43 @@ const pool = db.getPool(process.env['USER'],process.env['DATABASE'],process.env[
 module.exports = {
 	validateuserinputs: function (req,res,next){	
 		
-		if(typeof req.body.first_name == "undefined" || typeof req.body.last_name == "undefined" || typeof req.body.email == "undefined" || typeof req.body.address == "undefined" || typeof req.body.password == "undefined"){
-			let msgclean = "Error in input field , please correct and try again"
+		let errorMessage;
+		if(typeof req.body.first_name === "undefined" || req.body.first_name.trim() == ""){
+			 errorMessage = "First name is required"
+			
+		}
+		else if(typeof req.body.last_name === "undefined" || req.body.last_name.trim() == ""){
+			 errorMessage = "Last name is required"
+			
+		}else if(typeof req.body.email === "undefined" || req.body.email.trim() == ""){
+			 errorMessage = "Email is required"
+			
+		}else if( typeof req.body.address === "undefined" || req.body.address.trim() == ""){
+			 errorMessage = "Address is required"
+			
+		}else if(typeof req.body.password === "undefined" || req.body.password.trim() == ""){
+			 errorMessage = "Password is required"
+			
+		}
+		
+		if(typeof errorMessage !== "undefined"){
 			let reply = {
 				"status":409,
-				"error" : msgclean
+				"error" : errorMessage
 			};	
 			res.status(409).send(reply);
 			return;
 		}else{
+			req.first_name = req.body.first_name.trim();
+			req.last_name = req.body.last_name.trim();
+			req.email = req.body.email.trim();
+			req.address = req.body.address.trim();
+			req.password = req.body.password.trim();
 			next();
 		}
 	},
 	verifynewemail: function (req,res,next){
-		pool.query("select * from allusers where email = $1 ",[req.body.email],(err,ress)=>{
+		pool.query("select * from allusers where email = $1 ",[req.email],(err,ress)=>{
 		if(ress.rows.length >= 1 && req.body.email){
 			let reply = {
 				"status":409,
