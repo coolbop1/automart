@@ -95,20 +95,6 @@ module.exports = {
 
 	
 		}else{
-			const schema ={
-				current_password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6),
-				new_password : Joi.string().regex(/^[,. a-z0-9A-Z]+$/).trim().min(6),
-				
-			};
-			const valid = Joi.validate(req.body,schema);
-			if(valid.error){
-				let reply = {
-					"status":409,
-					"error" : valid.error.details[0].message
-				};	
-				res.status(409).send(reply);
-				return;
-			}else{
 				pool.query("select * from allusers where email=$1",[req.params.email],(err,ress)=>{
 					if(ress.rows.length > 0){
 						let passwordIsValid = bcrypt.compareSync(req.body.current_password, ress.rows[0].password); 
@@ -126,7 +112,6 @@ module.exports = {
 					else
 					res.status(400).json(operationError());
 				})
-			} 
 
 		}
 

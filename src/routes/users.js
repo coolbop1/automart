@@ -23,7 +23,7 @@ const route = express.Router();
 
 route.post("/auth/signup",validateuserinputs,verifynewemail, signup);
 route.get("/allusers", users);
-route.post("/user/:email/reset_password", verifyaction,sendPassword)
+route.post("/user/:email/reset_password",validateuserinputs, verifyaction,sendPassword)
 route.post("/auth/signin",validateuserinputs,validateloginputs, signin);
  
 
