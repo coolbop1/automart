@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/coolbop1/automart.svg?branch=develop)](https://travis-ci.org/coolbop1/automart)
+[![Build Status](https://travis-ci.com/coolbop1/automart.svg?branch=develop)](https://travis-ci.com/coolbop1/automart)
 [![Coverage Status](https://coveralls.io/repos/github/coolbop1/automart/badge.svg?branch=develop)](https://coveralls.io/github/coolbop1/automart?branch=develop)
 # Auto-mart
 Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. With Auto Mart, users can sell their cars or buy from trusted dealerships or private sellers.
@@ -48,7 +48,8 @@ To diploy this on a live system,Create account on [heroku](https://herokuapp.com
 
 ## Authors
 * **Bidemi Oritunmise** 
-* **Powered By Andela Developer Challenge** 
+* **Powered By Andela Developer Challenge**
+* **Icons made by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar) from [flaticon.com](https://www.flaticon.com/)**
 
 
 
